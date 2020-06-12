@@ -1,24 +1,5 @@
-# README
+# LandGrab
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Source at [GitHub](https://github.com/olliebennett/landgrab)
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Demo running at [landgrabdemo.herokuapp.com](https://landgrabdemo.herokuapp.com/)

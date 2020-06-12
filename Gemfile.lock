@@ -155,16 +155,15 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootsnap (>= 1.4.2)
+  bootsnap
   byebug
-  jbuilder (~> 2.7)
-  listen (~> 3.2)
-  pg (>= 0.18, < 2.0)
-  puma (~> 4.1)
-  rails (~> 6.0.3, >= 6.0.3.1)
+  jbuilder
+  pg
+  puma
+  rails
   spring
-  spring-watcher-listen (~> 2.0.0)
-  web-console (>= 3.3.0)
+  spring-watcher-listen
+  web-console
 
 RUBY VERSION
    ruby 2.7.0p0

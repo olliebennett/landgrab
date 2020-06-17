@@ -1,0 +1,32 @@
+<%= form_with(model: block, local: true) do |form| %>
+  <% if block.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(block.errors.count, "error") %> prohibited this block from being saved:</h2>
+
+      <ul>
+        <% block.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :southwest %>
+    <%= form.text_field :southwest %>
+  </div>
+
+  <div class="field">
+    <%= form.label :northeast %>
+    <%= form.text_field :northeast %>
+  </div>
+
+  <div class="field">
+    <%= form.label :w3w %>
+    <%= form.text_field :w3w %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

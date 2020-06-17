@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>South West:</strong>
+  <%= @block.southwest.x %>, <%= @block.southwest.y %>
+</p>
+
+<p>
+  <strong>North East:</strong>
+  <%= @block.northeast.x %>, <%= @block.northeast.y %>
+</p>
+
+<p>
+  <strong>What3Words:</strong>
+  <code>/// <%= @block.w3w %></code>
+  - <%= link_to 'view', "https://what3words.com/#{@block.w3w}" %>
+</p>
+
+<%= link_to 'Edit', edit_block_path(@block) %> |
+<%= link_to 'Back', blocks_path %>

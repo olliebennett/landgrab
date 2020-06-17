@@ -13,7 +13,7 @@
 <p>
   <strong>What3Words:</strong>
   <code>/// <%= @block.w3w %></code>
-  - <%= link_to 'view', "https://what3words.com/#{@block.w3w}" %>
+  - <%= link_to 'View', @block.w3w_url %>
 </p>
 
 <%= link_to 'Edit', edit_block_path(@block) %> |

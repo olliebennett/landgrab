@@ -27,6 +27,9 @@ gem 'puma'
 # Ruby on Rails Framework!
 gem 'rails'
 
+# Render RGeo (from PostGis) as GeoJSON
+gem 'rgeo-geojson'
+
 # Spring keeps application running in the background
 gem 'spring', groups: :development
 gem 'spring-watcher-listen', groups: :development

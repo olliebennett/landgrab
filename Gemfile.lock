@@ -137,6 +137,8 @@ GEM
     rgeo-activerecord (6.2.1)
       activerecord (>= 5.0)
       rgeo (>= 1.0.0)
+    rgeo-geojson (2.1.1)
+      rgeo (>= 1.0.0)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -174,6 +176,7 @@ DEPENDENCIES
   pg
   puma
   rails
+  rgeo-geojson
   spring
   spring-watcher-listen
   web-console

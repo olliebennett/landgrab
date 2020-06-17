@@ -25,6 +25,9 @@
       maxNativeZoom:19,
       maxZoom:25
   }).addTo(map);
+
+  var allBlocksGeoJson = [<%= Block.all.map(&:to_geojson).join(', ').html_safe %>];
+  L.geoJSON(allBlocksGeoJson).addTo(map);
 </script>
 
 <script>

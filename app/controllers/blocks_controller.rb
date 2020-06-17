@@ -10,6 +10,10 @@ class BlocksController < ApplicationController
   # GET /blocks/1
   # GET /blocks/1.json
   def show
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @block.to_geojson }
+    end
   end
 
   # GET /blocks/new

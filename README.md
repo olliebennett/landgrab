@@ -14,6 +14,7 @@ Create the required dev database and load schema;
 
 ```
 createdb landgrab_development
+createdb landgrab_test
 bin/rails db:schema:load
 ```
 

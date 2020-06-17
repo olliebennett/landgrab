@@ -10,6 +10,12 @@ You'll need Rails and PostgreSQL set up.
 
 Checkout this repo and navigate to the directory.
 
+Install the required PostGIS (spatial PostgreSQL extension);
+
+```
+brew install postgis
+```
+
 Create the required dev database and load schema;
 
 ```

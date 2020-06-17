@@ -16,6 +16,8 @@
 #
 default: &default
   # Replace "postgres" adapter with PostGIS (spatial extensions)
+  # (on Heroku, Database URL is already set; we replace postgres:// with postgis://)
+  url: <%= ENV.fetch('DATABASE_URL', '').sub(/^postgres/, 'postgis') %>
   adapter: postgis
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide

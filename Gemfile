@@ -3,6 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.1'
 
+# Support PostGIS (spatial PostgreSQL extension)
+gem 'activerecord-postgis-adapter'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
 

@@ -30,6 +30,8 @@ class BlocksController < ApplicationController
   def create
     @block = Block.new(block_params)
 
+    @block.populate_coords if @block.w3w.present?
+
     respond_to do |format|
       if @block.save
         format.html { redirect_to @block, notice: 'Block was successfully created.' }

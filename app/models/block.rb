@@ -22,6 +22,6 @@ class Block < ApplicationRecord
   def sanitize_w3w
     return if w3w.blank?
 
-    self.w3w = w3w.gsub(/\//, '')
+    self.w3w = w3w.downcase.gsub(/\//, '').squish
   end
 end

@@ -1,4 +1,6 @@
 class Block < ApplicationRecord
+  after_initialize :sanitize_w3w
+
   def to_geojson
     box = RGeo::Cartesian::BoundingBox.create_from_points(southwest, northeast)
     RGeo::GeoJSON.encode(box.to_geometry).to_json
@@ -15,5 +17,11 @@ class Block < ApplicationRecord
 
     self.southwest = "POINT(#{sw.fetch('lng')} #{sw.fetch('lat')})"
     self.northeast = "POINT(#{ne.fetch('lng')} #{ne.fetch('lat')})"
+  end
+
+  def sanitize_w3w
+    return if w3w.blank?
+
+    self.w3w = w3w.gsub(/\//, '')
   end
 end

@@ -18,7 +18,15 @@
 <h1>LandGrab</h1>
 
 <div id="map"></div>
+
 <script>
+  function onEachFeature(feature, layer) {
+    if (feature.properties && feature.properties.popupContent) {
+      var popupContent = feature.properties.popupContent;
+      layer.bindPopup(popupContent);
+    }
+  }
+
   var map = L.map('map').setView([51.4778, -0.0014], 19);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -27,10 +35,8 @@
   }).addTo(map);
 
   var allBlocksGeoJson = [<%= Block.all.map(&:to_geojson).join(', ').html_safe %>];
-  L.geoJSON(allBlocksGeoJson).addTo(map);
-</script>
+  L.geoJSON(allBlocksGeoJson, { onEachFeature: onEachFeature }).addTo(map);
 
-<script>
   function drawGrid() {
     const zoom = map.getZoom();
     const loadFeatures = zoom > 17;

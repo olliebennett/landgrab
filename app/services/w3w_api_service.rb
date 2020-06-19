@@ -1,20 +1,16 @@
 class W3wApiService
-  def self.api_base_url
-    'https://api.what3words.com/v3/'
-  end
-
-  def self.api_url(action)
-    "#{}#{action}"
-  end
-
   def self.convert_to_coordinates(w3w)
     resp = api_get('convert-to-coordinates', words: w3w)
     JSON.parse(resp.body)
   end
 
   def self.convert_to_w3w(coords)
-    resp = api_get('convert-to-w3w', coordinates: coords)
+    resp = api_get('convert-to-3wa', coordinates: coords)
     JSON.parse(resp.body)
+  end
+
+  def self.api_base_url
+    'https://api.what3words.com/v3/'
   end
 
   def self.api_get(path, query = {})
@@ -27,7 +23,6 @@ class W3wApiService
       'Content-Type' => 'application/json',
       'X-Api-Key' => api_key
     )
-    req.basic_auth api_key, '' # no password
     https.request(req)
   end
 

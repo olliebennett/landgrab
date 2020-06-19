@@ -11,9 +11,14 @@ class Block < ApplicationRecord
   end
 
   def populate_coords
-    x = W3wApiService.convert_to_coordinates(w3w).fetch('square')
-    sw = x.fetch('southwest')
-    ne = x.fetch('northeast')
+    x = W3wApiService.convert_to_coordinates(w3w)
+    populate_coords_from_w3w_response(x)
+  end
+
+  def populate_coords_from_w3w_response(w3w_response)
+    square = w3w_response.fetch('square')
+    sw = square.fetch('southwest')
+    ne = square.fetch('northeast')
 
     self.southwest = "POINT(#{sw.fetch('lng')} #{sw.fetch('lat')})"
     self.northeast = "POINT(#{ne.fetch('lng')} #{ne.fetch('lat')})"

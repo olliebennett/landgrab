@@ -2,17 +2,28 @@ class Block < ApplicationRecord
   after_initialize :sanitize_w3w
 
   def to_geojson
-    box = RGeo::Cartesian::BoundingBox.create_from_points(southwest, northeast)
-    geojson = RGeo::GeoJSON.encode(box.to_geometry)
+    geojson = RGeo::GeoJSON.encode(bounding_box.to_geometry)
 
     geojson['properties'] ||= {}
-    geojson['properties']['popupContent'] = "What3Words<br><code>#{w3w}</code><br><a href=\"#{w3w_url}\">view on what3words.com</a>"
+    geojson['properties']['popupContent'] = "What3Words<br><code>#{w3w}</code><br><code>#{midpoint_rounded.join(',')}</code><br><a href=\"#{w3w_url}\">view on what3words.com</a>"
 
     geojson.to_json
   end
 
   def w3w_url
     "https://what3words.com/#{w3w}"
+  end
+
+  def bounding_box
+    RGeo::Cartesian::BoundingBox.create_from_points(southwest, northeast)
+  end
+
+  def midpoint
+    [bounding_box.center_y, bounding_box.center_x]
+  end
+
+  def midpoint_rounded
+    midpoint.map { |x| format('%.6f', x) }
   end
 
   def populate_coords

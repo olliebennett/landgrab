@@ -1,6 +1,8 @@
 class Block < ApplicationRecord
   after_initialize :sanitize_w3w
 
+  belongs_to :plot
+
   def to_geojson
     geojson = RGeo::GeoJSON.encode(bounding_box.to_geometry)
 

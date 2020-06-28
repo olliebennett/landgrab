@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @plot.title %>
+</p>
+
+<p>
+  <strong>Polygon:</strong>
+  <%= @plot.polygon.coordinates[0] %>
+</p>
+
+<%= link_to 'Edit', edit_plot_path(@plot) %> |
+<%= link_to 'Back', plots_path %>

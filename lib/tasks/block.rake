@@ -1,11 +1,11 @@
 namespace :block do
   desc "Populate blocks within a given region polygon"
   task populate_from_polygon: :environment do
-    corner1 = RGeo::Cartesian::PointImpl.new(RGeo::Cartesian::Factory.new, '-0.02018', '51.51591')
-    corner2 = RGeo::Cartesian::PointImpl.new(RGeo::Cartesian::Factory.new, '-0.01960', '51.51558')
+    plot = Plot.last
+    bb = plot.bounding_box
 
-    latmin, latmax = [corner1.y, corner2.y].minmax
-    lngmin, lngmax = [corner1.x, corner2.x].minmax
+    latmin, latmax = [bb.min_point.y, bb.max_point.y].minmax
+    lngmin, lngmax = [bb.min_point.x, bb.max_point.x].minmax
 
     lat = latmin
     lng = lngmin
@@ -19,7 +19,13 @@ namespace :block do
         # Persist block (if not already existing)
         b = Block.find_or_initialize_by(w3w: w3w.fetch('words'))
         b.populate_coords_from_w3w_response(w3w)
-        b.save!
+        if b.within_plot?(plot)
+          puts "Block #{b.midpoint_rounded} is WITHIN plot; saving!"
+          b.plot = plot
+          b.save!
+        else
+          puts "Block #{b.midpoint_rounded} is OUTSIDE plot; skipping!"
+        end
 
         block_mid = w3w.fetch('coordinates')
         square = w3w.fetch('square')

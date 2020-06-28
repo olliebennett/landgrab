@@ -24,11 +24,15 @@ class Block < ApplicationRecord
   end
 
   def midpoint
-    [bounding_box.center_y, bounding_box.center_x]
+    RGeo::Cartesian::PointImpl.new(RGeo::Cartesian::Factory.new, bounding_box.center_x, bounding_box.center_y)
+  end
+
+  def within_plot?(plot)
+    plot.polygon.contains?(midpoint)
   end
 
   def midpoint_rounded
-    midpoint.map { |x| format('%.6f', x) }
+    [midpoint.x, midpoint.y].map { |coord| format('%.6f', coord) }
   end
 
   def populate_coords

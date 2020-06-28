@@ -8,6 +8,7 @@
       <th>South West</th>
       <th>North East</th>
       <th>What3Words</th>
+      <th>In Plot?</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -18,6 +19,7 @@
         <td><%= block.southwest.x %>, <%= block.southwest.y %></td>
         <td><%= block.northeast.x %>, <%= block.northeast.y %></td>
         <td><%= block.w3w %></td>
+        <td><%= block.plot_id.present? %></td>
         <td><%= link_to 'W3W', block.w3w_url %></td>
         <td><%= link_to 'Details', block %></td>
       </tr>

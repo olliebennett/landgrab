@@ -16,5 +16,15 @@
   - <%= link_to 'View', @block.w3w_url %>
 </p>
 
+<p>
+  <strong>Plot:</strong>
+  <% if @block.plot.present? %>
+    <%= link_to @block.plot.title, plot_path(@block.plot_id) %>
+  <% else %>
+    -
+  <% end %>
+</p>
+
+
 <%= link_to 'Edit', edit_block_path(@block) %> |
 <%= link_to 'Back', blocks_path %>

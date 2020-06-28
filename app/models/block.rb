@@ -1,7 +1,10 @@
 class Block < ApplicationRecord
   after_initialize :sanitize_w3w
 
-  belongs_to :plot
+  belongs_to :plot, optional: true
+
+  validates :southwest, presence: true
+  validates :northeast, presence: true
 
   def to_geojson
     geojson = RGeo::GeoJSON.encode(bounding_box.to_geometry)

@@ -2,12 +2,17 @@
 
 <p>
   <strong>South West:</strong>
-  <%= @block.southwest.x %>, <%= @block.southwest.y %>
+  <%= @block.southwest_rounded.join(', ') %>
 </p>
 
 <p>
   <strong>North East:</strong>
-  <%= @block.northeast.x %>, <%= @block.northeast.y %>
+  <%= @block.northeast_rounded.join(', ') %>
+</p>
+
+<p>
+  <strong>Midpoint:</strong>
+  <%= @block.midpoint_rounded.join(', ') %>
 </p>
 
 <p>

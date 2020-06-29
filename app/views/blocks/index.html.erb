@@ -16,8 +16,8 @@
   <tbody>
     <% @blocks.each do |block| %>
       <tr>
-        <td><%= block.southwest.x %>, <%= block.southwest.y %></td>
-        <td><%= block.northeast.x %>, <%= block.northeast.y %></td>
+        <td><%= block.southwest_rounded.join(', ') %></td>
+        <td><%= block.northeast_rounded.join(', ') %></td>
         <td><%= block.w3w %></td>
         <td><%= block.plot_id.present? %></td>
         <td><%= link_to 'W3W', block.w3w_url %></td>

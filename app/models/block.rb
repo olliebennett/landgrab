@@ -31,6 +31,14 @@ class Block < ApplicationRecord
     plot.polygon.contains?(midpoint)
   end
 
+  def southwest_rounded
+    [southwest.x, southwest.y].map { |coord| format('%.6f', coord) }
+  end
+
+  def northeast_rounded
+    [northeast.x, northeast.y].map { |coord| format('%.6f', coord) }
+  end
+
   def midpoint_rounded
     [midpoint.x, midpoint.y].map { |coord| format('%.6f', coord) }
   end

@@ -10,5 +10,14 @@
   <%= @plot.polygon.coordinates[0] %>
 </p>
 
+<p>
+  <strong>Blocks:</strong>
+  <%= @plot.blocks.size %>
+</p>
+
 <%= link_to 'Edit', edit_plot_path(@plot) %> |
 <%= link_to 'Back', plots_path %>
+
+<%= render 'static_pages/w3w_map',
+           center: [@plot.centroid_coords.y, @plot.centroid_coords.x],
+           blocks: @plot.blocks %>

@@ -1,14 +1,20 @@
 class BlocksController < ApplicationController
   before_action :set_block, only: [:show, :edit, :update, :destroy]
 
-  # GET /blocks
-  # GET /blocks.json
   def index
-    @blocks = Block.all
+    @plot = Plot.find(params[:plot]) if params[:plot].present?
+    if @plot.present?
+      @blocks = @plot.blocks
+      @center = [@plot.centroid_coords.y, @plot.centroid_coords.x]
+    else
+      @blocks = Block.all
+      mean_x = @blocks.map { |b| b.midpoint.x }.sum / @blocks.size
+      mean_y = @blocks.map { |b| b.midpoint.y }.sum / @blocks.size
+
+      @center = [mean_y, mean_x]
+    end
   end
 
-  # GET /blocks/1
-  # GET /blocks/1.json
   def show
     respond_to do |format|
       format.html { render :show }
@@ -16,17 +22,13 @@ class BlocksController < ApplicationController
     end
   end
 
-  # GET /blocks/new
   def new
     @block = Block.new
   end
 
-  # GET /blocks/1/edit
   def edit
   end
 
-  # POST /blocks
-  # POST /blocks.json
   def create
     @block = Block.new(block_params)
 
@@ -43,8 +45,6 @@ class BlocksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /blocks/1
-  # PATCH/PUT /blocks/1.json
   def update
     respond_to do |format|
       if @block.update(block_params)
@@ -57,8 +57,6 @@ class BlocksController < ApplicationController
     end
   end
 
-  # DELETE /blocks/1
-  # DELETE /blocks/1.json
   def destroy
     @block.destroy
     respond_to do |format|
@@ -68,13 +66,12 @@ class BlocksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_block
-      @block = Block.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def block_params
-      params.require(:block).permit(:southwest, :northeast, :w3w)
-    end
+  def set_block
+    @block = Block.find(params[:id])
+  end
+
+  def block_params
+    params.require(:block).permit(:southwest, :northeast, :w3w)
+  end
 end

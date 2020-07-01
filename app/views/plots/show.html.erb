@@ -13,11 +13,12 @@
 <p>
   <strong>Blocks:</strong>
   <%= @plot.blocks.size %>
+  - <%= link_to 'view on map', blocks_path(plot: @plot.id) %>
 </p>
 
 <%= link_to 'Edit', edit_plot_path(@plot) %> |
 <%= link_to 'Back', plots_path %>
 
-<%= render 'static_pages/w3w_map',
+<%= render 'map',
            center: [@plot.centroid_coords.y, @plot.centroid_coords.x],
-           blocks: @plot.blocks %>
+           plot: @plot %>

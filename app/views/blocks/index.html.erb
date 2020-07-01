@@ -2,6 +2,17 @@
 
 <h1>Blocks</h1>
 
+<% if @plot.present? %>
+  <p>
+    Showing blocks for plot:
+    <%= link_to @plot.title, plot_path(@plot) %>
+  </p>
+<% end %>
+
+<%= render 'static_pages/w3w_map',
+           center: @center,
+           blocks: @blocks %>
+
 <table>
   <thead>
     <tr>

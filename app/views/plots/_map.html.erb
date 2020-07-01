@@ -1,0 +1,52 @@
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+
+<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"/>
+
+<script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css"/>
+
+<div id="map" style="height: 75%;"></div>
+
+<script>
+  var map = L.map('map').setView(<%= center %>, 19);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxNativeZoom:19,
+      maxZoom:25
+  }).addTo(map);
+
+  // FeatureGroup is to store editable layers
+  var drawnItems = new L.FeatureGroup();
+  map.addLayer(drawnItems);
+  var drawControl = new L.Control.Draw({
+    draw: {
+      polyline: false,
+      rectangle: false,
+      circle: false,
+      circlemarker: false,
+      marker: false
+    },
+    edit: false
+  });
+  map.addControl(drawControl);
+
+  map.on(L.Draw.Event.CREATED, function (e) {
+    var type = e.layerType,
+    layer = e.layer;
+    // Add completed polygon to the map
+    map.addLayer(layer);
+    // Update input box with the polygon coordinates
+    var latlngs = layer._latlngs[0].map(function(coord) { return "" + coord.lng.toFixed(6) + " " + coord.lat.toFixed(6); });
+    // console.log("latlngs: ", latlngs, latlngs.length);
+    var polygon_field = document.getElementById('plot_polygon');
+    // Define polygon (including first point as final point to close the shape)
+    polygon_field.value = "POLYGON ((" + latlngs.join(', ') + ", " + latlngs[0] + "))";
+  });
+</script>

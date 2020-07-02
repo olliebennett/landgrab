@@ -20,6 +20,8 @@ class PlotsController < ApplicationController
 
     respond_to do |format|
       if @plot.save
+        PlotBlocksPopulateJob.perform_later(@plot.id)
+
         format.html { redirect_to @plot, notice: 'Plot was successfully created.' }
         format.json { render :show, status: :created, location: @plot }
       else

@@ -19,6 +19,7 @@
 <%= link_to 'Edit', edit_plot_path(@plot) %> |
 <%= link_to 'Back', plots_path %>
 
+<%# TODO: Fix issue then revert to using 'centroid' to center the map; https://github.com/olliebennett/landgrab/issues/1 %>
 <%= render 'map',
-           center: [@plot.centroid_coords.y, @plot.centroid_coords.x],
+           center: [51.4778, -0.0014],
            plot: @plot %>

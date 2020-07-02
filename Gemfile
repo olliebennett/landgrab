@@ -30,9 +30,12 @@ gem 'rails'
 # Render RGeo (from PostGis) as GeoJSON
 gem 'rgeo-geojson'
 
+# RSpec test framework
+gem 'rspec-rails', groups: %i[development test]
+
 # Spring keeps application running in the background
-gem 'spring', groups: :development
-gem 'spring-watcher-listen', groups: :development
+gem 'spring', groups: %i[development test]
+gem 'spring-watcher-listen', groups: %i[development test]
 
 # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
 gem 'web-console', groups: :development

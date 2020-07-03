@@ -16,12 +16,10 @@ Install the required PostGIS (spatial PostgreSQL extension);
 brew install postgis
 ```
 
-Create the required dev database and load schema;
+Create the required databases and load schema;
 
 ```
-createdb landgrab_development
-createdb landgrab_test
-bin/rails db:schema:load
+bin/rails db:setup
 ```
 
 Create an `.env` file to hold required environment variables.

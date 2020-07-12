@@ -16,7 +16,7 @@ gem 'byebug', groups: [:development, :test]
 gem 'dotenv-rails', groups: [:development, :test]
 
 # Dependency of RGeo operation with 'geos' library
-gem 'ffi-geos'
+gem 'ffi-geos', groups: [:development, :test]
 
 # JSON APIs
 gem 'jbuilder'

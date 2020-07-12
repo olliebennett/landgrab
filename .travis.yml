@@ -1,7 +1,11 @@
 language: ruby
 
 before_script:
-  rake db:test:prepare
+  - rake db:test:prepare
+  - psql -U postgres -c "create extension postgis"
 
-services:
-  - postgresql
+addons:
+  postgresql: 10
+  apt:
+    packages:
+    - postgresql-10-postgis-2.4

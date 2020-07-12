@@ -15,6 +15,9 @@ gem 'byebug', groups: [:development, :test]
 # Shim to load environment variables from .env into ENV in development.
 gem 'dotenv-rails', groups: [:development, :test]
 
+# Dependency of RGeo operation with 'geos' library
+gem 'ffi-geos'
+
 # JSON APIs
 gem 'jbuilder'
 

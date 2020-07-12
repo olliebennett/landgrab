@@ -1,0 +1,10 @@
+{
+  "buildpacks": [
+    {
+      "url": "heroku/heroku-geo-buildpack"
+    },
+    {
+      "url": "heroku/ruby"
+    }
+  ]
+}

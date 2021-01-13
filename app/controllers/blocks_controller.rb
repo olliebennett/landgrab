@@ -8,10 +8,14 @@ class BlocksController < ApplicationController
       @center = [@plot.centroid_coords.y, @plot.centroid_coords.x]
     else
       @blocks = Block.all
-      mean_x = @blocks.map { |b| b.midpoint.x }.sum / @blocks.size
-      mean_y = @blocks.map { |b| b.midpoint.y }.sum / @blocks.size
+      if @blocks.none?
+        @center = [51.4778, -0.0014] # Greenwich Observatory
+      else
+        mean_x = @blocks.map { |b| b.midpoint.x }.sum / @blocks.size
+        mean_y = @blocks.map { |b| b.midpoint.y }.sum / @blocks.size
 
-      @center = [mean_y, mean_x]
+        @center = [mean_y, mean_x]
+      end
     end
   end
 

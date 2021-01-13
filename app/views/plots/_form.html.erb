@@ -11,17 +11,33 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+  <div class="row mb-3 g-3 align-items-center">
+    <div class="col-sm-2">
+      <%= form.label :title, class: 'col-form-label' %>
+    </div>
+    <div class="col-sm-3">
+      <%= form.text_field :title, required: true, class: 'form-control', aria: { describedby: 'titleHelp' } %>
+    </div>
+    <div class="col-sm-7">
+      <span id="titleHelp" class="form-text">
+        Provide a meaningful name for the area.
+      </span>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :polygon %>
-    <%= form.text_field :polygon %>
+  <div class="row g-3 align-items-center">
+    <div class="col-sm-2">
+      <%= form.label :polygon, class: 'col-form-label' %>
+    </div>
+    <div class="col-sm-3">
+      <%= form.text_field :polygon, readonly: true, class: 'form-control', aria: { describedby: 'polygonHelp' } %>
+    </div>
+    <div class="col-sm-7">
+      <span id="polygonHelp" class="form-text">
+        Use the polygon icon on the map below to set this.
+      </span>
+    </div>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <%= form.submit class: 'btn btn-primary' %>
 <% end %>

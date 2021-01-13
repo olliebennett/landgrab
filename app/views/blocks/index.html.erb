@@ -1,6 +1,6 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Blocks</h1>
+
+<%= link_to 'New Block', new_block_path %>
 
 <% if @plot.present? %>
   <p>
@@ -9,35 +9,8 @@
   </p>
 <% end %>
 
+<%= render 'table' %>
+
 <%= render 'static_pages/w3w_map',
-           center: @center,
-           blocks: @blocks %>
-
-<table>
-  <thead>
-    <tr>
-      <th>South West</th>
-      <th>North East</th>
-      <th>What3Words</th>
-      <th>In Plot?</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @blocks.each do |block| %>
-      <tr>
-        <td><%= block.southwest_rounded.join(', ') %></td>
-        <td><%= block.northeast_rounded.join(', ') %></td>
-        <td><%= block.w3w %></td>
-        <td><%= block.plot_id.present? %></td>
-        <td><%= link_to 'W3W', block.w3w_url %></td>
-        <td><%= link_to 'Details', block %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Block', new_block_path %>
+     center: @center,
+     blocks: @blocks %>

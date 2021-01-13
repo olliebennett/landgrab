@@ -11,28 +11,15 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :w3w %>
-    <%= form.text_field :w3w %>
+  <div class="mb-3">
+    <%= form.label :w3w, class: 'form-label' %>
+    <%= form.text_field :w3w, class: 'form-control', aria: { describedby: 'w3wHelp' } %>
+    <div id="w3wHelp" class="form-text">
+      Enter 3 words from
+      <%= link_to 'What3Words', 'https://what3words.com/' %>
+      and we'll import the coordinates.
+    </div>
   </div>
 
-  <% if block.new_record? %>
-    <p>
-      Enter the What3Words above and the system will fill in the coordinates.
-    </p>
-  <% else %>
-    <div class="field">
-      <%= form.label :southwest %>
-      <%= form.text_field :southwest %>
-    </div>
-
-    <div class="field">
-      <%= form.label :northeast %>
-      <%= form.text_field :northeast %>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <%= form.submit class: 'btn btn-primary' %>
 <% end %>

@@ -1,0 +1,24 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>South West</th>
+      <th>North East</th>
+      <th>What3Words</th>
+      <th>In&nbsp;Plot?</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @blocks.each do |block| %>
+      <tr>
+        <td><%= block.southwest_rounded[0] %>,&nbsp;<%= block.southwest_rounded[1] %></td>
+        <td><%= block.northeast_rounded[0] %>,&nbsp;<%= block.northeast_rounded[1] %></td>
+        <td><%= content_tag(:code, block.w3w) %></td>
+        <td><%= block.plot_id.present? %></td>
+        <td><%= link_to 'W3W', block.w3w_url %></td>
+        <td><%= link_to 'Details', block %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

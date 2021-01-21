@@ -13,7 +13,7 @@
 <p>
   <strong>Blocks:</strong>
   <%= @plot.blocks.size %>
-  - <%= link_to 'view on map', blocks_path(plot: @plot.id) %>
+  - <%= link_to 'view blocks on map', blocks_path(plot: @plot.id) %>
 </p>
 
 <%# TODO: Fix issue then revert to using 'centroid' to center the map; https://github.com/olliebennett/landgrab/issues/1 %>

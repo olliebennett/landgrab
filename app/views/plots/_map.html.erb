@@ -1,18 +1,10 @@
-<style>
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-</style>
-
 <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"/>
 
 <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css"/>
 
-<div id="map" style="height: 75%;"></div>
+<div id="map" style="width: 100%; height: 500px;"></div>
 
 <script>
   var map = L.map('map').setView(<%= center %>, 19);

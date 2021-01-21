@@ -1,5 +1,5 @@
 class BlocksController < ApplicationController
-  before_action :set_block, only: [:show, :edit, :update, :destroy]
+  before_action :set_block, only: %i[show edit update destroy]
 
   def index
     @plot = Plot.find(params[:plot]) if params[:plot].present?
@@ -11,8 +11,8 @@ class BlocksController < ApplicationController
       if @blocks.none?
         @center = [51.4778, -0.0014] # Greenwich Observatory
       else
-        mean_x = @blocks.map { |b| b.midpoint.x }.sum / @blocks.size
-        mean_y = @blocks.map { |b| b.midpoint.y }.sum / @blocks.size
+        mean_x = @blocks.sum { |b| b.midpoint.x } / @blocks.size
+        mean_y = @blocks.sum { |b| b.midpoint.y } / @blocks.size
 
         @center = [mean_y, mean_x]
       end

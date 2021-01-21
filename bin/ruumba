@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+bundle exec ruumba --display-cop-names --disable-ruby-ext --config .ruumba.yml app/views

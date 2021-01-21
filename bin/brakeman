@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# Use 'markdown' format to avoid output line concatenation with default (text) formatter
+bundle exec brakeman --quiet --exit-on-warn --no-exit-on-error --format markdown

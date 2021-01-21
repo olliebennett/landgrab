@@ -2,5 +2,7 @@
 
 <%= render 'form', plot: @plot %>
 
-<%= link_to 'Show', @plot %> |
-<%= link_to 'Back', plots_path %>
+<%# TODO: Fix issue then revert to using 'centroid' to center the map; https://github.com/olliebennett/landgrab/issues/1 %>
+<%= render 'map',
+           center: [51.4778, -0.0014],
+           plot: @plot %>

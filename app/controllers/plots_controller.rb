@@ -1,5 +1,5 @@
 class PlotsController < ApplicationController
-  before_action :set_plot, only: [:show, :edit, :update, :destroy]
+  before_action :set_plot, only: %i[show edit update destroy]
 
   def index
     @plots = Plot.all

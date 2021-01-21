@@ -1,5 +1,5 @@
 class PlotsController < ApplicationController
-  before_action :set_plot, only: %i[show edit update destroy]
+  before_action :set_plot, only: %i[show edit update]
 
   def index
     @plots = Plot.all
@@ -40,14 +40,6 @@ class PlotsController < ApplicationController
         format.html { render :edit }
         format.json { render json: @plot.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  def destroy
-    @plot.destroy
-    respond_to do |format|
-      format.html { redirect_to plots_url, notice: 'Plot was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

@@ -42,6 +42,13 @@ gem 'rgeo-geojson'
 # RSpec test framework
 gem 'rspec-rails', groups: %i[development test]
 
+# RuboCop code linting
+gem 'rubocop'
+gem 'rubocop-performance'
+gem 'rubocop-rails'
+gem 'rubocop-rspec'
+gem 'rubocop-thread_safety'
+
 # Spring keeps application running in the background
 gem 'spring', groups: %i[development test]
 

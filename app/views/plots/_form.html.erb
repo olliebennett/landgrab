@@ -1,15 +1,5 @@
 <%= form_with(model: plot, local: true) do |form| %>
-  <% if plot.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(plot.errors.count, "error") %> prohibited this plot from being saved:</h2>
-
-      <ul>
-        <% plot.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render 'layouts/form_errors', errors: plot.errors %>
 
   <div class="row mb-3 g-3 align-items-center">
     <div class="col-sm-2">

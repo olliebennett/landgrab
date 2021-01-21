@@ -21,6 +21,9 @@ gem 'ffi-geos', groups: [:development, :test]
 # JSON APIs
 gem 'jbuilder'
 
+# Listener for filesystem changes
+gem 'listen', groups: %i[development test]
+
 # PostgreSQL database wrapper
 gem 'pg'
 

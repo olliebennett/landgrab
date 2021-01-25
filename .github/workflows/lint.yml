@@ -6,7 +6,7 @@
 
 name: Lint
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
   build:
@@ -14,15 +14,23 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Set up Ruby # https://github.com/ruby/setup-ruby#usage
       uses: ruby/setup-ruby@v1 # reads version from .ruby-version file
       with:
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+
     - name: Run RuboCop
       run: bin/rubocop
+
     - name: Run Ruumba (RuboCop on views)
       run: bin/ruumba
+
     - name: Run Brakeman
       run: bin/brakeman
+
+    - name: Install RGEO dependencies
+      run: sudo apt-get install libgeos-dev -y
+
     - name: Run Traceroute (detect unused actions/routes)
       run: bin/traceroute

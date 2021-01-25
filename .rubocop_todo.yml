@@ -23,13 +23,6 @@ Naming/MemoizedInstanceVariableName:
   Exclude:
     - 'app/controllers/static_pages_controller.rb'
 
-# Offense count: 1
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: slashes, arguments
-Rails/FilePath:
-  Exclude:
-    - 'config/environments/development.rb'
-
 # Offense count: 5
 # Configuration parameters: Include.
 # Include: app/**/*.rb, config/**/*.rb, db/**/*.rb, lib/**/*.rb

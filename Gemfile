@@ -49,6 +49,9 @@ gem 'rubocop-rails'
 gem 'rubocop-rspec'
 gem 'rubocop-thread_safety'
 
+# RuboCop for view files
+gem 'ruumba'
+
 # Spring keeps application running in the background
 gem 'spring', groups: %i[development test]
 

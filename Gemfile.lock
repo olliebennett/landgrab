@@ -197,6 +197,8 @@ GEM
     rubocop-thread_safety (0.4.2)
       rubocop (>= 0.53.0)
     ruby-progressbar (1.11.0)
+    ruumba (0.1.17)
+      rubocop
     spring (2.1.1)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -243,6 +245,7 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rspec
   rubocop-thread_safety
+  ruumba
   spring
   traceroute
   web-console

@@ -1,5 +1,5 @@
 class Plot < ApplicationRecord
-  has_many :blocks
+  has_many :blocks, dependent: :nullify
 
   validates :title, presence: true
   validates :polygon, presence: true

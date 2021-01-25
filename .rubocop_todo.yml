@@ -32,13 +32,6 @@ Rails/FilePath:
 
 # Offense count: 1
 # Configuration parameters: Include.
-# Include: app/models/**/*.rb
-Rails/HasManyOrHasOneDependent:
-  Exclude:
-    - 'app/models/plot.rb'
-
-# Offense count: 1
-# Configuration parameters: Include.
 # Include: app/controllers/**/*.rb
 Rails/LexicallyScopedActionFilter:
   Exclude:

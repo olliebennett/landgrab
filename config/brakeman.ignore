@@ -1,0 +1,37 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 4,
+      "fingerprint": "26ca7d5a152e06e8a4ecbf56fff4d3eeb68107ce172b5f1b568f576c46705f06",
+      "check_name": "LinkToHref",
+      "message": "Potentially unsafe model attribute in `link_to` href",
+      "file": "app/views/blocks/show.html.erb",
+      "line": 19,
+      "link": "https://brakemanscanner.org/docs/warning_types/link_to_href",
+      "code": "link_to(\"View\", Block.new(block_params).w3w_url)",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "BlocksController",
+          "method": "create",
+          "line": 41,
+          "file": "app/controllers/blocks_controller.rb",
+          "rendered": {
+            "name": "blocks/show",
+            "file": "app/views/blocks/show.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "blocks/show"
+      },
+      "user_input": "Block.new(block_params).w3w_url",
+      "confidence": "Weak",
+      "note": "We validate format of w3w before rendering\""
+    }
+  ],
+  "updated": "2021-01-25 15:54:20 +0000",
+  "brakeman_version": "4.10.1"
+}

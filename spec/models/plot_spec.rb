@@ -8,7 +8,8 @@ RSpec.describe Plot, type: :model do
     expect(plot).to be_valid
   end
 
-  it 'handles polygon with the correct rgeo method' do
-    expect(plot.polygon).to be_a RGeo::Geos::CAPIPolygonImpl
+  it 'handles polygon centroid' do
+    # See https://github.com/olliebennett/landgrab/issues/1
+    expect(plot.polygon.methods).to include :centroid
   end
 end

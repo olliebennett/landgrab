@@ -17,8 +17,8 @@ jobs:
 
     services:
       postgres:
-        # Docker Hub image
-        image: postgres:latest
+        # Docker Hub image (note: we use PostGIS which provides PostgreSQL with the relevant extension)
+        image: postgis/postgis
         ports:
           # Maps tcp port 5432 on service container to the host
           - 5432:5432

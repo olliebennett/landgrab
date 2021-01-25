@@ -1,0 +1,223 @@
+inherit_from: .rubocop.yml
+
+AllCops:
+  Include:
+    - '**/*.erb'
+
+# Not applicable to ERB files
+
+Style/CommentedKeyword:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# Arguably all 'Layout' cops are not applicable
+
+Layout/ArgumentAlignment:
+  Enabled: false
+
+Layout/HashAlignment:
+  Enabled: false
+
+Layout/ParameterAlignment:
+  Enabled: false
+
+Layout/BlockAlignment:
+  Enabled: false
+
+Layout/CaseIndentation:
+  Enabled: false
+
+Layout/ClosingParenthesisIndentation:
+  Enabled: false
+
+Layout/CommentIndentation:
+  Enabled: false
+
+Layout/ConditionPosition:
+  Enabled: false
+
+Layout/EndAlignment:
+  Enabled: false
+
+Layout/ElseAlignment:
+  Enabled: false
+
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
+
+Layout/EmptyLines:
+  Enabled: false
+
+Layout/EmptyLinesAroundBlockBody:
+  Enabled: false
+
+Layout/ExtraSpacing:
+  Enabled: false
+
+Layout/IndentationConsistency:
+  Enabled: false
+
+Layout/IndentationWidth:
+  Enabled: false
+
+Layout/FirstArgumentIndentation:
+  Enabled: false
+
+Layout/FirstArrayElementIndentation:
+  Enabled: false
+
+Layout/FirstHashElementIndentation:
+  Enabled: false
+
+Layout/InitialIndentation:
+  Enabled: false
+
+Layout/LeadingEmptyLines:
+  Enabled: false
+
+Layout/LeadingCommentSpace:
+  Enabled: false
+
+Layout/LineLength:
+  Enabled: false
+
+Layout/MultilineMethodCallBraceLayout:
+  Enabled: false
+
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
+
+Layout/SpaceAfterColon:
+  Enabled: false
+
+Layout/SpaceAfterComma:
+  Enabled: false
+
+Layout/SpaceAroundOperators:
+  Enabled: false
+
+Layout/SpaceBeforeBlockBraces:
+  Enabled: false
+
+Layout/SpaceBeforeComma:
+  Enabled: false
+
+Layout/SpaceBeforeComment:
+  Enabled: false
+
+Layout/SpaceBeforeFirstArg:
+  Enabled: false
+
+Layout/SpaceBeforeSemicolon:
+  Enabled: false
+
+Layout/SpaceInsideArrayLiteralBrackets:
+  Enabled: false
+
+Layout/SpaceInsideBlockBraces:
+  Enabled: false
+
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: false
+
+Layout/SpaceInsideParens:
+  Enabled: false
+
+Layout/SpaceInsideStringInterpolation:
+  Enabled: false
+
+Layout/TrailingEmptyLines:
+  Enabled: false
+
+Layout/TrailingWhitespace:
+  Enabled: false
+
+# Incorrectly flagged by Ruumba
+# Typically the false positives relate to important HTML differences which aren't
+# inside ERB tags and so aren't detected correctly by Ruumba.
+# TODO: Monitor these, and re-enable permanently once Ruumba flags correctly.
+
+Lint/Void:
+  Enabled: false
+
+Lint/EmptyWhen:
+  Enabled: false
+
+Rails/Presence:
+  Enabled: false
+
+Style/EmptyElse:
+  Enabled: false
+
+Style/ExplicitBlockArgument:
+  Enabled: false
+
+Style/IdenticalConditionalBranches:
+  Enabled: false
+
+Style/IfInsideElse:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/Next:
+  Enabled: false
+
+Style/Semicolon:
+  Enabled: false
+
+Style/SymbolProc:
+  Enabled: false
+
+Style/RedundantCondition:
+  Enabled: false
+
+# TODO: Enable cops below and resolve violations.
+# Note: The `--auto-gen-config` flag is glitchy with `ruumba`.
+# To re-generate this list;
+# - delete all rules below this comment and save.
+# - run `bin/ruumba`
+# - if any cops have errors (due to renamed cops etc), fix the config above.
+# - Copy full output (many errors + warnings!)
+# - Use text manipulation to extract occurrences of `: C: XXXX/YYYY` and `: W: XXXX/YYYY`
+# - De-duplicate and sort the matching cop names
+# - Paste below and manipulate to be `Enabled: false` in each case.
+
+Lint/EmptyConditionalBody:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/BlockNesting:
+  Enabled: false
+
+Rails/OutputSafety:
+  Enabled: false
+
+Rails/UnknownEnv:
+  Enabled: false
+
+Style/CaseLikeIf:
+  Enabled: false
+
+Style/CombinableLoops:
+  Enabled: false
+
+Style/HashAsLastArrayItem:
+  Enabled: false
+
+Style/SoleNestedConditional:
+  Enabled: false
+
+Style/StringConcatenation:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
+
+Style/TernaryParentheses:
+  Enabled: false

@@ -63,6 +63,7 @@ GEM
       minitest (>= 5.1)
       tzinfo (~> 2.0)
       zeitwerk (~> 2.3)
+    ast (2.4.1)
     bindex (0.8.1)
     bootsnap (1.5.1)
       msgpack (~> 1.0)
@@ -106,6 +107,9 @@ GEM
     nokogiri (1.11.1)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
+    parallel (1.20.1)
+    parser (3.0.0.0)
+      ast (~> 2.4.1)
     pg (1.2.3)
     puma (5.1.1)
       nio4r (~> 2.0)
@@ -139,10 +143,13 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (~> 1.0)
+    rainbow (3.0.0)
     rake (13.0.3)
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    regexp_parser (2.0.3)
+    rexml (3.2.4)
     rgeo (2.2.0)
     rgeo-activerecord (7.0.0)
       activerecord (>= 5.0)
@@ -166,6 +173,32 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.10.1)
+    rubocop (0.93.1)
+      parallel (~> 1.10)
+      parser (>= 2.7.1.5)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 1.8)
+      rexml
+      rubocop-ast (>= 0.6.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 1.4.0, < 2.0)
+    rubocop-ast (1.3.0)
+      parser (>= 2.7.1.5)
+    rubocop-performance (1.9.2)
+      rubocop (>= 0.90.0, < 2.0)
+      rubocop-ast (>= 0.4.0)
+    rubocop-rails (2.9.1)
+      activesupport (>= 4.2.0)
+      rack (>= 1.1)
+      rubocop (>= 0.90.0, < 2.0)
+    rubocop-rspec (1.44.1)
+      rubocop (~> 0.87)
+      rubocop-ast (>= 0.7.1)
+    rubocop-thread_safety (0.4.2)
+      rubocop (>= 0.53.0)
+    ruby-progressbar (1.11.0)
+    ruumba (0.1.17)
+      rubocop
     spring (2.1.1)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -179,6 +212,7 @@ GEM
       rails (>= 3.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+    unicode-display_width (1.7.0)
     web-console (4.1.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -206,6 +240,12 @@ DEPENDENCIES
   rails
   rgeo-geojson
   rspec-rails
+  rubocop
+  rubocop-performance
+  rubocop-rails
+  rubocop-rspec
+  rubocop-thread_safety
+  ruumba
   spring
   traceroute
   web-console

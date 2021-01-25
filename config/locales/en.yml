@@ -34,3 +34,5 @@ en:
     attributes:
       block:
         w3w: 'What3Words'
+      plot:
+        polygon: 'Area polygon'

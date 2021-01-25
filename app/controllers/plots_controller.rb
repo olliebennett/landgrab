@@ -5,15 +5,13 @@ class PlotsController < ApplicationController
     @plots = Plot.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @plot = Plot.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @plot = Plot.new(plot_params)

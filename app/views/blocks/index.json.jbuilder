@@ -1,1 +1,1 @@
-json.array! @blocks, partial: "blocks/block", as: :block
+json.array! @blocks, partial: 'blocks/block', as: :block

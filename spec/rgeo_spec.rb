@@ -5,4 +5,3 @@ RSpec.describe 'RGeo' do
     expect(RGeo::Geos).to be_supported
   end
 end
-

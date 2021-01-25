@@ -13,13 +13,13 @@ gem 'bootsnap', require: false
 gem 'brakeman', require: false, group: %i[development test]
 
 # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-gem 'byebug', groups: [:development, :test]
+gem 'byebug', groups: %i[development test]
 
 # Shim to load environment variables from .env into ENV in development.
-gem 'dotenv-rails', groups: [:development, :test]
+gem 'dotenv-rails', groups: %i[development test]
 
 # Dependency of RGeo operation with 'geos' library
-gem 'ffi-geos', groups: [:development, :test]
+gem 'ffi-geos', groups: %i[development test]
 
 # JSON APIs
 gem 'jbuilder'
@@ -41,6 +41,16 @@ gem 'rgeo-geojson'
 
 # RSpec test framework
 gem 'rspec-rails', groups: %i[development test]
+
+# RuboCop code linting
+gem 'rubocop'
+gem 'rubocop-performance'
+gem 'rubocop-rails'
+gem 'rubocop-rspec'
+gem 'rubocop-thread_safety'
+
+# RuboCop for view files
+gem 'ruumba'
 
 # Spring keeps application running in the background
 gem 'spring', groups: %i[development test]

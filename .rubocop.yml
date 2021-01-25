@@ -1,0 +1,65 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-thread_safety
+
+AllCops:
+  NewCops: enable
+
+  Exclude:
+    - db/migrate/*
+    - db/schema.rb
+    - tmp/**/*
+    - vendor/**/*
+
+  TargetRubyVersion: 3.0
+
+  DisplayCopNames: true
+
+Rails:
+  Enabled: true
+
+Rails/Output:
+  Include:
+    - app/**/*.rb
+    - config/**/*.rb
+    - spec/**/*.rb
+    - test/**/*.rb
+
+RSpec/DescribeClass:
+  Exclude:
+    - spec/requests/**/*
+    - spec/features/**/*
+
+RSpec/NamedSubject:
+  Enabled: false
+
+RSpec/ExampleLength:
+  # TODO: Reduce towards default of 5 lines!
+  Max: 13
+
+# Avoid checking for top-level documentation
+Style/Documentation:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'config/routes.rb'
+    - 'Guardfile'
+    - 'spec/**/*'
+    - 'lib/**/*'
+    - 'test/**/*'
+
+Layout/LineLength:
+  Max: 200
+
+Metrics/ClassLength:
+  Exclude:
+    - 'test/**/*' # permit long test files!
+
+# Allow short (2-letter) param names
+Naming/MethodParameterName:
+  Enabled: false

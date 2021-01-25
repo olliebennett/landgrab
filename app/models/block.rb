@@ -6,6 +6,8 @@ class Block < ApplicationRecord
   validates :southwest, presence: true
   validates :northeast, presence: true
 
+  validates :w3w, presence: true, format: { with: /\A[a-z]+\.[a-z]+\.[a-z]+\z/, message: 'format should be a.b.c'}
+
   def to_geojson
     geojson = RGeo::GeoJSON.encode(bounding_box.to_geometry)
 

@@ -1,5 +1,5 @@
 class BlocksController < ApplicationController
-  before_action :set_block, only: %i[show edit update destroy]
+  before_action :set_block, only: %i[show]
 
   def index
     @plot = Plot.find(params[:plot]) if params[:plot].present?

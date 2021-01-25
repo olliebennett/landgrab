@@ -30,13 +30,6 @@ Rails/FilePath:
   Exclude:
     - 'config/environments/development.rb'
 
-# Offense count: 1
-# Configuration parameters: Include.
-# Include: app/controllers/**/*.rb
-Rails/LexicallyScopedActionFilter:
-  Exclude:
-    - 'app/controllers/blocks_controller.rb'
-
 # Offense count: 5
 # Configuration parameters: Include.
 # Include: app/**/*.rb, config/**/*.rb, db/**/*.rb, lib/**/*.rb

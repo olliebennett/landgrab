@@ -1,0 +1,28 @@
+# GitHub Action to run linters, based on:
+# - Rails repo configuration:
+#   https://github.com/rails/rails/blob/master/.github/workflows/rubocop.yml
+# - GitHub Actions Docs
+#   https://github.com/ruby/setup-ruby#usage
+
+name: Lint
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby # https://github.com/ruby/setup-ruby#usage
+      uses: ruby/setup-ruby@v1 # reads version from .ruby-version file
+      with:
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+    - name: Run RuboCop
+      run: bin/rubocop
+    - name: Run Ruumba (RuboCop on views)
+      run: bin/ruumba
+    - name: Run Brakeman
+      run: bin/brakeman
+    - name: Run Traceroute (detect unused actions/routes)
+      run: bin/traceroute

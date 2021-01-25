@@ -61,10 +61,3 @@ Style/GlobalStdStream:
 Style/MixinUsage:
   Exclude:
     - 'bin/update'
-
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: SafeForConstants.
-Style/RedundantFetchBlock:
-  Exclude:
-    - 'config/puma.rb'

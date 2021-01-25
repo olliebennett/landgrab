@@ -10,7 +10,6 @@ class PlotBlocksPopulateJob < ApplicationJob
 
     lat = latmin
     lng = lngmin
-    w3w = nil # placeholder for What3Words API response
     square = nil
 
     while lng < lngmax

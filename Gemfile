@@ -9,6 +9,9 @@ gem 'activerecord-postgis-adapter'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
 
+# Security audit checks (eg. SQL injection)
+gem 'brakeman', require: false, group: %i[development test]
+
 # Call 'byebug' anywhere in the code to stop execution and get a debugger console
 gem 'byebug', groups: [:development, :test]
 

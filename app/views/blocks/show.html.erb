@@ -1,3 +1,7 @@
+<h1>
+  Block Details
+</h1>
+
 <p>
   <strong>South West:</strong>
   <%= @block.southwest_rounded.join(', ') %>
@@ -27,3 +31,7 @@
     -
   <% end %>
 </p>
+
+<%= render 'static_pages/w3w_map',
+     center: [@block.midpoint.y, @block.midpoint.x],
+     blocks: [@block] %>

@@ -6,6 +6,9 @@ ruby '3.0.0'
 # Support PostGIS (spatial PostgreSQL extension)
 gem 'activerecord-postgis-adapter'
 
+# Remove whitespace in user-supplied data
+gem 'auto_strip_attributes'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
 

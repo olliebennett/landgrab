@@ -6,6 +6,8 @@ class Plot < ApplicationRecord
 
   validate :validate_bounding_box_dimensions
 
+  auto_strip_attributes :title, squish: true
+
   MAX_BOUNDING_BOX_DIMENSION = 0.005
 
   def centroid_coords

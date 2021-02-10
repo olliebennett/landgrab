@@ -28,7 +28,7 @@
 <p>
   <strong>Plot:</strong>
   <% if @block.plot.present? %>
-    <%= link_to @block.plot.title, plot_path(@block.plot_id) %>
+    <%= link_to @block.plot.title, plot_path(@block.plot) %>
   <% else %>
     -
   <% end %>

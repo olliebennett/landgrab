@@ -16,7 +16,10 @@ class Block < ApplicationRecord
     geojson = RGeo::GeoJSON.encode(bounding_box.to_geometry)
 
     geojson['properties'] ||= {}
-    geojson['properties']['popupContent'] = "What3Words<br><code>#{w3w}</code><br><code>#{midpoint_rounded.join(',')}</code><br><a href=\"#{w3w_url}\">view on what3words.com</a>"
+    geojson['properties']['popupContent'] = 'What3Words<br>' \
+                                            "<a href=\"#{w3w_url}\"><code>#{w3w}</code></a><br>" \
+                                            "<code>#{midpoint_rounded.join(',')}</code><br>" \
+                                            "<a href=\"#{Rails.application.routes.url_helpers.block_path(self)}\">view details</a>"
 
     geojson.to_json
   end

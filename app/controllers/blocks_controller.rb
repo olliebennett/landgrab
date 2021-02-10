@@ -2,7 +2,7 @@ class BlocksController < ApplicationController
   before_action :set_block, only: %i[show]
 
   def index
-    @plot = Plot.find(params[:plot]) if params[:plot].present?
+    @plot = Plot.find_by_hashid!(params[:plot]) if params[:plot].present?
     if @plot.present?
       @blocks = @plot.blocks
       @center = [@plot.centroid_coords.y, @plot.centroid_coords.x]

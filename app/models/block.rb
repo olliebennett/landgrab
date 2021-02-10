@@ -1,4 +1,6 @@
 class Block < ApplicationRecord
+  include Hashid::Rails
+
   after_initialize :sanitize_w3w
 
   belongs_to :plot, optional: true

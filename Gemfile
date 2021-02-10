@@ -24,6 +24,9 @@ gem 'dotenv-rails', groups: %i[development test]
 # Dependency of RGeo operation with 'geos' library
 gem 'ffi-geos', groups: %i[development test]
 
+# Replace raw numeric IDs with short unique ids
+gem 'hashid-rails'
+
 # JSON APIs
 gem 'jbuilder'
 

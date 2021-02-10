@@ -1,4 +1,6 @@
 class Plot < ApplicationRecord
+  include Hashid::Rails
+
   has_many :blocks, dependent: :nullify
 
   validates :title, presence: true

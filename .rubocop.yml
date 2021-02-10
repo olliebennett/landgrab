@@ -29,6 +29,10 @@ Rails/Output:
     - spec/**/*.rb
     - test/**/*.rb
 
+# We encourage `find_by_id!` (an alias for `find`), as it's more explicit that it's using raw IDs (not HashIDs).
+Rails/DynamicFindBy:
+  Whitelist: find_by_id! find_by_hashid find_by_hashid!
+
 RSpec/DescribeClass:
   Exclude:
     - spec/requests/**/*

@@ -49,7 +49,7 @@ class BlocksController < ApplicationController
   private
 
   def set_block
-    @block = Block.find(params[:id])
+    @block = Block.find_by_hashid!(params[:id])
   end
 
   def block_params

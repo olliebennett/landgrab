@@ -44,7 +44,7 @@ class PlotsController < ApplicationController
   private
 
   def set_plot
-    @plot = Plot.find(params[:id])
+    @plot = Plot.find_by_hashid!(params[:id])
   end
 
   def plot_params

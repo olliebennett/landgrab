@@ -26,8 +26,19 @@ class Plot < ApplicationRecord
     RGeo::Cartesian::BoundingBox.create_from_points(southwest, northeast)
   end
 
-  def bounding_box_area
-    bounding_box.x_span * bounding_box.y_span
+  def area
+    # See https://gis.stackexchange.com/questions/153192
+    ActiveRecord::Base.connection.execute("
+    SELECT
+      ST_Area(
+        geography(
+          ST_Transform(
+            ST_GeomFromText('#{polygon.as_json}', 4326),
+            4326
+          )
+        )
+      ) AS area;
+    ")[0]['area'].to_f
   end
 
   def validate_bounding_box_dimensions

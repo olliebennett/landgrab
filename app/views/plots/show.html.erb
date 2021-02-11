@@ -15,6 +15,11 @@
 </p>
 
 <p>
+  <strong>Area:</strong>
+  <%= @plot.area.round %> m<sup>2</sup>
+</p>
+
+<p>
   <strong>Blocks:</strong>
   <%= @plot.blocks.size %>
   - <%= link_to 'view blocks on map', blocks_path(plot: @plot) %>

@@ -5,6 +5,8 @@ class Block < ApplicationRecord
 
   belongs_to :plot, optional: true
 
+  default_scope { order(:id) }
+
   validates :southwest, presence: true
   validates :northeast, presence: true
 

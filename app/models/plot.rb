@@ -3,6 +3,8 @@ class Plot < ApplicationRecord
 
   has_many :blocks, dependent: :nullify
 
+  default_scope { order(:id) }
+
   validates :title, presence: true
   validates :polygon, presence: true
 

@@ -28,17 +28,18 @@ class Plot < ApplicationRecord
 
   def area
     # See https://gis.stackexchange.com/questions/153192
-    ActiveRecord::Base.connection.execute("
-    SELECT
+    query = ActiveRecord::Base.sanitize_sql(['SELECT
       ST_Area(
         geography(
           ST_Transform(
-            ST_GeomFromText('#{polygon.as_json}', 4326),
+            ST_GeomFromText(?, 4326),
             4326
           )
         )
       ) AS area;
-    ")[0]['area'].to_f
+    ', polygon.as_json])
+
+    ActiveRecord::Base.connection.execute(query)[0]['area'].to_f
   end
 
   def validate_bounding_box_dimensions

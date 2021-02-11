@@ -4,26 +4,31 @@
   Plot Details
 </h1>
 
-<p>
-  <strong>Title:</strong>
-  <%= @plot.title %>
-</p>
-
-<p>
-  <strong>Polygon:</strong>
-  <%= @plot.polygon.coordinates[0] %>
-</p>
-
-<p>
-  <strong>Area:</strong>
-  <%= @plot.area.round %> m<sup>2</sup>
-</p>
-
-<p>
-  <strong>Blocks:</strong>
-  <%= @plot.blocks.size %>
-  - <%= link_to 'view blocks on map', blocks_path(plot: @plot) %>
-</p>
+<table class="table">
+  <tbody>
+    <tr>
+      <th>Title</th>
+      <td><%= @plot.title %></td>
+    </tr>
+    <tr>
+      <th>Polygon</th>
+      <td><%= @plot.polygon.coordinates[0] %></td>
+    </tr>
+    <tr>
+      <th>Area</th>
+      <td>~ <%= @plot.area_formatted_unsquared %><sup>2</sup></td>
+    </tr>
+    <tr>
+      <th>Blocks</th>
+      <td>
+        <%= @plot.blocks.size %>
+        <% if @plot.blocks.size.positive? %>
+          - <%= link_to 'view on map', blocks_path(plot: @plot) %>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <p>
   <%= link_to 'Edit plot', edit_plot_path(@plot) %>

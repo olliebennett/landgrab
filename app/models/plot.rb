@@ -42,6 +42,14 @@ class Plot < ApplicationRecord
     ActiveRecord::Base.connection.execute(query)[0]['area'].to_f
   end
 
+  def area_formatted_unsquared
+    if area <= 100_000
+      "#{format('%.1f', area)} m"
+    elsif area <= 1_000_000
+      "#{format('%.2g', area / 1_000_000)} km"
+    end
+  end
+
   def validate_bounding_box_dimensions
     errors.add(:polygon, 'is too wide') if bounding_box.x_span > MAX_BOUNDING_BOX_DIMENSION
     errors.add(:polygon, 'is too high') if bounding_box.y_span > MAX_BOUNDING_BOX_DIMENSION

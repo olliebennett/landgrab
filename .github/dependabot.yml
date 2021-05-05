@@ -1,0 +1,15 @@
+version: 2
+updates:
+- package-ecosystem: bundler
+  directory: "/"
+  schedule:
+    interval: weekly
+  open-pull-requests-limit: 10
+  versioning-strategy: lockfile-only
+  ignore:
+  - dependency-name: rspec-rails
+    versions:
+    - 4.1.0
+  - dependency-name: rubocop-performance
+    versions:
+    - 1.10.0

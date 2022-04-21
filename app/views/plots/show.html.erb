@@ -27,6 +27,12 @@
         <% end %>
       </td>
     </tr>
+    <tr>
+      <th>Created</th>
+      <td>
+        <%= @plot.created_at.strftime('%e %b %Y %H:%M:%S') %>
+      </td>
+    </tr>
   </tbody>
 </table>
 

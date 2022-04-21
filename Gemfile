@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.0'
+ruby '3.1.1'
 
 # Support PostGIS (spatial PostgreSQL extension)
 gem 'activerecord-postgis-adapter'

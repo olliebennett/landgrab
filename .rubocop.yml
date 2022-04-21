@@ -15,12 +15,13 @@ AllCops:
     - tmp/**/*
     - vendor/**/*
 
-  TargetRubyVersion: 3.0
-
   DisplayCopNames: true
 
 Rails:
   Enabled: true
+
+Rails/I18nLocaleTexts:
+  Enabled: false
 
 Rails/Output:
   Include:

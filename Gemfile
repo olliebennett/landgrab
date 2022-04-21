@@ -60,9 +60,6 @@ gem 'rubocop-thread_safety'
 # RuboCop for view files
 gem 'ruumba'
 
-# Spring keeps application running in the background
-gem 'spring', groups: %i[development test]
-
 # Detect misconfigured routes
 gem 'traceroute', group: %i[development test]
 

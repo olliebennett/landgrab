@@ -18,16 +18,7 @@ class PlotBlocksPopulateJob < ApplicationJob
       while lat < latmax
         w3w = W3wApiService.convert_to_w3w("#{lat},#{lng}")
 
-        # Persist block (if not already existing)
-        b = Block.find_or_initialize_by(w3w: w3w.fetch('words'))
-        b.populate_coords_from_w3w_response(w3w)
-        if b.within_plot?(plot)
-          puts "Block #{b.midpoint_rounded} is WITHIN plot; saving!"
-          b.plot = plot
-          b.save!
-        else
-          puts "Block #{b.midpoint_rounded} is OUTSIDE plot; skipping!"
-        end
+        persist_block(w3w)
 
         block_mid = w3w.fetch('coordinates')
         square = w3w.fetch('square')
@@ -43,6 +34,21 @@ class PlotBlocksPopulateJob < ApplicationJob
       block_maxlng = [square.fetch('southwest').fetch('lng'), square.fetch('northeast').fetch('lng')].max
       lng = block_maxlng + 0.000001
       lat = latmin
+    end
+  end
+
+  private
+
+  def persist_block(w3w)
+    # Persist block (if not already existing)
+    b = Block.find_or_initialize_by(w3w: w3w.fetch('words'))
+    b.populate_coords_from_w3w_response(w3w)
+    if b.within_plot?(plot)
+      puts "Block #{b.midpoint_rounded} is WITHIN plot; saving!"
+      b.plot = plot
+      b.save!
+    else
+      puts "Block #{b.midpoint_rounded} is OUTSIDE plot; skipping!"
     end
   end
 end

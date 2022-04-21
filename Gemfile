@@ -16,6 +16,9 @@ gem 'auto_strip_attributes'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
 
+# Pagination (Kaminari) styling for Bootstrap
+gem 'bootstrap5-kaminari-views'
+
 # Security audit checks (eg. SQL injection)
 gem 'brakeman', require: false, group: %i[development test]
 
@@ -34,6 +37,9 @@ gem 'hashid-rails'
 
 # JSON APIs
 gem 'jbuilder'
+
+# Pagination support
+gem 'kaminari'
 
 # Listener for filesystem changes
 gem 'listen', groups: %i[development test]

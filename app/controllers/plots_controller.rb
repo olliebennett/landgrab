@@ -2,7 +2,7 @@ class PlotsController < ApplicationController
   before_action :set_plot, only: %i[show edit update]
 
   def index
-    @plots = Plot.all
+    @plots = Plot.order(id: :desc).page(params[:page])
   end
 
   def show; end

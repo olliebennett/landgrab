@@ -16,7 +16,11 @@
   </p>
 <% end %>
 
+<%= page_entries_info @blocks %>
+
 <%= render 'table' %>
+
+<%= paginate @blocks, theme: 'bootstrap-5' %>
 
 <%= render 'static_pages/w3w_map',
      center: @center,

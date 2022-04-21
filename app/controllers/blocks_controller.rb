@@ -4,10 +4,10 @@ class BlocksController < ApplicationController
   def index
     @plot = Plot.find_by_hashid!(params[:plot]) if params[:plot].present?
     if @plot.present?
-      @blocks = @plot.blocks
+      @blocks = @plot.blocks.order(id: :desc).page(params[:page])
       @center = [@plot.centroid_coords.y, @plot.centroid_coords.x]
     else
-      @blocks = Block.all
+      @blocks = Block.order(id: :desc).page(params[:page])
       if @blocks.none?
         @center = [51.4778, -0.0014] # Greenwich Observatory
       else

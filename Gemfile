@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.1'
 
@@ -22,7 +21,8 @@ gem 'byebug', groups: %i[development test]
 gem 'dotenv-rails', groups: %i[development test]
 
 # Dependency of RGeo operation with 'geos' library
-gem 'ffi-geos', groups: %i[development test]
+# TODO: Remove git version once https://github.com/dark-panda/ffi-geos/issues/31 is released
+gem 'ffi-geos', groups: %i[development test], git: 'https://github.com/dark-panda/ffi-geos', branch: 'homebrew'
 
 # Replace raw numeric IDs with short unique ids
 gem 'hashid-rails'

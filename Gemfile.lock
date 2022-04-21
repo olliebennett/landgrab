@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/dark-panda/ffi-geos
+  revision: 4219b6dfc17f2431f0337880d8ae89503f43c2aa
+  branch: homebrew
+  specs:
+    ffi-geos (2.3.0)
+      ffi (>= 1.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -81,8 +89,6 @@ GEM
       railties (>= 3.2)
     erubi (1.10.0)
     ffi (1.15.5)
-    ffi-geos (2.3.0)
-      ffi (>= 1.0.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
     hashid-rails (1.4.1)
@@ -237,7 +243,7 @@ DEPENDENCIES
   brakeman
   byebug
   dotenv-rails
-  ffi-geos
+  ffi-geos!
   hashid-rails
   jbuilder
   listen
@@ -260,4 +266,4 @@ RUBY VERSION
    ruby 3.1.1p18
 
 BUNDLED WITH
-   2.2.3
+   2.3.8

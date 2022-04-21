@@ -2,6 +2,11 @@ source 'https://rubygems.org'
 
 ruby '3.1.1'
 
+# IMPORTANT: When upgrading Rails, follow all instructions!
+# Eg. run `app:update` script, action `new_framework_defaults_*.rb`, update `config.load_defaults`
+# https://guides.rubyonrails.org/upgrading_ruby_on_rails.html
+gem 'rails', '~> 7.0' # REMEMBER TO `app:update` AFTER CHANGING
+
 # Support PostGIS (spatial PostgreSQL extension)
 gem 'activerecord-postgis-adapter'
 
@@ -38,9 +43,6 @@ gem 'pg'
 
 # Puma app server
 gem 'puma'
-
-# Ruby on Rails Framework!
-gem 'rails'
 
 # Render RGeo (from PostGis) as GeoJSON
 gem 'rgeo-geojson'

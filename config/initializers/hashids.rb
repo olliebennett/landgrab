@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Hashid::Rails.configure do |config|
   # The salt to use for generating hashid. Prepended with pepper (table name).
   config.salt = ENV.fetch('HASHID_SALT', '')

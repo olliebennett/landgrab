@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :block do
   desc 'Populate blocks within a given region polygon'
   task populate_from_polygon: :environment do

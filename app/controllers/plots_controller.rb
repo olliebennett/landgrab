@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PlotsController < ApplicationController
   before_action :set_plot, only: %i[show edit update]
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class W3wApiService
   def self.convert_to_coordinates(w3w)
     resp = api_get('convert-to-coordinates', words: w3w)

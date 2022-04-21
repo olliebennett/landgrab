@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BootstrapHelper
   def active_navlink(title, href)
     if current_page?(href)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PlotBlocksPopulateJob < ApplicationJob
   queue_as :default
 

@@ -4,8 +4,8 @@ class PlotBlocksPopulateJob < ApplicationJob
   queue_as :default
 
   def perform(plot_id)
-    plot = Plot.find(plot_id)
-    bb = plot.bounding_box
+    @plot = Plot.find(plot_id)
+    bb = @plot.bounding_box
 
     latmin, latmax = [bb.min_point.y, bb.max_point.y].minmax
     lngmin, lngmax = [bb.min_point.x, bb.max_point.x].minmax
@@ -43,9 +43,9 @@ class PlotBlocksPopulateJob < ApplicationJob
     # Persist block (if not already existing)
     b = Block.find_or_initialize_by(w3w: w3w.fetch('words'))
     b.populate_coords_from_w3w_response(w3w)
-    if b.within_plot?(plot)
+    if b.within_plot?(@plot)
       puts "Block #{b.midpoint_rounded} is WITHIN plot; saving!"
-      b.plot = plot
+      b.plot = @plot
       b.save!
     else
       puts "Block #{b.midpoint_rounded} is OUTSIDE plot; skipping!"

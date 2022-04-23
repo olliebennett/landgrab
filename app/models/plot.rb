@@ -58,7 +58,7 @@ class Plot < ApplicationRecord
   def coordinates_display
     polygon.coordinates[0].map do |coord|
       coord.map { |x| format('%.6f', x) }
-    end.to_s.gsub('"', '')
+    end.to_s.delete('"')
   end
 
   def validate_bounding_box_dimensions

@@ -19,10 +19,13 @@ class Block < ApplicationRecord
     geojson = RGeo::GeoJSON.encode(bounding_box.to_geometry)
 
     geojson['properties'] ||= {}
+    available = subscription.nil?
+    geojson['properties']['available'] = available
     geojson['properties']['popupContent'] = 'What3Words<br>' \
                                             "<a href=\"#{w3w_url}\"><code>#{w3w}</code></a><br>" \
                                             "<code>#{midpoint_rounded.join(',')}</code><br>" \
-                                            "<a href=\"#{Rails.application.routes.url_helpers.block_path(self)}\">view details</a>"
+                                            "<a href=\"#{Rails.application.routes.url_helpers.block_path(self)}\">view details</a><br>" \
+                                            "Subscription: #{available ? 'Available' : 'Unavailable'}"
 
     geojson.to_json
   end

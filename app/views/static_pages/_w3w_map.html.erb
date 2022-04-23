@@ -16,6 +16,14 @@
     }
   }
 
+  function blockStyle(feature) {
+    if (feature.geometry.properties && feature.geometry.properties.available) {
+      return {color: "#3388ff"};
+    } else {
+      return {color: "darkred"};
+    }
+  };
+
   var map = L.map('map');
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -25,7 +33,7 @@
   }).addTo(map);
 
   var allBlocksGeoJson = [<%= blocks.map(&:to_geojson).join(', ').html_safe %>];
-  var blocks = L.geoJSON(allBlocksGeoJson, { onEachFeature: onEachFeature }).addTo(map);
+  var blocks = L.geoJSON(allBlocksGeoJson, { onEachFeature: onEachFeature, style: blockStyle }).addTo(map);
 
   map.fitBounds(blocks.getBounds())
 

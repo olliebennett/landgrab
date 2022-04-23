@@ -20,7 +20,7 @@
   <%= link_to 'What3Words', 'https://what3words.com/' %>.
 </p>
 
-<%= render 'w3w_map', center: @center, blocks: Block.all %>
+<%= render 'w3w_map', blocks: Plot.joins(:blocks).reorder('RANDOM()').first.blocks %>
 
 <!-- GEOS Supported? <%= RGeo::Geos.supported? %> -->
 

@@ -7,21 +7,15 @@
   <%= link_to 'What3Words', 'https://what3words.com/' %>.
 </p>
 
-<%= link_to 'New Block', new_block_path %>
-
-<% if @plot.present? %>
-  <p>
-    Showing blocks for plot:
-    <%= link_to @plot.title, plot_path(@plot) %>
-  </p>
-<% end %>
-
-<%= page_entries_info @blocks %>
+<p>
+  <%= page_entries_info @blocks %>
+  <% if @plot.present? %>
+    from the <%= link_to @plot.title, plot_path(@plot) %> plot
+  <% end %>
+</p>
 
 <%= render 'table' %>
 
 <%= paginate @blocks, theme: 'bootstrap-5' %>
 
-<%= render 'static_pages/w3w_map',
-     center: @center,
-     blocks: @blocks %>
+<%= render 'static_pages/w3w_map', blocks: @blocks %>

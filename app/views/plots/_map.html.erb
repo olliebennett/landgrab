@@ -49,6 +49,13 @@
     var latlngs = <%= plot.polygon.coordinates[0][0...-1].map(&:reverse) %>;
     var polygon = L.polygon(latlngs, { color: 'red' }).addTo(map);
     // zoom the map to the polygon
-    map.fitBounds(polygon.getBounds());
+    const LAT_BUFFER = 0.00001;
+    const LNG_BUFFER = 0.0001;
+    var bounds = polygon.getBounds();
+    bounds._northEast.lat += LAT_BUFFER;
+    bounds._northEast.lng += LNG_BUFFER;
+    bounds._southWest.lat -= LAT_BUFFER;
+    bounds._southWest.lng -= LNG_BUFFER;
+    map.fitBounds(bounds);
   <% end %>
 </script>

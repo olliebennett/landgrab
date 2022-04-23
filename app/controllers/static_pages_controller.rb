@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class StaticPagesController < ApplicationController
+  skip_before_action :authenticate_user!, only: :homepage
+
   def homepage
     if params[:center].present?
       block = Block.find_by(w3w: params[:center])

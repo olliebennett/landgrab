@@ -6,10 +6,10 @@ class BlocksController < ApplicationController
   def index
     @plot = Plot.find_by_hashid!(params[:plot]) if params[:plot].present?
     if @plot.present?
-      @blocks = @plot.blocks.order(id: :desc).page(params[:page])
+      @blocks = @plot.blocks.order(id: :desc).includes(:subscription).page(params[:page])
       @center = [@plot.centroid_coords.y, @plot.centroid_coords.x]
     else
-      @blocks = Block.order(id: :desc).page(params[:page])
+      @blocks = Block.order(id: :desc).includes(:plot, :subscription).page(params[:page])
       if @blocks.none?
         @center = Plot::DEFAULT_COORDS
       else

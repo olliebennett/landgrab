@@ -4,7 +4,10 @@
       <th>South West</th>
       <th>North East</th>
       <th>What3Words</th>
-      <th>In&nbsp;Plot?</th>
+      <% if @plot.nil? %>
+        <th>Plot</th>
+      <% end %>
+      <th>Subscriber?</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -15,7 +18,16 @@
         <td><%= block.southwest_rounded[0] %>,&nbsp;<%= block.southwest_rounded[1] %></td>
         <td><%= block.northeast_rounded[0] %>,&nbsp;<%= block.northeast_rounded[1] %></td>
         <td><%= content_tag(:code, block.w3w) %></td>
-        <td><%= block.plot_id.present? %></td>
+        <% if @plot.nil? %>
+          <td>
+            <% if block.plot.present? %>
+              <%= link_to block.plot.title, plot_path(block.plot) %>
+            <% else %>
+              -
+            <% end %>
+          </td>
+        <% end %>
+        <td><%= block.subscription.present? %></td>
         <td><%= link_to 'W3W', block.w3w_url %></td>
         <td><%= link_to 'Details', block %></td>
       </tr>

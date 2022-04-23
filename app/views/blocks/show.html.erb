@@ -34,6 +34,23 @@
   <% end %>
 </p>
 
+<p>
+  <% if @block.subscription.present? %>
+    <% if @block.subscription.user == current_user %>
+      You've already subscribed to this block
+    <% else %>
+      This block is already subscribed by User <%= @block.subscription.user.hashid %>
+    <% end %>
+    (since <%= @block.subscription.created_at.strftime('%e %b %Y %H:%M:%S') %>).
+  <% else %>
+    <%= form_with(model: Subscription.new(user: current_user, block: @block)) do |form| %>
+      <%= form.hidden_field :user_id %>
+      <%= form.hidden_field :block_id %>
+      <%= form.submit 'Subscribe!', class: 'btn btn-primary' %>
+    <% end %>
+  <% end %>
+</p>
+
 <%= render 'static_pages/w3w_map',
      center: [@block.midpoint.y, @block.midpoint.x],
      blocks: [@block] %>

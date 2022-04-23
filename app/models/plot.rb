@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Plot < ApplicationRecord
-  include Hashid::Rails
-
   has_many :blocks, dependent: :nullify
 
   default_scope { order(:id) }

@@ -17,6 +17,13 @@
       </ul>
       <ul class="navbar-nav mb-2 mb-lg-0">
         <li class="nav-item">
+          <% if user_signed_in? %>
+            <%= active_navlink 'Log Out', destroy_user_session_path %>
+            <% else %>
+            <%= active_navlink 'Log In', new_user_session_path %>
+          <% end %>
+        </li>
+        <li class="nav-item">
           <%= active_navlink('GitHub', 'https://github.com/olliebennett/landgrab/') %>
         </li>
       </ul>

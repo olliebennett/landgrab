@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_23_141455) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_23_201440) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -32,6 +32,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_23_141455) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "subscriptions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "block_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["block_id"], name: "index_subscriptions_on_block_id"
+    t.index ["user_id"], name: "index_subscriptions_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -45,4 +54,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_23_141455) do
   end
 
   add_foreign_key "blocks", "plots"
+  add_foreign_key "subscriptions", "blocks"
+  add_foreign_key "subscriptions", "users"
 end

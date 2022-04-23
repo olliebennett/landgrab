@@ -8,12 +8,12 @@
     </tr>
   </thead>
 
-  <tbody>
+  <tbody style="font-variant-numeric: tabular-nums;">
     <% @plots.each do |plot| %>
       <tr>
         <td><%= link_to plot.title, plot %></td>
         <td><%= plot.created_at.to_formatted_s(:short) %></td>
-        <td><%= plot.polygon.coordinates[0] %></td>
+        <td><%= plot.coordinates_display %></td>
         <td><%= plot.blocks.count %></td>
       </tr>
     <% end %>

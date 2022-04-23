@@ -55,6 +55,12 @@ class Plot < ApplicationRecord
     end
   end
 
+  def coordinates_display
+    polygon.coordinates[0].map do |coord|
+      coord.map { |x| format('%.6f', x) }
+    end.to_s.gsub('"', '')
+  end
+
   def validate_bounding_box_dimensions
     errors.add(:polygon, 'is too wide') if bounding_box.x_span > MAX_BOUNDING_BOX_DIMENSION
     errors.add(:polygon, 'is too high') if bounding_box.y_span > MAX_BOUNDING_BOX_DIMENSION

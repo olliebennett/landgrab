@@ -27,6 +27,9 @@ gem 'brakeman', require: false, group: %i[development test]
 # Call 'byebug' anywhere in the code to stop execution and get a debugger console
 gem 'byebug', groups: %i[development test]
 
+# User authentication
+gem 'devise'
+
 # Shim to load environment variables from .env into ENV in development.
 gem 'dotenv-rails', groups: %i[development test]
 

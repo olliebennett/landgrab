@@ -1,0 +1,11 @@
+ignore_unreachable_actions:
+- devise#_prefixes
+- devise/confirmations#create
+- devise/confirmations#show
+- devise/confirmations#new
+- devise/unlocks#create
+- devise/unlocks#show
+- devise/unlocks#new
+- devise/omniauth_callbacks#passthru
+- devise/omniauth_callbacks#failure
+ignore_unused_routes:

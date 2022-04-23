@@ -8,19 +8,6 @@
 
 <div id="map" style="width: 100%; height: 500px"></div>
 
-<%
-bounds = {
-  _northEast: {
-    lat: blocks.map { |b| b.northeast.y }.max.round(6),
-    lng: blocks.map { |b| b.northeast.x }.max.round(6)
-  },
-  _southWest: {
-    lat: blocks.map { |b| b.southwest.y }.min.round(6),
-    lng: blocks.map { |b| b.southwest.x }.min.round(6)
-  }
-}
-%>
-
 <script>
   function onEachFeature(feature, layer) {
     if (feature.properties && feature.properties.popupContent) {
@@ -30,7 +17,6 @@ bounds = {
   }
 
   var map = L.map('map');
-  // map.setView(<%= Plot::DEFAULT_COORDS %>, 19);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',

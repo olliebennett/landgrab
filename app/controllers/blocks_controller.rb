@@ -11,7 +11,7 @@ class BlocksController < ApplicationController
     else
       @blocks = Block.order(id: :desc).page(params[:page])
       if @blocks.none?
-        @center = [51.4778, -0.0014] # Greenwich Observatory
+        @center = Plot::DEFAULT_COORDS
       else
         mean_x = @blocks.sum { |b| b.midpoint.x } / @blocks.size
         mean_y = @blocks.sum { |b| b.midpoint.y } / @blocks.size

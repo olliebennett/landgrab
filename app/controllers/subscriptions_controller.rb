@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SubscriptionsController < ApplicationController
-  before_action :set_subscription, only: %i[show edit update destroy]
+  before_action :set_subscription, only: %i[show edit update]
 
   def index
     @subscriptions = Subscription.all
@@ -26,12 +26,6 @@ class SubscriptionsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
-  end
-
-  def destroy
-    @subscription.destroy
-
-    redirect_to subscriptions_url, notice: 'Subscription was successfully destroyed.'
   end
 
   private

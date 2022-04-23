@@ -15,7 +15,7 @@ class Plot < ApplicationRecord
   auto_strip_attributes :title, squish: true
 
   MAX_BOUNDING_BOX_DIMENSION = 0.005
-  DEFAULT_COORDS = [51.4778, -0.0014] # Greenwich Observatory
+  DEFAULT_COORDS = [51.4778, -0.0014].freeze # Greenwich Observatory
 
   def centroid_coords
     RGeo::Cartesian::PointImpl.new(RGeo::Cartesian::Factory.new, polygon.centroid.x, polygon.centroid.y)

@@ -1,0 +1,23 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Subscription ID</th>
+      <th>User</th>
+      <th>Block ID</th>
+      <th>What3Words</th>
+      <th>Created</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% subscriptions.each do |subscription| %>
+      <tr>
+        <td><%= link_to subscription.hashid, admin_subscription_path(subscription) %></td>
+        <td><%= subscription.user.hashid %><%= ' (you!)' if subscription.user == current_user %></td>
+        <td><%= link_to subscription.block.hashid, admin_block_path(subscription.block) %></td>
+        <td><%= link_to subscription.block.w3w, subscription.block.w3w_url %></td>
+        <td><%= subscription.created_at.strftime('%e %b %Y %H:%M:%S') %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

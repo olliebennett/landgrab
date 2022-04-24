@@ -14,12 +14,6 @@
   </ul>
 </p>
 
-<p>
-  When you <%= link_to 'create a plot', new_plot_path %> of land,
-  the underlying 3x3m 'blocks' are imported automatically from
-  <%= link_to 'What3Words', 'https://what3words.com/' %>.
-</p>
-
 <%= render 'w3w_map', blocks: Plot.joins(:blocks).distinct.sample.blocks %>
 
 <!-- GEOS Supported? <%= RGeo::Geos.supported? %> -->

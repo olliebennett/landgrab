@@ -8,22 +8,28 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <% [
           ['Plots', plots_path],
-          ['Blocks', blocks_path],
           ['Subscriptions', subscriptions_path]
         ].each do |text, href| %>
           <li class="nav-item">
             <%= active_navlink text, href %>
           </li>
         <% end %>
+        <% if current_user&.admin? %>
+          <li class="nav-item">
+            <%= active_navlink 'ADMIN', admin_dashboard_path %>
+          </li>
+      <% end %>
       </ul>
       <ul class="navbar-nav mb-2 mb-lg-0">
-        <li class="nav-item">
-          <% if user_signed_in? %>
+        <% if user_signed_in? %>
+          <li class="nav-item">
             <%= active_navlink 'Log Out', destroy_user_session_path %>
-            <% else %>
+          </li>
+        <% else %>
+          <li class="nav-item">
             <%= active_navlink 'Log In', new_user_session_path %>
-          <% end %>
-        </li>
+          </li>
+        <% end %>
         <li class="nav-item">
           <%= active_navlink('GitHub', 'https://github.com/olliebennett/landgrab/') %>
         </li>

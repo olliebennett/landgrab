@@ -1,0 +1,11 @@
+<% title 'Admin Dashboard' %>
+
+<h1>Dashboard</h1>
+
+<p>This area is for admins only and provides visibility and control over all data</p>
+<p>The following users currently have admin access:</p>
+<ul>
+<% User.where(admin: true).each do |user| %>
+  <li><%= user.email %></li>
+<% end %>
+</ul>

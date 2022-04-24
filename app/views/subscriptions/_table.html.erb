@@ -2,10 +2,9 @@
   <thead>
     <tr>
       <th>Subscription ID</th>
-      <th>User</th>
-      <th>Block ID</th>
-      <th>What3Words</th>
-      <th>Created</th>
+      <th colspan="3">Block</th>
+      <th>Plot</th>
+      <th>Subscribed Date</th>
     </tr>
   </thead>
 
@@ -13,9 +12,22 @@
     <% subscriptions.each do |subscription| %>
       <tr>
         <td><%= link_to subscription.hashid, subscription_path(subscription) %></td>
-        <td><%= subscription.user.hashid %><%= ' (you!)' if subscription.user == current_user %></td>
-        <td><%= link_to subscription.block.hashid, block_path(subscription.block) %></td>
-        <td><%= link_to subscription.block.w3w, subscription.block.w3w_url %></td>
+        <td>
+          <%= content_tag(:code, subscription.block.w3w) %>
+        </td>
+        <td>
+          <%= link_to 'Details', block_path(subscription.block) %>
+        </td>
+        <td>
+          <%= link_to 'W3W', subscription.block.w3w_url %>
+        </td>
+        <td>
+          <% if subscription.block.plot.present? %>
+            <%= link_to subscription.block.plot&.title, plot_path(subscription.block.plot) %>
+          <% else %>
+            -
+          <% end %>
+        </td>
         <td><%= subscription.created_at.strftime('%e %b %Y %H:%M:%S') %></td>
       </tr>
     <% end %>

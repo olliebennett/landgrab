@@ -1,11 +1,13 @@
 <table class="table">
   <thead>
     <tr>
+      <th>South West</th>
+      <th>North East</th>
       <th>What3Words</th>
       <% if @plot.nil? %>
         <th>Plot</th>
       <% end %>
-      <th>Available?</th>
+      <th>Subscriber</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -13,19 +15,21 @@
   <tbody style="font-variant-numeric: tabular-nums;">
     <% @blocks.each do |block| %>
       <tr>
+        <td><%= block.southwest_rounded[0] %>,&nbsp;<%= block.southwest_rounded[1] %></td>
+        <td><%= block.northeast_rounded[0] %>,&nbsp;<%= block.northeast_rounded[1] %></td>
         <td><%= content_tag(:code, block.w3w) %></td>
         <% if @plot.nil? %>
           <td>
             <% if block.plot.present? %>
-              <%= link_to block.plot.title, plot_path(block.plot) %>
+              <%= link_to block.plot.title, admin_plot_path(block.plot) %>
             <% else %>
               -
             <% end %>
           </td>
         <% end %>
-        <td><%= block.subscription.nil? ? 'Available' : 'Unavailable' %></td>
+        <td><%= block.subscription&.user&.email || '-' %></td>
         <td><%= link_to 'W3W', block.w3w_url %></td>
-        <td><%= link_to 'Details', block %></td>
+        <td><%= link_to 'Details', admin_block_path(block) %></td>
       </tr>
     <% end %>
   </tbody>

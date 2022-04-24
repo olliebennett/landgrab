@@ -3,19 +3,50 @@
     {
       "warning_type": "Cross-Site Scripting",
       "warning_code": 4,
-      "fingerprint": "26ca7d5a152e06e8a4ecbf56fff4d3eeb68107ce172b5f1b568f576c46705f06",
+      "fingerprint": "29a1f8ad9a7aefbcaa45333e028c7f37d661adb1068db5f9f8c0e86de3cb22af",
       "check_name": "LinkToHref",
       "message": "Potentially unsafe model attribute in `link_to` href",
-      "file": "app/views/blocks/show.html.erb",
-      "line": 19,
+      "file": "app/views/admin/blocks/show.html.erb",
+      "line": 25,
       "link": "https://brakemanscanner.org/docs/warning_types/link_to_href",
       "code": "link_to(\"View\", Block.new(block_params).w3w_url)",
       "render_path": [
         {
           "type": "controller",
-          "class": "BlocksController",
+          "class": "Admin::BlocksController",
           "method": "create",
-          "line": 41,
+          "line": 44,
+          "file": "app/controllers/admin/blocks_controller.rb",
+          "rendered": {
+            "name": "admin/blocks/show",
+            "file": "app/views/admin/blocks/show.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "admin/blocks/show"
+      },
+      "user_input": "Block.new(block_params).w3w_url",
+      "confidence": "Weak",
+      "note": "We validate format of w3w before rendering"
+    },
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 4,
+      "fingerprint": "77d99f6f7f2b9b4c76852acfebb4246d158bf22af0c3199123256f3c4f9e519c",
+      "check_name": "LinkToHref",
+      "message": "Potentially unsafe model attribute in `link_to` href",
+      "file": "app/views/blocks/show.html.erb",
+      "line": 10,
+      "link": "https://brakemanscanner.org/docs/warning_types/link_to_href",
+      "code": "link_to(\"View\", Block.find_by_hashid!(params[:id]).w3w_url)",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "BlocksController",
+          "method": "show",
+          "line": 26,
           "file": "app/controllers/blocks_controller.rb",
           "rendered": {
             "name": "blocks/show",
@@ -27,11 +58,11 @@
         "type": "template",
         "template": "blocks/show"
       },
-      "user_input": "Block.new(block_params).w3w_url",
+      "user_input": "Block.find_by_hashid!(params[:id]).w3w_url",
       "confidence": "Weak",
-      "note": "We validate format of w3w before rendering\""
+      "note": "We validate format of w3w before rendering"
     }
   ],
-  "updated": "2021-01-25 15:54:20 +0000",
-  "brakeman_version": "4.10.1"
+  "updated": "2022-04-24 23:43:33 +0100",
+  "brakeman_version": "5.2.2"
 }

@@ -1,4 +1,37 @@
-<%= render @subscription %>
+<table class="table">
+  <tbody>
+    <tr>
+      <th>User</th>
+      <td>
+        <%= link_to @subscription.user.hashid, admin_user_path(@subscription.user) %>
+        <%= ' (you!)' if @subscription.user == current_user %>
+      </td>
+    </tr>
+    <tr>
+      <th>Block</th>
+      <td>
+        <%= link_to @subscription.block.hashid, admin_block_path(@subscription.block) %>
+        - <%= content_tag(:code, @subscription.block.w3w) %>
+      </td>
+    </tr>
+    <tr>
+      <th>Plot</th>
+      <td>
+        <% if @subscription.block.plot.present? %>
+          <%= link_to @subscription.block.plot.title, admin_plot_path(@subscription.block.plot) %>
+        <% else %>
+          NOT PRESENT
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th>Created</th>
+      <td>
+        <%= @subscription.created_at.strftime('%e %b %Y %H:%M:%S') %>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <div>
   <%= link_to "Edit this subscription", edit_admin_subscription_path(@subscription) %>

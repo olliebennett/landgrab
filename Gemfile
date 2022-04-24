@@ -34,8 +34,7 @@ gem 'devise'
 gem 'dotenv-rails', groups: %i[development test]
 
 # Dependency of RGeo operation with 'geos' library
-# TODO: Remove git version once https://github.com/dark-panda/ffi-geos/issues/31 is released
-gem 'ffi-geos', groups: %i[development test], git: 'https://github.com/dark-panda/ffi-geos', branch: 'homebrew'
+gem 'ffi-geos', groups: %i[development test]
 
 # Replace raw numeric IDs with short unique ids
 gem 'hashid-rails'

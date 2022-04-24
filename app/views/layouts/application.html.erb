@@ -22,6 +22,9 @@
     <%= render 'layouts/messages' %>
 
     <div class="container-xl mt-3 mb-5">
+      <% if controller.class.name.start_with?('Admin') %>
+        <%= render 'admin/admin_navbar' %>
+      <% end %>
       <%= yield %>
     </div>
   </body>

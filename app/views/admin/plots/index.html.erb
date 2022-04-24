@@ -1,0 +1,21 @@
+<% title 'Plots' %>
+
+<h1>Plots</h1>
+
+<p>
+  Plots are collections of
+  <%= link_to 'blocks', admin_blocks_path %>
+  covering a larger area.
+
+  When you <%= link_to 'create a plot', new_admin_plot_path %> of land,
+  the underlying 3x3m 'blocks' are imported automatically from
+  <%= link_to 'What3Words', 'https://what3words.com/' %>.
+</p>
+
+<%= link_to 'New Plot', new_admin_plot_path %>
+
+<%= page_entries_info @plots %>
+
+<%= render 'table' %>
+
+<%= paginate @plots, theme: 'bootstrap-5' %>

@@ -5,24 +5,14 @@
 </h1>
 
 <p>
-  <strong>South West:</strong>
-  <%= @block.southwest_rounded.join(', ') %>
+<strong>What3Words:</strong>
+<code>/// <%= @block.w3w %></code>
+- <%= link_to 'View', @block.w3w_url %>
 </p>
 
 <p>
-  <strong>North East:</strong>
-  <%= @block.northeast_rounded.join(', ') %>
-</p>
-
-<p>
-  <strong>Midpoint:</strong>
+  <strong>Coordinates (longitude,latitude at block centre):</strong>
   <%= @block.midpoint_rounded.join(', ') %>
-</p>
-
-<p>
-  <strong>What3Words:</strong>
-  <code>/// <%= @block.w3w %></code>
-  - <%= link_to 'View', @block.w3w_url %>
 </p>
 
 <p>
@@ -44,7 +34,6 @@
     (since <%= @block.subscription.created_at.strftime('%e %b %Y %H:%M:%S') %>).
   <% else %>
     <%= form_with(model: Subscription.new(user: current_user, block: @block)) do |form| %>
-      <%= form.hidden_field :user_id %>
       <%= form.hidden_field :block_id %>
       <%= form.submit 'Subscribe!', class: 'btn btn-primary' %>
     <% end %>

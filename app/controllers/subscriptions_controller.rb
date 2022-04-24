@@ -1,18 +1,16 @@
 # frozen_string_literal: true
 
 class SubscriptionsController < ApplicationController
-  before_action :set_subscription, only: %i[show edit update]
+  before_action :set_subscription, only: %i[show]
 
   def index
-    @subscriptions = Subscription.all
+    @subscriptions = current_user.subscriptions
   end
 
   def show; end
 
-  def edit; end
-
   def create
-    @subscription = Subscription.new(subscription_params)
+    @subscription = current_user.subscriptions.new(subscription_params)
     if @subscription.save
       redirect_to subscription_url(@subscription), notice: 'Subscription was successfully created.'
     else
@@ -20,23 +18,13 @@ class SubscriptionsController < ApplicationController
     end
   end
 
-  def update
-    if @subscription.update(subscription_params)
-      redirect_to subscription_url(@subscription), notice: 'Subscription was successfully updated.'
-    else
-      render :edit, status: :unprocessable_entity
-    end
-  end
-
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_subscription
-    @subscription = Subscription.find_by_hashid!(params[:id])
+    @subscription = current_user.subscriptions.find_by_hashid!(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def subscription_params
-    params.require(:subscription).permit(:user_id, :block_id)
+    params.require(:subscription).permit(:block_id)
   end
 end

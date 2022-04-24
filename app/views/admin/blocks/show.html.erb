@@ -1,0 +1,48 @@
+<% title "Block: #{@block.w3w}" %>
+
+<h1>
+  Block Details
+</h1>
+
+<p>
+  <strong>South West:</strong>
+  <%= @block.southwest_rounded.join(', ') %>
+</p>
+
+<p>
+  <strong>North East:</strong>
+  <%= @block.northeast_rounded.join(', ') %>
+</p>
+
+<p>
+  <strong>Midpoint:</strong>
+  <%= @block.midpoint_rounded.join(', ') %>
+</p>
+
+<p>
+  <strong>What3Words:</strong>
+  <code>/// <%= @block.w3w %></code>
+  - <%= link_to 'View', @block.w3w_url %>
+</p>
+
+<p>
+  <strong>Plot:</strong>
+  <% if @block.plot.present? %>
+    <%= link_to @block.plot.title, admin_plot_path(@block.plot) %>
+  <% else %>
+    -
+  <% end %>
+</p>
+
+<p>
+  <% if @block.subscription.present? %>
+    This block is already subscribed by User <%= @block.subscription.user.hashid %>
+    (since <%= @block.subscription.created_at.strftime('%e %b %Y %H:%M:%S') %>).
+  <% else %>
+    This block is not yet subscribed.
+  <% end %>
+</p>
+
+<%= render 'static_pages/w3w_map',
+     center: [@block.midpoint.y, @block.midpoint.x],
+     blocks: [@block] %>

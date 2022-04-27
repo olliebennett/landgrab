@@ -2,6 +2,8 @@
 
 module Webhook
   class StripeController < ApplicationController
+    skip_before_action :verify_authenticity_token
+
     def webhook
       @event = parse_event
 

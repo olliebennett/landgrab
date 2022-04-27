@@ -70,6 +70,9 @@ gem 'rubocop-thread_safety'
 # RuboCop for view files
 gem 'ruumba'
 
+# Payments
+gem 'stripe'
+
 # Detect misconfigured routes
 gem 'traceroute', group: %i[development test]
 

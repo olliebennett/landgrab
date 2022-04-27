@@ -33,7 +33,7 @@ module Webhook
     end
 
     def parse_event
-      Stripe::Webhook.construct_event(params.to_s, sig_header)
+      Stripe::Webhook.construct_event(params.to_s, sig_header, endpoint_secret)
     rescue JSON::ParserError
       raise 'Invalid JSON'
     rescue Stripe::SignatureVerificationError

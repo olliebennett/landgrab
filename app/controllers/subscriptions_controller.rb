@@ -12,7 +12,7 @@ class SubscriptionsController < ApplicationController
   def create
     @subscription = current_user.subscriptions.new(subscription_params)
     if @subscription.save
-      redirect_to subscription_url(@subscription), notice: 'Subscription was successfully created.'
+      redirect_to subscription_url(@subscription), notice: 'You successfully subscribed to this block!'
     else
       render :new, status: :unprocessable_entity
     end

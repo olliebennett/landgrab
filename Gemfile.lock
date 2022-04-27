@@ -250,6 +250,14 @@ GEM
     ruby-progressbar (1.11.0)
     ruumba (0.1.17)
       rubocop
+    sentry-rails (5.2.1)
+      railties (>= 5.0)
+      sentry-ruby-core (~> 5.2.1)
+    sentry-ruby (5.2.1)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      sentry-ruby-core (= 5.2.1)
+    sentry-ruby-core (5.2.1)
+      concurrent-ruby
     stripe (5.53.0)
     strscan (3.0.1)
     thor (1.2.1)
@@ -299,6 +307,8 @@ DEPENDENCIES
   rubocop-rspec
   rubocop-thread_safety
   ruumba
+  sentry-rails
+  sentry-ruby
   stripe
   traceroute
   web-console

@@ -70,6 +70,10 @@ gem 'rubocop-thread_safety'
 # RuboCop for view files
 gem 'ruumba'
 
+# Sentry.io Error Reporting
+gem 'sentry-rails'
+gem 'sentry-ruby'
+
 # Payments
 gem 'stripe'
 

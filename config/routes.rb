@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   resources :plots, only: %i[index show]
   resources :subscriptions, only: %i[create index show]
 
+  post '/checkout/checkout', 'checkouts#checkout'
+  get '/checkout/success', 'checkouts#success'
+  get '/checkout/cancel', 'checkouts#cancel'
+
   namespace :admin do
     root to: 'dashboard#dashboard', as: :dashboard
 
@@ -16,5 +20,9 @@ Rails.application.routes.draw do
     resources :plots, only: %i[create index show new edit update]
     resources :subscriptions, only: %i[create index show edit update]
     resources :users, only: %i[index show]
+  end
+
+  namespace :webhook do
+    post '/stripe' => 'stripe#webhook'
   end
 end

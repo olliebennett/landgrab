@@ -250,6 +250,7 @@ GEM
     ruby-progressbar (1.11.0)
     ruumba (0.1.17)
       rubocop
+    stripe (5.53.0)
     strscan (3.0.1)
     thor (1.2.1)
     timeout (0.2.0)
@@ -298,6 +299,7 @@ DEPENDENCIES
   rubocop-rspec
   rubocop-thread_safety
   ruumba
+  stripe
   traceroute
   web-console
 

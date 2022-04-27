@@ -6,6 +6,6 @@
 <p>The following users currently have admin access:</p>
 <ul>
 <% User.where(admin: true).each do |user| %>
-  <li><%= user.email %></li>
+  <li><%= link_to user.hashid, admin_user_path(user) %> - <%= user.email %></li>
 <% end %>
 </ul>

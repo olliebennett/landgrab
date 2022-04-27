@@ -11,8 +11,8 @@
       <td><%= @plot.title %></td>
     </tr>
     <tr>
-      <th>Polygon</th>
-      <td><%= @plot.coordinates_display %></td>
+      <th>Coordinates (midpoint)</th>
+      <td><%= @plot.centroid_coords_display %></td>
     </tr>
     <tr>
       <th>Area</th>
@@ -21,7 +21,10 @@
     <tr>
       <th>Blocks</th>
       <td>
+        <%= @plot.blocks.left_outer_joins(:subscription).where(subscriptions: { id: nil }).size %>
+        available out of
         <%= @plot.blocks.size %>
+        total
         <% if @plot.blocks.size.positive? %>
           - <%= link_to 'view on map', blocks_path(plot: @plot) %>
         <% end %>

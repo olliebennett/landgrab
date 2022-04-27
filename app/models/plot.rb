@@ -19,6 +19,10 @@ class Plot < ApplicationRecord
     RGeo::Cartesian::PointImpl.new(RGeo::Cartesian::Factory.new, polygon.centroid.x, polygon.centroid.y)
   end
 
+  def centroid_coords_display
+    [centroid_coords.x, centroid_coords.y].map { |x| format('%.6f', x) }.join(', ')
+  end
+
   def bounding_box
     x_coords = polygon.coordinates[0].map { |coord| coord[0] }
     y_coords = polygon.coordinates[0].map { |coord| coord[1] }

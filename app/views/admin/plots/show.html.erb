@@ -21,6 +21,8 @@
     <tr>
       <th>Blocks</th>
       <td>
+        <%= @plot.blocks.left_outer_joins(:subscription).where(subscriptions: { id: nil }).size %>
+        available out of
         <%= @plot.blocks.size %>
         <% if @plot.blocks.size.positive? %>
           - <%= link_to 'view on map', blocks_path(plot: @plot) %>

@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 module Admin
-  class SubscriptionsController < Admin::AdminController
+  class SubscriptionsController < ApplicationController
+    before_action :check_admin
     before_action :set_subscription, only: %i[show edit update]
 
     def index

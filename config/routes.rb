@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :subscriptions, only: %i[create index show]
 
   namespace :admin do
-    root to: 'admin#dashboard', as: :dashboard
+    root to: 'dashboard#dashboard', as: :dashboard
 
     resources :blocks, only: %i[create index show new]
     resources :plots, only: %i[create index show new edit update]

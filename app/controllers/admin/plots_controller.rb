@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 module Admin
-  class PlotsController < Admin::AdminController
+  class PlotsController < ApplicationController
+    before_action :check_admin
     before_action :set_plot, only: %i[show edit update]
 
     def index

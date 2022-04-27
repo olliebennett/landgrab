@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 module Admin
-  class BlocksController < Admin::AdminController
+  class BlocksController < ApplicationController
+    before_action :check_admin
     before_action :set_block, only: %i[show]
 
     def index

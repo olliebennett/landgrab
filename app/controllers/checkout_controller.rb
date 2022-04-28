@@ -12,13 +12,9 @@ class CheckoutController < ApplicationController
                 allow_other_host: true
   end
 
-  def success
-    render plain: 'Thanks for your order!'
-  end
+  def success; end
 
-  def cancel
-    render plain: 'Forgot to add something to your cart? Shop around then come back to pay!'
-  end
+  def cancel; end
 
   private
 

@@ -1,10 +1,16 @@
-<% title "User #{@user.hashid}" %>
-
-<h1>
-  User Details
-</h1>
+<h1><%= admin_title @user %></h1>
 
 <p>
   <strong>Email:</strong>
   <%= @user.email %>
+</p>
+
+<p>
+  <strong>Registered:</strong>
+  <%= @user.created_at.strftime('%e %b %Y %H:%M:%S') %>
+</p>
+
+<p>
+  <strong>Admin:</strong>
+  <%= @user.admin? ? 'YES' : 'NO' %>
 </p>

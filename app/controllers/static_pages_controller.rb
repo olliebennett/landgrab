@@ -11,4 +11,14 @@ class StaticPagesController < ApplicationController
       @center = Plot::DEFAULT_COORDS
     end
   end
+
+  def explore
+    @plot = Plot.select('plots.id, plots.title, COUNT(blocks)')
+                .with_available_blocks
+                .group('plots.id')
+                .sample
+    @available_limit = 25
+    @available_blocks = @plot.blocks.available.sample(@available_limit)
+    @unavailable_blocks = @plot.blocks.unavailable.distinct.sample(75)
+  end
 end

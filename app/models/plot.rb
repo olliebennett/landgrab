@@ -12,6 +12,8 @@ class Plot < ApplicationRecord
 
   auto_strip_attributes :title, squish: true
 
+  scope :with_available_blocks, -> { left_joins(blocks: :subscription).where(subscription: { id: nil }) }
+
   MAX_BOUNDING_BOX_DIMENSION = 0.005
   DEFAULT_COORDS = [51.4778, -0.0014].freeze # Greenwich Observatory
 

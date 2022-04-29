@@ -8,6 +8,9 @@ class Block < ApplicationRecord
 
   default_scope { order(:id) }
 
+  scope :available, -> { left_joins(:subscription).where(subscription: { id: nil }) }
+  scope :unavailable, -> { joins(:subscription).distinct }
+
   validates :southwest, presence: true
   validates :northeast, presence: true
 

@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get '/checkout/success', 'checkouts#success'
   get '/checkout/cancel', 'checkouts#cancel'
 
+  get '/explore', to: 'static_pages#explore'
+
   namespace :admin do
     root to: 'dashboard#dashboard', as: :dashboard
 

@@ -1,25 +1,28 @@
-<h1><%= title 'Explore LandGrab' %></h1>
+<h1><%= title 'Explore' %></h1>
 
 <p>
   We've randomly selected a plot with blocks available for adopting -
   <%= link_to @plot.title, plot_path(@plot) %>!
 </p>
 
-<p>
-  Click a block on the map below to see subscription options,
-  or <%= link_to 'choose one at random', block_path(@available_blocks.sample) %>
-</p>
-
-<p>
-  <% if @available_blocks.size == 1 %>
+<% if @available_blocks.size == 1 %>
+  <p>
     There is only one block remaining in this plot -
     <%= link_to 'view it', block_path(@available_blocks.sample) %>
-  <% elsif @available_blocks.size < @available_limit %>
-    There are only <%= @available_blocks.size %> available blocks remaining in this plot.
-  <% else %>
-    Showing a selection of remaining blocks in this plot.
-  <% end %>
-</p>
+  </p>
+<% else %>
+  <p>
+    <% if @available_blocks.size < @available_limit %>
+      There are only <%= @available_blocks.size %> available blocks remaining in this plot.
+    <% else %>
+      Showing a selection of remaining blocks in this plot.
+    <% end %>
+  </p>
+  <p>
+    Click a block on the map below to see subscription options,
+    or <%= link_to 'choose one at random', block_path(@available_blocks.sample) %>
+  </p>
+<% end %>
 
 <% if @unavailable_blocks.any? %>
   <p>Some unavailable (already adopted) blocks are shown in red on the map</p>

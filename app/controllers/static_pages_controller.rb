@@ -3,6 +3,8 @@
 class StaticPagesController < ApplicationController
   skip_before_action :authenticate_user!, only: :homepage
 
+  def about; end
+
   def homepage
     if params[:center].present?
       block = Block.find_by(w3w: params[:center])

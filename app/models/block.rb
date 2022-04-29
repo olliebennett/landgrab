@@ -22,7 +22,7 @@ class Block < ApplicationRecord
     geojson = RGeo::GeoJSON.encode(bounding_box.to_geometry)
 
     geojson['properties'] ||= {}
-    available = subscription.nil?
+    available = subscription.nil? || subscription.new_record? # handle display on 'new' screen
     geojson['properties']['available'] = available
     geojson['properties']['popupContent'] = 'What3Words<br>' \
                                             "<a href=\"#{w3w_url}\"><code>#{w3w}</code></a><br>" \

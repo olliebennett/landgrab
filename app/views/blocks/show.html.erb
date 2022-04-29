@@ -38,6 +38,10 @@
       <%= form.submit 'Subscribe (test; no payment)!', class: 'btn btn-secondary' %>
     <% end %>
     or
+    <p>
+      For testing: use card <code>4242 4242 4242 4242</code>
+      and any (future) expiry date and any 3-digit CVV
+    </p>
     <%= form_with url: checkout_checkout_path do |form| %>
       <%= form.hidden_field :block, value: @block.hashid %>
       <%= form.submit 'Pay & Subscribe', class: 'btn btn-primary' %>

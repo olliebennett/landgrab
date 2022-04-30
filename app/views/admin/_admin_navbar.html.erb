@@ -1,12 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-1">
   <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <%= link_to 'Admin', admin_dashboard_path, class: 'navbar-brand' %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbarSupportedContent" aria-controls="adminNavbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" id="adminNavbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <% [
-          ['Admin Dashboard', admin_dashboard_path],
           ['Plots', admin_plots_path],
           ['Blocks', admin_blocks_path],
           ['Subscriptions', admin_subscriptions_path],

@@ -39,9 +39,16 @@
     maxZoom: 22
   });
 
+  const layer_google = L.tileLayer('https://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
+    attribution: 'Google',
+    maxNativeZoom: 19,
+    maxZoom: 22
+  });
+
   var baseMaps = {
-    "OpenStreetMap": layer_osm,
-    "HERE Maps": layer_here
+    'OpenStreetMap': layer_osm,
+    'HERE Maps': layer_here,
+    'Google': layer_google
   };
 
   layer_osm.addTo(map);

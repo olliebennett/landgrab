@@ -26,7 +26,6 @@
 
   var map = L.map('map');
 
-
   const layer_osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors',
     maxNativeZoom: 19,
@@ -40,10 +39,14 @@
   });
 
   const layer_google = L.tileLayer('https://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
-    attribution: 'Google',
+    attribution: '&copy; Google',
     maxNativeZoom: 19,
     maxZoom: 22
   });
+
+  layer_osm.addTo(map);
+  layer_here.addTo(map);
+  layer_google.addTo(map);
 
   var baseMaps = {
     'OpenStreetMap': layer_osm,
@@ -51,11 +54,7 @@
     'Google': layer_google
   };
 
-  layer_osm.addTo(map);
-  layer_here.addTo(map);
-  var overlays = {};
-
-  L.control.layers(baseMaps, overlays, { position: 'bottomleft' }).addTo(map);
+  L.control.layers(baseMaps, {}, { position: 'bottomleft' }).addTo(map);
 
   var allBlocksGeoJson = [<%= blocks.map(&:to_geojson).join(', ').html_safe %>];
   var blocks = L.geoJSON(allBlocksGeoJson, { onEachFeature: onEachFeature, style: blockStyle }).addTo(map);

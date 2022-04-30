@@ -16,7 +16,7 @@
   </div>
 
   <% if form.object.new_record? %>
-    <div class="row g-3 align-items-center">
+    <div class="row mb-3 g-3 align-items-center">
       <div class="col-sm-2">
         <%= form.label :polygon, class: 'col-form-label' %>
       </div>
@@ -29,9 +29,23 @@
         </span>
       </div>
     </div>
+    <div class="row mb-3 g-3 align-items-center">
+      <div class="col-sm-2">
+        <label class="col-form-label">Approx Area</label>
+      </div>
+      <div class="col-sm-3">
+        <%= text_field_tag 'approx_area', nil, { readonly: true, class: 'form-control' } %>
+      </div>
+      <div class="col-sm-7">
+        <span id="polygonHelp" class="form-text">
+          Will be confirmed once polygon is created.
+        </span>
+      </div>
+    </div>
   <% else %>
     <p>It's not possible to edit the plot's area.</p>
   <% end %>
 
   <%= form.submit class: 'btn btn-primary' %>
+  Warning: Overlapping with other plots will re-assign those blocks to this plot!
 <% end %>

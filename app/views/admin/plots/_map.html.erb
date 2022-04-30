@@ -14,12 +14,23 @@
       maxZoom:25
   }).addTo(map);
 
+  const handlePolygonChange = (latlngs) => {
+    copyCoordsToFormField(latlngs);
+    updatePolygonArea(latlngs);
+  }
+
   const copyCoordsToFormField = (latlngs) => {
     // Update input box with the polygon coordinates
     var latlngs = latlngs.map(function(coord) { return "" + coord.lng.toFixed(6) + " " + coord.lat.toFixed(6); });
     var polygon_field = document.getElementById('plot_polygon');
     // Define polygon (including first point as final point to close the shape)
     polygon_field.value = "POLYGON ((" + latlngs.join(', ') + ", " + latlngs[0] + "))";
+  };
+
+  const updatePolygonArea = (latlngs) => {
+    var area_m = L.GeometryUtil.geodesicArea(latlngs);
+    var area_acre = area_m / 4046.86;
+    document.getElementById('approx_area').value = '' + area_m.toFixed(0) + ' m^3 or ' + area_acre.toFixed(4) + ' acres';
   };
 
   <% if plot.new_record? %>
@@ -49,11 +60,11 @@
       map.removeControl(drawControl);
 
       // Update the form input once the polygon is drawn
-      copyCoordsToFormField(layer._latlngs[0]);
+      handlePolygonChange(layer._latlngs[0]);
     });
 
     // Re-update the form input when any polygon points are moved
-    map.on(L.Draw.Event.EDITVERTEX, (e) => copyCoordsToFormField(e.poly._latlngs[0]));
+    map.on(L.Draw.Event.EDITVERTEX, (e) => handlePolygonChange(e.poly._latlngs[0]));
   <% else %>
     // Draw the plot!
     // create a red polygon from the plot's LatLng points (x,y converted to y,x and excluding final duplicate point)

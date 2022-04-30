@@ -1,5 +1,5 @@
-<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"/>
 
 <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css"/>
@@ -13,6 +13,14 @@
       maxNativeZoom:19,
       maxZoom:25
   }).addTo(map);
+
+  const copyCoordsToFormField = (latlngs) => {
+    // Update input box with the polygon coordinates
+    var latlngs = latlngs.map(function(coord) { return "" + coord.lng.toFixed(6) + " " + coord.lat.toFixed(6); });
+    var polygon_field = document.getElementById('plot_polygon');
+    // Define polygon (including first point as final point to close the shape)
+    polygon_field.value = "POLYGON ((" + latlngs.join(', ') + ", " + latlngs[0] + "))";
+  };
 
   <% if plot.new_record? %>
     map.setView(<%= Plot::DEFAULT_COORDS %>, 19);
@@ -36,13 +44,16 @@
       layer = e.layer;
       // Add completed polygon to the map
       map.addLayer(layer);
-      // Update input box with the polygon coordinates
-      var latlngs = layer._latlngs[0].map(function(coord) { return "" + coord.lng.toFixed(6) + " " + coord.lat.toFixed(6); });
-      // console.log("latlngs: ", latlngs, latlngs.length);
-      var polygon_field = document.getElementById('plot_polygon');
-      // Define polygon (including first point as final point to close the shape)
-      polygon_field.value = "POLYGON ((" + latlngs.join(', ') + ", " + latlngs[0] + "))";
+      layer.editing.enable();
+      // Remove 'draw' button to prevent drawing more than one polygon.
+      map.removeControl(drawControl);
+
+      // Update the form input once the polygon is drawn
+      copyCoordsToFormField(layer._latlngs[0]);
     });
+
+    // Re-update the form input when any polygon points are moved
+    map.on(L.Draw.Event.EDITVERTEX, (e) => copyCoordsToFormField(e.poly._latlngs[0]));
   <% else %>
     // Draw the plot!
     // create a red polygon from the plot's LatLng points (x,y converted to y,x and excluding final duplicate point)

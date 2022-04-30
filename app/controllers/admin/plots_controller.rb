@@ -24,7 +24,7 @@ module Admin
         if @plot.save
           PlotBlocksPopulateJob.perform_later(@plot.id)
 
-          format.html { redirect_to admin_polt_path(@plot), notice: 'Plot was successfully created.' }
+          format.html { redirect_to admin_plot_path(@plot), notice: 'Plot was successfully created.' }
           format.json { render :show, status: :created, location: @plot }
         else
           format.html { render :new }

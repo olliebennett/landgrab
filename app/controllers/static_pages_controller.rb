@@ -19,8 +19,8 @@ class StaticPagesController < ApplicationController
                 .with_available_blocks
                 .group('plots.id')
                 .sample
-    @available_limit = 25
+    @available_limit = 200
     @available_blocks = @plot.blocks.available.sample(@available_limit)
-    @unavailable_blocks = @plot.blocks.unavailable.distinct.sample(75)
+    @unavailable_blocks = @plot.blocks.unavailable.distinct.sample(250 - @available_blocks.size)
   end
 end

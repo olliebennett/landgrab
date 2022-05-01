@@ -114,6 +114,10 @@
     var latlngs = <%= plot.polygon.coordinates[0][0...-1].map(&:reverse) %>;
     var polygon = renderPolygon(map, latlngs, '<%= plot.new_record? ? 'blue' : 'red' %>', <%= plot.new_record? %>);
 
+    <% plot.overlapping_polygons.map do |op| %>
+      renderPolygon(map, <%= op.polygon.coordinates[0][0...-1].map(&:reverse) %>, 'black', false)
+    <% end %>
+
     updatePolygonArea(polygon._latlngs[0])
   <% end %>
 

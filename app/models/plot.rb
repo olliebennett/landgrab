@@ -9,6 +9,7 @@ class Plot < ApplicationRecord
   validates :polygon, presence: true
 
   validate :validate_bounding_box_dimensions
+  validate :validate_overlapping_polygons
 
   auto_strip_attributes :title, squish: true
 
@@ -68,5 +69,23 @@ class Plot < ApplicationRecord
   def validate_bounding_box_dimensions
     errors.add(:polygon, 'is too wide') if bounding_box.x_span > MAX_BOUNDING_BOX_DIMENSION
     errors.add(:polygon, 'is too high') if bounding_box.y_span > MAX_BOUNDING_BOX_DIMENSION
+  end
+
+  def validate_overlapping_polygons
+    overlaps = overlapping_polygons
+    return if overlaps.blank?
+
+    errors.add(:polygon, "intersects with other plot(s) - Plot #{overlaps.map(&:hashid).join(', ')}")
+  end
+
+  def overlapping_polygons
+    return nil if polygon.nil?
+
+    Plot \
+      .select('plots.id, plots.title, plots.polygon')
+      .joins('INNER JOIN plots p2 ON plots.id != p2.id')
+      .where('ST_Intersects(plots.polygon, ST_GeomFromText(?, 0))', polygon.as_json)
+      .where.not(id:)
+      .distinct
   end
 end

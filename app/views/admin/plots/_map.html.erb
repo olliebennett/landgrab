@@ -50,9 +50,11 @@
   };
 
   const updatePolygonArea = (latlngs) => {
+    const areaField = document.getElementById('approx_area');
+    if (!areaField) { return; }
     var area_m = L.GeometryUtil.geodesicArea(latlngs);
     var area_acre = area_m / 4046.86;
-    document.getElementById('approx_area').value = '' + area_m.toFixed(0) + ' m^3 or ' + area_acre.toFixed(4) + ' acres';
+    areaField.value = '' + area_m.toFixed(0) + ' m^3 or ' + area_acre.toFixed(4) + ' acres';
   };
 
   const renderPolygon = (map, latlngs, polygon_colour, editable) => {

@@ -43,7 +43,6 @@
   }
 
   const copyCoordsToFormField = (latlngs) => {
-    // Update input box with the polygon coordinates
     var latlngs = latlngs.map(function(coord) { return "" + coord.lng.toFixed(6) + " " + coord.lat.toFixed(6); });
     var polygon_field = document.getElementById('plot_polygon');
     // Define polygon (including first point as final point to close the shape)
@@ -56,11 +55,35 @@
     document.getElementById('approx_area').value = '' + area_m.toFixed(0) + ' m^3 or ' + area_acre.toFixed(4) + ' acres';
   };
 
-  <% if plot.new_record? %>
+  const renderPolygon = (map, latlngs, polygon_colour, editable) => {
+    var polygon = L.polygon(latlngs, { color: polygon_colour }).addTo(map);
+
+    if (editable) {
+      polygon.editing.enable();
+    }
+
+    fitMapToPolygon(map, polygon);
+
+    return polygon;
+  };
+
+  const fitMapToPolygon = (map, polygon) => {
+    const LAT_BUFFER = 0.00001;
+    const LNG_BUFFER = 0.0001;
+    var bounds = polygon.getBounds();
+    bounds._northEast.lat += LAT_BUFFER;
+    bounds._northEast.lng += LNG_BUFFER;
+    bounds._southWest.lat -= LAT_BUFFER;
+    bounds._southWest.lng -= LNG_BUFFER;
+    map.fitBounds(bounds);
+  };
+
+  <% if plot.polygon.nil? # i.e. new record and no invalid polygon set %>
     map.setView(<%= Plot::DEFAULT_COORDS %>, 19);
     // FeatureGroup is to store editable layers
     var drawnItems = new L.FeatureGroup();
     map.addLayer(drawnItems);
+
     var drawControl = new L.Control.Draw({
       draw: {
         polyline: false,
@@ -71,6 +94,7 @@
       },
       edit: false
     });
+
     map.addControl(drawControl);
 
     map.on(L.Draw.Event.CREATED, function (e) {
@@ -85,22 +109,14 @@
       // Update the form input once the polygon is drawn
       handlePolygonChange(layer._latlngs[0]);
     });
-
-    // Re-update the form input when any polygon points are moved
-    map.on(L.Draw.Event.EDITVERTEX, (e) => handlePolygonChange(e.poly._latlngs[0]));
-  <% else %>
-    // Draw the plot!
-    // create a red polygon from the plot's LatLng points (x,y converted to y,x and excluding final duplicate point)
+  <% else # polygon is present %>
+    // Prepare lat/lng points: x,y converted to y,x and excluding final (dupe) point
     var latlngs = <%= plot.polygon.coordinates[0][0...-1].map(&:reverse) %>;
-    var polygon = L.polygon(latlngs, { color: 'red' }).addTo(map);
-    // zoom the map to the polygon
-    const LAT_BUFFER = 0.00001;
-    const LNG_BUFFER = 0.0001;
-    var bounds = polygon.getBounds();
-    bounds._northEast.lat += LAT_BUFFER;
-    bounds._northEast.lng += LNG_BUFFER;
-    bounds._southWest.lat -= LAT_BUFFER;
-    bounds._southWest.lng -= LNG_BUFFER;
-    map.fitBounds(bounds);
+    var polygon = renderPolygon(map, latlngs, '<%= plot.new_record? ? 'blue' : 'red' %>', <%= plot.new_record? %>);
+
+    updatePolygonArea(polygon._latlngs[0])
   <% end %>
+
+  // Re-update the form input when any polygon points are moved
+  map.on(L.Draw.Event.EDITVERTEX, (e) => handlePolygonChange(e.poly._latlngs[0]));
 </script>

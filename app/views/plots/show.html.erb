@@ -24,7 +24,7 @@
         <%= @plot.blocks.size %>
         total
         <% if @plot.blocks.size.positive? %>
-          - <%= link_to 'view on map', blocks_path(plot: @plot) %>
+          - <%= link_to 'view full list', blocks_path(plot: @plot) %>
         <% end %>
       </td>
     </tr>
@@ -36,3 +36,5 @@
     </tr>
   </tbody>
 </table>
+
+<%= render 'static_pages/w3w_map', blocks: @plot.blocks.sample(250) %>

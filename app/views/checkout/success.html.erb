@@ -5,3 +5,12 @@
 <div class="alert alert-success" role="alert">
   Thanks for your order!
 </div>
+
+<% if @block.subscription.present? %>
+  <p>
+    <%= link_to 'View subscription',
+                subscription_path(@block.subscription) %>
+  </p>
+<% else %>
+  <p>Please refresh this page in a few seconds to see your new subscription!</p>
+<% end %>

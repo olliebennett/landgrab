@@ -74,7 +74,7 @@ GEM
       activerecord (>= 4.0)
     bcrypt (3.1.17)
     bindex (0.8.1)
-    bootsnap (1.11.1)
+    bootsnap (1.12.0)
       msgpack (~> 1.2)
     bootstrap5-kaminari-views (0.0.1)
       kaminari (>= 0.13)
@@ -136,7 +136,7 @@ GEM
     mini_mime (1.1.2)
     mini_portile2 (2.8.0)
     minitest (5.15.0)
-    msgpack (1.5.1)
+    msgpack (1.5.2)
     net-imap (0.2.3)
       digest
       net-protocol

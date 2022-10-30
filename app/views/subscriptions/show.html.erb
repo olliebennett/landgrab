@@ -8,6 +8,16 @@
       </td>
     </tr>
     <tr>
+      <th>Project</th>
+      <td>
+        <% if @subscription.block.plot&.project.present? %>
+          <%= link_to @subscription.block.plot.project.title, project_path(@subscription.block.plot.project) %>
+        <% else %>
+          NOT PRESENT
+        <% end %>
+      </td>
+    </tr>
+    <tr>
       <th>Plot</th>
       <td>
         <% if @subscription.block.plot.present? %>

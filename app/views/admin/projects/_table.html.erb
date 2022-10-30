@@ -1,0 +1,23 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Logo</th>
+      <th>Created</th>
+      <th>Plots</th>
+    </tr>
+  </thead>
+
+  <tbody style="font-variant-numeric: tabular-nums;">
+    <% @projects.each do |project| %>
+      <tr>
+        <td><%= link_to project.title, admin_project_path(project) %></td>
+        <td><%= project.description.first(80) %>...</td>
+        <td><%= image_tag project.logo_url, height: '50' %></td>
+        <td><%= project.created_at.to_formatted_s(:short) %></td>
+        <td><%= project.plots.size %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

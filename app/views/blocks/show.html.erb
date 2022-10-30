@@ -19,6 +19,10 @@
   <strong>Plot:</strong>
   <% if @block.plot.present? %>
     <%= link_to @block.plot.title, plot_path(@block.plot) %>
+    <% if @block.plot.project.present? %>
+      (part of the <%= link_to @block.plot.project.title, project_path(@block.plot.project) %> project)
+    <% end %>
+    </tr>
   <% else %>
     -
   <% end %>

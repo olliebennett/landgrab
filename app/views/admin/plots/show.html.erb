@@ -7,6 +7,16 @@
       <td><%= @plot.title %></td>
     </tr>
     <tr>
+      <th>Project</th>
+      <td>
+        <% if @plot.project.present? %>
+          <%= link_to @plot.project.title, admin_project_path(@plot.project) %>
+        <% else %>
+          None; plot is not associated with a project
+        <% end %>
+      </td>
+    </tr>
+    <tr>
       <th>Polygon</th>
       <td><%= @plot.coordinates_display %></td>
     </tr>

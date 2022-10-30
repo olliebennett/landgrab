@@ -15,6 +15,20 @@
     </div>
   </div>
 
+  <div class="row mb-3 g-3 align-items-center">
+    <div class="col-sm-2">
+      <%= form.label :project_id, class: 'col-form-label' %>
+    </div>
+    <div class="col-sm-3">
+      <%= form.text_field :project_id, required: true, class: 'form-control', aria: { describedby: 'projectIdHelp' } %>
+    </div>
+    <div class="col-sm-7">
+      <span id="projectIdHelp" class="form-text">
+        The ID of the project this plot belongs to.
+      </span>
+    </div>
+  </div>
+
   <% if form.object.new_record? %>
     <div class="row mb-3 g-3 align-items-center">
       <div class="col-sm-2">

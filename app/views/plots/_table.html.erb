@@ -8,7 +8,7 @@
   </thead>
 
   <tbody style="font-variant-numeric: tabular-nums;">
-    <% @plots.each do |plot| %>
+    <% plots.each do |plot| %>
       <tr>
         <td><%= link_to plot.title, plot %></td>
         <td><%= plot.created_at.to_formatted_s(:short) %></td>

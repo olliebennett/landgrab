@@ -9,6 +9,16 @@
       <td><%= @plot.title %></td>
     </tr>
     <tr>
+      <th>Project</th>
+      <td>
+        <% if @plot.project.present? %>
+          <%= link_to @plot.project.title, project_path(@plot.project) %>
+        <% else %>
+          None; plot is not associated with a project
+        <% end %>
+      </td>
+    </tr>
+    <tr>
       <th>Coordinates (midpoint)</th>
       <td><%= @plot.centroid_coords_display %></td>
     </tr>
@@ -19,7 +29,7 @@
     <tr>
       <th>Blocks</th>
       <td>
-        <%= @plot.blocks.left_outer_joins(:subscription).where(subscriptions: { id: nil }).size %>
+        <%= @plot.non_subscribed_blocks.size %>
         available out of
         <%= @plot.blocks.size %>
         total

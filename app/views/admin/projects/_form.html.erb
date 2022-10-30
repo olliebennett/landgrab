@@ -1,0 +1,61 @@
+<%= form_with(model: [:admin, project], local: true) do |form| %>
+  <%= render 'layouts/form_errors', errors: project.errors %>
+
+  <div class="row mb-3 g-3 align-items-center">
+    <div class="col-sm-2">
+      <%= form.label :title, class: 'col-form-label' %>
+    </div>
+    <div class="col-sm-3">
+      <%= form.text_field :title, required: true, class: 'form-control', aria: { describedby: 'titleHelp' } %>
+    </div>
+    <div class="col-sm-7">
+      <span id="titleHelp" class="form-text">
+        Provide a name for this project
+      </span>
+    </div>
+  </div>
+
+  <div class="row mb-3 g-3 align-items-center">
+    <div class="col-sm-2">
+      <%= form.label :description, class: 'col-form-label' %>
+    </div>
+    <div class="col-sm-3">
+      <%= form.text_field :description, required: true, class: 'form-control', aria: { describedby: 'descriptionHelp' } %>
+    </div>
+    <div class="col-sm-7">
+      <span id="descriptionHelp" class="form-text">
+        Provide some detail about the project
+      </span>
+    </div>
+  </div>
+
+  <div class="row mb-3 g-3 align-items-center">
+    <div class="col-sm-2">
+      <%= form.label :hero_image_url, 'Hero Image URL', class: 'col-form-label' %>
+    </div>
+    <div class="col-sm-3">
+      <%= form.text_field :hero_image_url, required: true, class: 'form-control', aria: { describedby: 'heroImageHelp' } %>
+    </div>
+    <div class="col-sm-7">
+      <span id="heroImageHelp" class="form-text">
+        URL of a wide image to be used in the background of the project page
+      </span>
+    </div>
+  </div>
+
+  <div class="row mb-3 g-3 align-items-center">
+    <div class="col-sm-2">
+      <%= form.label :logo_url, 'Logo URL', class: 'col-form-label' %>
+    </div>
+    <div class="col-sm-3">
+      <%= form.text_field :logo_url, required: true, class: 'form-control', aria: { describedby: 'logoImageHelp' } %>
+    </div>
+    <div class="col-sm-7">
+      <span id="logoImageHelp" class="form-text">
+        URL of a smaller image / icon for the project
+      </span>
+    </div>
+  </div>
+
+  <%= form.submit class: 'btn btn-primary' %>
+<% end %>

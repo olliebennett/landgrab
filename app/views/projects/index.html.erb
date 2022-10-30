@@ -1,0 +1,14 @@
+<% title 'Projects' %>
+
+<h1>Projects</h1>
+
+<p>
+  We've collated various projects which all work towards restoring,
+  regenerating or re-wilding land across the UK.
+</p>
+
+<%#= page_entries_info @projects %>
+
+<%= render 'table', projects: @projects %>
+
+<%= paginate @projects, theme: 'bootstrap-5' %>

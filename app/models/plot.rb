@@ -60,6 +60,10 @@ class Plot < ApplicationRecord
     end
   end
 
+  def area_formatted_acres
+    "#{format('%.3f', area / 4046.86)} acres"
+  end
+
   def coordinates_display
     polygon.coordinates[0].map do |coord|
       coord.map { |x| format('%.6f', x) }

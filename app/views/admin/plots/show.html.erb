@@ -12,7 +12,11 @@
     </tr>
     <tr>
       <th>Area</th>
-      <td>~ <%= @plot.area_formatted_unsquared %><sup>2</sup></td>
+      <td>
+        ~ <%= @plot.area_formatted_unsquared %><sup>2</sup>
+        or
+        <%= @plot.area_formatted_acres %>
+      </td>
     </tr>
     <!--
     <tr>

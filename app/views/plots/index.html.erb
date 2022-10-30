@@ -8,6 +8,6 @@
 
 <%= page_entries_info @plots %>
 
-<%= render 'table' %>
+<%= render 'table', plots: @plots %>
 
 <%= paginate @plots, theme: 'bootstrap-5' %>

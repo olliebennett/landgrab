@@ -3,6 +3,7 @@
     <tr>
       <th>Subscription ID</th>
       <th colspan="3">Block</th>
+      <th>Project</th>
       <th>Plot</th>
       <th>Subscribed Date</th>
     </tr>
@@ -22,13 +23,20 @@
           <%= link_to 'W3W', subscription.block.w3w_url %>
         </td>
         <td>
+          <% if subscription.block.plot&.project.present? %>
+            <%= link_to subscription.block.plot.project.title, project_path(subscription.block.plot.project) %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+        <td>
           <% if subscription.block.plot.present? %>
             <%= link_to subscription.block.plot&.title, plot_path(subscription.block.plot) %>
           <% else %>
             -
           <% end %>
         </td>
-        <td><%= subscription.created_at.strftime('%e %b %Y %H:%M:%S') %></td>
+        <td><%= subscription.created_at.strftime('%e %b %Y') %></td>
       </tr>
     <% end %>
   </tbody>

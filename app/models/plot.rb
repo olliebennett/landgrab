@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Plot < ApplicationRecord
+  belongs_to :project, optional: true
   has_many :blocks, dependent: :nullify
 
   default_scope { order(:id) }
@@ -68,6 +69,10 @@ class Plot < ApplicationRecord
     polygon.coordinates[0].map do |coord|
       coord.map { |x| format('%.6f', x) }
     end.to_s.delete('"')
+  end
+
+  def non_subscribed_blocks
+    blocks.left_outer_joins(:subscription).where(subscriptions: { id: nil })
   end
 
   def validate_bounding_box_dimensions

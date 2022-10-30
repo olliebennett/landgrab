@@ -27,6 +27,16 @@
       </td>
     </tr>
     <tr>
+      <th>Project</th>
+      <td>
+        <% if @subscription.block.plot&.project.present? %>
+          <%= link_to @subscription.block.plot.project.title, admin_project_path(@subscription.block.plot.project) %>
+        <% else %>
+          NOT PRESENT
+        <% end %>
+      </td>
+    </tr>
+    <tr>
       <th>Created</th>
       <td>
         <%= @subscription.created_at.strftime('%e %b %Y %H:%M:%S') %>

@@ -1,0 +1,39 @@
+<h1><%= admin_title @project %></h1>
+
+<table class="table">
+  <tbody>
+    <tr>
+      <th>Title</th>
+      <td><%= @project.title %></td>
+    </tr>
+
+    <tr>
+      <th>Description</th>
+      <td><%= @project.description %></td>
+    </tr>
+
+    <tr>
+      <th>Hero Image</th>
+      <td><%= image_tag @project.hero_image_url, height: '150px' %></td>
+    </tr>
+
+    <tr>
+      <th>Logo</th>
+      <td><%= image_tag @project.logo_url, height: '100px' %></td>
+    </tr>
+
+    <tr>
+      <th>Created</th>
+      <td>
+        <%= @project.created_at.strftime('%e %b %Y %H:%M:%S') %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+  <%= link_to 'Edit project', edit_admin_project_path(@project) %>
+</p>
+
+<h2>Plots in this Project</h2>
+<%= render 'admin/plots/table', plots: @project.plots %>

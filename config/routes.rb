@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :blocks, only: %i[index show]
   resources :plots, only: %i[index show]
+  resources :projects, only: %i[index show]
   resources :subscriptions, only: %i[create index show]
 
   post '/checkout/checkout', 'checkouts#checkout'
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
 
     resources :blocks, only: %i[create index show new]
     resources :plots, only: %i[create index show new edit update]
+    resources :projects, only: %i[create index show new edit update]
     resources :subscriptions, only: %i[create index show edit update]
     resources :users, only: %i[index show]
   end

@@ -14,6 +14,11 @@ class CheckoutController < ApplicationController
 
   def success
     @block = Block.find_by_hashid!(params[:block])
+
+    return if @block.subscription.nil?
+
+    redirect_to subscription_path(@block.subscription),
+                flash: { success: 'Purchase successful!' }
   end
 
   def cancel; end

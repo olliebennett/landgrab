@@ -1,0 +1,33 @@
+<%= form_with(model: [:admin, post], local: true) do |form| %>
+  <%= render 'layouts/form_errors', errors: post.errors %>
+
+  <div class="row mb-3 g-3 align-items-center">
+    <div class="col-sm-2">
+      <%= form.label :title, class: 'col-form-label' %>
+    </div>
+    <div class="col-sm-5">
+      <%= form.text_field :title, required: true, class: 'form-control', aria: { describedby: 'titleHelp' } %>
+    </div>
+    <div class="col-sm-5">
+      <span id="titleHelp" class="form-text">
+        Provide a short title for the post.
+      </span>
+    </div>
+  </div>
+
+  <div class="row mb-3 g-3 align-items-center">
+    <div class="col-sm-2">
+      <%= form.label :body, class: 'col-form-label' %>
+    </div>
+    <div class="col-sm-5">
+      <%= form.text_area :body, required: true, class: 'form-control', rows: 10, aria: { describedby: 'bodyHelp' } %>
+    </div>
+    <div class="col-sm-5">
+      <span id="bodyHelp" class="form-text">
+        The main content of the post.
+      </span>
+    </div>
+  </div>
+
+  <%= form.submit class: 'btn btn-primary' %>
+<% end %>

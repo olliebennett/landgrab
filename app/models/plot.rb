@@ -28,8 +28,8 @@ class Plot < ApplicationRecord
   end
 
   def bounding_box
-    x_coords = polygon.coordinates[0].map { |coord| coord[0] }
-    y_coords = polygon.coordinates[0].map { |coord| coord[1] }
+    x_coords = polygon.coordinates[0].pluck(0)
+    y_coords = polygon.coordinates[0].pluck(1)
 
     northeast = RGeo::Cartesian::PointImpl.new(RGeo::Cartesian::Factory.new, x_coords.max, y_coords.max)
     southwest = RGeo::Cartesian::PointImpl.new(RGeo::Cartesian::Factory.new, x_coords.min, y_coords.min)
@@ -72,7 +72,7 @@ class Plot < ApplicationRecord
   end
 
   def non_subscribed_blocks
-    blocks.left_outer_joins(:subscription).where(subscriptions: { id: nil })
+    blocks.where.missing(:subscription)
   end
 
   def validate_bounding_box_dimensions

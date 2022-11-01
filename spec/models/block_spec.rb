@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Block, type: :model do
+RSpec.describe Block do
   let(:block_params) { { w3w: 'aaa.bbb.ccc', southwest: 1, northeast: 1 } }
   let(:block) { described_class.new(block_params) }
 

@@ -54,6 +54,9 @@ gem 'pg'
 # Puma app server
 gem 'puma'
 
+# Markdown editor
+gem 'redcarpet'
+
 # Render RGeo (from PostGis) as GeoJSON
 gem 'rgeo-geojson'
 

@@ -31,7 +31,7 @@ module MarkdownRenderer
 
   def self.renderer
     CustomRenderer.new(
-      escape_html: true,
+      escape_html: false,
       hard_wrap: true,
       safe_links_only: true
     )

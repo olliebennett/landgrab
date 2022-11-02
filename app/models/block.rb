@@ -5,6 +5,8 @@ class Block < ApplicationRecord
 
   belongs_to :plot, optional: true
   has_one :subscription, dependent: :restrict_with_exception
+  has_many :post_associations, as: :postable, inverse_of: :postable, dependent: :restrict_with_exception
+  has_many :posts, through: :post_associations
 
   default_scope { order(:id) }
 

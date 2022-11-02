@@ -3,6 +3,8 @@
 class Plot < ApplicationRecord
   belongs_to :project, optional: true
   has_many :blocks, dependent: :nullify
+  has_many :post_associations, as: :postable, inverse_of: :postable, dependent: :restrict_with_exception
+  has_many :posts, through: :post_associations
 
   default_scope { order(:id) }
 

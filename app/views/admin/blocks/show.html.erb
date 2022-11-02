@@ -31,6 +31,15 @@
 </p>
 
 <p>
+  <strong>Project:</strong>
+  <% if @block.plot&.project.present? %>
+    <%= link_to @block.plot.project.title, admin_project_path(@block.plot.project) %>
+  <% else %>
+    -
+  <% end %>
+</p>
+
+<p>
   <% if @block.subscription.present? %>
     This block is already subscribed by User <%= @block.subscription.user.hashid %>
     (since <%= @block.subscription.created_at.strftime('%e %b %Y %H:%M:%S') %>).
@@ -42,3 +51,12 @@
 <%= render 'static_pages/w3w_map',
      center: [@block.midpoint.y, @block.midpoint.x],
      blocks: [@block] %>
+
+
+<h2 class="mt-3">
+  Posts about this Block
+  <% if @block.plot.present? %>
+    (and corresponding plot<% if @block.plot.project.present? %> and project<% end %>)
+  <% end %>
+</h2>
+<%= render 'admin/posts/table', posts: [@block, @block.plot, @block.plot&.project].compact.map(&:posts).flatten %>

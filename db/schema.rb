@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_30_231102) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_02_064446) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -32,6 +32,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_30_231102) do
     t.datetime "updated_at", null: false
     t.bigint "project_id"
     t.index ["project_id"], name: "index_plots_on_project_id"
+  end
+
+  create_table "post_associations", force: :cascade do |t|
+    t.bigint "post_id", null: false
+    t.string "postable_type"
+    t.bigint "postable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_post_associations_on_post_id"
+    t.index ["postable_type", "postable_id"], name: "index_post_associations_on_postable"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -76,6 +86,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_30_231102) do
 
   add_foreign_key "blocks", "plots"
   add_foreign_key "plots", "projects"
+  add_foreign_key "post_associations", "posts"
   add_foreign_key "posts", "users", column: "author_id"
   add_foreign_key "subscriptions", "blocks"
   add_foreign_key "subscriptions", "users"

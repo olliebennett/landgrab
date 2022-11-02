@@ -1,29 +1,33 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Project</th>
-      <th>Created</th>
-      <th>Polygon</th>
-      <th>Blocks</th>
-    </tr>
-  </thead>
-
-  <tbody style="font-variant-numeric: tabular-nums;">
-    <% plots.each do |plot| %>
+<% if plots.size.zero? %>
+  <p>No plots found</p>
+<% else %>
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= link_to plot.title, admin_plot_path(plot) %></td>
-        <td>
-          <% if plot.project.present? %>
-            <%= link_to plot.project.title, admin_project_path(plot.project) %>
-          <% else %>
-            None
-          <% end %>
-        </td>
-        <td><%= plot.created_at.to_formatted_s(:short) %></td>
-        <td><%= pluralize(plot.polygon.coordinates[0].length, 'point') %></td>
-        <td><%= plot.blocks.count %></td>
+        <th>Title</th>
+        <th>Project</th>
+        <th>Created</th>
+        <th>Polygon</th>
+        <th>Blocks</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody style="font-variant-numeric: tabular-nums;">
+      <% plots.each do |plot| %>
+        <tr>
+          <td><%= link_to plot.title, admin_plot_path(plot) %></td>
+          <td>
+            <% if plot.project.present? %>
+              <%= link_to plot.project.title, admin_project_path(plot.project) %>
+            <% else %>
+              None
+            <% end %>
+          </td>
+          <td><%= plot.created_at.to_formatted_s(:short) %></td>
+          <td><%= pluralize(plot.polygon.coordinates[0].length, 'point') %></td>
+          <td><%= plot.blocks.count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

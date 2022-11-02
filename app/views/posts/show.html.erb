@@ -1,0 +1,37 @@
+<h1><%= @post.title %></h1>
+
+<p>
+  Posted
+  <%= @post.created_at.strftime('%e %b %Y %H:%M:%S') %>
+  by
+  <%= @post.author.display_name %>
+</p>
+
+<hr />
+
+<%= markdown(@post.body) %>
+
+<h2 class="mt-3">
+  Post Associations
+</h2>
+<% if @post.post_associations.none? %>
+  <p>This post isn't linked to any records yet.</p>
+<% else %>
+  <p>The post is linked to the following records:</p>
+  <ul>
+    <% @post.post_associations.each do |pa| %>
+      <li>
+        <% case pa.postable_type %>
+        <% when 'Project' %>
+          <%= link_to "Project: #{pa.postable.title}", project_path(pa.postable) %>
+        <% when 'Plot' %>
+          <%= link_to "Plot: #{pa.postable.title}", plot_path(pa.postable) %>
+        <% when 'Block' %>
+          <%= link_to "Block: #{pa.postable.w3w}", block_path(pa.postable) %>
+        <% else %>
+          <% raise "Unhandled post association type: #{pa.postable_type}" %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

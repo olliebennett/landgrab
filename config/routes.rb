@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :blocks, only: %i[index show]
   resources :plots, only: %i[index show]
+  resources :posts, only: %i[show]
   resources :projects, only: %i[index show]
   resources :subscriptions, only: %i[create index show]
 

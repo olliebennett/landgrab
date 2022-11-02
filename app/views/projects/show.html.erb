@@ -2,11 +2,11 @@
   Project: <%= title @project.title %>
 </h1>
 
-<%= image_tag @project.hero_image_url, height: '250px', width: '100%', class: 'mb-2' %>
+<%= image_tag @project.hero_image_url, height: '250px', width: '100%', class: 'mb-2 rounded' %>
 
 <div class="row">
   <div class="col-xs-12 col-sm-4">
-    <%= image_tag @project.logo_url, height: '100px', width: '100%' %>
+    <%= image_tag @project.logo_url, height: '100px' %>
   </div>
   <div class="col-xs-12 col-sm-8">
     <p>
@@ -15,33 +15,13 @@
   </div>
 </div>
 
-<% if @project.plots.any? %>
-  <h2>Support the project</h2>
-  <p>
-    <%= @project.title %> consists of
-    <%= pluralize(@project.plots.size, 'plot') %>
-    broken into 3x3m squares ("blocks") of land.
-    In order to support the restoration of the land,
-    each block is individually available to sponsor for a small fee.
-  </p>
-  <div class="row">
-    <% @project.plots.each do |plot| %>
-      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title"><%= plot.title %></h5>
-            <p class="card-text">
-              <%= plot.non_subscribed_blocks.size %>
-              of
-              <%= plot.blocks.size %>
-              blocks available
-            </p>
-            <%= link_to 'View Plot', plot_path(plot), class: 'btn btn-primary stretched-link' %>
-          </div>
-        </div>
-      </div>
-    <% end %>
+<div class="row">
+  <div class="col-md-8">
+    <h2>Support the project</h2>
+    <%= render 'plots', project: @project %>
   </div>
-<% else %>
-  <p>There aren't any plots associated with this project yet.
-<% end %>
+  <div class="col-md-4">
+    <h2>Updates from this Project</h2>
+    <%= render 'posts', project: @project %>
+  </div>
+</div>

@@ -1,21 +1,25 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Body</th>
-      <th>Author</th>
-      <th>Created</th>
-    </tr>
-  </thead>
-
-  <tbody style="font-variant-numeric: tabular-nums;">
-    <% posts.each do |post| %>
+<% if posts.size.zero? %>
+  <p>No posts found</p>
+<% else %>
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= link_to post.title, admin_post_path(post) %></td>
-        <td><%= truncate(post.body, length: 75) %></td>
-        <td><%= post.author.display_name %></td>
-        <td><%= post.created_at.to_formatted_s(:short) %></td>
+        <th>Title</th>
+        <th>Body</th>
+        <th>Author</th>
+        <th>Created</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody style="font-variant-numeric: tabular-nums;">
+      <% posts.each do |post| %>
+        <tr>
+          <td><%= link_to post.title, admin_post_path(post) %></td>
+          <td><%= truncate(post.body, length: 75) %></td>
+          <td><%= post.author.display_name %></td>
+          <td><%= post.created_at.to_formatted_s(:short) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

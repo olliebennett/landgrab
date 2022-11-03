@@ -17,7 +17,7 @@ class CheckoutController < ApplicationController
 
     return if @block.subscription.nil?
 
-    redirect_to subscription_path(@block.subscription),
+    redirect_to block_path(@block),
                 flash: { success: 'Purchase successful!' }
   end
 

@@ -1,0 +1,27 @@
+<% show_body_length ||= 0 %>
+
+<% if posts.size.zero? %>
+  <p>
+    There are no related posts to show.
+  </p>
+<% else %>
+  <div class="list-group">
+    <% posts.sort { |x| x.created_at }.each do |post| %>
+      <a href="<%= post_path(post) %>" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-0">
+            <%= post.title %>
+          </h5>
+          <small class="text-muted">
+            <%= distance_of_time_in_words(post.created_at, Time.current) %> ago
+          </small>
+        </div>
+        <% if show_body_length.positive? %>
+          <p class="mb-1">
+            <%= markdown(truncate(post.body, length: show_body_length)) %>
+          </p>
+        <% end %>
+      </a>
+    <% end %>
+  </div>
+<% end %>

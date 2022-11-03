@@ -2,37 +2,15 @@
   Plot: <%= title @plot.title %>
 </h1>
 
-<p>
-  This plot
-  <% if @plot.project.present? %>
-    is part of the
-    <%= link_to @plot.project.title, project_path(@plot.project) %>
-    project and
-  <% end %>
-  covers <%= @plot.area_formatted_acres %>
-  (~ <%= @plot.area_formatted_unsquared %><sup>2</sup>).
-</p>
-
-<p>
-  There are
-  <%= @plot.non_subscribed_blocks.size %>
-  blocks still available to subscribe to, out of
-  <%= @plot.blocks.size %>
-  total in the plot
-  <% if @plot.blocks.size.positive? %>
-    - <%= link_to 'view all blocks', blocks_path(plot: @plot) %>
-  <% end %>
-</p>
-
-<p>
-  The plot was created on
-  <%= @plot.created_at.strftime('%e %b %Y') %>
-  and centres on coordinates
-  <%= @plot.centroid_coords_display %>.
-</p>
-
-<p>
-  Select a block from the map below to subscribe or view details.
-</p>
-
-<%= render 'static_pages/w3w_map', blocks: @plot.blocks.sample(250) %>
+<div class="row">
+  <div class="col-md-6">
+    <%= render 'details', plot: @plot %>
+    <p>
+      Select a block from the map to subscribe or view details.
+    </p>
+    <%= render 'posts', plot: @plot %>
+  </div>
+  <div class="col-md-6">
+    <%= render 'static_pages/w3w_map', blocks: @plot.blocks.sample(250) %>
+  </div>
+</div>

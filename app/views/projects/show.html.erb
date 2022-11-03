@@ -2,26 +2,34 @@
   Project: <%= title @project.title %>
 </h1>
 
-<%= image_tag @project.hero_image_url, height: '250px', width: '100%', class: 'mb-2 rounded' %>
-
-<div class="row">
-  <div class="col-xs-12 col-sm-4">
-    <%= image_tag @project.logo_url, class: 'img-fluid' %>
-  </div>
-  <div class="col-xs-12 col-sm-8">
-    <p>
-      <%= @project.description %>
-    </p>
-  </div>
-</div>
-
 <div class="row">
   <div class="col-md-8">
+    <%= image_tag @project.hero_image_url, height: '250px', width: '100%', class: 'mb-2 rounded' %>
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-4">
+        <%= image_tag @project.logo_url, class: 'img-fluid' %>
+      </div>
+      <div class="col-xs-12 col-sm-8">
+        <p>
+          <%= @project.description %>
+        </p>
+      </div>
+    </div>
     <h2>Support the project</h2>
     <%= render 'plots', project: @project %>
   </div>
   <div class="col-md-4">
-    <h2>Updates from this Project</h2>
+    <% if @project.plots.any? %>
+      <div class="row">
+        <% @project.plots.order(id: :desc).limit(2).each do |plot| %>
+          <div class="col-xs-12 col-sm-6 mb-4">
+            <%= render 'plots/card', plot: plot, featured: true %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+    <h2>Project Updates</h2>
     <%= render 'posts', project: @project %>
   </div>
 </div>

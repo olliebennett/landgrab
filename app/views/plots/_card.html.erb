@@ -1,0 +1,22 @@
+<% featured ||= false %>
+
+<div class="card">
+  <% if featured %>
+    <div class="card-header">
+      <span class="badge text-bg-warning">Featured Plot</span>
+    </div>
+  <% end %>
+  <div class="card-body">
+    <h5 class="card-title"><%= plot.title %></h5>
+
+    <p class="card-text">
+      <%= plot.non_subscribed_blocks.size %>
+      of
+      <%= plot.blocks.size %>
+      blocks available
+    </p>
+    <%= link_to 'View Plot',
+                plot_path(plot),
+                class: "btn btn-#{featured ? 'warning' : 'primary'} stretched-link" %>
+  </div>
+</div>

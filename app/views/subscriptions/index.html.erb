@@ -1,5 +1,10 @@
 <h1>Subscriptions</h1>
 
+<p>
+  You are currently subscribed to
+  <%= pluralize(@subscriptions.size, 'block') %>
+</p>
+
 <%= render 'table', subscriptions: @subscriptions %>
 
 <p>

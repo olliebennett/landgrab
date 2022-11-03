@@ -5,17 +5,7 @@
   </p>
   <div class="row">
     <% project.posts.each do |post| %>
-      <div class="col-xs-12">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title"><%= post.title %></h5>
-            <p class="card-text">
-              <%= markdown(truncate(post.body, length: 150)) %>
-            </p>
-            <%= link_to 'Read Full Post', post_path(post), class: 'btn btn-primary stretched-link' %>
-          </div>
-        </div>
-      </div>
+      <%= render 'posts/card', post: post %>
     <% end %>
   </div>
 <% else %>

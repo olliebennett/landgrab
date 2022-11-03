@@ -6,7 +6,7 @@
   </p>
 <% else %>
   <div class="list-group">
-    <% posts.sort { |x| x.created_at }.each do |post| %>
+    <% posts.sort_by(&:created_at).reverse_each do |post| %>
       <a href="<%= post_path(post) %>" class="list-group-item list-group-item-action">
         <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-0">

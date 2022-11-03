@@ -4,4 +4,6 @@ class PostAssociation < ApplicationRecord
   belongs_to :post
 
   belongs_to :postable, polymorphic: true
+
+  validates :postable_id, uniqueness: { scope: %i[postable_type post] }
 end

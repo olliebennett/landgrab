@@ -1,7 +1,7 @@
 <% if project.posts.any? %>
   <p>
     <%= project.title %> has
-    <%= pluralize(project.posts.size, 'related updates') %>.
+    <%= pluralize(project.posts.size, 'related update') %>.
   </p>
   <div class="row">
     <% project.posts.each do |post| %>
@@ -12,7 +12,7 @@
             <p class="card-text">
               <%= markdown(truncate(post.body, length: 150)) %>
             </p>
-            <%= link_to 'Read Full Post', post_path(post), class: 'btn btn-primary' %>
+            <%= link_to 'Read Full Post', post_path(post), class: 'btn btn-primary stretched-link' %>
           </div>
         </div>
       </div>

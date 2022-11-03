@@ -26,10 +26,9 @@ class Block < ApplicationRecord
     geojson['properties'] ||= {}
     available = subscription.nil? || subscription.new_record? # handle display on 'new' screen
     geojson['properties']['available'] = available
-    geojson['properties']['popupContent'] = 'What3Words<br>' \
-                                            "<a href=\"#{w3w_url}\"><code>#{w3w}</code></a><br>" \
+    geojson['properties']['popupContent'] = "<p>///#{w3w}</p>" \
                                             "<code>#{midpoint_rounded.join(',')}</code><br>" \
-                                            "<a href=\"#{Rails.application.routes.url_helpers.block_path(self)}\">view details</a><br>" \
+                                            "<a href=\"#{Rails.application.routes.url_helpers.block_path(self)}\" class=\"btn btn-default\">View details</a><br>" \
                                             "Subscription: #{available ? 'Available' : 'Unavailable'}"
 
     geojson.to_json

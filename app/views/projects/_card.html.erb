@@ -1,0 +1,10 @@
+<div class="card">
+  <%= image_tag project.hero_image_url, height: '150', class: 'card-img-top', alt: "Hero image for #{project.title} project" %>
+  <div class="card-body">
+    <h5 class="card-title"><%= project.title %></h5>
+    <p class="card-text">
+      <%= truncate(project.description, length: 200) %>
+    </p>
+    <%= link_to 'View Project', project_path(project), class: 'btn btn-primary stretched-link' %>
+  </div>
+</div>

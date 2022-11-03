@@ -1,0 +1,10 @@
+<h1><%= post.title %></h1>
+
+<p>
+  Posted
+  <%= post.created_at.strftime('%e %b %Y %H:%M:%S') %>
+  by
+  <%= post.author.display_name %>
+</p>
+
+<hr />

@@ -1,0 +1,28 @@
+<p>
+  <% if block.subscription.present? %>
+    <p>
+      <% if block.subscription.user == current_user %>
+        You're already subscribed to this block
+      <% else %>
+        This block is already subscribed by User <%= block.subscription.user.hashid %>
+      <% end %>
+      (since <%= block.subscription.created_at.strftime('%e %b %Y %H:%M:%S') %>).
+    </p>
+    <% if block.subscription.user == current_user %>
+      <%= link_to 'Cancel Subscription', "javascript:alert('not implemented; this is all fake money for now')", class: 'btn btn-outline-danger' %>
+    <% end %>
+  <% else %>
+    <%= form_with(model: Subscription.new(user: current_user, block: block)) do |form| %>
+      <%= form.hidden_field :block_id %>
+      <%= form.submit 'Subscribe (test; no payment)!', class: 'btn btn-secondary' %>
+    <% end %>
+    or
+    <%= form_with url: checkout_checkout_path do |form| %>
+      <%= form.hidden_field :block, value: block.hashid %>
+      <%= form.submit 'Pay & Subscribe', class: 'btn btn-primary' %>
+      <br>
+      Use card <code>4242 4242 4242 4242</code>,
+      any (future) expiry date, any CVV
+    <% end %>
+  <% end %>
+</p>

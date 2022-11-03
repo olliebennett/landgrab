@@ -1,0 +1,26 @@
+<% project_pas = post.post_associations.where(postable_type: 'Project') %>
+<% plot_pas = post.post_associations.where(postable_type: 'Plot') %>
+<% block_pas = post.post_associations.where(postable_type: 'Block') %>
+<h2 class="mt-3">
+  Associated Places
+</h2>
+<% if [project_pas, plot_pas, block_pas].all?(&:empty?) %>
+  <p>This post isn't linked to any places yet.</p>
+<% end %>
+<% if project_pas.any? %>
+  <% project_pas.each do |pa| %>
+    <%= render 'projects/card', project: pa.postable %>
+  <% end %>
+<% end %>
+<% if plot_pas.any? %>
+  <p>Plots:</p>
+  <% plot_pas.each do |pa| %>
+    <%= link_to pa.postable.title, plot_path(pa.postable) %>
+  <% end %>
+<% end %>
+<% if block_pas.any? %>
+  <p>Blocks:</p>
+  <% block_pas.each do |pa| %>
+    <%= link_to "///#{pa.postable.w3w}", block_path(pa.postable) %>
+  <% end %>
+<% end %>

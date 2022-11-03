@@ -1,43 +1,35 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th>Subscription ID</th>
-      <th colspan="3">Block</th>
-      <th>Project</th>
-      <th>Plot</th>
-      <th>Subscribed Date</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% subscriptions.each do |subscription| %>
-      <tr>
-        <td><%= link_to subscription.hashid, subscription_path(subscription) %></td>
-        <td>
-          <%= content_tag(:code, subscription.block.w3w) %>
-        </td>
-        <td>
-          <%= link_to 'Details', block_path(subscription.block) %>
-        </td>
-        <td>
-          <%= link_to 'W3W', subscription.block.w3w_url %>
-        </td>
-        <td>
+<div class="row">
+  <% subscriptions.each do |subscription| %>
+    <div class="col-sm-6 col-lg-4">
+      <div class="card mb-4">
+        <div class="card-header">
+          <%= content_tag(:code, "///#{subscription.block.w3w}") %>
+        </div>
+        <div class="card-body">
           <% if subscription.block.plot&.project.present? %>
-            <%= link_to subscription.block.plot.project.title, project_path(subscription.block.plot.project) %>
-          <% else %>
-            -
+            <h6 class="card-subtitle mb-2 text-muted">
+              Project:
+              <%= subscription.block.plot.project.title %>
+            </h6>
           <% end %>
-        </td>
-        <td>
           <% if subscription.block.plot.present? %>
-            <%= link_to subscription.block.plot&.title, plot_path(subscription.block.plot) %>
-          <% else %>
-            -
+            <h6 class="card-subtitle mb-2 text-muted">
+              Plot: <%= subscription.block.plot.title %>
+            </h6>
           <% end %>
-        </td>
-        <td><%= subscription.created_at.strftime('%e %b %Y') %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+          <p class="card-text">
+            <small class="text-muted">
+              Subscribed for
+              <%= distance_of_time_in_words(subscription.created_at, Time.current) %>
+              so far
+            </small>
+          </p>
+          <%= link_to 'View Block', block_path(subscription.block), class: 'btn btn-primary stretched-link' %>
+        </div>
+        <div class="card-footer">
+          £XX.XX / month
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

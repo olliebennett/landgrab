@@ -11,6 +11,6 @@
     <%= render 'posts', plot: @plot %>
   </div>
   <div class="col-md-6">
-    <%= render 'static_pages/w3w_map', blocks: @plot.blocks.sample(250) %>
+    <%= render 'static_pages/w3w_map', blocks: @plot.blocks.includes(:subscription).sample(250) %>
   </div>
 </div>

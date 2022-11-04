@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class StaticPagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: :homepage
+  skip_before_action :authenticate_user!, only: %i[about homepage explore]
 
   def about; end
 

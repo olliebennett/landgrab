@@ -2,6 +2,7 @@
 
 class BlocksController < ApplicationController
   before_action :set_block, only: %i[show]
+  skip_before_action :authenticate_user!, only: %i[index show]
 
   def index
     @plot = Plot.find_by_hashid!(params[:plot]) if params[:plot].present?

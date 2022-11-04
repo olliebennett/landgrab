@@ -2,6 +2,7 @@
 
 class PostsController < ApplicationController
   before_action :set_post, only: %i[show]
+  skip_before_action :authenticate_user!, only: %i[show]
 
   def show; end
 

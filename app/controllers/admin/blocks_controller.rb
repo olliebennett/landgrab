@@ -7,20 +7,15 @@ module Admin
 
     def index
       @plot = Plot.find_by_hashid!(params[:plot]) if params[:plot].present?
-      if @plot.present?
-        @blocks = @plot.blocks.order(id: :desc).includes(:subscription).page(params[:page])
-        @center = [@plot.centroid_coords.y, @plot.centroid_coords.x]
-      else
-        @blocks = Block.order(id: :desc).includes(:plot, :subscription).page(params[:page])
-        if @blocks.none?
-          @center = Plot::DEFAULT_COORDS
-        else
-          mean_x = @blocks.sum { |b| b.midpoint.x } / @blocks.size
-          mean_y = @blocks.sum { |b| b.midpoint.y } / @blocks.size
-
-          @center = [mean_y, mean_x]
-        end
+      @blocks = @plot.present? ? @plot.blocks : Block.all
+      @blocks = @blocks.where('blocks.w3w LIKE ?', "%#{params[:w3w]}%") if params[:w3w]
+      case params[:subscribed]
+      when 'true'
+        @blocks = @blocks.joins(:subscription)
+      when 'false'
+        @blocks = @blocks.where.missing(:subscription)
       end
+      @blocks = @blocks.order(id: :desc).includes(:plot, :subscription).page(params[:page])
     end
 
     def show

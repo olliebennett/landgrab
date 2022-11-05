@@ -1,0 +1,23 @@
+<%= form_tag(admin_blocks_path, method: :get, class: 'row g-3 mb-3') do |form| %>
+  <div class="col-sm-3">
+    <%= label_tag :w3w, 'What3Words Address', class: 'visually-hidden' %>
+    <%= text_field_tag :w3w, params[:w3w], class: 'form-control', placeholder: 'W3W Address' %>
+  </div>
+
+  <div class="col-sm-3">
+    <%= label_tag :plot, 'Plot', class: 'visually-hidden' %>
+    <%= select_tag :plot, option_groups_from_collection_for_select(Project.order(:title), :plots, :title, :hashid, :title, params[:plot]),
+                          { include_blank: '[ All Plots ]', class: 'form-select' } %>
+  </div>
+
+  <div class="col-sm-3">
+    <%= label_tag :subscribed, 'Subscribed?', class: 'visually-hidden' %>
+    <%= select_tag :subscribed,
+                   options_for_select({ 'Already Subscribed' => 'true', 'Not Subscribed' => 'false' }, params[:subscribed]),
+                   { include_blank: '[ Subscribed? ]', class: 'form-select' } %>
+  </div>
+
+  <div class="col-sm-2 d-grid">
+    <button type="submit" class="btn btn-primary btn-block">Filter</button>
+  </div>
+<% end %>

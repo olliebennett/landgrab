@@ -5,10 +5,15 @@
   <%= link_to 'What3Words', 'https://what3words.com/' %>.
 </p>
 
+<%= render 'filters' %>
+
 <p>
   <%= page_entries_info @blocks %>
   <% if @plot.present? %>
     from the <%= link_to @plot.title, admin_plot_path(@plot) %> plot
+  <% end %>
+  <% if filtered? %>
+    matching selected filters.
   <% end %>
 </p>
 

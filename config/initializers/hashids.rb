@@ -9,8 +9,8 @@ Hashid::Rails.configure do |config|
   config.min_hash_length = 6
 
   # The alphabet to use for generating hashids
-  config.alphabet = 'abcdefghijklmnopqrstuvwxyz' \
-                    '1234567890'
+  config.alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ' \
+                    '23456789'
 
   # Whether to override the `find` method
   config.override_find = false

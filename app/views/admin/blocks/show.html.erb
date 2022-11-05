@@ -1,62 +1,18 @@
 <h1><%= admin_title @block %></h1>
 
-<p>
-  <strong>South West:</strong>
-  <%= @block.southwest_rounded.join(', ') %>
-</p>
-
-<p>
-  <strong>North East:</strong>
-  <%= @block.northeast_rounded.join(', ') %>
-</p>
-
-<p>
-  <strong>Midpoint:</strong>
-  <%= @block.midpoint_rounded.join(', ') %>
-</p>
-
-<p>
-  <strong>What3Words:</strong>
-  <code>/// <%= @block.w3w %></code>
-  - <%= link_to 'View', @block.w3w_url %>
-</p>
-
-<p>
-  <strong>Plot:</strong>
-  <% if @block.plot.present? %>
-    <%= link_to @block.plot.title, admin_plot_path(@block.plot) %>
-  <% else %>
-    -
-  <% end %>
-</p>
-
-<p>
-  <strong>Project:</strong>
-  <% if @block.plot&.project.present? %>
-    <%= link_to @block.plot.project.title, admin_project_path(@block.plot.project) %>
-  <% else %>
-    -
-  <% end %>
-</p>
-
-<p>
-  <% if @block.subscription.present? %>
-    This block is already subscribed by User <%= @block.subscription.user.hashid %>
-    (since <%= @block.subscription.created_at.strftime('%e %b %Y %H:%M:%S') %>).
-  <% else %>
-    This block is not yet subscribed.
-  <% end %>
-</p>
+<div class="row">
+  <div class="col-md-6">
+    <%= render 'details', block: @block %>
+    <%= render 'subscription_info', block: @block %>
+    <%= render 'posts', block: @block %>
+  </div>
+  <div class="col-md-6">
+    <%= render 'static_pages/w3w_map',
+        center: [@block.midpoint.y, @block.midpoint.x],
+        blocks: [@block] %>
+  </div>
+</div>
 
 <%= render 'static_pages/w3w_map',
      center: [@block.midpoint.y, @block.midpoint.x],
      blocks: [@block] %>
-
-
-<h2 class="mt-3">
-  Posts about this Block
-  <% if @block.plot.present? %>
-    (and corresponding plot<% if @block.plot.project.present? %> and project<% end %>)
-  <% end %>
-</h2>
-<%= render 'admin/posts/table', posts: [@block, @block.plot, @block.plot&.project].compact.map(&:posts).flatten %>

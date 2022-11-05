@@ -1,0 +1,10 @@
+<p>
+  <% if @block.subscription.present? %>
+    This block is already subscribed by
+    <%= link_to @block.subscription.user.display_name,
+                admin_user_path(@block.subscription.user) %>
+    (since <%= @block.subscription.created_at.strftime('%e %b %Y %H:%M:%S') %>).
+  <% else %>
+    This block is not yet subscribed.
+  <% end %>
+</p>

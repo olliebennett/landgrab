@@ -27,4 +27,32 @@ RSpec.describe Block do
       expect(block.errors[:w3w]).to include('format should be a.b.c')
     end
   end
+
+  describe '#viewable_by?' do
+    subject(:viewable) { block.viewable_by?(user) }
+
+    let(:user) { create(:user) }
+    let(:block) { create(:block) }
+    let(:subscription) { create(:subscription, user:, block:) }
+
+    before { subscription }
+
+    it 'returns true if block subscribed' do
+      expect(viewable).to be true
+    end
+
+    it 'returns false if block unsubscribed' do
+      subscription.destroy
+      block.reload
+
+      expect(viewable).to be false
+    end
+
+    it 'returns false if block subscribed by another user' do
+      subscription.update!(user: create(:user))
+      block.reload
+
+      expect(viewable).to be false
+    end
+  end
 end

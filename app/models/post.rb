@@ -7,4 +7,11 @@ class Post < ApplicationRecord
 
   validates :title, presence: true
   validates :body, presence: true
+
+  # Viewable if user has subscribed to any associated block
+  def viewable_by?(user)
+    post_associations.any? do |pa|
+      pa.postable.viewable_by?(user)
+    end
+  end
 end

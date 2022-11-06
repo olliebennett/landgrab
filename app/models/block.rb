@@ -81,4 +81,8 @@ class Block < ApplicationRecord
 
     self.w3w = w3w.downcase.delete('/').squish
   end
+
+  def viewable_by?(user)
+    subscription&.user == user
+  end
 end

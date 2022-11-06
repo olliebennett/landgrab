@@ -9,7 +9,9 @@ module Admin
       @posts = Post.order(id: :desc).page(params[:page])
     end
 
-    def show; end
+    def show
+      @post_association = @post.post_associations.new
+    end
 
     def new
       @post = Post.new

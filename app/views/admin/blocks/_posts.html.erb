@@ -5,4 +5,5 @@ Posts about this Block
   (and corresponding plot<% if @block.plot.project.present? %> and project<% end %>)
 <% end %>
 </h2>
+
 <%= render 'admin/posts/table', posts: [@block, @block.plot, @block.plot&.project].compact.map(&:posts).flatten %>

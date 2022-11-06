@@ -1,0 +1,25 @@
+<table class="table">
+  <tbody>
+    <tr>
+      <th>Title</th>
+      <td><%= post.title %></td>
+    </tr>
+
+    <tr>
+      <th>Body</th>
+      <td><%= markdown(post.body) %></td>
+    </tr>
+
+    <tr>
+      <th>Author</th>
+      <td><%= link_to post.author.display_name, admin_user_path(post.author) %></td>
+    </tr>
+
+    <tr>
+      <th>Created</th>
+      <td>
+        <%= post.created_at.strftime('%e %b %Y %H:%M:%S') %>
+      </td>
+    </tr>
+  </tbody>
+</table>

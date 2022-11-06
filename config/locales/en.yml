@@ -36,3 +36,6 @@ en:
         w3w: 'What3Words'
       plot:
         polygon: 'Polygon'
+      post_association:
+        postable: 'Record'
+        postable_id: 'Record'

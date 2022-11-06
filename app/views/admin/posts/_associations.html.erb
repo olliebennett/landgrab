@@ -1,0 +1,21 @@
+<% if post.post_associations.none? %>
+  <p>This post isn't linked to any records yet.</p>
+<% else %>
+  <p>The post is linked to the following records:</p>
+  <ul>
+    <% post.post_associations.select(&:persisted?).each do |pa| %>
+      <li>
+        <% case pa.postable_type %>
+        <% when 'Project' %>
+          <%= link_to "Project: #{pa.postable.title}", admin_project_path(pa.postable) %>
+        <% when 'Plot' %>
+          <%= link_to "Plot: #{pa.postable.title}", admin_plot_path(pa.postable) %>
+        <% when 'Block' %>
+          <%= link_to "Block: #{pa.postable.w3w}", admin_block_path(pa.postable) %>
+        <% else %>
+          <% raise "Unhandled post association type: #{pa.postable_type}" %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

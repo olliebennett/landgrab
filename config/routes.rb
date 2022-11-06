@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     resources :blocks, only: %i[create index show new]
     resources :plots, only: %i[create index show new edit update]
     resources :posts, only: %i[create index show new edit update]
+    resources :post_associations, only: %i[create]
     resources :projects, only: %i[create index show new edit update]
     resources :subscriptions, only: %i[create index show edit update]
     resources :users, only: %i[index show]

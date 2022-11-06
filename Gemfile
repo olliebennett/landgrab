@@ -33,6 +33,9 @@ gem 'devise'
 # Shim to load environment variables from .env into ENV in development.
 gem 'dotenv-rails', groups: %i[development test]
 
+# Use factories for creating test objects
+gem 'factory_bot_rails', group: %i[development test]
+
 # Dependency of RGeo operation with 'geos' library
 gem 'ffi-geos', groups: %i[development test]
 

@@ -97,6 +97,11 @@ GEM
       dotenv (= 2.8.1)
       railties (>= 3.2)
     erubi (1.11.0)
+    factory_bot (6.2.1)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.2.0)
+      factory_bot (~> 6.2.0)
+      railties (>= 5.0.0)
     ffi (1.15.5)
     ffi-geos (2.4.0)
       ffi (>= 1.0.0)
@@ -293,6 +298,7 @@ DEPENDENCIES
   byebug
   devise
   dotenv-rails
+  factory_bot_rails
   ffi-geos
   hashid-rails
   jbuilder

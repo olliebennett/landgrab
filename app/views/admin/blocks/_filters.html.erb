@@ -1,4 +1,4 @@
-<%= form_tag(admin_blocks_path, method: :get, class: 'row g-3 mb-3') do |form| %>
+<%= form_tag(admin_blocks_path, method: :get, class: 'row g-3 mb-3') do %>
   <div class="col-sm-3">
     <%= label_tag :w3w, 'What3Words Address', class: 'visually-hidden' %>
     <%= text_field_tag :w3w, params[:w3w], class: 'form-control', placeholder: 'W3W Address' %>

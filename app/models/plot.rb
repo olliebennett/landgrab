@@ -99,4 +99,12 @@ class Plot < ApplicationRecord
       .where.not(id:)
       .distinct
   end
+
+  def viewable_by?(user)
+    blocks_subscribed_by(user).any?
+  end
+
+  def blocks_subscribed_by(user)
+    blocks.joins(subscription: :user).where(users: { id: user.id })
+  end
 end

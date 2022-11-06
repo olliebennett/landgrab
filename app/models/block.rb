@@ -13,8 +13,7 @@ class Block < ApplicationRecord
   scope :available, -> { where.missing(:subscription) }
   scope :unavailable, -> { joins(:subscription).distinct }
 
-  validates :southwest, presence: true
-  validates :northeast, presence: true
+  validates :southwest, :northeast, presence: true
 
   validates :w3w, presence: true, format: { with: /\A[a-z]+\.[a-z]+\.[a-z]+\z/, message: 'format should be a.b.c' }
 

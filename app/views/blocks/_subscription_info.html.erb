@@ -4,7 +4,7 @@
       <% if block.subscription.user == current_user %>
         You're already subscribed to this block
       <% else %>
-        This block is already subscribed by <%= block.subscription.user.display_name %>
+        This block is already subscribed by someone else
       <% end %>
       (since <%= block.subscription.created_at.strftime('%e %b %Y %H:%M:%S') %>).
     </p>

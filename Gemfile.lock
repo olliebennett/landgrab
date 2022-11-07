@@ -258,13 +258,11 @@ GEM
     ruby-progressbar (1.11.0)
     ruumba (0.1.17)
       rubocop
-    sentry-rails (5.3.1)
+    sentry-rails (5.5.0)
       railties (>= 5.0)
-      sentry-ruby-core (~> 5.3.1)
+      sentry-ruby (~> 5.5.0)
     sentry-ruby (5.5.0)
       concurrent-ruby (~> 1.0, >= 1.0.2)
-    sentry-ruby-core (5.3.1)
-      concurrent-ruby
     stripe (7.1.0)
     strscan (3.0.4)
     thor (1.2.1)
@@ -284,7 +282,7 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    zeitwerk (2.6.1)
+    zeitwerk (2.6.5)
 
 PLATFORMS
   ruby

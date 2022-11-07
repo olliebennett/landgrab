@@ -20,4 +20,12 @@ class ApplicationController < ActionController::Base
 
     render file: Rails.public_path.join('404.html'), status: :not_found, layout: false
   end
+
+  def ensure_stripe_enrollment
+    return if current_user.stripe_customer_id.present?
+
+    StripeCustomerCreateJob.perform_now(current_user)
+
+    current_user.reload
+  end
 end

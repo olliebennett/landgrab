@@ -2,6 +2,7 @@
 
 class BlocksController < ApplicationController
   before_action :set_block, only: %i[show]
+  before_action :ensure_stripe_enrollment, only: %i[show]
   skip_before_action :authenticate_user!, only: %i[index show]
 
   def index

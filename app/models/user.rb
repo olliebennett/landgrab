@@ -10,6 +10,9 @@ class User < ApplicationRecord
   has_many :posts_authored, class_name: 'Post', foreign_key: 'author_id', inverse_of: :author, dependent: :restrict_with_exception
 
   validates :first_name, :last_name, length: { maximum: 255 }
+  validates :stripe_customer_id, allow_blank: true,
+                                 format: { with: /\Acus_[0-9a-zA-Z]+\z/ },
+                                 uniqueness: true
 
   def full_name
     [first_name, last_name].join(' ')

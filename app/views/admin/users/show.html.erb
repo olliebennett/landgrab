@@ -16,6 +16,16 @@
 </p>
 
 <p>
+  <strong>Stripe Customer ID:</strong>
+  <% if @user.stripe_customer_id.present? %>
+    <%= link_to @user.stripe_customer_id,
+                "#{ENV.fetch('STRIPE_DASHBOARD_URL')}/customers/#{@user.stripe_customer_id}" %>
+  <% else %>
+    -
+  <% end %>
+</p>
+
+<p>
   <strong>Registered:</strong>
   <%= @user.created_at.strftime('%e %b %Y %H:%M:%S') %>
 </p>

@@ -2,6 +2,7 @@
 
 class SubscriptionsController < ApplicationController
   before_action :set_subscription, only: %i[show]
+  before_action :ensure_stripe_enrollment, only: %i[create]
 
   def index
     @subscriptions = current_user.subscriptions

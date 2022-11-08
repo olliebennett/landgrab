@@ -35,6 +35,20 @@
 
   <div class="row mb-3 g-3 align-items-center">
     <div class="col-sm-2">
+      <%= form.label :website, 'Website URL', class: 'col-form-label' %>
+    </div>
+    <div class="col-sm-5">
+      <%= form.text_field :website, class: 'form-control', aria: { describedby: 'websiteHelp' } %>
+    </div>
+    <div class="col-sm-5">
+      <span id="websiteHelp" class="form-text">
+        URL of the project website (the project logo will link here)
+      </span>
+    </div>
+  </div>
+
+  <div class="row mb-3 g-3 align-items-center">
+    <div class="col-sm-2">
       <%= form.label :hero_image_url, 'Hero Image URL', class: 'col-form-label' %>
     </div>
     <div class="col-sm-5">

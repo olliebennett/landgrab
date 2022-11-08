@@ -46,7 +46,14 @@ module Admin
     end
 
     def project_params
-      params.require(:project).permit(:title, :description, :hero_image_url, :logo_url)
+      params.require(:project)
+            .permit(
+              :title,
+              :description,
+              :website,
+              :hero_image_url,
+              :logo_url
+            )
     end
   end
 end

@@ -13,6 +13,17 @@
     </tr>
 
     <tr>
+      <th>Website</th>
+      <td>
+        <% if @project.website.present? %>
+          <%= link_to @project.website, @project.website %>
+        <% else %>
+          -
+        <% end %>
+      </td>
+    </tr>
+
+    <tr>
       <th>Hero Image</th>
       <td><%= image_tag @project.hero_image_url, height: '150px' %></td>
     </tr>

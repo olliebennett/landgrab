@@ -3,66 +3,72 @@
     {
       "warning_type": "Cross-Site Scripting",
       "warning_code": 4,
-      "fingerprint": "29a1f8ad9a7aefbcaa45333e028c7f37d661adb1068db5f9f8c0e86de3cb22af",
+      "fingerprint": "058c3d4d343021b43b7067cffc4edf98da678ab7692fe4622d0cc936d5425fcb",
       "check_name": "LinkToHref",
       "message": "Potentially unsafe model attribute in `link_to` href",
-      "file": "app/views/admin/blocks/show.html.erb",
-      "line": 25,
+      "file": "app/views/admin/projects/show.html.erb",
+      "line": 19,
       "link": "https://brakemanscanner.org/docs/warning_types/link_to_href",
-      "code": "link_to(\"View\", Block.new(block_params).w3w_url)",
+      "code": "link_to(Project.find_by_hashid!(params[:id]).website, Project.find_by_hashid!(params[:id]).website)",
       "render_path": [
         {
           "type": "controller",
-          "class": "Admin::BlocksController",
-          "method": "create",
-          "line": 44,
-          "file": "app/controllers/admin/blocks_controller.rb",
+          "class": "Admin::ProjectsController",
+          "method": "show",
+          "line": 13,
+          "file": "app/controllers/admin/projects_controller.rb",
           "rendered": {
-            "name": "admin/blocks/show",
-            "file": "app/views/admin/blocks/show.html.erb"
+            "name": "admin/projects/show",
+            "file": "app/views/admin/projects/show.html.erb"
           }
         }
       ],
       "location": {
         "type": "template",
-        "template": "admin/blocks/show"
+        "template": "admin/projects/show"
       },
-      "user_input": "Block.new(block_params).w3w_url",
+      "user_input": "Project.find_by_hashid!(params[:id]).website",
       "confidence": "Weak",
-      "note": "We validate format of w3w before rendering"
+      "cwe_id": [
+        79
+      ],
+      "note": "Website is only editable by admins"
     },
     {
       "warning_type": "Cross-Site Scripting",
       "warning_code": 4,
-      "fingerprint": "77d99f6f7f2b9b4c76852acfebb4246d158bf22af0c3199123256f3c4f9e519c",
+      "fingerprint": "be8de5809e30a2607a44bbc4d8fdf7a0af17e4d8e9bc722a3540046d382bf4dc",
       "check_name": "LinkToHref",
       "message": "Potentially unsafe model attribute in `link_to` href",
-      "file": "app/views/blocks/show.html.erb",
+      "file": "app/views/projects/show.html.erb",
       "line": 10,
       "link": "https://brakemanscanner.org/docs/warning_types/link_to_href",
-      "code": "link_to(\"View\", Block.find_by_hashid!(params[:id]).w3w_url)",
+      "code": "link_to(Project.find_by_hashid!(params[:id]).website)",
       "render_path": [
         {
           "type": "controller",
-          "class": "BlocksController",
+          "class": "ProjectsController",
           "method": "show",
-          "line": 26,
-          "file": "app/controllers/blocks_controller.rb",
+          "line": 12,
+          "file": "app/controllers/projects_controller.rb",
           "rendered": {
-            "name": "blocks/show",
-            "file": "app/views/blocks/show.html.erb"
+            "name": "projects/show",
+            "file": "app/views/projects/show.html.erb"
           }
         }
       ],
       "location": {
         "type": "template",
-        "template": "blocks/show"
+        "template": "projects/show"
       },
-      "user_input": "Block.find_by_hashid!(params[:id]).w3w_url",
+      "user_input": "Project.find_by_hashid!(params[:id]).website",
       "confidence": "Weak",
-      "note": "We validate format of w3w before rendering"
+      "cwe_id": [
+        79
+      ],
+      "note": "Website is only editable by admins"
     }
   ],
-  "updated": "2022-04-24 23:43:33 +0100",
-  "brakeman_version": "5.2.2"
+  "updated": "2022-11-08 07:13:23 +0000",
+  "brakeman_version": "5.3.1"
 }

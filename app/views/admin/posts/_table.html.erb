@@ -5,6 +5,7 @@
     <thead>
       <tr>
         <th>Title</th>
+        <th>Preview</th>
         <th>Body</th>
         <th>Author</th>
         <th>Created</th>
@@ -15,6 +16,7 @@
       <% posts.each do |post| %>
         <tr>
           <td><%= link_to post.title, admin_post_path(post) %></td>
+          <td><%= truncate(post.preview || '-', length: 75) %></td>
           <td><%= truncate(post.body, length: 75) %></td>
           <td><%= post.author.display_name %></td>
           <td><%= post.created_at.to_formatted_s(:short) %></td>

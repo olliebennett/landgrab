@@ -3,7 +3,7 @@
     <%= project.title %> has
     <%= pluralize(project.posts.size, 'related update') %>.
   </p>
-  <%= render 'posts/list_group', posts: project.posts, show_body_length: 150 %>
+  <%= render 'posts/list_group', posts: project.posts, show_preview: true %>
 <% else %>
   <p>There aren't any posts associated with this project yet.
 <% end %>

@@ -1,4 +1,4 @@
-<% show_body_length ||= 0 %>
+<% show_preview ||= false %>
 
 <% if posts.size.zero? %>
   <p>
@@ -16,9 +16,9 @@
             <%= distance_of_time_in_words(post.created_at, Time.current) %> ago
           </small>
         </div>
-        <% if show_body_length.positive? %>
+        <% if show_preview && post.preview.present? %>
           <p class="mb-1">
-            <%= markdown(truncate(post.body, length: show_body_length)) %>
+            <%= markdown(post.preview) %>
           </p>
         <% end %>
       </a>

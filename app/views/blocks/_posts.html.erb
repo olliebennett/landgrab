@@ -2,4 +2,4 @@
 
 <%= render 'posts/list_group',
            posts: [block, block.plot, block.plot&.project].compact.map(&:posts).flatten.uniq,
-           show_body_length: 150 %>
+           show_preview: true %>

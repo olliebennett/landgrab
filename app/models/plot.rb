@@ -108,10 +108,10 @@ class Plot < ApplicationRecord
     blocks.joins(subscription: :user).where(users: { id: user.id })
   end
 
-  def blocks_for_map
-    # select a balance of subscribed vs avaliable blocks
+  def blocks_for_map(include_block: nil)
+    # returns 250 (or 251) blocks, sampling a balance of subscribed vs avaliable blocks
     subscribed = blocks.includes(:subscription).unavailable.sample(100)
     available = blocks.includes(:subscription).where.not(id: subscribed.map(&:id)).sample(150)
-    subscribed + available
+    ([include_block] + subscribed + available).compact.uniq
   end
 end

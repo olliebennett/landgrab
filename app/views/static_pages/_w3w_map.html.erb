@@ -9,8 +9,13 @@
 <script src='https://unpkg.com/leaflet.fullscreen@2.4.0/Control.FullScreen.js'></script>
 <link rel="stylesheet" href='https://unpkg.com/leaflet.fullscreen@2.4.0/Control.FullScreen.css' />
 
-<div id="map" style="width: 100%; height: 500px"></div>
+<div id="map" style="width: 100%; height: 500px" class="mb-3"></div>
 
+<% popup_blocks ||= [] %>
+<%= render 'static_pages/map_legend', show_current: popup_blocks.any? %>
+Popup blocks: <%= popup_blocks.map(&:w3w).join(',') %>
+
+<% blocks = blocks.each { |b| b.map_popup = popup_blocks.include?(b) } %>
 <script>
   function onEachFeature(feature, layer) {
     if (feature.properties && feature.properties.popupContent) {
@@ -20,10 +25,14 @@
   }
 
   function blockStyle(feature) {
-    if (feature.geometry.properties && feature.geometry.properties.available) {
-      return {color: "#3388ff"};
+    const base = { color: 'black', weight: 2 }
+    // Style docs: https://leafletjs.com/reference.html#path-option
+    if (feature.geometry.properties && feature.geometry.properties.popupContent) {
+      return {...base, ...{ opacity: 0.65, fill: true, fillOpacity: 0.5, fillColor: 'limegreen' }};
+    } else if (feature.geometry.properties && feature.geometry.properties.available) {
+      return {...base, ...{ fillColor: "#3388ff", fillOpacity: 0.3 }};
     } else {
-      return {color: "darkred"};
+      return {...base, ...{ fillColor: "darkred", fillOpacity: 0.3 }};
     }
   };
 

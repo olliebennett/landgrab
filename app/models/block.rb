@@ -3,6 +3,8 @@
 class Block < ApplicationRecord
   after_initialize :sanitize_w3w
 
+  attr_accessor :map_popup
+
   belongs_to :plot, optional: true
   has_one :subscription, dependent: :restrict_with_exception
   has_many :post_associations, as: :postable, inverse_of: :postable, dependent: :restrict_with_exception
@@ -23,14 +25,24 @@ class Block < ApplicationRecord
     geojson = RGeo::GeoJSON.encode(bounding_box.to_geometry)
 
     geojson['properties'] ||= {}
-    available = subscription.nil? || subscription.new_record? # handle display on 'new' screen
-    geojson['properties']['available'] = available
-    geojson['properties']['popupContent'] = "<p>///#{w3w}</p>" \
-                                            "<code>#{midpoint_rounded.join(',')}</code><br>" \
-                                            "<a href=\"#{Rails.application.routes.url_helpers.block_path(self)}\" class=\"btn btn-default\">View details</a><br>" \
-                                            "Subscription: #{available ? 'Available' : 'Unavailable'}"
+    geojson['properties']['available'] = available?
+    geojson['properties']['popupContent'] = popup_content
+    geojson['properties']['focussed'] = map_popup
 
     geojson.to_json
+  end
+
+  def available?
+    subscription.nil? || subscription.new_record? # handle display on 'new' screen
+  end
+
+  def popup_content
+    return unless map_popup
+
+    "<p>///#{w3w}</p>" \
+      "<code>#{midpoint_rounded.join(',')}</code><br>" \
+      "<a href=\"#{Rails.application.routes.url_helpers.block_path(self)}\" class=\"btn btn-default\">View details</a><br>" \
+      "Subscription: #{available? ? 'Available' : 'Unavailable'}"
   end
 
   def w3w_url

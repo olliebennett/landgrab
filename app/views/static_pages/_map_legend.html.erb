@@ -1,0 +1,28 @@
+<% show_current ||= false %>
+
+<ul class="list-inline">
+  <li class="list-inline-item"><span class="block-legend block-legend-available">&nbsp;</span> Available</li>
+  <li class="list-inline-item"><span class="block-legend block-legend-subscribed">&nbsp;</span> Taken</li>
+  <% if show_current %>
+    <li class="list-inline-item"><span class="block-legend block-legend-focussed">&nbsp;</span> Current Block</li>
+  <% end %>
+</ul>
+
+<style>
+.block-legend {
+  height: 30px;
+  width: 30px;
+  border: 2px solid black;
+  display: inline-block;
+  opacity: 0.5;
+}
+.block-legend-focussed {
+  background-color: limegreen;
+}
+.block-legend-available {
+  background-color: #3388ff;
+}
+.block-legend-subscribed {
+  background-color: darkred;
+}
+</style>

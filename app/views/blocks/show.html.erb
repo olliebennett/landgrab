@@ -8,7 +8,7 @@
   </div>
   <div class="col-md-6">
     <%= render 'static_pages/w3w_map',
-        center: [@block.midpoint.y, @block.midpoint.x],
-        blocks: [@block] %>
+        blocks: @block.plot&.blocks || [@block],
+        popup_blocks: [@block] %>
   </div>
 </div>

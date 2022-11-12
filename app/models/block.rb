@@ -40,10 +40,7 @@ class Block < ApplicationRecord
   def popup_content
     return unless map_popup
 
-    "<p>///#{w3w}</p>" \
-      "<code>#{midpoint_rounded.join(',')}</code><br>" \
-      "<a href=\"#{Rails.application.routes.url_helpers.block_path(self)}\" class=\"btn btn-default\">View details</a><br>" \
-      "Subscription: #{available? ? 'Available' : 'Unavailable'}"
+    "///#{w3w}"
   end
 
   def w3w_url

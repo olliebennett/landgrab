@@ -18,7 +18,11 @@ Popup blocks: <%= popup_blocks.map(&:w3w).join(',') %>
 <% blocks = blocks.each { |b| b.map_popup = popup_blocks.include?(b) } %>
 <script>
   function onEachFeature(feature, layer) {
-    if (feature.properties && feature.properties.popupContent) {
+    if (feature.properties && feature.properties.link) {
+      layer.on({
+        click: () => { location = feature.properties.link; }
+      });
+    } else if (feature.properties && feature.properties.popupContent) {
       var popupContent = feature.properties.popupContent;
       layer.bindPopup(popupContent);
     }

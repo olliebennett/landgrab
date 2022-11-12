@@ -28,6 +28,7 @@ class Block < ApplicationRecord
     geojson['properties']['available'] = available?
     geojson['properties']['popupContent'] = popup_content
     geojson['properties']['focussed'] = map_popup
+    geojson['properties']['link'] = Rails.application.routes.url_helpers.block_path(self)
 
     geojson.to_json
   end

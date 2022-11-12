@@ -13,7 +13,6 @@
 
 <% popup_blocks ||= [] %>
 <%= render 'static_pages/map_legend', show_current: popup_blocks.any? %>
-Popup blocks: <%= popup_blocks.map(&:w3w).join(',') %>
 
 <% blocks = blocks.each { |b| b.map_popup = popup_blocks.include?(b) } %>
 <script>

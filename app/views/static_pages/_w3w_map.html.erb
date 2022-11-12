@@ -97,7 +97,8 @@
     // Fit map to plot bounds
     var latlngs = <%= plot.polygon.coordinates[0][0...-1].map(&:reverse) %>;
     var polygon = L.polygon(latlngs); // Note: not adding to map
-    fitMapToPolygon(map, polygon);
+    // fitMapToPolygon(map, polygon);
+    map.fitBounds(polygon.getBounds());
   <% else %>
     // Fit map to block bounds
     map.fitBounds(blocks.getBounds())

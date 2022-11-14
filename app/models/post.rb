@@ -8,6 +8,16 @@ class Post < ApplicationRecord
   validates :title, presence: true
   validates :body, presence: true
 
+  W3W_REGEX = %r{/{3}([a-z]+\.[a-z]+\.[a-z]+)}
+
+  def mentioned_w3w
+    body.scan(W3W_REGEX).uniq.map(&:first)
+  end
+
+  def mentioned_blocks
+    Block.where(w3w: mentioned_w3w)
+  end
+
   # Viewable if user has subscribed to any associated block
   def viewable_by?(user)
     post_associations.any? do |pa|

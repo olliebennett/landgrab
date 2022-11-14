@@ -4,9 +4,10 @@
 
 <div class="row">
   <div class="col-md-8">
-    <%= markdown(@post.body) %>
+    <%= markdown(linkify_blocks(@post.body)) %>
   </div>
   <div class="col-md-4">
     <%= render 'associations', post: @post %>
   </div>
 </div>
+

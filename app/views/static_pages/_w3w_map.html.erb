@@ -1,6 +1,8 @@
 <% popup_blocks ||= [] %>
 <% blocks ||= [] %>
 <% plot ||= nil %>
+<% hide_legend ||= false %>
+<% featured_description ||= 'Current Block' %>
 
 <script src="https://assets.what3words.com/sdk/v3/what3words.js?key=<%= ENV.fetch('WHAT3WORDS_API_KEY') %>"></script>
 
@@ -15,7 +17,11 @@
 
 <div id="map" style="width: 100%; height: 500px" class="mb-3"></div>
 
-<%= render 'static_pages/map_legend', show_current: popup_blocks.any? %>
+<% unless hide_legend %>
+  <%= render 'static_pages/map_legend',
+             show_current: popup_blocks.any?,
+             featured_description: featured_description %>
+<% end %>
 
 <% blocks = blocks.each { |b| b.map_popup = popup_blocks.include?(b) } %>
 <script>

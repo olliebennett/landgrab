@@ -85,4 +85,9 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.default_url_options = { host: ENV.fetch('APP_DOMAIN'), protocol: 'https' }
+
+  config.after_initialize do
+    # Ensure availability of xyz_url helpers in background jobs
+    Rails.application.routes.default_url_options = config.action_mailer.default_url_options
+  end
 end

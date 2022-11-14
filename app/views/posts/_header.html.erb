@@ -3,6 +3,11 @@
   <%= post.created_at.strftime('%e %b %Y %H:%M:%S') %>
   by
   <%= post.author.display_name %>
+  <% if current_user&.admin? %>
+    <span class="float-end">
+      <%= link_to 'Edit', edit_admin_post_path(post) %>
+    </span>
+  <% end %>
 </p>
 
 <hr />

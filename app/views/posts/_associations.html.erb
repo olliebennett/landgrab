@@ -35,7 +35,7 @@
   </p>
   <%= render 'static_pages/w3w_map',
     blocks: block_pas.map(&:postable) + mentioned_blocks,
-    plot: post.post_associations.where(postable_type: 'Plot').first.postable,
+    plot: post.post_associations.where(postable_type: 'Plot').first&.postable,
     popup_blocks: mentioned_blocks,
     featured_description: 'Mentioned' %>
 <% end %>

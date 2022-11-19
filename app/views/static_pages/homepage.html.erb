@@ -15,6 +15,12 @@
   <%= link_to 'Start exploring!', explore_path, class: 'btn btn-primary' %>
 </p>
 
-<%= render 'w3w_map', blocks: Plot.joins(:blocks).distinct.sample.blocks %>
+<% sample_block = Plot.joins(:blocks).distinct.sample %>
+<% if sample_block.present? %>
+  <%= render 'w3w_map', blocks: sample_blocks.blocks %>
+<% else %>
+  There aren't any plots in the system yet...
+<% end %>
+
 
 <!-- GEOS Supported? <%= RGeo::Geos.supported? %> -->

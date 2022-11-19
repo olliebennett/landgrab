@@ -19,6 +19,9 @@ class StaticPagesController < ApplicationController
                 .with_available_blocks
                 .group('plots.id')
                 .sample
+
+    return redirect_to root_url, flash: { danger: 'No plots exist yet so nothing to explore!' } if @plot.nil?
+
     @available_limit = 200
     @available_blocks = @plot.blocks.available.sample(@available_limit)
     @unavailable_blocks = @plot.blocks.unavailable.distinct.sample(250 - @available_blocks.size)

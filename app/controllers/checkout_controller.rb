@@ -2,10 +2,11 @@
 
 class CheckoutController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[success cancel]
+  before_action :verify_env_setup!
 
   STRIPE_PRICE_IDS = {
-    yearly: ENV.fetch('STRIPE_PRICE_ID_BLOCK_YEARLY'),
-    monthly: ENV.fetch('STRIPE_PRICE_ID_BLOCK_MONTHLY')
+    yearly: ENV.fetch('STRIPE_PRICE_ID_BLOCK_YEARLY', nil),
+    monthly: ENV.fetch('STRIPE_PRICE_ID_BLOCK_MONTHLY', nil)
   }.freeze
 
   def checkout
@@ -29,6 +30,10 @@ class CheckoutController < ApplicationController
   def cancel; end
 
   private
+
+  def verify_env_setup!
+    raise 'Stripe Price IDs not configured' if STRIPE_PRICE_IDS.values.any?(:nil?)
+  end
 
   def stripe_checkout_payload(freq)
     price_id = STRIPE_PRICE_IDS.fetch(freq)

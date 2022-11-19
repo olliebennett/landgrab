@@ -12,17 +12,26 @@
       <%= link_to 'Cancel Subscription', "javascript:alert('not implemented; this is all fake money for now')", class: 'btn btn-outline-danger' %>
     <% end %>
   <% elsif user_signed_in? %>
-    <%= form_with(model: Subscription.new(user: current_user, block: block)) do |form| %>
-      <%= form.hidden_field :block_id %>
-      <%= form.submit 'Subscribe (test; no payment)!', class: 'btn btn-secondary' %>
-    <% end %>
-    or
     <%= form_with url: checkout_checkout_path do |form| %>
       <%= form.hidden_field :block, value: block.hashid %>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="freq" id="freq_monthly">
+        <label class="form-check-label" for="freq_monthly">
+          Subscribe for £5 per month
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="freq" id="freq_yearly">
+        <label class="form-check-label" for="freq_yearly">
+          Subscribe for £50 per year (save £10)
+        </label>
+      </div>
       <%= form.submit 'Pay & Subscribe', class: 'btn btn-primary' %>
+      <!--
       <br>
       Use card <code>4242 4242 4242 4242</code>,
       any (future) expiry date, any CVV
+      -->
     <% end %>
   <% else %>
     <p>

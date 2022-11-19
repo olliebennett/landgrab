@@ -3,9 +3,14 @@
 class CheckoutController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[success cancel]
 
+  STRIPE_PRICE_IDS = {
+    yearly: ENV.fetch('STRIPE_PRICE_ID_BLOCK_YEARLY'),
+    monthly: ENV.fetch('STRIPE_PRICE_ID_BLOCK_MONTHLY')
+  }.freeze
+
   def checkout
     @block = Block.find_by_hashid!(params[:block])
-    create_stripe_checkout
+    create_stripe_checkout(params[:freq].to_sym)
 
     redirect_to @stripe_checkout.url,
                 status: :see_other,
@@ -25,12 +30,12 @@ class CheckoutController < ApplicationController
 
   private
 
-  def stripe_checkout_payload
+  def stripe_checkout_payload(freq)
+    price_id = STRIPE_PRICE_IDS.fetch(freq)
     {
       customer_email: current_user.email,
       line_items: [{
-        # Provide the exact Price ID (e.g. pr_1234) of the product you want to sell
-        price: ENV.fetch('STRIPE_PRICE_ID_BLOCK'),
+        price: price_id,
         quantity: 1
       }],
       payment_intent_data: {
@@ -45,7 +50,7 @@ class CheckoutController < ApplicationController
     }
   end
 
-  def create_stripe_checkout
-    @stripe_checkout = Stripe::Checkout::Session.create(stripe_checkout_payload)
+  def create_stripe_checkout(freq)
+    @stripe_checkout = Stripe::Checkout::Session.create(stripe_checkout_payload(freq))
   end
 end

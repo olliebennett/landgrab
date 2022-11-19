@@ -12,6 +12,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    # Required ENV variables
+    env:
+      STRIPE_PRICE_ID_BLOCK_YEARLY: price_a
+      STRIPE_PRICE_ID_BLOCK_MONTHLY: price_b
+
     steps:
     - uses: actions/checkout@v2
 

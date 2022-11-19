@@ -35,3 +35,12 @@ bin/rails s
 ```
 
 Open the site at [localhost:3000](http://localhost:3000)!
+
+## Troubleshooting
+
+Database filling up (> 8,000 rows with no records);
+
+```sh
+heroku pg:psql
+DELETE FROM spatial_ref_sys WHERE srid <> 4326;
+```

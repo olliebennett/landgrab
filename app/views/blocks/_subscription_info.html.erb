@@ -9,7 +9,9 @@
       (since <%= block.subscription.created_at.strftime('%e %b %Y %H:%M:%S') %>).
     </p>
     <% if block.subscription.user == current_user %>
-      <%= link_to 'Cancel Subscription', "javascript:alert('not implemented; this is all fake money for now')", class: 'btn btn-outline-danger' %>
+      <%= link_to 'Cancel Subscription',
+                  "javascript:alert('Please contact us to cancel your subscription')",
+                  class: 'btn btn-outline-danger' %>
     <% end %>
   <% elsif user_signed_in? %>
     <%= form_with url: checkout_checkout_path do |form| %>

@@ -2,12 +2,6 @@
 
 class CheckoutController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[success cancel]
-  before_action :verify_env_setup!
-
-  STRIPE_PRICE_IDS = {
-    yearly: ENV.fetch('STRIPE_PRICE_ID_BLOCK_YEARLY', nil),
-    monthly: ENV.fetch('STRIPE_PRICE_ID_BLOCK_MONTHLY', nil)
-  }.freeze
 
   def checkout
     @block = Block.find_by_hashid!(params[:block])
@@ -31,25 +25,29 @@ class CheckoutController < ApplicationController
 
   private
 
-  def verify_env_setup!
-    raise 'Stripe Price IDs not configured' if STRIPE_PRICE_IDS.values.any?(:nil?)
+  def extract_stripe_price_id(freq)
+    case freq
+    when :monthly
+      ENV.fetch('STRIPE_PRICE_ID_BLOCK_MONTHLY')
+    when :yearly
+      ENV.fetch('STRIPE_PRICE_ID_BLOCK_YEARLY')
+    else
+      raise "Unhandled price frequency: #{freq}"
+    end
   end
 
   def stripe_checkout_payload(freq)
-    price_id = STRIPE_PRICE_IDS.fetch(freq)
     {
       customer_email: current_user.email,
       line_items: [{
-        price: price_id,
+        price: extract_stripe_price_id(freq),
         quantity: 1
       }],
-      payment_intent_data: {
-        metadata: {
-          user: current_user.hashid,
-          blocks: @block.hashid
-        }
+      metadata: {
+        user: current_user.hashid,
+        blocks: @block.hashid
       },
-      mode: 'payment',
+      mode: 'subscription',
       success_url: checkout_success_url(block: @block.hashid),
       cancel_url: checkout_cancel_url
     }

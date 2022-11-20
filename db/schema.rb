@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_08_071746) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_20_214728) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -70,7 +70,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_08_071746) do
     t.bigint "block_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "stripe_id", null: false
     t.index ["block_id"], name: "index_subscriptions_on_block_id"
+    t.index ["stripe_id"], name: "index_subscriptions_on_stripe_id", unique: true
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 

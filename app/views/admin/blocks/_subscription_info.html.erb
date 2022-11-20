@@ -1,6 +1,9 @@
 <p>
   <% if @block.subscription.present? %>
-    This block is already subscribed by
+    This block is already
+    <%= link_to 'subscribed',
+                admin_subscription_path(@block.subscription) %>
+    by
     <%= link_to @block.subscription.user.display_name,
                 admin_user_path(@block.subscription.user) %>
     (since <%= @block.subscription.created_at.strftime('%e %b %Y %H:%M:%S') %>).

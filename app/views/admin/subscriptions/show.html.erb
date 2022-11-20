@@ -6,7 +6,8 @@
       <th>User</th>
       <td>
         <%= link_to @subscription.user.hashid, admin_user_path(@subscription.user) %>
-        <%= ' (you!)' if @subscription.user == current_user %>
+        - <%= @subscription.user.display_name %>
+        <%= " (that's you!)" if @subscription.user == current_user %>
       </td>
     </tr>
     <tr>
@@ -34,6 +35,13 @@
         <% else %>
           NOT PRESENT
         <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th>Stripe ID</th>
+      <td>
+        <%= link_to @subscription.stripe_id,
+                    "#{ENV.fetch('STRIPE_DASHBOARD_URL')}/subscriptions/#{@subscription.stripe_id}" %>
       </td>
     </tr>
     <tr>

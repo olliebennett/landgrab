@@ -3,8 +3,8 @@
     <tr>
       <th>Subscription ID</th>
       <th>User</th>
-      <th>Block ID</th>
-      <th>What3Words</th>
+      <th>Block</th>
+      <th>Stripe ID</th>
       <th>Created</th>
     </tr>
   </thead>
@@ -17,8 +17,11 @@
           <%= link_to subscription.user.hashid, admin_user_path(subscription.user) %>
           (<%= subscription.user.email %>)
         </td>
-        <td><%= link_to subscription.block.hashid, admin_block_path(subscription.block) %></td>
-        <td><%= link_to subscription.block.w3w, subscription.block.w3w_url %></td>
+        <td><%= link_to subscription.block.w3w, admin_block_path(subscription.block) %></td>
+        <td>
+          <%= link_to subscription.stripe_id,
+                        "#{ENV.fetch('STRIPE_DASHBOARD_URL')}/subscriptions/#{subscription.stripe_id}" %>
+        </td>
         <td><%= subscription.created_at.strftime('%e %b %Y %H:%M:%S') %></td>
       </tr>
     <% end %>

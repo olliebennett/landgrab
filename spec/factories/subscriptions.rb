@@ -4,5 +4,7 @@ FactoryBot.define do
   factory :subscription do
     block
     user
+
+    sequence(:stripe_id) { |n| "sub_#{n}" }
   end
 end

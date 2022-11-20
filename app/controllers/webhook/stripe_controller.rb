@@ -9,8 +9,12 @@ module Webhook
       @event = parse_event
 
       case @event.type
-      when 'payment_intent.succeeded'
-        payment_intent_succeeded
+      when 'checkout.session.completed'
+        checkout_session_completed
+      when 'invoice.paid'
+        # TODO: invoice_paid
+      when 'invoice.payment_failed'
+        # TODO: invoice_payment_failed
       else
         raise "Unhandled event type: #{@event.type}"
       end
@@ -20,16 +24,30 @@ module Webhook
 
     private
 
-    def payment_intent_succeeded
-      payment_intent = @event.data.object
+    def checkout_session_completed
+      checkout_session = @event.data.object
 
-      user = User.find_by_hashid!(payment_intent.metadata.user)
-      block = Block.find_by_hashid(payment_intent.metadata.blocks) # TODO: Handle multiple via CSV?
+      user = extract_user(checkout_session)
+      block = Block.find_by_hashid(checkout_session.metadata.block)
+
+      # TODO: Assign subscription ID
+      # sub_id = checkout_session.subscription
+
       # TODO: Check block still available?
 
       Subscription.create(user:, block:)
 
       # puts 'PaymentIntent was successful!'
+    end
+
+    def extract_user(obj)
+      cus_id = obj.customer
+      raise 'Missing customer ID from webhook body' if cus_id.blank?
+
+      user = User.find_by(stripe_customer_id: cus_id)
+      raise "Found no user with Stripe Customer ID #{cus_id}" if user.nil?
+
+      user
     end
 
     def parse_event

@@ -38,14 +38,13 @@ class CheckoutController < ApplicationController
 
   def stripe_checkout_payload(freq)
     {
-      customer_email: current_user.email,
+      customer: current_user.stripe_customer_id,
       line_items: [{
         price: extract_stripe_price_id(freq),
         quantity: 1
       }],
       metadata: {
-        user: current_user.hashid,
-        blocks: @block.hashid
+        block: @block.hashid
       },
       mode: 'subscription',
       success_url: checkout_success_url(block: @block.hashid),

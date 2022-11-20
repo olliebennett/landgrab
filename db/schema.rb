@@ -10,20 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_20_214728) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_20_225325) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
-
-  create_table "blocks", force: :cascade do |t|
-    t.geometry "southwest", limit: {:srid=>0, :type=>"st_point"}, null: false
-    t.geometry "northeast", limit: {:srid=>0, :type=>"st_point"}, null: false
-    t.string "w3w", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "plot_id"
-    t.index ["plot_id"], name: "index_blocks_on_plot_id"
-  end
 
   create_table "plots", force: :cascade do |t|
     t.string "title", null: false
@@ -67,13 +57,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_20_214728) do
 
   create_table "subscriptions", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "block_id", null: false
+    t.bigint "tile_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "stripe_id", null: false
-    t.index ["block_id"], name: "index_subscriptions_on_block_id"
     t.index ["stripe_id"], name: "index_subscriptions_on_stripe_id", unique: true
+    t.index ["tile_id"], name: "index_subscriptions_on_tile_id"
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
+  end
+
+  create_table "tiles", force: :cascade do |t|
+    t.geometry "southwest", limit: {:srid=>0, :type=>"st_point"}, null: false
+    t.geometry "northeast", limit: {:srid=>0, :type=>"st_point"}, null: false
+    t.string "w3w", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "plot_id"
+    t.index ["plot_id"], name: "index_tiles_on_plot_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -93,10 +93,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_20_214728) do
     t.index ["stripe_customer_id"], name: "index_users_on_stripe_customer_id", unique: true
   end
 
-  add_foreign_key "blocks", "plots"
   add_foreign_key "plots", "projects"
   add_foreign_key "post_associations", "posts"
   add_foreign_key "posts", "users", column: "author_id"
-  add_foreign_key "subscriptions", "blocks"
+  add_foreign_key "subscriptions", "tiles"
   add_foreign_key "subscriptions", "users"
+  add_foreign_key "tiles", "plots"
 end

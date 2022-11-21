@@ -29,36 +29,32 @@
     </div>
   </div>
 
-  <% if form.object.new_record? %>
-    <div class="row mb-3 g-3 align-items-center">
-      <div class="col-sm-2">
-        <%= form.label :polygon, class: 'col-form-label' %>
-      </div>
-      <div class="col-sm-3">
-        <%= form.text_field :polygon, readonly: true, class: 'form-control', aria: { describedby: 'polygonHelp' } %>
-      </div>
-      <div class="col-sm-7">
-        <span id="polygonHelp" class="form-text">
-          Use the polygon icon on the map below to set this.
-        </span>
-      </div>
+  <div class="row mb-3 g-3 align-items-center">
+    <div class="col-sm-2">
+      <%= form.label :polygon, class: 'col-form-label' %>
     </div>
-    <div class="row mb-3 g-3 align-items-center">
-      <div class="col-sm-2">
-        <label class="col-form-label">Approx Area</label>
-      </div>
-      <div class="col-sm-3">
-        <%= text_field_tag 'approx_area', nil, { readonly: true, class: 'form-control' } %>
-      </div>
-      <div class="col-sm-7">
-        <span id="polygonHelp" class="form-text">
-          Will be confirmed once polygon is created.
-        </span>
-      </div>
+    <div class="col-sm-3">
+      <%= form.text_field :polygon, readonly: true, class: 'form-control', aria: { describedby: 'polygonHelp' } %>
     </div>
-  <% else %>
-    <p>It's not possible to edit the plot's area.</p>
-  <% end %>
+    <div class="col-sm-7">
+      <span id="polygonHelp" class="form-text">
+        Use the polygon icon on the map below to set this.
+      </span>
+    </div>
+  </div>
+  <div class="row mb-3 g-3 align-items-center">
+    <div class="col-sm-2">
+      <label class="col-form-label">Approx Area</label>
+    </div>
+    <div class="col-sm-3">
+      <%= text_field_tag 'approx_area', nil, { readonly: true, class: 'form-control' } %>
+    </div>
+    <div class="col-sm-7">
+      <span id="polygonHelp" class="form-text">
+        Will be confirmed once polygon is created.
+      </span>
+    </div>
+  </div>
 
   <%= form.submit class: 'btn btn-primary' %>
 <% end %>

@@ -1,3 +1,5 @@
+<% edit_mode ||= false %>
+
 <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"/>
 
@@ -92,22 +94,6 @@
 
   <% if plot.polygon.nil? # i.e. new record and no invalid polygon set %>
     map.setView(<%= Plot::DEFAULT_COORDS %>, 19);
-    // FeatureGroup is to store editable layers
-    var drawnItems = new L.FeatureGroup();
-    map.addLayer(drawnItems);
-
-    var drawControl = new L.Control.Draw({
-      draw: {
-        polyline: false,
-        rectangle: false,
-        circle: false,
-        circlemarker: false,
-        marker: false
-      },
-      edit: false
-    });
-
-    map.addControl(drawControl);
 
     map.on(L.Draw.Event.CREATED, function (e) {
       var type = e.layerType,
@@ -124,7 +110,7 @@
   <% else # polygon is present %>
     // Prepare lat/lng points: x,y converted to y,x and excluding final (dupe) point
     var latlngs = <%= plot.polygon.coordinates[0][0...-1].map(&:reverse) %>;
-    var polygon = renderPolygon(map, latlngs, '<%= plot.new_record? ? 'blue' : 'red' %>', <%= plot.new_record? %>);
+    var polygon = renderPolygon(map, latlngs, '<%= edit_mode ? 'blue' : 'red' %>', <%= edit_mode %>);
 
     <% plot.overlapping_polygons.map do |op| %>
       renderPolygon(map, <%= op.polygon.coordinates[0][0...-1].map(&:reverse) %>, 'black', false)

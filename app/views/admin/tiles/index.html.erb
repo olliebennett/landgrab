@@ -1,9 +1,9 @@
-<h1><%= admin_title Block %></h1>
+<h1><%= admin_title Tile %></h1>
 
 <%= render 'filters' %>
 
 <p>
-  <%= page_entries_info @blocks %>
+  <%= page_entries_info @tiles %>
   <% if @plot.present? %>
     from the <%= link_to @plot.title, admin_plot_path(@plot) %> plot
   <% end %>
@@ -14,6 +14,6 @@
 
 <%= render 'table' %>
 
-<%= paginate @blocks, theme: 'bootstrap-5' %>
+<%= paginate @tiles, theme: 'bootstrap-5' %>
 
-<%= render 'static_pages/w3w_map', blocks: @blocks %>
+<%= render 'static_pages/w3w_map', tiles: @tiles %>

@@ -1,31 +1,31 @@
 <h1><%= title 'Explore' %></h1>
 
 <p>
-  We've randomly selected a plot with blocks available for adopting -
+  We've randomly selected a plot with tiles available for adopting -
   <%= link_to @plot.title, plot_path(@plot) %>!
 </p>
 
-<% if @available_blocks.size == 1 %>
+<% if @available_tiles.size == 1 %>
   <p>
-    There is only one block remaining in this plot -
-    <%= link_to 'view it', block_path(@available_blocks.sample) %>
+    There is only one tile remaining in this plot -
+    <%= link_to 'view it', tile_path(@available_tiles.sample) %>
   </p>
 <% else %>
   <p>
-    <% if @available_blocks.size < @available_limit %>
-      There are only <%= @available_blocks.size %> available blocks remaining in this plot.
+    <% if @available_tiles.size < @available_limit %>
+      There are only <%= @available_tiles.size %> available tiles remaining in this plot.
     <% else %>
-      Showing a selection of remaining blocks in this plot.
+      Showing a selection of remaining tiles in this plot.
     <% end %>
   </p>
   <p>
-    Click a block on the map below to see subscription options,
-    or <%= link_to 'choose one at random', block_path(@available_blocks.sample) %>
+    Click a tile on the map below to see subscription options,
+    or <%= link_to 'choose one at random', tile_path(@available_tiles.sample) %>
   </p>
 <% end %>
 
-<% if @unavailable_blocks.any? %>
-  <p>Some unavailable (already adopted) blocks are shown in red on the map</p>
+<% if @unavailable_tiles.any? %>
+  <p>Some unavailable (already adopted) tiles are shown in red on the map</p>
 <% end %>
 
-<%= render 'static_pages/w3w_map', blocks: @available_blocks.concat(@unavailable_blocks) %>
+<%= render 'static_pages/w3w_map', tiles: @available_tiles.concat(@unavailable_tiles) %>

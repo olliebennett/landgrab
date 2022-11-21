@@ -28,13 +28,13 @@ module Webhook
       checkout_session = @event.data.object
 
       user = extract_user(checkout_session)
-      block = Block.find_by_hashid(checkout_session.metadata.block)
+      tile = Tile.find_by_hashid(checkout_session.metadata.tile)
 
       sub_id = checkout_session.subscription
 
-      # TODO: Check block still available?
+      # TODO: Check tile still available?
 
-      Subscription.create!(user:, block:, stripe_id: sub_id)
+      Subscription.create!(user:, tile:, stripe_id: sub_id)
     end
 
     def extract_user(obj)

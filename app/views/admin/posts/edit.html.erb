@@ -15,8 +15,8 @@
           <%= link_to "Project: #{pa.postable.title}", admin_project_path(pa.postable) %>
         <% when 'Plot' %>
           <%= link_to "Plot: #{pa.postable.title}", admin_plot_path(pa.postable) %>
-        <% when 'Block' %>
-          <%= link_to "Block: #{pa.postable.w3w}", admin_block_path(pa.postable) %>
+        <% when 'Tile' %>
+          <%= link_to "Tile: #{pa.postable.w3w}", admin_tile_path(pa.postable) %>
         <% else %>
           <% raise "Unhandled post association type: #{pa.postable_type}" %>
         <% end %>

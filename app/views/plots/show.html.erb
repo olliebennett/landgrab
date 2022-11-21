@@ -6,11 +6,11 @@
   <div class="col-md-6 mb-3">
     <%= render 'details', plot: @plot %>
     <p>
-      Select a block from the map to subscribe or view details.
+      Select a tile from the map to subscribe or view details.
     </p>
     <%= render 'posts', plot: @plot %>
   </div>
   <div class="col-md-6">
-    <%= render 'static_pages/w3w_map', blocks: @plot.blocks_for_map %>
+    <%= render 'static_pages/w3w_map', tiles: @plot.tiles_for_map %>
   </div>
 </div>

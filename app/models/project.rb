@@ -9,12 +9,12 @@ class Project < ApplicationRecord
   validates :title, presence: true
 
   def viewable_by?(user)
-    blocks_subscribed_by(user).any?
+    tiles_subscribed_by(user).any?
   end
 
-  def blocks_subscribed_by(user)
-    Block.joins(subscription: :user, plot: :project)
-         .where(projects: { id: })
-         .where(users: { id: user.id })
+  def tiles_subscribed_by(user)
+    Tile.joins(subscription: :user, plot: :project)
+        .where(projects: { id: })
+        .where(users: { id: user.id })
   end
 end

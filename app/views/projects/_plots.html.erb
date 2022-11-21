@@ -2,9 +2,9 @@
   <p>
     <%= project.title %> consists of
     <%= pluralize(project.plots.size, 'plot') %>
-    broken into 3x3m squares ("blocks") of land.
+    broken into 3x3m squares ("tiles") of land.
     In order to support the restoration of the land,
-    each block is individually available to sponsor for a small fee.
+    each tile is individually available to sponsor for a small fee.
   </p>
   <div class="row">
     <% project.plots.each do |plot| %>

@@ -14,11 +14,11 @@ class Post < ApplicationRecord
     body.scan(W3W_REGEX).uniq.map(&:first)
   end
 
-  def mentioned_blocks
-    Block.where(w3w: mentioned_w3w)
+  def mentioned_tiles
+    Tile.where(w3w: mentioned_w3w)
   end
 
-  # Viewable if user has subscribed to any associated block
+  # Viewable if user has subscribed to any associated tile
   def viewable_by?(user)
     post_associations.any? do |pa|
       pa.postable.viewable_by?(user)

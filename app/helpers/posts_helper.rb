@@ -9,13 +9,13 @@ module PostsHelper
     # rubocop:enable Rails/OutputSafety
   end
 
-  def linkify_blocks(string)
-    mentioned_blocks = Post.new(body: string).mentioned_blocks
+  def linkify_tiles(string)
+    mentioned_tiles = Post.new(body: string).mentioned_tiles
 
-    mentioned_blocks.each do |block|
+    mentioned_tiles.each do |tile|
       string.gsub!(
-        %r{///(#{block.w3w})},
-        "[///\\1](#{Rails.application.routes.url_helpers.block_url(block)})"
+        %r{///(#{tile.w3w})},
+        "[///\\1](#{Rails.application.routes.url_helpers.tile_url(tile)})"
       )
     end
 

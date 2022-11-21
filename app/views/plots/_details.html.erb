@@ -12,12 +12,12 @@ covers <%= @plot.area_formatted_acres %>
 
 <p>
 There are
-<%= @plot.non_subscribed_blocks.size %>
-blocks still available to subscribe to, out of
-<%= @plot.blocks.size %>
+<%= @plot.non_subscribed_tiles.size %>
+tiles still available to subscribe to, out of
+<%= @plot.tiles.size %>
 total in the plot
-<% if @plot.blocks.size.positive? %>
-  - <%= link_to 'view all blocks', blocks_path(plot: @plot) %>
+<% if @plot.tiles.size.positive? %>
+  - <%= link_to 'view all tiles', tiles_path(plot: @plot) %>
 <% end %>
 </p>
 

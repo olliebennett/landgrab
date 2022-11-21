@@ -14,32 +14,32 @@ RSpec.describe Project do
 
     let(:user) { create(:user) }
     let(:plot) { create(:plot, project:) }
-    let(:block) { create(:block, plot:) }
-    let(:subscription) { create(:subscription, user:, block:) }
+    let(:tile) { create(:tile, plot:) }
+    let(:subscription) { create(:subscription, user:, tile:) }
 
     before { subscription }
 
-    it 'returns true if block subscribed' do
+    it 'returns true if tile subscribed' do
       expect(viewable).to be true
     end
 
-    it 'returns false if block unsubscribed' do
+    it 'returns false if tile unsubscribed' do
       subscription.destroy
-      block.reload
+      tile.reload
 
       expect(viewable).to be false
     end
 
-    it 'returns false if block subscribed by another user' do
+    it 'returns false if tile subscribed by another user' do
       subscription.update!(user: create(:user))
-      block.reload
+      tile.reload
 
       expect(viewable).to be false
     end
 
-    it 'returns false if block assigned to different plot' do
-      block.update!(plot: create(:plot))
-      block.reload
+    it 'returns false if tile assigned to different plot' do
+      tile.update!(plot: create(:plot))
+      tile.reload
 
       expect(viewable).to be false
     end

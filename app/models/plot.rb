@@ -2,7 +2,7 @@
 
 class Plot < ApplicationRecord
   belongs_to :project, optional: true
-  has_many :blocks, dependent: :nullify
+  has_many :tiles, dependent: :nullify
   has_many :post_associations, as: :postable, inverse_of: :postable, dependent: :restrict_with_exception
   has_many :posts, through: :post_associations
 
@@ -16,7 +16,7 @@ class Plot < ApplicationRecord
 
   auto_strip_attributes :title, squish: true
 
-  scope :with_available_blocks, -> { left_joins(blocks: :subscription).where(subscription: { id: nil }) }
+  scope :with_available_tiles, -> { left_joins(tiles: :subscription).where(subscription: { id: nil }) }
 
   MAX_BOUNDING_BOX_DIMENSION = 0.005
   DEFAULT_COORDS = [51.4778, -0.0014].freeze # Greenwich Observatory
@@ -73,8 +73,8 @@ class Plot < ApplicationRecord
     end.to_s.delete('"')
   end
 
-  def non_subscribed_blocks
-    blocks.where.missing(:subscription)
+  def non_subscribed_tiles
+    tiles.where.missing(:subscription)
   end
 
   def validate_bounding_box_dimensions
@@ -101,17 +101,17 @@ class Plot < ApplicationRecord
   end
 
   def viewable_by?(user)
-    blocks_subscribed_by(user).any?
+    tiles_subscribed_by(user).any?
   end
 
-  def blocks_subscribed_by(user)
-    blocks.joins(subscription: :user).where(users: { id: user.id })
+  def tiles_subscribed_by(user)
+    tiles.joins(subscription: :user).where(users: { id: user.id })
   end
 
-  def blocks_for_map(include_block: nil)
-    # returns 250 (or 251) blocks, sampling a balance of subscribed vs avaliable blocks
-    subscribed = blocks.includes(:subscription).unavailable.sample(100)
-    available = blocks.includes(:subscription).where.not(id: subscribed.map(&:id)).sample(150)
-    ([include_block] + subscribed + available).compact.uniq
+  def tiles_for_map(include_tile: nil)
+    # returns 250 (or 251) tiles, sampling a balance of subscribed vs avaliable tiles
+    subscribed = tiles.includes(:subscription).unavailable.sample(100)
+    available = tiles.includes(:subscription).where.not(id: subscribed.map(&:id)).sample(150)
+    ([include_tile] + subscribed + available).compact.uniq
   end
 end

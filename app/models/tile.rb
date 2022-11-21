@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Block < ApplicationRecord
+class Tile < ApplicationRecord
   after_initialize :sanitize_w3w
 
   attr_accessor :map_popup
@@ -28,7 +28,7 @@ class Block < ApplicationRecord
     geojson['properties']['available'] = available?
     geojson['properties']['popupContent'] = popup_content
     geojson['properties']['focussed'] = map_popup
-    geojson['properties']['link'] = Rails.application.routes.url_helpers.block_path(self)
+    geojson['properties']['link'] = Rails.application.routes.url_helpers.tile_path(self)
 
     geojson.to_json
   end

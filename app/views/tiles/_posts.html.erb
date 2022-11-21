@@ -1,5 +1,5 @@
 <h2 class="mt-3">Recent updates</h2>
 
 <%= render 'posts/list_group',
-           posts: [block, block.plot, block.plot&.project].compact.map(&:posts).flatten.uniq,
+           posts: [tile, tile.plot, tile.plot&.project].compact.map(&:posts).flatten.uniq,
            show_preview: true %>

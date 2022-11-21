@@ -28,8 +28,8 @@ module Admin
             Project.decode_id(tmp[:postable_id])
           when 'Plot'
             Plot.decode_id(tmp[:postable_id])
-          when 'Block'
-            Block.decode_id(tmp[:postable_id])
+          when 'Tile'
+            Tile.decode_id(tmp[:postable_id])
           else
             raise "Unexpected postable_type: #{tmp[:postable_type]}"
           end

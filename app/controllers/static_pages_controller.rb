@@ -7,23 +7,23 @@ class StaticPagesController < ApplicationController
 
   def homepage
     if params[:center].present?
-      block = Block.find_by(w3w: params[:center])
-      @center = [block.midpoint.y, block.midpoint.x] if block
+      tile = Tile.find_by(w3w: params[:center])
+      @center = [tile.midpoint.y, tile.midpoint.x] if tile
     else
       @center = Plot::DEFAULT_COORDS
     end
   end
 
   def explore
-    @plot = Plot.select('plots.id, plots.title, COUNT(blocks)')
-                .with_available_blocks
+    @plot = Plot.select('plots.id, plots.title, COUNT(tiles)')
+                .with_available_tiles
                 .group('plots.id')
                 .sample
 
     return redirect_to root_url, flash: { danger: 'No plots exist yet so nothing to explore!' } if @plot.nil?
 
     @available_limit = 200
-    @available_blocks = @plot.blocks.available.sample(@available_limit)
-    @unavailable_blocks = @plot.blocks.unavailable.distinct.sample(250 - @available_blocks.size)
+    @available_tiles = @plot.tiles.available.sample(@available_limit)
+    @unavailable_tiles = @plot.tiles.unavailable.distinct.sample(250 - @available_tiles.size)
   end
 end

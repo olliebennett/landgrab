@@ -1,17 +1,17 @@
 <table class="table">
   <tbody>
     <tr>
-      <th>Block</th>
+      <th>Tile</th>
       <td>
-        <%= link_to @subscription.block.hashid, block_path(@subscription.block) %>
-        - <%= content_tag(:code, @subscription.block.w3w) %>
+        <%= link_to @subscription.tile.hashid, tile_path(@subscription.tile) %>
+        - <%= content_tag(:code, @subscription.tile.w3w) %>
       </td>
     </tr>
     <tr>
       <th>Project</th>
       <td>
-        <% if @subscription.block.plot&.project.present? %>
-          <%= link_to @subscription.block.plot.project.title, project_path(@subscription.block.plot.project) %>
+        <% if @subscription.tile.plot&.project.present? %>
+          <%= link_to @subscription.tile.plot.project.title, project_path(@subscription.tile.plot.project) %>
         <% else %>
           NOT PRESENT
         <% end %>
@@ -20,8 +20,8 @@
     <tr>
       <th>Plot</th>
       <td>
-        <% if @subscription.block.plot.present? %>
-          <%= link_to @subscription.block.plot.title, plot_path(@subscription.block.plot) %>
+        <% if @subscription.tile.plot.present? %>
+          <%= link_to @subscription.tile.plot.title, plot_path(@subscription.tile.plot) %>
         <% else %>
           NOT PRESENT
         <% end %>

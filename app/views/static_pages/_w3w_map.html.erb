@@ -1,8 +1,8 @@
-<% popup_blocks ||= [] %>
-<% blocks ||= [] %>
+<% popup_tiles ||= [] %>
+<% tiles ||= [] %>
 <% plot ||= nil %>
 <% hide_legend ||= false %>
-<% featured_description ||= 'Current Block' %>
+<% featured_description ||= 'Current Tile' %>
 
 <script src="https://assets.what3words.com/sdk/v3/what3words.js?key=<%= ENV.fetch('WHAT3WORDS_API_KEY') %>"></script>
 
@@ -19,11 +19,11 @@
 
 <% unless hide_legend %>
   <%= render 'static_pages/map_legend',
-             show_current: popup_blocks.any?,
+             show_current: popup_tiles.any?,
              featured_description: featured_description %>
 <% end %>
 
-<% blocks = blocks.each { |b| b.map_popup = popup_blocks.include?(b) } %>
+<% tiles = tiles.each { |b| b.map_popup = popup_tiles.include?(b) } %>
 <script>
   function onEachFeature(feature, layer) {
     if (feature.properties && feature.properties.popupContent) {
@@ -36,7 +36,7 @@
     }
   }
 
-  function blockStyle(feature) {
+  function tileStyle(feature) {
     const base = { color: 'black', weight: 2 }
     // Style docs: https://leafletjs.com/reference.html#path-option
     if (feature.geometry.properties && feature.geometry.properties.popupContent) {
@@ -85,8 +85,8 @@
 
   L.control.layers(baseMaps, {}, { position: 'bottomleft' }).addTo(map);
 
-  var allBlocksGeoJson = [<%= blocks.map(&:to_geojson).join(', ').html_safe %>];
-  var blocks = L.geoJSON(allBlocksGeoJson, { onEachFeature: onEachFeature, style: blockStyle }).addTo(map);
+  var allTilesGeoJson = [<%= tiles.map(&:to_geojson).join(', ').html_safe %>];
+  var tiles = L.geoJSON(allTilesGeoJson, { onEachFeature: onEachFeature, style: tileStyle }).addTo(map);
 
   <% if plot.present? %>
     const fitMapToPolygon = (map, polygon) => {
@@ -106,8 +106,8 @@
     // fitMapToPolygon(map, polygon);
     map.fitBounds(polygon.getBounds());
   <% else %>
-    // Fit map to block bounds
-    map.fitBounds(blocks.getBounds())
+    // Fit map to tile bounds
+    map.fitBounds(tiles.getBounds())
   <% end %>
 
   function drawGrid() {

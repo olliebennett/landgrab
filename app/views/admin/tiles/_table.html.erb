@@ -1,0 +1,36 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>South West</th>
+      <th>North East</th>
+      <th>What3Words</th>
+      <% if @plot.nil? %>
+        <th>Plot</th>
+      <% end %>
+      <th>Subscriber</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody style="font-variant-numeric: tabular-nums;">
+    <% @tiles.each do |tile| %>
+      <tr>
+        <td><%= tile.southwest_rounded[0] %>,&nbsp;<%= tile.southwest_rounded[1] %></td>
+        <td><%= tile.northeast_rounded[0] %>,&nbsp;<%= tile.northeast_rounded[1] %></td>
+        <td><%= content_tag(:code, tile.w3w) %></td>
+        <% if @plot.nil? %>
+          <td>
+            <% if tile.plot.present? %>
+              <%= link_to tile.plot.title, admin_plot_path(tile.plot) %>
+            <% else %>
+              -
+            <% end %>
+          </td>
+        <% end %>
+        <td><%= tile.subscription&.user&.email || '-' %></td>
+        <td><%= link_to 'W3W', tile.w3w_url %></td>
+        <td><%= link_to 'Details', admin_tile_path(tile) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

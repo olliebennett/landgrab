@@ -10,10 +10,10 @@
     <h5 class="card-title"><%= plot.title %></h5>
 
     <p class="card-text">
-      <%= plot.non_subscribed_blocks.size %>
+      <%= plot.non_subscribed_tiles.size %>
       of
-      <%= plot.blocks.size %>
-      blocks available
+      <%= plot.tiles.size %>
+      tiles available
     </p>
     <%= link_to 'View Plot',
                 plot_path(plot),

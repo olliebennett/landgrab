@@ -13,7 +13,7 @@ class SubscriptionsController < ApplicationController
   def create
     @subscription = current_user.subscriptions.new(subscription_params)
     if @subscription.save
-      redirect_to block_url(@subscription.block), notice: 'You successfully subscribed to this block!'
+      redirect_to tile_url(@subscription.tile), notice: 'You successfully subscribed to this tile!'
     else
       render :new, status: :unprocessable_entity
     end
@@ -26,6 +26,6 @@ class SubscriptionsController < ApplicationController
   end
 
   def subscription_params
-    params.require(:subscription).permit(:block_id)
+    params.require(:subscription).permit(:tile_id)
   end
 end

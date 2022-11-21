@@ -15,9 +15,9 @@
   <%= link_to 'Start exploring!', explore_path, class: 'btn btn-primary' %>
 </p>
 
-<% sample_plot = Plot.joins(:blocks).distinct.sample %>
+<% sample_plot = Plot.joins(:tiles).distinct.sample %>
 <% if sample_plot.present? %>
-  <%= render 'w3w_map', blocks: sample_plot.blocks %>
+  <%= render 'w3w_map', tiles: sample_plot.tiles %>
 <% else %>
   There aren't any plots in the system yet...
 <% end %>

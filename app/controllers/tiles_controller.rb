@@ -1,22 +1,22 @@
 # frozen_string_literal: true
 
-class BlocksController < ApplicationController
-  before_action :set_block, only: %i[show]
+class TilesController < ApplicationController
+  before_action :set_tile, only: %i[show]
   before_action :ensure_stripe_enrollment, only: %i[show]
   skip_before_action :authenticate_user!, only: %i[index show]
 
   def index
     @plot = Plot.find_by_hashid!(params[:plot]) if params[:plot].present?
     if @plot.present?
-      @blocks = @plot.blocks.order(id: :desc).includes(:subscription).page(params[:page])
+      @tiles = @plot.tiles.order(id: :desc).includes(:subscription).page(params[:page])
       @center = [@plot.centroid_coords.y, @plot.centroid_coords.x]
     else
-      @blocks = Block.order(id: :desc).includes(:plot, :subscription).page(params[:page])
-      if @blocks.none?
+      @tiles = Tile.order(id: :desc).includes(:plot, :subscription).page(params[:page])
+      if @tiles.none?
         @center = Plot::DEFAULT_COORDS
       else
-        mean_x = @blocks.sum { |b| b.midpoint.x } / @blocks.size
-        mean_y = @blocks.sum { |b| b.midpoint.y } / @blocks.size
+        mean_x = @tiles.sum { |b| b.midpoint.x } / @tiles.size
+        mean_y = @tiles.sum { |b| b.midpoint.y } / @tiles.size
 
         @center = [mean_y, mean_x]
       end
@@ -26,13 +26,13 @@ class BlocksController < ApplicationController
   def show
     respond_to do |format|
       format.html { render :show }
-      format.json { render json: @block.to_geojson }
+      format.json { render json: @tile.to_geojson }
     end
   end
 
   private
 
-  def set_block
-    @block = Block.find_by_hashid!(params[:id])
+  def set_tile
+    @tile = Tile.find_by_hashid!(params[:id])
   end
 end

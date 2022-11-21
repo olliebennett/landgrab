@@ -3,7 +3,7 @@
     <tr>
       <th>Subscription ID</th>
       <th>User</th>
-      <th>Block</th>
+      <th>Tile</th>
       <th>Stripe ID</th>
       <th>Created</th>
     </tr>
@@ -17,7 +17,7 @@
           <%= link_to subscription.user.hashid, admin_user_path(subscription.user) %>
           (<%= subscription.user.email %>)
         </td>
-        <td><%= link_to subscription.block.w3w, admin_block_path(subscription.block) %></td>
+        <td><%= link_to subscription.tile.w3w, admin_tile_path(subscription.tile) %></td>
         <td>
           <%= link_to subscription.stripe_id,
                         "#{ENV.fetch('STRIPE_DASHBOARD_URL')}/subscriptions/#{subscription.stripe_id}" %>

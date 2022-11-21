@@ -1,10 +1,10 @@
-<%= form_with(model: block, local: true) do |form| %>
-  <% if block.errors.any? %>
+<%= form_with(model: tile, local: true) do |form| %>
+  <% if tile.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(block.errors.count, "error") %> prohibited this block from being saved:</h2>
+      <h2><%= pluralize(tile.errors.count, "error") %> prohibited this tile from being saved:</h2>
 
       <ul>
-        <% block.errors.full_messages.each do |message| %>
+        <% tile.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>

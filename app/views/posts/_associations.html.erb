@@ -1,11 +1,11 @@
 <% project_pas = post.post_associations.where(postable_type: 'Project') %>
 <% plot_pas = post.post_associations.where(postable_type: 'Plot') %>
-<% block_pas = post.post_associations.where(postable_type: 'Block') %>
-<% linked_blocks = block_pas.map(&:postable) %>
+<% tile_pas = post.post_associations.where(postable_type: 'Tile') %>
+<% linked_tiles = tile_pas.map(&:postable) %>
 <h2 class="mt-3">
   Associated Places
 </h2>
-<% if [project_pas, plot_pas, block_pas].all?(&:empty?) %>
+<% if [project_pas, plot_pas, tile_pas].all?(&:empty?) %>
   <p>This post isn't linked to any places yet.</p>
 <% end %>
 <% if project_pas.any? %>
@@ -14,28 +14,28 @@
   <% end %>
 <% end %>
 
-<% mentioned_blocks = post.mentioned_blocks %>
-<% if mentioned_blocks.any? || linked_blocks.any? %>
+<% mentioned_tiles = post.mentioned_tiles %>
+<% if mentioned_tiles.any? || linked_tiles.any? %>
   <p>
-    <% if mentioned_blocks.any? && (linked_blocks - mentioned_blocks).any? %>
+    <% if mentioned_tiles.any? && (linked_tiles - mentioned_tiles).any? %>
       This post mentions
-      <%= pluralize(mentioned_blocks.size, 'block') %>
+      <%= pluralize(mentioned_tiles.size, 'tile') %>
       and is associated with
-      <%= pluralize((linked_blocks - mentioned_blocks).size, 'additional block') %>,
+      <%= pluralize((linked_tiles - mentioned_tiles).size, 'additional tile') %>,
       shown on the map below.
-    <% elsif mentioned_blocks.any? %>
+    <% elsif mentioned_tiles.any? %>
       This post mentions
-      <%= pluralize(mentioned_blocks.size, 'block') %>,
+      <%= pluralize(mentioned_tiles.size, 'tile') %>,
       shown on the map below.
-    <% elsif linked_blocks.any? %>
+    <% elsif linked_tiles.any? %>
       This post is associated with
-      <%= pluralize(linked_blocks.size, 'block') %>,
+      <%= pluralize(linked_tiles.size, 'tile') %>,
       shown on the map below.
     <% end %>
   </p>
   <%= render 'static_pages/w3w_map',
-    blocks: block_pas.map(&:postable) + mentioned_blocks,
+    tiles: tile_pas.map(&:postable) + mentioned_tiles,
     plot: post.post_associations.where(postable_type: 'Plot').first&.postable,
-    popup_blocks: mentioned_blocks,
+    popup_tiles: mentioned_tiles,
     featured_description: 'Mentioned' %>
 <% end %>

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   root to: 'static_pages#homepage'
 
-  resources :blocks, only: %i[index show]
+  resources :tiles, only: %i[index show]
   resources :plots, only: %i[index show]
   resources :posts, only: %i[show]
   resources :projects, only: %i[index show]
@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'dashboard#dashboard', as: :dashboard
 
-    resources :blocks, only: %i[create index show new]
+    resources :tiles, only: %i[create index show new]
     resources :plots, only: %i[create index show new edit update]
     resources :posts, only: %i[create index show new edit update]
     resources :post_associations, only: %i[create]

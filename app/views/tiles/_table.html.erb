@@ -11,21 +11,21 @@
   </thead>
 
   <tbody style="font-variant-numeric: tabular-nums;">
-    <% @blocks.each do |block| %>
+    <% @tiles.each do |tile| %>
       <tr>
-        <td><%= content_tag(:code, block.w3w) %></td>
+        <td><%= content_tag(:code, tile.w3w) %></td>
         <% if @plot.nil? %>
           <td>
-            <% if block.plot.present? %>
-              <%= link_to block.plot.title, plot_path(block.plot) %>
+            <% if tile.plot.present? %>
+              <%= link_to tile.plot.title, plot_path(tile.plot) %>
             <% else %>
               -
             <% end %>
           </td>
         <% end %>
-        <td><%= block.subscription.nil? ? 'Available' : 'Unavailable' %></td>
-        <td><%= link_to 'W3W', block.w3w_url %></td>
-        <td><%= link_to 'Details', block %></td>
+        <td><%= tile.subscription.nil? ? 'Available' : 'Unavailable' %></td>
+        <td><%= link_to 'W3W', tile.w3w_url %></td>
+        <td><%= link_to 'Details', tile %></td>
       </tr>
     <% end %>
   </tbody>

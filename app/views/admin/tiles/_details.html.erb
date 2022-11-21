@@ -1,0 +1,38 @@
+<p>
+  <strong>What3Words:</strong>
+  <code>/// <%= tile.w3w %></code>
+  - <%= link_to 'View', tile.w3w_url %>
+</p>
+
+<p>
+  <strong>South West:</strong>
+  <%= @tile.southwest_rounded.join(', ') %>
+</p>
+
+<p>
+  <strong>North East:</strong>
+  <%= @tile.northeast_rounded.join(', ') %>
+</p>
+
+<p>
+  <strong>Midpoint:</strong>
+  <%= @tile.midpoint_rounded.join(', ') %>
+</p>
+
+<p>
+  <strong>Plot:</strong>
+  <% if @tile.plot.present? %>
+    <%= link_to @tile.plot.title, admin_plot_path(@tile.plot) %>
+  <% else %>
+    -
+  <% end %>
+</p>
+
+<p>
+  <strong>Project:</strong>
+  <% if @tile.plot&.project.present? %>
+    <%= link_to @tile.plot.project.title, admin_project_path(@tile.plot.project) %>
+  <% else %>
+    -
+  <% end %>
+</p>

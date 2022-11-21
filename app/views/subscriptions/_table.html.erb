@@ -3,18 +3,18 @@
     <div class="col-sm-6 col-lg-4">
       <div class="card mb-4">
         <div class="card-header">
-          <%= content_tag(:code, "///#{subscription.block.w3w}") %>
+          <%= content_tag(:code, "///#{subscription.tile.w3w}") %>
         </div>
         <div class="card-body">
-          <% if subscription.block.plot&.project.present? %>
+          <% if subscription.tile.plot&.project.present? %>
             <h6 class="card-subtitle mb-2 text-muted">
               Project:
-              <%= subscription.block.plot.project.title %>
+              <%= subscription.tile.plot.project.title %>
             </h6>
           <% end %>
-          <% if subscription.block.plot.present? %>
+          <% if subscription.tile.plot.present? %>
             <h6 class="card-subtitle mb-2 text-muted">
-              Plot: <%= subscription.block.plot.title %>
+              Plot: <%= subscription.tile.plot.title %>
             </h6>
           <% end %>
           <p class="card-text">
@@ -24,7 +24,7 @@
               so far
             </small>
           </p>
-          <%= link_to 'View Block', block_path(subscription.block), class: 'btn btn-primary stretched-link' %>
+          <%= link_to 'View Tile', tile_path(subscription.tile), class: 'btn btn-primary stretched-link' %>
         </div>
         <div class="card-footer">
           £XX.XX / month

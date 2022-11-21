@@ -37,7 +37,7 @@ module Admin
     end
 
     def subscription_params
-      params.require(:subscription).permit(:user_id, :block_id)
+      params.require(:subscription).permit(:user_id, :tile_id)
     end
   end
 end

@@ -1,21 +1,21 @@
 <p>
-  <% if block.subscription.present? %>
+  <% if tile.subscription.present? %>
     <p>
-      <% if block.subscription.user == current_user %>
-        You're already subscribed to this block
+      <% if tile.subscription.user == current_user %>
+        You're already subscribed to this tile
       <% else %>
-        This block is already subscribed by someone else
+        This tile is already subscribed by someone else
       <% end %>
-      (since <%= block.subscription.created_at.strftime('%e %b %Y %H:%M:%S') %>).
+      (since <%= tile.subscription.created_at.strftime('%e %b %Y %H:%M:%S') %>).
     </p>
-    <% if block.subscription.user == current_user %>
+    <% if tile.subscription.user == current_user %>
       <%= link_to 'Cancel Subscription',
                   "javascript:alert('Please contact us to cancel your subscription')",
                   class: 'btn btn-outline-danger' %>
     <% end %>
   <% elsif user_signed_in? %>
     <%= form_with url: checkout_checkout_path do |form| %>
-      <%= form.hidden_field :block, value: block.hashid %>
+      <%= form.hidden_field :tile, value: tile.hashid %>
       <div class="form-check">
         <%= radio_button_tag 'freq', 'monthly', true, class: 'form-check-input' %>
         <%= label_tag 'freq_monthly', 'Subscribe for £5 per month', class: 'form-check-label' %>
@@ -32,7 +32,7 @@
       <%= link_to 'log in', new_user_session_path, class: 'btn btn-primary' %>
       or
       <%= link_to 'register', new_user_registration_path, class: 'btn btn-primary' %>
-      to subscribe to this block.
+      to subscribe to this tile.
     </p>
   <% end %>
 </p>

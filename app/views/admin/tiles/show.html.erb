@@ -1,0 +1,18 @@
+<h1><%= admin_title @tile %></h1>
+
+<div class="row">
+  <div class="col-md-6">
+    <%= render 'details', tile: @tile %>
+    <%= render 'subscription_info', tile: @tile %>
+    <%= render 'posts', tile: @tile %>
+  </div>
+  <div class="col-md-6">
+    <%= render 'static_pages/w3w_map',
+        center: [@tile.midpoint.y, @tile.midpoint.x],
+        tiles: [@tile] %>
+  </div>
+</div>
+
+<%= render 'static_pages/w3w_map',
+     center: [@tile.midpoint.y, @tile.midpoint.x],
+     tiles: [@tile] %>

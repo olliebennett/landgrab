@@ -4,7 +4,7 @@ class CheckoutController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[success cancel]
 
   def checkout
-    @block = Block.find_by_hashid!(params[:block])
+    @tile = Tile.find_by_hashid!(params[:tile])
     create_stripe_checkout(params[:freq].to_sym)
 
     redirect_to @stripe_checkout.url,
@@ -13,11 +13,11 @@ class CheckoutController < ApplicationController
   end
 
   def success
-    @block = Block.find_by_hashid!(params[:block])
+    @tile = Tile.find_by_hashid!(params[:tile])
 
-    return if @block.subscription.nil?
+    return if @tile.subscription.nil?
 
-    redirect_to block_path(@block),
+    redirect_to tile_path(@tile),
                 flash: { success: 'Purchase successful!' }
   end
 
@@ -44,10 +44,10 @@ class CheckoutController < ApplicationController
         quantity: 1
       }],
       metadata: {
-        block: @block.hashid
+        tile: @tile.hashid
       },
       mode: 'subscription',
-      success_url: checkout_success_url(block: @block.hashid),
+      success_url: checkout_success_url(tile: @tile.hashid),
       cancel_url: checkout_cancel_url
     }
   end

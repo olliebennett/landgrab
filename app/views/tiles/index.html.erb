@@ -1,0 +1,19 @@
+<h1><%= title 'Tiles' %></h1>
+
+<p>
+  Tiles are individual 3m x 3m squares of land, defined by
+  <%= link_to 'What3Words', 'https://what3words.com/' %>.
+</p>
+
+<p>
+  <%= page_entries_info @tiles %>
+  <% if @plot.present? %>
+    from the <%= link_to @plot.title, plot_path(@plot) %> plot
+  <% end %>
+</p>
+
+<%= render 'table' %>
+
+<%= paginate @tiles, theme: 'bootstrap-5' %>
+
+<%= render 'static_pages/w3w_map', tiles: @tiles %>

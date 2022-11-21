@@ -10,7 +10,7 @@
     </div>
     <div class="col-sm-5">
       <%= form.select :postable_type,
-                      options_for_select(%w[Project Plot Block], form.object.postable_type),
+                      options_for_select(%w[Project Plot Tile], form.object.postable_type),
                       { include_blank: '[ Select Type ]' },
                       {
                         required: true,

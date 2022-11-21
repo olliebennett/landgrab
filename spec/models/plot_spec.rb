@@ -14,29 +14,29 @@ RSpec.describe Plot do
     expect(plot.polygon.methods).to include :centroid
   end
 
-  describe '#blocks_subscribed_by' do
-    subject(:blocks_subscribed) { plot.blocks_subscribed_by(user) }
+  describe '#tiles_subscribed_by' do
+    subject(:tiles_subscribed) { plot.tiles_subscribed_by(user) }
 
     let(:user) { create(:user) }
-    let(:block) { create(:block, plot:) }
-    let(:subscription) { create(:subscription, user:, block:) }
+    let(:tile) { create(:tile, plot:) }
+    let(:subscription) { create(:subscription, user:, tile:) }
 
     before { subscription }
 
-    it 'returns subscribed block' do
-      expect(blocks_subscribed.ids).to match_array [block.id]
+    it 'returns subscribed tile' do
+      expect(tiles_subscribed.ids).to match_array [tile.id]
     end
 
-    it 'excludes unsubscribed blocks' do
+    it 'excludes unsubscribed tiles' do
       subscription.destroy
 
-      expect(blocks_subscribed.ids).to be_empty
+      expect(tiles_subscribed.ids).to be_empty
     end
 
-    it 'excludes blocks subscribed by another user' do
+    it 'excludes tiles subscribed by another user' do
       subscription.update!(user: create(:user))
 
-      expect(blocks_subscribed.ids).to be_empty
+      expect(tiles_subscribed.ids).to be_empty
     end
   end
 end

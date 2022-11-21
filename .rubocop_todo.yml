@@ -22,7 +22,7 @@ Metrics/MethodLength:
 # Include: app/**/*.rb, config/**/*.rb, db/**/*.rb, lib/**/*.rb
 Rails/Output:
   Exclude:
-    - 'app/jobs/plot_blocks_populate_job.rb'
+    - 'app/jobs/plot_tiles_populate_job.rb'
     - 'spec/rails_helper.rb'
 
 # Offense count: 1

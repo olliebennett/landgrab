@@ -28,6 +28,12 @@
       </td>
     </tr>
     <tr>
+      <th>Price</th>
+      <td>
+        <%= render_subscription_price(@subscription) || 'Not set' %>
+      </td>
+    </tr>
+    <tr>
       <th>Status</th>
       <td>
         <%= @subscription.stripe_status || 'NOT SET' %>

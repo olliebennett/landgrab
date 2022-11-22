@@ -12,4 +12,8 @@ class Subscription < ApplicationRecord
   enum :stripe_status,
        %i[active past_due unpaid canceled incomplete incomplete_expired trialing],
        prefix: :stripe_status
+
+  enum :recurring_interval, %i[month], prefix: :recurring_interval
+
+  monetize :price_pence, as: :price, numericality: { greater_than: 0 }, allow_nil: true
 end

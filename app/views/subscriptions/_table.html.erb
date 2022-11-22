@@ -27,9 +27,9 @@
           <%= link_to 'View Tile', tile_path(subscription.tile), class: 'btn btn-primary stretched-link' %>
         </div>
         <div class="card-footer">
-          <!-- £XX.XX / month -->
-          <span class="badge bg-secondary">
-            <%= subscription.stripe_status&.humanize || 'No status' %>
+          <%= render_subscription_price(subscription) %>
+          <span class="float-end">
+            <%= render_subscription_status(subscription) || 'No status' %>
           </span>
         </div>
       </div>

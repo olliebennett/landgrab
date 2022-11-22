@@ -34,7 +34,8 @@ module Webhook
 
       # TODO: Check tile still available?
 
-      Subscription.create!(user:, tile:, stripe_id: sub_id)
+      subscr = Subscription.create!(user:, tile:, stripe_id: sub_id)
+      StripeSubscriptionRefreshJob.perform_later(subscr)
     end
 
     def extract_user(obj)

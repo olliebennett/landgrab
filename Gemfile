@@ -51,6 +51,9 @@ gem 'kaminari'
 # Listener for filesystem changes
 gem 'listen', groups: %i[development test]
 
+# Handling currency objects
+gem 'money-rails'
+
 # PostgreSQL database wrapper
 gem 'pg'
 

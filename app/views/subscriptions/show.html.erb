@@ -28,6 +28,12 @@
       </td>
     </tr>
     <tr>
+      <th>Status</th>
+      <td>
+        <%= @subscription.stripe_status || 'NOT SET' %>
+      </td>
+    </tr>
+    <tr>
       <th>Created</th>
       <td>
         <%= @subscription.created_at.strftime('%e %b %Y %H:%M:%S') %>

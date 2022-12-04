@@ -84,6 +84,8 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+  config.action_mailer.delivery_method = :postmark
+  config.action_mailer.postmark_settings = { api_token: ENV.fetch('POSTMARK_SERVER_API_TOKEN') }
   config.action_mailer.default_url_options = { host: ENV.fetch('APP_DOMAIN'), protocol: 'https' }
 
   config.after_initialize do

@@ -57,6 +57,9 @@ gem 'money-rails'
 # PostgreSQL database wrapper
 gem 'pg'
 
+# Postmarkapp.com email sending
+gem 'postmark-rails'
+
 # Puma app server
 gem 'puma'
 

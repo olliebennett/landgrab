@@ -16,10 +16,20 @@
       <tr>
         <td><%= link_to subscription.hashid, admin_subscription_path(subscription) %></td>
         <td>
-          <%= link_to subscription.user.hashid, admin_user_path(subscription.user) %>
-          (<%= subscription.user.email %>)
+          <% if subscription.user.present? %>
+            <%= link_to subscription.user.hashid, admin_user_path(subscription.user) %>
+            (<%= subscription.user.email %>)
+          <% else %>
+            Unregistered
+          <% end %>
         </td>
-        <td><%= link_to subscription.tile.w3w, admin_tile_path(subscription.tile) %></td>
+        <td>
+          <% if subscription.tile.present? %>
+            <%= link_to subscription.tile.w3w, admin_tile_path(subscription.tile) %>
+          <% else %>
+            No tile assigned
+          <% end %>
+        </td>
         <td>
           <%= link_to subscription.stripe_id,
                         "#{ENV.fetch('STRIPE_DASHBOARD_URL')}/subscriptions/#{subscription.stripe_id}" %>

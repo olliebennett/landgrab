@@ -86,6 +86,9 @@ gem 'ruumba'
 gem 'sentry-rails'
 gem 'sentry-ruby'
 
+# Async job processing
+gem 'sidekiq'
+
 # Payments
 gem 'stripe'
 

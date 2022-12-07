@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '3.1.2'
+ruby '3.1.3'
 
 # IMPORTANT: When upgrading Rails, follow all instructions!
 # Eg. run `app:update` script, action `new_framework_defaults_*.rb`, update `config.load_defaults`

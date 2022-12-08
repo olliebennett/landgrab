@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CheckoutController < ApplicationController
-  skip_before_action :authenticate_user!, except: %i[generate]
+  skip_before_action :authenticate_user!, only: %i[generate]
 
   # See docs/CHECKOUT.md
   def checkout
@@ -16,6 +16,10 @@ class CheckoutController < ApplicationController
   # See docs/CHECKOUT.md
   def generate
     create_stripe_checkout(params[:freq].to_sym, nil)
+
+    redirect_to @stripe_checkout.url,
+                status: :see_other,
+                allow_other_host: true
   end
 
   def claim; end

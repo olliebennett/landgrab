@@ -1,28 +1,16 @@
 # frozen_string_literal: true
 
 class CheckoutController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[generate]
+  skip_before_action :authenticate_user!, only: %i[success cancel]
 
-  # See docs/CHECKOUT.md
   def checkout
-    tile = Tile.find_by_hashid!(params[:tile])
-    create_stripe_checkout(params[:freq].to_sym, tile)
+    @tile = Tile.find_by_hashid!(params[:tile])
+    create_stripe_checkout(params[:freq].to_sym)
 
     redirect_to @stripe_checkout.url,
                 status: :see_other,
                 allow_other_host: true
   end
-
-  # See docs/CHECKOUT.md
-  def generate
-    create_stripe_checkout(params[:freq].to_sym, nil)
-
-    redirect_to @stripe_checkout.url,
-                status: :see_other,
-                allow_other_host: true
-  end
-
-  def claim; end
 
   def success
     @tile = Tile.find_by_hashid!(params[:tile])
@@ -48,24 +36,23 @@ class CheckoutController < ApplicationController
     end
   end
 
-  def stripe_checkout_payload(freq, tile)
+  def stripe_checkout_payload(freq)
     {
-      # Stripe will create new customer if not supplied
-      customer: current_user&.stripe_customer_id,
+      customer: current_user.stripe_customer_id,
       line_items: [{
         price: extract_stripe_price_id(freq),
         quantity: 1
       }],
       metadata: {
-        tile: tile&.hashid
+        tile: @tile.hashid
       },
       mode: 'subscription',
-      success_url: tile.nil? ? checkout_claim_url : checkout_success_url(tile: tile.hashid),
+      success_url: checkout_success_url(tile: @tile.hashid),
       cancel_url: checkout_cancel_url
     }
   end
 
-  def create_stripe_checkout(freq, tile)
-    @stripe_checkout = Stripe::Checkout::Session.create(stripe_checkout_payload(freq, tile))
+  def create_stripe_checkout(freq)
+    @stripe_checkout = Stripe::Checkout::Session.create(stripe_checkout_payload(freq))
   end
 end

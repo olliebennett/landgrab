@@ -25,36 +25,27 @@ module Webhook
     private
 
     def checkout_session_completed
-      @checkout_session = @event.data.object
+      checkout_session = @event.data.object
 
-      user = extract_user(@checkout_session)
+      user = extract_user(checkout_session)
       tile = Tile.find_by_hashid(checkout_session.metadata.tile)
 
-      sub_id = @checkout_session.subscription
+      sub_id = checkout_session.subscription
 
       # TODO: Check tile still available?
 
       subscr = Subscription.create!(user:, tile:, stripe_id: sub_id)
-
-      handle_external_checkout(subscr) if user.nil?
-
       StripeSubscriptionRefreshJob.perform_later(subscr)
     end
 
-    # See docs/CHECKOUT.md
-    def handle_external_checkout(subscr)
-      claim_email = @checkout_session.customer_email
-      raise 'Missing customer/claim email from Stripe checkout session' if claim_email.nil?
-
-      subscr.update!(claim_email:, claim_hash: SecureRandom.base36)
-      SubscriptionMailer.claim(subscr.id).deliver_later
-    end
-
-    def extract_user
-      cus_id = @checkout_session.customer
+    def extract_user(obj)
+      cus_id = obj.customer
       raise 'Missing customer ID from webhook body' if cus_id.blank?
 
-      User.find_by(stripe_customer_id: cus_id)
+      user = User.find_by(stripe_customer_id: cus_id)
+      raise "Found no user with Stripe Customer ID #{cus_id}" if user.nil?
+
+      user
     end
 
     def parse_event

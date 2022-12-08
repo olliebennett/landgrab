@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1><%= "Claim your #{ENV.fetch('SITE_TITLE', 'LandGrab')} subscription" %></h1>
+    <p>
+      Click here to claim the subscription:
+    </p>
+    <p>
+      <%= link_to 'claim', claim_subscription_url(@subscription, hash: @subscription.claim_hash) %>
+    </p>
+    <p>Any questions or issues, please just reply to this message!</p>
+  </body>
+</html>

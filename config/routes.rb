@@ -9,14 +9,19 @@ Rails.application.routes.draw do
   resources :plots, only: %i[index show]
   resources :posts, only: %i[show]
   resources :projects, only: %i[index show]
-  resources :subscriptions, only: %i[create index show]
+  resources :subscriptions, only: %i[create index show] do
+    get 'claim', on: :member
+  end
 
   post '/checkout/checkout', 'checkouts#checkout'
+  get '/checkout/generate', 'checkouts#generate'
   get '/checkout/success', 'checkouts#success'
   get '/checkout/cancel', 'checkouts#cancel'
+  get '/checkout/claim', 'checkouts#claim'
 
   get '/about', to: 'static_pages#about'
   get '/explore', to: 'static_pages#explore'
+  get '/support', to: 'static_pages#support'
 
   namespace :admin do
     root to: 'dashboard#dashboard', as: :dashboard

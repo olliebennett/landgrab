@@ -28,7 +28,7 @@ module Webhook
       @checkout_session = @event.data.object
 
       user = extract_user
-      tile = Tile.find_by_hashid(checkout_session.metadata.tile)
+      tile = Tile.find_by_hashid(@checkout_session.metadata.tile)
 
       sub_id = @checkout_session.subscription
 

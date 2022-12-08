@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Subscription < ApplicationRecord
-  belongs_to :user
-  belongs_to :tile
+  belongs_to :user, optional: true
+  belongs_to :tile, optional: true
 
   validates :stripe_id,
             format: { with: /\Asub_[0-9a-zA-Z]+\z/ },

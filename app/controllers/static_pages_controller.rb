@@ -5,6 +5,8 @@ class StaticPagesController < ApplicationController
 
   def about; end
 
+  def support; end
+
   def homepage
     if params[:center].present?
       tile = Tile.find_by(w3w: params[:center])

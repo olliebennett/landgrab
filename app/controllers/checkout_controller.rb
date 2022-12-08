@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CheckoutController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[generate]
+  skip_before_action :authenticate_user!, only: %i[generate claim]
 
   # See docs/CHECKOUT.md
   def checkout

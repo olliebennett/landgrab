@@ -21,17 +21,16 @@ class SubscriptionsController < ApplicationController
 
   def claim
     if user_signed_in?
-      claim_hash = params[:claim_hash]
-      subscr = Subscription.find_by(claim_hash:)
-      if subsrc.user.present?
-        if subscr.user == current_user
-          redirect_to subscription_path(subscr), flash: { notice: 'All good; this subscription is already linked to your account' }
+      @subscription = Subscription.find_by(id: params[:id], claim_hash: params[:hash])
+      if @subscription.user.present?
+        if @subscription.user == current_user
+          redirect_to subscription_path(@subscription), flash: { notice: 'All good; this subscription is already linked to your account' }
         else
           redirect_to support_path, flash: { notice: 'Oh! This subscription is already connected to a different account. Have you got two accounts? Please reach out to us and we can help.' }
         end
       else
-        subscr.update!(user: current_user)
-        redirect_to subscription_path(subscr), flash: { notice: 'We have successfully connected the subscription to your account' }
+        @subscription.update!(user: current_user)
+        redirect_to subscription_path(@subscription), flash: { notice: 'We have successfully connected the subscription to your account' }
       end
     else
       redirect_to register_path, flash: { notice: 'Please register an account then click the link again to claim' }

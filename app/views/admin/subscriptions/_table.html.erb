@@ -20,7 +20,8 @@
             <%= link_to subscription.user.hashid, admin_user_path(subscription.user) %>
             (<%= subscription.user.email %>)
           <% else %>
-            Unregistered
+            Unregistered; email from stripe is
+            <%= content_tag(:code, subscription.claim_email || 'NOT SET') %>
           <% end %>
         </td>
         <td>

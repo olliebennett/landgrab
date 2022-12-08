@@ -9,7 +9,7 @@
       Click here to claim the subscription:
     </p>
     <p>
-      <%= @subscription.claim_hash %>
+      <%= link_to 'claim', claim_subscription_url(@subscription, hash: @subscription.claim_hash) %>
     </p>
     <p>Any questions or issues, please just reply to this message!</p>
   </body>

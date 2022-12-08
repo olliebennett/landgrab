@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_07_224622) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_08_004202) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -64,6 +64,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_07_224622) do
     t.integer "stripe_status"
     t.integer "price_pence"
     t.integer "recurring_interval"
+    t.string "claim_email"
+    t.string "claim_hash"
     t.index ["stripe_id"], name: "index_subscriptions_on_stripe_id", unique: true
     t.index ["tile_id"], name: "index_subscriptions_on_tile_id"
     t.index ["user_id"], name: "index_subscriptions_on_user_id"

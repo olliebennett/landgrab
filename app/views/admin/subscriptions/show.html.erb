@@ -5,22 +5,30 @@
     <tr>
       <th>User</th>
       <td>
-        <%= link_to @subscription.user.hashid, admin_user_path(@subscription.user) %>
-        - <%= @subscription.user.display_name %>
-        <%= " (that's you!)" if @subscription.user == current_user %>
+        <% if @subscription.user.present? %>
+          <%= link_to @subscription.user.hashid, admin_user_path(@subscription.user) %>
+          - <%= @subscription.user.display_name %>
+          <%= " (that's you!)" if @subscription.user == current_user %>
+        <% else %>
+          No user; purchase not yet claimed
+        <% end %>
       </td>
     </tr>
     <tr>
       <th>Tile</th>
       <td>
-        <%= link_to @subscription.tile.hashid, admin_tile_path(@subscription.tile) %>
-        - <%= content_tag(:code, @subscription.tile.w3w) %>
+        <% if @subscription.tile.present? %>
+          <%= link_to @subscription.tile.hashid, admin_tile_path(@subscription.tile) %>
+          - <%= content_tag(:code, @subscription.tile.w3w) %>
+        <% else %>
+          No tile; subscription not yet assigned
+        <% end %>
       </td>
     </tr>
     <tr>
       <th>Plot</th>
       <td>
-        <% if @subscription.tile.plot.present? %>
+        <% if @subscription.tile&.plot.present? %>
           <%= link_to @subscription.tile.plot.title, admin_plot_path(@subscription.tile.plot) %>
         <% else %>
           NOT PRESENT

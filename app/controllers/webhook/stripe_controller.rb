@@ -28,7 +28,7 @@ module Webhook
       @checkout_session = @event.data.object
 
       user = extract_user
-      tile = Tile.find_by_hashid(@checkout_session.metadata.tile)
+      tile = Tile.find_by_hashid(@checkout_session.metadata.tile) if @checkout_session.metadata.respond_to?(:tile)
 
       sub_id = @checkout_session.subscription
 
@@ -43,7 +43,7 @@ module Webhook
 
     # See docs/CHECKOUT.md
     def handle_external_checkout(subscr)
-      claim_email = @checkout_session.customer_email
+      claim_email = @checkout_session.customer_email || @checkout_session.customer_details.email
       raise 'Missing customer/claim email from Stripe checkout session' if claim_email.nil?
 
       subscr.update!(claim_email:, claim_hash: SecureRandom.base36)

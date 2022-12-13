@@ -1,0 +1,93 @@
+{
+  "id": "evt_1MCsmMIUdRPXBaHSBrbcjTe9",
+  "object": "event",
+  "api_version": "2022-08-01",
+  "created": 1670539282,
+  "data": {
+    "object": {
+      "id": "cs_test_a15Y48cPqIhqjKZYWxxs0ICovRykdwuOrGEFxE0775CXpWuxOsJ8Db2Y1W",
+      "object": "checkout.session",
+      "after_expiration": null,
+      "allow_promotion_codes": null,
+      "amount_subtotal": 500,
+      "amount_total": 500,
+      "automatic_tax": {
+        "enabled": false,
+        "status": null
+      },
+      "billing_address_collection": null,
+      "cancel_url": "https://test.example.com/checkout/cancel",
+      "client_reference_id": null,
+      "consent": null,
+      "consent_collection": null,
+      "created": 1670539176,
+      "currency": "gbp",
+      "custom_text": {
+        "shipping_address": null,
+        "submit": null
+      },
+      "customer": "cus_MwmKA3vyc8sdf1",
+      "customer_creation": "always",
+      "customer_details": {
+        "address": {
+          "city": null,
+          "country": "GB",
+          "line1": null,
+          "line2": null,
+          "postal_code": "AA1 1AA",
+          "state": null
+        },
+        "email": "test@example.com",
+        "name": "O BENNETT",
+        "phone": null,
+        "tax_exempt": "none",
+        "tax_ids": [
+        ]
+      },
+      "customer_email": null,
+      "expires_at": 1670625576,
+      "invoice": "in_1MCsmJIUdRPXBaHSIVauFJiy",
+      "invoice_creation": null,
+      "livemode": false,
+      "locale": null,
+      "metadata": {
+      },
+      "mode": "subscription",
+      "payment_intent": null,
+      "payment_link": null,
+      "payment_method_collection": "always",
+      "payment_method_options": null,
+      "payment_method_types": [
+        "card"
+      ],
+      "payment_status": "paid",
+      "phone_number_collection": {
+        "enabled": false
+      },
+      "recovered_from": null,
+      "setup_intent": null,
+      "shipping_address_collection": null,
+      "shipping_cost": null,
+      "shipping_details": null,
+      "shipping_options": [
+      ],
+      "status": "complete",
+      "submit_type": null,
+      "subscription": "sub_1MCsmJIUdRPXBaHSKXW64rWe",
+      "success_url": "https://test.example.com/checkout/claim",
+      "total_details": {
+        "amount_discount": 0,
+        "amount_shipping": 0,
+        "amount_tax": 0
+      },
+      "url": null
+    }
+  },
+  "livemode": false,
+  "pending_webhooks": 1,
+  "request": {
+    "id": null,
+    "idempotency_key": null
+  },
+  "type": "checkout.session.completed"
+}

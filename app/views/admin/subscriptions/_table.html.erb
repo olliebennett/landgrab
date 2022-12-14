@@ -36,7 +36,7 @@
                         "#{ENV.fetch('STRIPE_DASHBOARD_URL')}/subscriptions/#{subscription.stripe_id}" %>
         </td>
         <td><%= render_subscription_price(subscription) || 'Not set' %></td>
-        <td><%= subscription.stripe_status || 'Not set' %></td>
+        <td><%= render_subscription_status(subscription) || 'NOT SET' %></td>
         <td><%= subscription.created_at.strftime('%e %b %Y %H:%M:%S') %></td>
       </tr>
     <% end %>

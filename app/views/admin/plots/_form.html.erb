@@ -17,6 +17,20 @@
 
   <div class="row mb-3 g-3 align-items-center">
     <div class="col-sm-2">
+      <%= form.label :description, class: 'col-form-label' %>
+    </div>
+    <div class="col-sm-3">
+      <%= form.text_field :description, class: 'form-control', aria: { describedby: 'descriptionHelp' } %>
+    </div>
+    <div class="col-sm-7">
+      <span id="descriptionHelp" class="form-text">
+        Provide a longer description for the area.
+      </span>
+    </div>
+  </div>
+
+  <div class="row mb-3 g-3 align-items-center">
+    <div class="col-sm-2">
       <%= form.label :project_id, class: 'col-form-label' %>
     </div>
     <div class="col-sm-3">

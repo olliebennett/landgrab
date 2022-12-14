@@ -1,4 +1,8 @@
 
+<% if @plot.description %>
+  <%= markdown(@plot.description) %>
+<% end %>
+
 <p>
 This plot
 <% if @plot.project.present? %>

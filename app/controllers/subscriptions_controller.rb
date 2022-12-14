@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/PerceivedComplexity
 class SubscriptionsController < ApplicationController
   before_action :set_subscription, only: %i[show]
   before_action :ensure_stripe_enrollment, only: %i[create]
@@ -21,9 +22,13 @@ class SubscriptionsController < ApplicationController
 
   def claim
     if user_signed_in?
-      @subscription = Subscription.find_by(id: params[:id], claim_hash: params[:hash])
+      @subscription = Subscription.find_by_hashid(params[:id])
       if @subscription.nil?
         redirect_to support_path, flash: { danger: 'We could not find a subscription; please contact us.' }
+      elsif params[:hash].blank?
+        redirect_to support_path, flash: { danger: 'That link is missing something; please contact us.' }
+      elsif !ActiveSupport::SecurityUtils.secure_compare(@subscription.claim_hash, params[:hash])
+        redirect_to support_path, flash: { danger: "That link doesn't look quite right; please contact us." }
       elsif @subscription.user.present?
         if @subscription.user == current_user
           redirect_to subscription_path(@subscription), flash: { notice: 'All good; this subscription is already linked to your account' }
@@ -49,3 +54,4 @@ class SubscriptionsController < ApplicationController
     params.require(:subscription).permit(:tile_id)
   end
 end
+# rubocop:enable Metrics/PerceivedComplexity

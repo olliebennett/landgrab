@@ -5,6 +5,8 @@ class SubscriptionsController < ApplicationController
   before_action :set_subscription, only: %i[show]
   before_action :ensure_stripe_enrollment, only: %i[create]
 
+  skip_before_action :authenticate_user!, only: %i[claim]
+
   def index
     @subscriptions = current_user.subscriptions
   end

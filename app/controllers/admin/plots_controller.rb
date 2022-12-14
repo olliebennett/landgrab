@@ -54,7 +54,7 @@ module Admin
     end
 
     def plot_params
-      params.require(:plot).permit(:title, :polygon, :project_id)
+      params.require(:plot).permit(:title, :description, :polygon, :project_id)
     end
   end
 end

@@ -3,7 +3,7 @@
 module Admin
   class SubscriptionsController < ApplicationController
     before_action :check_admin
-    before_action :set_subscription, only: %i[show edit update]
+    before_action :set_subscription, only: %i[show edit refresh update]
 
     def index
       @subscriptions = Subscription.all
@@ -22,9 +22,15 @@ module Admin
       end
     end
 
+    def refresh
+      StripeSubscriptionRefreshJob.perform_now(@subscription)
+
+      redirect_to admin_subscription_url(@subscription), notice: 'Subscription status was refreshed from Stripe.'
+    end
+
     def update
       if @subscription.update(subscription_params)
-        redirect_to admin_subscription_url(@subscription), notice: 'Subscription was successfully updated.'
+        redirect_to admin_subscription_path(@subscription), notice: 'Subscription was successfully updated.'
       else
         render :edit, status: :unprocessable_entity
       end

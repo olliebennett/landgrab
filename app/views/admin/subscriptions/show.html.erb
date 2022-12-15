@@ -56,6 +56,8 @@
       <th>Status</th>
       <td>
         <%= render_subscription_status(@subscription) || 'NOT SET' %>
+        -
+        <%= link_to 'refresh', refresh_admin_subscription_path(@subscription) %>
       </td>
     </tr>
     <tr>

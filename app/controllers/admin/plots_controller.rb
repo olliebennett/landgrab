@@ -12,7 +12,8 @@ module Admin
     def show; end
 
     def new
-      @plot = Plot.new
+      project = Project.find_by_hashid(params[:project_id]) if params[:project_id].present?
+      @plot = Plot.new(project:)
     end
 
     def edit; end

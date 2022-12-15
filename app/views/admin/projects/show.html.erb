@@ -47,7 +47,7 @@
 </p>
 
 <h2>Plots in this Project</h2>
-<%= render 'admin/plots/table', plots: @project.plots %>
+<%= render 'admin/plots/table', project: @project, plots: @project.plots %>
 
 <h2>Posts about this Project</h2>
 <%= render 'admin/posts/table', posts: @project.posts %>

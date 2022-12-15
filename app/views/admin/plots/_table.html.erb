@@ -1,5 +1,10 @@
 <% if plots.size.zero? %>
-  <p>No plots found</p>
+  <p>
+    No plots found
+    <% if project.present? %>
+    - <%= link_to 'New Plot', new_admin_plot_path(project_id: project.hashid) %>
+    <% end %>
+  </p>
 <% else %>
   <table class="table">
     <thead>

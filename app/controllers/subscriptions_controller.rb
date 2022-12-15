@@ -42,7 +42,7 @@ class SubscriptionsController < ApplicationController
         redirect_to subscription_path(@subscription), flash: { notice: 'We have successfully connected the subscription to your account' }
       end
     else
-      redirect_to registration_path, flash: { notice: 'Please register an account then click the link again to claim' }
+      redirect_to registration_path(:user), flash: { notice: 'Please register an account then click the link again to claim' }
     end
   end
 

@@ -1,9 +1,8 @@
+<% project ||= nil %>
+
 <% if plots.size.zero? %>
   <p>
     No plots found
-    <% if project.present? %>
-    - <%= link_to 'New Plot', new_admin_plot_path(project_id: project.hashid) %>
-    <% end %>
   </p>
 <% else %>
   <table class="table">
@@ -35,4 +34,8 @@
       <% end %>
     </tbody>
   </table>
+<% end %>
+<% if project.present? %>
+<p>
+  <%= link_to 'Create New Plot for the Project', new_admin_plot_path(project_id: project.hashid) %></p>
 <% end %>

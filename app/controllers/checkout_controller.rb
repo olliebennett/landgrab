@@ -3,10 +3,11 @@
 class CheckoutController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[generate claim]
 
+  before_action :set_tile, only: %i[checkout success]
+
   # See docs/CHECKOUT.md
   def checkout
-    tile = Tile.find_by_hashid!(params[:tile])
-    create_stripe_checkout(params[:freq].to_sym, tile)
+    create_stripe_checkout(params[:freq].to_sym, @tile)
 
     redirect_to @stripe_checkout.url,
                 status: :see_other,
@@ -25,8 +26,6 @@ class CheckoutController < ApplicationController
   def claim; end
 
   def success
-    @tile = Tile.find_by_hashid!(params[:tile])
-
     return if @tile.subscription.nil?
 
     redirect_to tile_path(@tile),
@@ -67,5 +66,9 @@ class CheckoutController < ApplicationController
 
   def create_stripe_checkout(freq, tile)
     @stripe_checkout = Stripe::Checkout::Session.create(stripe_checkout_payload(freq, tile))
+  end
+
+  def set_tile
+    @tile = Tile.find_by_hashid!(params[:tile])
   end
 end

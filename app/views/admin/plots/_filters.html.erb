@@ -1,0 +1,9 @@
+<%= form_tag(admin_plots_path, method: :get, class: 'row g-3 mb-3') do %>
+  <div class="col-sm-4">
+    <%= label_tag :project, 'Project', class: 'visually-hidden' %>
+    <%= select_tag :project, options_from_collection_for_select(Project.order(:title), :hashid, :title, params[:project]),
+                          { include_blank: '[ All Projects ]', class: 'form-select' } %>
+  </div>
+
+  <%= render_filter_submit %>
+<% end %>

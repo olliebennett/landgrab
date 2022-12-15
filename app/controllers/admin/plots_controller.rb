@@ -6,7 +6,9 @@ module Admin
     before_action :set_plot, only: %i[show edit update]
 
     def index
-      @plots = Plot.order(id: :desc).page(params[:page])
+      @project = Project.find_by_hashid!(params[:project]) if params[:project].present?
+      @plots = @project.present? ? @project.plots : Plot.all
+      @plots = @plots.order(id: :desc).page(params[:page])
     end
 
     def show; end

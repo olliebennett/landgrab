@@ -78,6 +78,8 @@ class Plot < ApplicationRecord
   end
 
   def validate_bounding_box_dimensions
+    return if polygon.nil?
+
     errors.add(:polygon, 'is too wide') if bounding_box.x_span > MAX_BOUNDING_BOX_DIMENSION
     errors.add(:polygon, 'is too high') if bounding_box.y_span > MAX_BOUNDING_BOX_DIMENSION
   end

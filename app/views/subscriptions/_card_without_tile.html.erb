@@ -1,0 +1,27 @@
+<div class="card mb-4">
+  <div class="card-header">
+    Unclaimed subscription
+  </div>
+  <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">
+      Find a tile you like!
+    </h6>
+    <p class="card-text">
+      You can redeem this subscription against any tile of your choice.
+    </p>
+    <p class="card-text">
+      <small class="text-muted">
+        Subscribed for
+        <%= distance_of_time_in_words(subscription.created_at, Time.current) %>
+        so far
+      </small>
+    </p>
+    <%= link_to 'Find a Tile', explore_path, class: 'btn btn-primary stretched-link' %>
+  </div>
+  <div class="card-footer">
+    <%= render_subscription_price(subscription) %>
+    <span class="float-end">
+      <%= render_subscription_status(subscription) || 'No status' %>
+    </span>
+  </div>
+</div>

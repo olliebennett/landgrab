@@ -1,38 +1,11 @@
 <div class="row">
   <% subscriptions.each do |subscription| %>
     <div class="col-sm-6 col-lg-4">
-      <div class="card mb-4">
-        <div class="card-header">
-          <%= content_tag(:code, "///#{subscription.tile.w3w}") %>
-        </div>
-        <div class="card-body">
-          <% if subscription.tile.plot&.project.present? %>
-            <h6 class="card-subtitle mb-2 text-muted">
-              Project:
-              <%= subscription.tile.plot.project.title %>
-            </h6>
-          <% end %>
-          <% if subscription.tile.plot.present? %>
-            <h6 class="card-subtitle mb-2 text-muted">
-              Plot: <%= subscription.tile.plot.title %>
-            </h6>
-          <% end %>
-          <p class="card-text">
-            <small class="text-muted">
-              Subscribed for
-              <%= distance_of_time_in_words(subscription.created_at, Time.current) %>
-              so far
-            </small>
-          </p>
-          <%= link_to 'View Tile', tile_path(subscription.tile), class: 'btn btn-primary stretched-link' %>
-        </div>
-        <div class="card-footer">
-          <%= render_subscription_price(subscription) %>
-          <span class="float-end">
-            <%= render_subscription_status(subscription) || 'No status' %>
-          </span>
-        </div>
-      </div>
+      <% if subscription.tile.present? %>
+        <%= render 'card_with_tile', subscription: subscription %>
+      <% else %>
+        <%= render 'card_without_tile', subscription: subscription %>
+      <% end %>
     </div>
   <% end %>
 </div>

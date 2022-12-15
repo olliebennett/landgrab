@@ -1,8 +1,8 @@
 <h1><%= title 'Subscriptions' %></h1>
 
 <p>
-  You are currently subscribed to
-  <%= pluralize(@subscriptions.size, 'tile') %>
+  You currently have
+  <%= pluralize(@subscriptions.size, 'subscriptions') %>
 </p>
 
 <%= render 'table', subscriptions: @subscriptions %>

@@ -3,14 +3,18 @@
     <tr>
       <th>Tile</th>
       <td>
-        <%= link_to @subscription.tile.hashid, tile_path(@subscription.tile) %>
-        - <%= content_tag(:code, @subscription.tile.w3w) %>
+        <% if @subscription.tile.present? %>
+          <%= link_to @subscription.tile.hashid, tile_path(@subscription.tile) %>
+          - <%= content_tag(:code, @subscription.tile.w3w) %>
+        <% else %>
+          NOT PRESENT
+        <% end %>
       </td>
     </tr>
     <tr>
       <th>Project</th>
       <td>
-        <% if @subscription.tile.plot&.project.present? %>
+        <% if @subscription.tile&.plot&.project.present? %>
           <%= link_to @subscription.tile.plot.project.title, project_path(@subscription.tile.plot.project) %>
         <% else %>
           NOT PRESENT
@@ -20,7 +24,7 @@
     <tr>
       <th>Plot</th>
       <td>
-        <% if @subscription.tile.plot.present? %>
+        <% if @subscription.tile&.plot.present? %>
           <%= link_to @subscription.tile.plot.title, plot_path(@subscription.tile.plot) %>
         <% else %>
           NOT PRESENT
@@ -36,7 +40,7 @@
     <tr>
       <th>Status</th>
       <td>
-        <%= @subscription.stripe_status || 'NOT SET' %>
+        <%= render_subscription_status(@subscription) || 'NOT SET' %>
       </td>
     </tr>
     <tr>

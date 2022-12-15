@@ -1,0 +1,12 @@
+<%= form_with url: checkout_checkout_path do |form| %>
+  <%= form.hidden_field :tile, value: tile.hashid %>
+  <div class="form-check">
+    <%= radio_button_tag 'freq', 'monthly', true, class: 'form-check-input' %>
+    <%= label_tag 'freq_monthly', 'Subscribe for £5 per month', class: 'form-check-label' %>
+  </div>
+  <div class="form-check">
+    <%= radio_button_tag 'freq', 'yearly', false, class: 'form-check-input' %>
+    <%= label_tag 'freq_yearly', 'Subscribe for £50 per year (save £10)', class: 'form-check-label' %>
+  </div>
+  <%= form.submit 'Pay & Subscribe', class: 'btn btn-primary' %>
+<% end %>

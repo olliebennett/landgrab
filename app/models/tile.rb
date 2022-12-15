@@ -37,6 +37,10 @@ class Tile < ApplicationRecord
     subscription.nil? || subscription.new_record? # handle display on 'new' screen
   end
 
+  def unavailable?
+    !available?
+  end
+
   def popup_content
     return unless map_popup
 

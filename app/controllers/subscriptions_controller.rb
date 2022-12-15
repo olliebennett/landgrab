@@ -2,7 +2,7 @@
 
 # rubocop:disable Metrics/PerceivedComplexity
 class SubscriptionsController < ApplicationController
-  before_action :set_subscription, only: %i[show]
+  before_action :set_subscription, only: %i[redeem show]
   before_action :ensure_stripe_enrollment, only: %i[create]
 
   skip_before_action :authenticate_user!, only: %i[claim]
@@ -44,6 +44,25 @@ class SubscriptionsController < ApplicationController
     else
       redirect_to register_path, flash: { notice: 'Please register an account then click the link again to claim' }
     end
+  end
+
+  def redeem
+    @tile = Tile.find_by_hashid!(params[:tile])
+
+    return redirect_to support_path, flash: { danger: 'Sorry; this tile is not available! Please pick another.' } if @tile.unavailable?
+
+    if @subscription.tile.present?
+      flash = if @subscription.tile == @tile
+                { notice: 'All good; the subscription was already redeemed against this tile!' }
+              else
+                { danger: "Sorry; this subscription has already been associated to tile ///#{@subscription.tile.w3w}" }
+              end
+    else
+      @subscription.update!(tile: @tile)
+      flash = { notice: "Congratulations! You're now subscribed to this tile!" }
+    end
+
+    redirect_to tile_path(@subscription.tile), flash:
   end
 
   private

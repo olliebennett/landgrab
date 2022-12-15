@@ -2,29 +2,26 @@
   <% if tile.subscription.present? %>
     <p>
       <% if tile.subscription.user == current_user %>
-        You're already subscribed to this tile
+        Your subscription to this tile began on
       <% else %>
-        This tile is already subscribed by someone else
+        This tile is already subscribed by someone else since
       <% end %>
-      (since <%= tile.subscription.created_at.strftime('%e %b %Y %H:%M:%S') %>).
+      <%= tile.subscription.created_at.strftime('%e %b %Y') %>
+      <% if tile.subscription.stripe_status.present? %>
+        and is currently <%= tile.subscription.stripe_status %>
+      <% end %>
     </p>
     <% if tile.subscription.user == current_user %>
       <%= link_to 'Cancel Subscription',
-                  "javascript:alert('Please contact us to cancel your subscription')",
+                  "javascript:alert('Please contact us if you need to cancel your subscription')",
                   class: 'btn btn-outline-danger' %>
     <% end %>
   <% elsif user_signed_in? %>
-    <%= form_with url: checkout_checkout_path do |form| %>
-      <%= form.hidden_field :tile, value: tile.hashid %>
-      <div class="form-check">
-        <%= radio_button_tag 'freq', 'monthly', true, class: 'form-check-input' %>
-        <%= label_tag 'freq_monthly', 'Subscribe for £5 per month', class: 'form-check-label' %>
-      </div>
-      <div class="form-check">
-        <%= radio_button_tag 'freq', 'yearly', false, class: 'form-check-input' %>
-        <%= label_tag 'freq_yearly', 'Subscribe for £50 per year (save £10)', class: 'form-check-label' %>
-      </div>
-      <%= form.submit 'Pay & Subscribe', class: 'btn btn-primary' %>
+    <% redeemable_subscription = current_user.subscriptions.where.missing(:tile).first %>
+    <% if redeemable_subscription.present? %>
+      <%= render 'subscription_redeem', tile: tile, subscription: redeemable_subscription %>
+    <% else %>
+      <%= render 'subscription_checkout', tile: tile %>
     <% end %>
   <% else %>
     <p>

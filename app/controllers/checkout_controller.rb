@@ -28,6 +28,8 @@ class CheckoutController < ApplicationController
   def success
     return if @tile.subscription.nil?
 
+    StripeSubscriptionRefreshJob.perform_later(@tile.subscription)
+
     redirect_to tile_path(@tile),
                 flash: { success: 'Purchase successful!' }
   end

@@ -94,6 +94,19 @@
 
   <% if plot.polygon.nil? # i.e. new record and no invalid polygon set %>
     map.setView(<%= Plot::DEFAULT_COORDS %>, 19);
+    // FeatureGroup is to store editable layers
+    var drawnItems = new L.FeatureGroup();
+    map.addLayer(drawnItems);
+    var drawControl = new L.Control.Draw({
+      draw: {
+        polyline: false,
+        rectangle: false,
+        circle: false,
+        circlemarker: false,
+        marker: false
+      }
+    });
+    map.addControl(drawControl);
 
     map.on(L.Draw.Event.CREATED, function (e) {
       var type = e.layerType,

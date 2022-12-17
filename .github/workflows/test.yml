@@ -51,4 +51,5 @@ jobs:
     - name: Run Rspec
       env:
         DATABASE_URL: postgres://postgres:postgres@localhost:5432
+        STRIPE_SECRET_KEY: sk_test_abc123
       run: bin/rspec

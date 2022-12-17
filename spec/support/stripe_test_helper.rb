@@ -9,4 +9,29 @@ module StripeTestHelper
     signature = Stripe::Webhook::Signature.compute_signature(time, payload, secret)
     Stripe::Webhook::Signature.generate_header(time, signature)
   end
+
+  def stripe_fixture(filename)
+    # We should use `.to_hash` on Stripe responses to avoid unhelpful nested `StripeObject`s.
+    # In our specs (here), we load json and force symbol keys for compatibility
+    filename = "stripe/#{filename}" unless filename.start_with?('stripe/')
+    json_fixture(filename).deep_symbolize_keys
+  end
+
+  # Stub the low-level Stripe API request
+  # method => HTTP verb (as symbol) to expect for the request (eg. :post)
+  # status => response code (200 or 4XX) - see https://stripe.com/docs/api/errors
+  # path => Stripe API path AND local fixtures directory (eg. 'payment_intents')
+  # filename => JSON fixture (relative to 'path' folder)
+  def stub_stripe_api(method, status, path, filename)
+    resp = stripe_fixture("#{path}/#{filename}")
+
+    stub_request(method, stripe_api_url(path))
+      .to_return(status:, body: resp.to_json)
+  end
+
+  private
+
+  def stripe_api_url(path)
+    "https://api.stripe.com/v1/#{path}"
+  end
 end

@@ -3,6 +3,7 @@
 RSpec.describe 'Checkout' do
   before do
     allow(ENV).to receive(:fetch).and_call_original
+    allow(ENV).to receive(:fetch).with('STRIPE_PRICE_ID_BLOCK_MONTHLY').and_return('price_123monthly')
 
     stub_stripe_api(:post, 200, 'checkout/sessions', 'new')
   end

@@ -94,3 +94,6 @@ gem 'traceroute', group: %i[development test]
 
 # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
 gem 'web-console', groups: :development
+
+# Mock web requests during tests
+gem 'webmock', group: :test

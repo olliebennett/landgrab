@@ -7,7 +7,7 @@ class CheckoutController < ApplicationController
 
   # See docs/CHECKOUT.md
   def checkout
-    create_stripe_checkout(params[:freq].to_sym, @tile)
+    create_stripe_checkout(params[:freq].to_sym, nil, @tile)
 
     redirect_to @stripe_checkout.url,
                 status: :see_other,
@@ -16,7 +16,8 @@ class CheckoutController < ApplicationController
 
   # See docs/CHECKOUT.md
   def generate
-    create_stripe_checkout(params[:freq].to_sym, nil)
+    promo_code = PromoCode.find_by!(code: params[:code]) if params[:code].present?
+    create_stripe_checkout(params[:freq].to_sym, promo_code, nil)
 
     redirect_to @stripe_checkout.url,
                 status: :see_other,
@@ -49,8 +50,8 @@ class CheckoutController < ApplicationController
     end
   end
 
-  def stripe_checkout_payload(freq, tile)
-    {
+  def stripe_checkout_payload(freq, promo_stripe_id, tile)
+    x = {
       # Stripe will create new customer if not supplied
       customer: current_user&.stripe_customer_id,
       line_items: [{
@@ -64,10 +65,12 @@ class CheckoutController < ApplicationController
       success_url: tile.nil? ? checkout_claim_url : checkout_success_url(tile: tile.hashid),
       cancel_url: checkout_cancel_url
     }
+    x[:discount] = { promotional_code: promo_stripe_id } if promo_stripe_id.present?
+    x
   end
 
-  def create_stripe_checkout(freq, tile)
-    @stripe_checkout = Stripe::Checkout::Session.create(stripe_checkout_payload(freq, tile))
+  def create_stripe_checkout(freq, promo_code, tile)
+    @stripe_checkout = Stripe::Checkout::Session.create(stripe_checkout_payload(freq, promo_code&.stripe_id, tile))
   end
 
   def set_tile

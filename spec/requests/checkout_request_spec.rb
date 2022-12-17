@@ -32,7 +32,7 @@ RSpec.describe 'Checkout' do
 
       do_get
 
-      expect(Stripe::Checkout::Session).to have_received(:create).with(hash_including(discounts: [{ promotional_code: promo_code.stripe_id }]))
+      expect(Stripe::Checkout::Session).to have_received(:create).with(hash_including(discounts: [{ promotion_code: promo_code.stripe_id }]))
     end
   end
 end

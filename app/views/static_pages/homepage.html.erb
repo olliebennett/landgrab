@@ -17,7 +17,7 @@
 
 <% sample_plot = Plot.joins(:tiles).distinct.sample %>
 <% if sample_plot.present? %>
-  <%= render 'w3w_map', tiles: sample_plot.tiles %>
+  <%= render 'w3w_map', tiles: sample_plot.tiles_for_map %>
 <% else %>
   There aren't any plots in the system yet...
 <% end %>

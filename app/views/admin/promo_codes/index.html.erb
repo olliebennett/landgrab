@@ -1,0 +1,11 @@
+<h1><%= admin_title(PromoCode) %></h1>
+
+<p>
+  Promo codes can be applied when setting up a subscription.
+</p>
+
+<%= page_entries_info @promo_codes %>
+
+<%= render 'table', promo_codes: @promo_codes %>
+
+<%= paginate @promo_codes, theme: 'bootstrap-5' %>

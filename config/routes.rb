@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     resources :posts, only: %i[create index show new edit update]
     resources :post_associations, only: %i[create]
     resources :projects, only: %i[create index show new edit update]
+    resources :promo_codes, only: %i[index]
     resources :subscriptions, only: %i[create index show edit update] do
       get :refresh, on: :member
     end

@@ -65,7 +65,7 @@ class CheckoutController < ApplicationController
       success_url: tile.nil? ? checkout_claim_url : checkout_success_url(tile: tile.hashid),
       cancel_url: checkout_cancel_url
     }
-    x[:discount] = { promotional_code: promo_stripe_id } if promo_stripe_id.present?
+    x[:discounts] = [{ promotional_code: promo_stripe_id }] if promo_stripe_id.present?
     x
   end
 

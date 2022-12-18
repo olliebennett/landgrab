@@ -88,7 +88,7 @@ class Plot < ApplicationRecord
     overlaps = overlapping_polygons
     return if overlaps.blank?
 
-    errors.add(:polygon, "intersects with other plot(s) - Plot #{overlaps.map(&:hashid).join(', ')}")
+    errors.add(:polygon, "intersects with other plot(s) - #{overlaps.map(&:title).join(', ')}")
   end
 
   def overlapping_polygons

@@ -13,6 +13,7 @@
         <th>Created</th>
         <th>Polygon</th>
         <th>Tiles</th>
+        <th>Area</th>
       </tr>
     </thead>
 
@@ -30,6 +31,7 @@
           <td><%= plot.created_at.to_formatted_s(:short) %></td>
           <td><%= pluralize(plot.polygon.coordinates[0].length, 'point') %></td>
           <td><%= plot.tiles.count %></td>
+          <td>~ <%= plot.area_formatted_unsquared %><sup>2</sup></td>
         </tr>
       <% end %>
     </tbody>

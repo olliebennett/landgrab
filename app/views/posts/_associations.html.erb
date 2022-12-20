@@ -14,6 +14,12 @@
   <% end %>
 <% end %>
 
+<% if plot_pas.any? %>
+  <% plot_pas.each do |pa| %>
+    <%= render 'plots/card', plot: pa.postable %>
+  <% end %>
+<% end %>
+
 <% mentioned_tiles = post.mentioned_tiles %>
 <% if mentioned_tiles.any? || linked_tiles.any? %>
   <p>

@@ -13,6 +13,11 @@
     </tr>
 
     <tr>
+      <th>Welcome Text (shown after subscribing)</th>
+      <td><%= markdown(@project.welcome_text) %></td>
+    </tr>
+
+    <tr>
       <th>Website</th>
       <td>
         <% if @project.website.present? %>

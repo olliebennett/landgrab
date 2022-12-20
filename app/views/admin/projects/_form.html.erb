@@ -35,6 +35,24 @@
 
   <div class="row mb-3 g-3 align-items-center">
     <div class="col-sm-2">
+      <%= form.label :welcome_text, class: 'col-form-label' %>
+    </div>
+    <div class="col-sm-5">
+      <%= form.text_area :welcome_text,
+                        required: true,
+                        class: 'form-control',
+                        rows: 6,
+                        aria: { describedby: 'welcomeTextHelp' } %>
+    </div>
+    <div class="col-sm-5">
+      <span id="welcomeTextHelp" class="form-text">
+        Provide a message to be displayed after a user subscribes.
+      </span>
+    </div>
+  </div>
+
+  <div class="row mb-3 g-3 align-items-center">
+    <div class="col-sm-2">
       <%= form.label :website, 'Website URL', class: 'col-form-label' %>
     </div>
     <div class="col-sm-5">

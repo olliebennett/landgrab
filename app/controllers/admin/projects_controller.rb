@@ -52,7 +52,8 @@ module Admin
               :description,
               :website,
               :hero_image_url,
-              :logo_url
+              :logo_url,
+              :welcome_text
             )
     end
   end

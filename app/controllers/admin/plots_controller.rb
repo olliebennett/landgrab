@@ -39,7 +39,7 @@ module Admin
     def update
       respond_to do |format|
         if @plot.update(plot_params)
-          PlotTilesPopulateJob.perform_later(@plot.id)
+          PlotTilesPopulateJob.perform_later(@plot.id) if @plot.changes.key?('polygon')
 
           format.html { redirect_to admin_plot_path(@plot), notice: 'Plot was successfully updated.' }
           format.json { render :show, status: :ok, location: @plot }

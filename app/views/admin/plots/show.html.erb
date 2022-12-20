@@ -11,6 +11,16 @@
       <td><%= markdown(@plot.description) %></td>
     </tr>
     <tr>
+      <th>Hero Image</th>
+      <td>
+        <% if @plot.hero_image_url.present? %>
+          <%= image_tag @plot.hero_image_url, height: '150px' %>
+        <% else %>
+          -
+        <% end %>
+      </td>
+    </tr>
+    <tr>
       <th>Project</th>
       <td>
         <% if @plot.project.present? %>

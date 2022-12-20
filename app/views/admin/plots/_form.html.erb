@@ -31,6 +31,20 @@
 
   <div class="row mb-3 g-3 align-items-center">
     <div class="col-sm-2">
+      <%= form.label :hero_image_url, 'Hero Image URL', class: 'col-form-label' %>
+    </div>
+    <div class="col-sm-3">
+      <%= form.text_field :hero_image_url, class: 'form-control', aria: { describedby: 'heroImageHelp' } %>
+    </div>
+    <div class="col-sm-7">
+      <span id="heroImageHelp" class="form-text">
+        URL of an image to be used as the main/header image of the plot
+      </span>
+    </div>
+  </div>
+
+  <div class="row mb-3 g-3 align-items-center">
+    <div class="col-sm-2">
       <%= form.label :project_id, class: 'col-form-label' %>
     </div>
     <div class="col-sm-3">
@@ -56,6 +70,7 @@
       </span>
     </div>
   </div>
+
   <div class="row mb-3 g-3 align-items-center">
     <div class="col-sm-2">
       <label class="col-form-label">Approx Area</label>

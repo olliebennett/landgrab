@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   resources :tiles, only: %i[index show]
   resources :plots, only: %i[index show]
   resources :posts, only: %i[show]
-  resources :projects, only: %i[index show]
+  resources :projects, only: %i[index show] do
+    get :welcome, on: :member
+  end
   resources :subscriptions, only: %i[create index show] do
     get :claim, on: :member
     post :redeem, on: :member

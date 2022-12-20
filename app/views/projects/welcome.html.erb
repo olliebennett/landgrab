@@ -1,0 +1,27 @@
+<h1><%= title "Welcome to #{@project.title}" %></h1>
+
+<div class="row">
+  <div class="col-xs-12">
+    <%= image_tag @project.hero_image_url, height: '250px', width: '100%', class: 'mb-2 rounded' %>
+  </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-4">
+        <% if @project.website %>
+          <%= link_to @project.website do %>
+            <%= image_tag @project.logo_url, class: 'img-fluid' %>
+          <% end %>
+        <% else %>
+          <%= image_tag @project.logo_url, class: 'img-fluid' %>
+        <% end %>
+      </div>
+      <div class="col-xs-12 col-sm-8">
+        <p>
+          <%= markdown(@project.welcome_text) %>
+        </p>
+      </div>
+    </div>
+    <h2>Support the project</h2>
+    <%= render 'plots', project: @project %>
+  </div>
+</div>

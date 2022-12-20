@@ -10,7 +10,9 @@
           - <%= @subscription.user.display_name %>
           <%= " (that's you!)" if @subscription.user == current_user %>
         <% else %>
-          No user; purchase not yet claimed
+          No user; purchase not yet claimed. User must visit this link:
+          <br>
+          <%= content_tag(:code, claim_subscription_url(@subscription, hash: @subscription.claim_hash)) %>
         <% end %>
       </td>
     </tr>

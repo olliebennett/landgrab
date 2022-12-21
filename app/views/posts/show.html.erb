@@ -5,7 +5,7 @@
 <div class="row">
   <div class="col-md-8">
     <% if user_signed_in? %>
-      <% if @post.viewable_by?(current_user) %>
+      <% if current_user.admin? || @post.viewable_by?(current_user) %>
         <%= markdown(linkify_tiles(@post.body)) %>
       <% else %>
         <%= bootstrap_alert 'You need to subscribe to a related tile before you can view this post!' %>

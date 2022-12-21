@@ -31,6 +31,12 @@ This endpoint will generate a Stripe checkout, associating it to the
 user if they are logged in, and redirect the customer to complete
 payment through Stripe.
 
+The endpoint accepts parameters;
+
+- `freq` for the period of the subscription.
+- `code` of a promo code corresponding to a Stripe 'promotion code'.
+- `project` id to restrict the subscription to a specific project.
+
 After completing the payment, the user will reach a 'claim' page
 (`checkout_claim_path`) which is a dead end. We'll separately receive
 a webhook informing us of the subscription, and will send an email

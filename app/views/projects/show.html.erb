@@ -21,10 +21,10 @@
       </div>
     </div>
     <h2>Support the project</h2>
-    <% if project.plots.any? %>
+    <% if @project.plots.any? %>
       <p>
-        <%= project.title %> consists of
-        <%= pluralize(project.plots.size, 'plot') %>
+        <%= @project.title %> consists of
+        <%= pluralize(@project.plots.size, 'plot') %>
         broken into 3x3m squares ("tiles") of land.
         In order to support the restoration of the land,
         each tile is individually available to sponsor for a small fee.

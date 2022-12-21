@@ -51,8 +51,9 @@ class CheckoutController < ApplicationController
   end
 
   def stripe_checkout_payload(freq, promo_stripe_id, tile)
+    project = Project.first
     success_url = if current_user.present?
-                    tile.present? ? checkout_success_url(tile: tile.hashid) : subscriptions_url
+                    tile.present? ? checkout_success_url(tile: tile.hashid) : welcome_project_path(project)
                   else
                     checkout_claim_url
                   end

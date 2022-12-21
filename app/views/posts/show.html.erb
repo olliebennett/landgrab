@@ -4,7 +4,21 @@
 
 <div class="row">
   <div class="col-md-8">
-    <%= markdown(linkify_tiles(@post.body)) %>
+    <% if user_signed_in? %>
+      <% if @post.viewable_by?(current_user) %>
+        <%= markdown(linkify_tiles(@post.body)) %>
+      <% else %>
+        <%= bootstrap_alert 'You need to subscribe to a related tile before you can view this post!' %>
+      <% end %>
+    <% else %>
+      <%= bootstrap_alert safe_join([
+        'Please',
+        link_to('log in', new_user_session_path, class: 'alert-link'),
+        'or',
+        link_to('register', new_user_registration_path, class: 'alert-link'),
+        'before trying to view this post'
+      ], ' ') %>
+    <% end %>
   </div>
   <div class="col-md-4">
     <%= render 'associations', post: @post %>

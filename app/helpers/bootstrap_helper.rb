@@ -8,4 +8,13 @@ module BootstrapHelper
       link_to title, href, class: 'nav-link'
     end
   end
+
+  def bootstrap_alert(text, type = 'danger')
+    capture do
+      tag.div(class: "alert alert-#{type}", role: 'alert') do
+        concat text
+        concat yield if block_given?
+      end
+    end
+  end
 end

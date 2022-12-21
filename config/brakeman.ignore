@@ -7,7 +7,7 @@
       "check_name": "LinkToHref",
       "message": "Potentially unsafe model attribute in `link_to` href",
       "file": "app/views/admin/projects/show.html.erb",
-      "line": 19,
+      "line": 24,
       "link": "https://brakemanscanner.org/docs/warning_types/link_to_href",
       "code": "link_to(Project.find_by_hashid!(params[:id]).website, Project.find_by_hashid!(params[:id]).website)",
       "render_path": [
@@ -67,8 +67,42 @@
         79
       ],
       "note": "Website is only editable by admins"
+    },
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 4,
+      "fingerprint": "c19f8957dee394b063fd316b9eca6b033b5d9adf77c3e04c1985f9b24b197536",
+      "check_name": "LinkToHref",
+      "message": "Potentially unsafe model attribute in `link_to` href",
+      "file": "app/views/projects/welcome.html.erb",
+      "line": 11,
+      "link": "https://brakemanscanner.org/docs/warning_types/link_to_href",
+      "code": "link_to(Project.find_by_hashid!(params[:id]).website)",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "ProjectsController",
+          "method": "welcome",
+          "line": 14,
+          "file": "app/controllers/projects_controller.rb",
+          "rendered": {
+            "name": "projects/welcome",
+            "file": "app/views/projects/welcome.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "projects/welcome"
+      },
+      "user_input": "Project.find_by_hashid!(params[:id]).website",
+      "confidence": "Weak",
+      "cwe_id": [
+        79
+      ],
+      "note": "This note is set by admins who are trusted"
     }
   ],
-  "updated": "2022-11-08 07:13:23 +0000",
-  "brakeman_version": "5.3.1"
+  "updated": "2022-12-21 00:13:21 +0000",
+  "brakeman_version": "5.4.0"
 }

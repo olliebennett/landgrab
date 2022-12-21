@@ -51,6 +51,12 @@ class CheckoutController < ApplicationController
   end
 
   def stripe_checkout_payload(freq, promo_stripe_id, tile)
+    success_url = if current_user.present?
+                    tile.present? ? checkout_success_url(tile: tile.hashid) : subscriptions_url
+                  else
+                    checkout_claim_url
+                  end
+
     x = {
       # Stripe will create new customer if not supplied
       customer: current_user&.stripe_customer_id,
@@ -62,7 +68,7 @@ class CheckoutController < ApplicationController
         tile: tile&.hashid
       },
       mode: 'subscription',
-      success_url: tile.nil? ? checkout_claim_url : checkout_success_url(tile: tile.hashid),
+      success_url:,
       cancel_url: checkout_cancel_url
     }
     x[:discounts] = [{ promotion_code: promo_stripe_id }] if promo_stripe_id.present?

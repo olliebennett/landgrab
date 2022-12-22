@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   # Store current URL for use in post-login/register redirect.
   def store_location
     return if user_signed_in?
-    return unless request.get?
+    return if request.post?
     return unless request.format.html? # skip JSON/CSV etc.
     return if %w[
       /

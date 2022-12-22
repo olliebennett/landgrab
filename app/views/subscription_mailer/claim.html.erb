@@ -4,13 +4,20 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1><%= "Claim your #{ENV.fetch('SITE_TITLE', 'LandGrab')} subscription" %></h1>
+    <h1><%= "Claim your #{ENV.fetch('SITE_TITLE', 'LandGrab')} tile" %></h1>
     <p>
-      Click here to claim the subscription:
+      Click here to set up your account and choose a tile:
     </p>
     <p>
-      <%= link_to 'claim', claim_subscription_url(@subscription, hash: @subscription.claim_hash) %>
+      <%= link_to 'claim my tile', claim_subscription_url(@subscription, hash: @subscription.claim_hash) %>
     </p>
-    <p>Any questions or issues, please just reply to this message!</p>
+    <p>
+      For reference, you can always log into the site here:
+    </p>
+    <p>
+      Members area: <%= root_url %>
+    </p>
+    <p>If you have any questions, please simply reply to this email.</p>
+    <p>Thank you</p>
   </body>
 </html>

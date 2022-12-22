@@ -80,6 +80,7 @@ class CheckoutController < ApplicationController
 
   def create_stripe_checkout(freq, promo_code, tile)
     @stripe_checkout = Stripe::Checkout::Session.create(stripe_checkout_payload(freq, promo_code&.stripe_id, tile))
+    nil # return no error
   rescue Stripe::InvalidRequestError => e
     raise e unless e.message == 'This promotion code cannot be redeemed because the associated customer has prior transactions.'
 

@@ -3,9 +3,14 @@
     This tile is already
     <%= link_to 'subscribed',
                 admin_subscription_path(@tile.subscription) %>
-    by
-    <%= link_to @tile.subscription.user.display_name,
-                admin_user_path(@tile.subscription.user) %>
+
+    <% if @tile.subscription.user.present? %>
+      by
+      <%= link_to @tile.subscription.user.display_name,
+                  admin_user_path(@tile.subscription.user) %>
+    <% else %>
+      (but not claimed yet)
+    <% end %>
     (since <%= @tile.subscription.created_at.strftime('%e %b %Y %H:%M:%S') %>).
   <% else %>
     This tile is not yet subscribed.

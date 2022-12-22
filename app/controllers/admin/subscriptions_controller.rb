@@ -6,7 +6,10 @@ module Admin
     before_action :set_subscription, only: %i[show edit refresh update]
 
     def index
-      @subscriptions = Subscription.order(id: :desc).page(params[:page])
+      @subscriptions = Subscription.all
+      @subscriptions = @subscriptions.where(stripe_status: params[:stripe_status].compact_blank.map { |x| x == 'BLANK' ? nil : Subscription.stripe_statuses.fetch(x) }) if params[:stripe_status]
+      @subscriptions = @subscriptions.where('stripe_id LIKE ?', "%#{params[:stripe_id]}%") if params[:stripe_id].present?
+      @subscriptions = @subscriptions.order(id: :desc).page(params[:page])
     end
 
     def show; end

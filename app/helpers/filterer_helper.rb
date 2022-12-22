@@ -27,6 +27,22 @@ module FiltererHelper
     end
   end
 
+  def render_filter_enum(enum_hash, key, size: 6, col: 2, include_blank: true)
+    selected_result = params[key].is_a?(Array) ? params[key] : params[key]&.split(',')
+    options = enum_hash.keys
+    options.unshift('BLANK') if include_blank
+    input = select_tag(key, options_for_select(options, selected_result), multiple: true, size: [options.length, size].min, include_blank: '[ Stripe Status ]', class: 'form-control')
+
+    label = label_tag key, key.to_s.titleize, class: 'visually-hidden'
+
+    tag.div(class: "col-sm-#{col}") do
+      capture do
+        concat label
+        concat input
+      end
+    end
+  end
+
   def render_filter_submit(col: 2)
     tag.div(class: "col-sm-#{col} d-grid") do
       button_tag 'Filter', class: 'btn btn-primary btn-block'

@@ -2,6 +2,8 @@
 
 <%= page_entries_info @subscriptions %>
 
+<%= render 'filters' %>
+
 <%= render 'table', subscriptions: @subscriptions %>
 
 <%= paginate @subscriptions, theme: 'bootstrap-5' %>

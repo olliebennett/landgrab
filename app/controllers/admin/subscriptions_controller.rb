@@ -6,7 +6,7 @@ module Admin
     before_action :set_subscription, only: %i[show edit refresh update]
 
     def index
-      @subscriptions = Subscription.all
+      @subscriptions = Subscription.order(id: :desc).page(params[:page])
     end
 
     def show; end

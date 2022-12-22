@@ -1,6 +1,10 @@
 <h1><%= admin_title Subscription %></h1>
 
+<%= page_entries_info @subscriptions %>
+
 <%= render 'table', subscriptions: @subscriptions %>
+
+<%= paginate @subscriptions, theme: 'bootstrap-5' %>
 
 <p>
   Users can subscribe to a new (unclaimed) tile from the tile's details page.

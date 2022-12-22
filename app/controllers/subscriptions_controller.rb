@@ -43,7 +43,7 @@ class SubscriptionsController < ApplicationController
         redirect_to welcome_project_path(@subscription.project_fallback), flash: { notice: "Great; you've subscribed! Next step is to pick a tile!" }
       end
     else
-      redirect_to new_registration_path(:user), flash: { notice: 'Please register an account then click the link again to claim' }
+      redirect_to new_registration_path(:user), flash: { notice: 'Please register an account (or login) to claim your tile' }
     end
   end
 

@@ -4,11 +4,7 @@
       <% if tile.subscription.user == current_user %>
         Your subscription to this tile began on
       <% else %>
-        This tile is already subscribed by someone else since
-      <% end %>
-      <%= tile.subscription.created_at.strftime('%e %b %Y') %>
-      <% if tile.subscription.stripe_status.present? %>
-        and is currently <%= tile.subscription.stripe_status %>
+        This tile is already subscribed by someone else!
       <% end %>
     </p>
     <% if tile.subscription.user == current_user %>

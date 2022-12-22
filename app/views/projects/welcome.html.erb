@@ -4,7 +4,6 @@
   <div class="col-xs-12">
     <%= image_tag @project.hero_image_url, height: '250px', width: '100%', class: 'mb-2 rounded' %>
   </div>
-
     <div class="row">
       <div class="col-xs-12 col-sm-4">
         <% if @project.website %>
@@ -19,6 +18,12 @@
         <p>
           <%= markdown(@project.welcome_text) %>
         </p>
+        <% random_plot = @project.plots.with_available_tiles.sample %>
+        <% if random_plot.present? %>
+          <p>
+            <%= link_to 'Pick a random plot for me', plot_path(random_plot), class: 'btn btn-primary' %>
+          </p>
+        <% end %>
       </div>
     </div>
     <%= render 'plots', project: @project %>

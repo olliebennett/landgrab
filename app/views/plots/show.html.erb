@@ -6,8 +6,19 @@
   <div class="col-md-6 mb-3">
     <%= render 'details', plot: @plot %>
     <p>
-      Select a tile from the map to subscribe or view details.
+      Click an available tile (small blue square) on the map to subscribe or view details.
     </p>
+
+    <% redeemable_subscription = current_user.subscriptions.where.missing(:tile).first %>
+    <% if redeemable_subscription.present? %>
+      <% random_tile = @plot.tiles.available.sample %>
+      <% if random_tile.present? %>
+        <p>
+          <%= link_to 'Pick a random tile for me', tile_path(random_tile), class: 'btn btn-primary' %>
+        </p>
+      <% end %>
+    <% end %>
+
     <%= render 'posts', plot: @plot %>
   </div>
   <div class="col-md-6">

@@ -1,5 +1,5 @@
 
-<% if @plot.description %>
+<% if @plot.description.present? %>
   <%= markdown(@plot.description) %>
 <% end %>
 
@@ -14,20 +14,27 @@ covers <%= @plot.area_formatted_acres %>
 (~ <%= @plot.area_formatted_unsquared %><sup>2</sup>).
 </p>
 
+<% if @plot.hero_image_url.present? %>
+  <%= image_tag @plot.hero_image_url,
+                height: '150',
+                width: '100%',
+                class: 'rounded mb-3',
+                alt: "Hero image for #{@plot.title} plot" %>
+<% end %>
+
 <p>
 There are
 <%= @plot.non_subscribed_tiles.size %>
 tiles still available to subscribe to, out of
 <%= @plot.tiles.size %>
 total in the plot
-<% if @plot.tiles.size.positive? %>
-  - <%= link_to 'view all tiles', tiles_path(plot: @plot) %>
-<% end %>
 </p>
 
+<!--
 <p>
 The plot was created on
 <%= @plot.created_at.strftime('%e %b %Y') %>
 and centres on coordinates
 <%= @plot.centroid_coords_display %>.
 </p>
+-->

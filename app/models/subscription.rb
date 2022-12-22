@@ -16,4 +16,8 @@ class Subscription < ApplicationRecord
   enum :recurring_interval, %i[month year], prefix: :recurring_interval
 
   monetize :price_pence, as: :price, numericality: { greater_than: 0 }, allow_nil: true
+
+  def project_fallback
+    Project.first
+  end
 end

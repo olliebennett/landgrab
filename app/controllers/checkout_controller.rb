@@ -17,7 +17,9 @@ class CheckoutController < ApplicationController
   # See docs/CHECKOUT.md
   def generate
     promo_code = PromoCode.find_by!(code: params[:code]) if params[:code].present?
-    create_stripe_checkout(params[:freq].to_sym, promo_code, nil)
+    err = create_stripe_checkout(params[:freq].to_sym, promo_code, nil)
+
+    return redirect_to support_path, flash: { danger: err } if err.present?
 
     redirect_to @stripe_checkout.url,
                 status: :see_other,
@@ -78,6 +80,10 @@ class CheckoutController < ApplicationController
 
   def create_stripe_checkout(freq, promo_code, tile)
     @stripe_checkout = Stripe::Checkout::Session.create(stripe_checkout_payload(freq, promo_code&.stripe_id, tile))
+  rescue Stripe::InvalidRequestError => e
+    raise e unless e.message == 'This promotion code cannot be redeemed because the associated customer has prior transactions.'
+
+    "You've already used this promo code so can't subscribe with this again"
   end
 
   def set_tile

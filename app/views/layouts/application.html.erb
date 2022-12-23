@@ -17,6 +17,7 @@
     <%#= stylesheet_link_tag    'application', media: 'all' %>
 
     <title><%= if content_for?(:title) then yield(:title) + ' | ' end %><%= ENV.fetch('SITE_TITLE', 'LandGrab') %></title>
+    <%= render 'layouts/analytics' %>
   </head>
 
   <body>

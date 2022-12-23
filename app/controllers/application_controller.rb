@@ -35,6 +35,12 @@ class ApplicationController < ActionController::Base
     stored_location_for(:user) || root_path
   end
 
+  def log_event_mixpanel(event_type, event_data = {})
+    flash['a'] ||= {}
+    flash['a']['mixpanel'] ||= []
+    flash['a']['mixpanel'] << { 'event_type' => event_type, 'event_data' => event_data }
+  end
+
   private
 
   def check_admin

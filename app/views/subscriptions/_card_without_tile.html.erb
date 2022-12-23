@@ -16,7 +16,7 @@
         so far
       </small>
     </p>
-    <%= link_to 'Find a Tile', explore_path, class: 'btn btn-primary stretched-link' %>
+    <%= link_to 'Find a Tile', welcome_project_path(subscription.project_fallback), class: 'btn btn-primary stretched-link' %>
   </div>
   <div class="card-footer">
     <%= render_subscription_price(subscription) %>

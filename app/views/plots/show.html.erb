@@ -1,15 +1,26 @@
+<% ready_to_claim = user_signed_in? && current_user.subscriptions.where.missing(:tile).any? %>
+<% random_tile = @plot.tiles.available.sample %>
+
 <h1>
   Plot: <%= title @plot.title %>
 </h1>
 
 <div class="row">
   <div class="col-md-6 mb-3">
+    <% if random_tile.present? && ready_to_claim %>
+      <%= bootstrap_alert safe_join([
+        "Next, you need to choose a tile! Click a blue square on the map or ",
+        link_to('pick a random tile', tile_path(random_tile), class: 'alert-link'),
+        '.'
+      ], ''), :info %>
+    <% end %>
+
     <%= render 'details', plot: @plot %>
+
     <p>
       Click an available tile (small blue square) on the map to subscribe or view details.
     </p>
 
-    <% random_tile = @plot.tiles.available.sample %>
     <% if random_tile.present? %>
       <p>
         <%= link_to 'Pick a random tile for me', tile_path(random_tile), class: 'btn btn-primary' %>

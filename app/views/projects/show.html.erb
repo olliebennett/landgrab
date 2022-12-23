@@ -1,8 +1,14 @@
+<% ready_to_claim = user_signed_in? && current_user.subscriptions.where.missing(:tile).any? %>
+
 <h1><%= title "Project: #{@project.title}" %></h1>
 
 <div class="row">
   <div class="col-md-8">
     <%= image_tag @project.hero_image_url, height: '250px', width: '100%', class: 'mb-2 rounded' %>
+
+    <% if ready_to_claim %>
+      <%= bootstrap_alert "You've subscribed but need to choose a tile! First, pick a plot from below...", :info %>
+    <% end %>
 
     <div class="row">
       <div class="col-xs-12 col-sm-4">

@@ -1,7 +1,12 @@
+<% ready_to_claim = user_signed_in? && current_user.subscriptions.where.missing(:tile).any? %>
+
 <h1><%= title @tile.w3w %></h1>
 
 <div class="row">
   <div class="col-md-6">
+    <% if @tile.available? && ready_to_claim %>
+      <%= bootstrap_alert "Last step! Use the 'claim this tile' button below.", :info %>
+    <% end %>
     <%= render 'details', tile: @tile %>
     <%= render 'subscription_info', tile: @tile %>
     <%= render 'posts', tile: @tile %>

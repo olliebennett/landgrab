@@ -25,7 +25,7 @@ class TilesController < ApplicationController
   end
 
   def show
-    log_event_mixpanel('Tiles: Show', { authed: user_signed_in?, tile: @tile, plot: @tile.plot })
+    log_event_mixpanel('Tiles: Show', { authed: user_signed_in?, tile: @tile.hashid, plot: @tile.plot&.hashid, project: @tile.plot&.project&.hashid })
     respond_to do |format|
       format.html { render :show }
       format.json { render json: @tile.to_geojson }

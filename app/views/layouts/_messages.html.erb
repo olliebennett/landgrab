@@ -1,4 +1,5 @@
 <% flash.each do |key, value|
+  next if key == 'a' # analytics handled separately
   # Convert devise keys into bootstrap-compatible styles
   alert_class = case key.to_s
   when "notice"

@@ -10,7 +10,7 @@ class PlotsController < ApplicationController
   end
 
   def show
-    log_event_mixpanel('Plots: Show', { authed: user_signed_in?, plot: @plot.hashid })
+    log_event_mixpanel('Plots: Show', { authed: user_signed_in?, plot: @plot.hashid, project: @plot.project&.hashid })
   end
 
   private

@@ -10,11 +10,11 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    log_event_mixpanel('Projects: Show', { authed: user_signed_in?, project: @project })
+    log_event_mixpanel('Projects: Show', { authed: user_signed_in?, project: @project.hashid })
   end
 
   def welcome
-    log_event_mixpanel('Projects: Welcome', { authed: user_signed_in?, project: @project })
+    log_event_mixpanel('Projects: Welcome', { authed: user_signed_in?, project: @project.hashid })
   end
 
   private

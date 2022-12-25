@@ -18,7 +18,7 @@
     <% end %>
 
     <% flash.to_h.dig('a', 'mixpanel')&.each do |event| %>
-      mixpanel.track('<%= event['event_type']%>');
+      mixpanel.track('<%= event['event_type']%>', <%= event['event_data'].to_json.html_safe %>);
     <% end %>
   </script>
 <% end %>

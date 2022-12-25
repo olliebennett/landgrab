@@ -3,11 +3,16 @@
 class StaticPagesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[about homepage explore]
 
-  def about; end
+  def about
+    log_event_mixpanel('About Page', { authed: user_signed_in? })
+  end
 
-  def support; end
+  def support
+    log_event_mixpanel('Support Page', { authed: user_signed_in? })
+  end
 
   def homepage
+    log_event_mixpanel('Home Page', { authed: user_signed_in? })
     if params[:center].present?
       tile = Tile.find_by(w3w: params[:center])
       @center = [tile.midpoint.y, tile.midpoint.x] if tile
@@ -17,6 +22,7 @@ class StaticPagesController < ApplicationController
   end
 
   def explore
+    log_event_mixpanel('Explore Page', { authed: user_signed_in? })
     @plot = Plot.select('plots.id, plots.title, COUNT(tiles)')
                 .with_available_tiles
                 .group('plots.id')

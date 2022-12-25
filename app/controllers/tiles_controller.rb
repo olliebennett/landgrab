@@ -6,6 +6,7 @@ class TilesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
 
   def index
+    log_event_mixpanel('Tiles: Index', { authed: user_signed_in? })
     @plot = Plot.find_by_hashid!(params[:plot]) if params[:plot].present?
     if @plot.present?
       @tiles = @plot.tiles.order(id: :desc).includes(:subscription).page(params[:page])
@@ -24,6 +25,7 @@ class TilesController < ApplicationController
   end
 
   def show
+    log_event_mixpanel('Tiles: Show', { authed: user_signed_in?, tile: @tile, plot: @tile.plot })
     respond_to do |format|
       format.html { render :show }
       format.json { render json: @tile.to_geojson }

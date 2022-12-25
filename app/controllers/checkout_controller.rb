@@ -9,6 +9,7 @@ class CheckoutController < ApplicationController
   def checkout
     create_stripe_checkout(params[:freq].to_sym, nil, @tile)
 
+    log_event_mixpanel('Checkout: Checkout', { authed: user_signed_in? })
     redirect_to @stripe_checkout.url,
                 status: :see_other,
                 allow_other_host: true
@@ -21,14 +22,18 @@ class CheckoutController < ApplicationController
 
     return redirect_to support_path, flash: { danger: err } if err.present?
 
+    log_event_mixpanel('Checkout: Generate', { authed: user_signed_in? })
     redirect_to @stripe_checkout.url,
                 status: :see_other,
                 allow_other_host: true
   end
 
-  def claim; end
+  def claim
+    log_event_mixpanel('Checkout: Claim', { authed: user_signed_in? })
+  end
 
   def success
+    log_event_mixpanel('Checkout: Success', { authed: user_signed_in? })
     return if @tile.subscription.nil?
 
     StripeSubscriptionRefreshJob.perform_later(@tile.subscription)
@@ -37,7 +42,9 @@ class CheckoutController < ApplicationController
                 flash: { success: 'Purchase successful!' }
   end
 
-  def cancel; end
+  def cancel
+    log_event_mixpanel('Checkout: Cancel', { authed: user_signed_in? })
+  end
 
   private
 

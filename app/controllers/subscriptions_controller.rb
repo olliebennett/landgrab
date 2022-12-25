@@ -8,12 +8,16 @@ class SubscriptionsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[claim]
 
   def index
+    log_event_mixpanel('Subscriptions: Index')
     @subscriptions = current_user.subscriptions
   end
 
-  def show; end
+  def show
+    log_event_mixpanel('Subscriptions: Show')
+  end
 
   def create
+    log_event_mixpanel('Subscriptions: Create')
     @subscription = current_user.subscriptions.new(subscription_params)
     if @subscription.save
       redirect_to tile_url(@subscription.tile), notice: 'You successfully subscribed to this tile!'
@@ -23,6 +27,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def claim
+    log_event_mixpanel('Subscriptions: Claim', { authd: user_signed_in? })
     if user_signed_in?
       @subscription = Subscription.find_by_hashid(params[:id])
       # TODO: Set 'project' on a subscription and redirect to that!
@@ -48,6 +53,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def redeem
+    log_event_mixpanel('Subscriptions: Redeem')
     @tile = Tile.find_by_hashid!(params[:tile])
 
     return redirect_to support_path, flash: { danger: 'Sorry; this tile is not available! Please pick another.' } if @tile.unavailable?

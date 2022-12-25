@@ -5,12 +5,17 @@ class ProjectsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
 
   def index
+    log_event_mixpanel('Projects: Index', { authed: user_signed_in? })
     @projects = Project.order(id: :desc).page(params[:page])
   end
 
-  def show; end
+  def show
+    log_event_mixpanel('Projects: Show', { authed: user_signed_in?, project: @project })
+  end
 
-  def welcome; end
+  def welcome
+    log_event_mixpanel('Projects: Welcome', { authed: user_signed_in?, project: @project })
+  end
 
   private
 

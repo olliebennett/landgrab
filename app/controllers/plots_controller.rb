@@ -6,9 +6,12 @@ class PlotsController < ApplicationController
 
   def index
     @plots = Plot.order(id: :desc).page(params[:page])
+    log_event_mixpanel('Plots: Index', { authed: user_signed_in? })
   end
 
-  def show; end
+  def show
+    log_event_mixpanel('Plots: Show', { authed: user_signed_in?, plot: @plot.hashid })
+  end
 
   private
 

@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[show]
 
   def show
-    @viewable = user_signed_in? && (current_user.admin? || @post.viewable_by?(current_user))
+    @viewable = user_signed_in? && @post.viewable_by?(current_user)
     log_event_mixpanel('Posts: Show', { authed: user_signed_in?, viewable: @viewable })
   end
 

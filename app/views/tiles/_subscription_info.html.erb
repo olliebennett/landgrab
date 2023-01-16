@@ -3,6 +3,7 @@
     <p>
       <% if tile.subscription.user == current_user %>
         Your subscription to this tile began on
+        <%= tile.subscription.created_at.strftime('%e %b %Y') %>
       <% else %>
         This tile is already subscribed by someone else!
       <% end %>

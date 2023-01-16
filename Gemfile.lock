@@ -283,7 +283,7 @@ GEM
       sentry-ruby (~> 5.5.0)
     sentry-ruby (5.5.0)
       concurrent-ruby (~> 1.0, >= 1.0.2)
-    stripe (8.0.0)
+    stripe (8.1.0)
     strscan (3.0.4)
     thor (1.2.1)
     timeout (0.3.0)

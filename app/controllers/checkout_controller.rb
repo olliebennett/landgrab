@@ -91,6 +91,7 @@ class CheckoutController < ApplicationController
   rescue Stripe::InvalidRequestError => e
     raise e unless e.message == 'This promotion code cannot be redeemed because the associated customer has prior transactions.'
 
+    # TODO: Handle when e.message.start_with?('Coupon expired')
     "You've already used this promo code so can't subscribe with this again"
   end
 

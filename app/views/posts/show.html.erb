@@ -8,7 +8,7 @@
       <% if @viewable %>
         <%= markdown(linkify_tiles(@post.body)) %>
       <% else %>
-        <%= bootstrap_alert 'You need to subscribe to a related tile before you can view this post!' %>
+        <%= bootstrap_alert 'You need to be subscribed to a related tile before you can view this post!' %>
       <% end %>
     <% else %>
       <%= bootstrap_alert safe_join([

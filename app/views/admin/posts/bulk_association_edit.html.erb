@@ -12,8 +12,14 @@
     <%= form.submit 'Choose Plot', class: 'btn btn-primary' %>
   <% end %>
 <% else %>
-  Bulk associating to tiles in plot:
-  <%= link_to @plot.title, admin_plot_path(@plot) %>
+  <p>
+    Bulk associating to tiles in plot:
+    <%= link_to @plot.title, admin_plot_path(@plot) %>
+  </p>
+  <p>
+    Use the polygon icon on the map below to draw around a section of the plot
+    and we'll assign all contained tiles to the post.
+  </p>
 
-  <%= render 'admin/plots/map', plot: @plot %>
+  <%= render 'static_pages/w3w_map', tiles: @plot.tiles %>
 <% end %>

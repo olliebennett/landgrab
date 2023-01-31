@@ -52,17 +52,6 @@
   var tiles = L.geoJSON(allTilesGeoJson, { onEachFeature: onEachFeature, style: tileStyle }).addTo(map);
 
   <% if plot.present? %>
-    const fitMapToPolygon = (map, polygon) => {
-      const LAT_BUFFER = 0.00001;
-      const LNG_BUFFER = 0.0001;
-      var bounds = polygon.getBounds();
-      bounds._northEast.lat += LAT_BUFFER;
-      bounds._northEast.lng += LNG_BUFFER;
-      bounds._southWest.lat -= LAT_BUFFER;
-      bounds._southWest.lng -= LNG_BUFFER;
-      map.fitBounds(bounds);
-    };
-
     // Fit map to plot bounds
     var latlngs = <%= plot.polygon.coordinates[0][0...-1].map(&:reverse) %>;
     var polygon = L.polygon(latlngs); // Note: not adding to map

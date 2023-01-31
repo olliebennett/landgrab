@@ -36,5 +36,16 @@
     };
 
     L.control.layers(baseMaps, {}, { position: 'bottomleft' }).addTo(map);
-  }
+  };
+
+  const fitMapToPolygon = (map, polygon) => {
+    const LAT_BUFFER = 0.00001;
+    const LNG_BUFFER = 0.0001;
+    var bounds = polygon.getBounds();
+    bounds._northEast.lat += LAT_BUFFER;
+    bounds._northEast.lng += LNG_BUFFER;
+    bounds._southWest.lat -= LAT_BUFFER;
+    bounds._southWest.lng -= LNG_BUFFER;
+    map.fitBounds(bounds);
+  };
 </script>

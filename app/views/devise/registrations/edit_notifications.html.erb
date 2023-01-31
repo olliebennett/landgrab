@@ -1,0 +1,15 @@
+<%= form_for(resource || current_user, as: :user, url: registration_path(current_user), html: { method: :put }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource || current_user %>
+
+  <%= render 'layouts/settings_nav', current_page: :notifications %>
+
+  <h2><%= title 'Notifications' %></h2>
+
+  <p>
+    Select which things you'd like to be notified about.
+  </p>
+
+  <%= render 'users/form_names', form: f %>
+
+  <%= f.submit 'Update Notification Settings', class: 'btn btn-primary' %>
+<% end %>

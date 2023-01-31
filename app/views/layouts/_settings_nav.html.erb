@@ -1,0 +1,17 @@
+<% pages = [
+  [:profile, 'Profile', edit_profile_path],
+  [:password, 'Password', edit_password_path]
+] %>
+
+<ul class="nav nav-pills mb-3">
+  <li class="nav-item">
+    <span class="nav-link disabled">Settings:</span>
+  </li>
+  <% pages.each do |page_slug, page_title, page_path| %>
+    <li class="nav-item">
+      <%= link_to page_title,
+                  page_path,
+                  class: "nav-link #{'active' if page_slug == current_page}" %>
+    </li>
+  <% end %>
+</ul>

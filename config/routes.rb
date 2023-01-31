@@ -5,6 +5,10 @@ Rails.application.routes.draw do
              controllers: {
                registrations: 'registrations'
              }
+  as :user do
+    get '/settings/profile' => 'registrations#edit', as: 'edit_profile'
+    get '/settings/password' => 'registrations#edit_password', as: 'edit_password'
+  end
 
   root to: 'static_pages#homepage'
 

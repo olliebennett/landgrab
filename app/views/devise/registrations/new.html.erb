@@ -10,11 +10,9 @@
   <div class="mb-3">
     <%= f.label :password, class: 'form-label' %>
     <%= f.password_field :password, autocomplete: 'new-password', required: true, class: 'form-control', aria: { describedby: 'passwordHelp' } %>
-    <% if @minimum_password_length %>
-      <div id="passwordHelp" class="form-text">
-        (<%= @minimum_password_length %> characters minimum)
-      </div>
-    <% end %>
+    <div id="passwordHelp" class="form-text">
+      (<%= @minimum_password_length %> characters minimum)
+    </div>
   </div>
 
   <div class="mb-3">

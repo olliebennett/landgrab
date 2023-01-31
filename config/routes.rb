@@ -38,7 +38,11 @@ Rails.application.routes.draw do
 
     resources :tiles, only: %i[create index show new]
     resources :plots, only: %i[create index show new edit update]
-    resources :posts, only: %i[create index show new edit update]
+    resources :posts, only: %i[create index show new edit update] do
+      get :bulk_association_edit, on: :member
+      post :bulk_association_update, on: :member
+    end
+
     resources :post_associations, only: %i[create]
     resources :projects, only: %i[create index show new edit update]
     resources :promo_codes, only: %i[index]

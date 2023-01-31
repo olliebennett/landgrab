@@ -1,0 +1,19 @@
+<h1><%= admin_title @post, suffix: '- Bulk Association' %></h1>
+
+<% if @plot.nil? %>
+  <p>First, pick a plot whose tiles we'll be bulk associating to this post...
+  <%= form_with(url: bulk_association_edit_admin_post_path(@post), method: :get) do |form| %>
+    <div class="col-sm-4 mb-3">
+      <%= label_tag :plot, 'Plot', class: 'visually-hidden' %>
+      <%= select_tag :plot, option_groups_from_collection_for_select(Project.order(:title), :plots, :title, :hashid, :title, params[:plot]),
+                            { include_blank: '[ Select Plot ]', class: 'form-select' } %>
+    </div>
+
+    <%= form.submit 'Choose Plot', class: 'btn btn-primary' %>
+  <% end %>
+<% else %>
+  Bulk associating to tiles in plot:
+  <%= link_to @plot.title, admin_plot_path(@plot) %>
+
+  <%= render 'admin/plots/map', plot: @plot %>
+<% end %>

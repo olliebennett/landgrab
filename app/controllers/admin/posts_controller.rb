@@ -3,7 +3,7 @@
 module Admin
   class PostsController < ApplicationController
     before_action :check_admin
-    before_action :set_post, only: %i[show edit update]
+    before_action :set_post, only: %i[show edit update bulk_association_edit bulk_association_update]
 
     def index
       @posts = Post.order(id: :desc).page(params[:page])
@@ -37,6 +37,12 @@ module Admin
         render :edit
       end
     end
+
+    def bulk_association_edit
+      @plot = Plot.find_by_hashid!(params[:plot]) if params[:plot].present?
+    end
+
+    def bulk_association_update; end
 
     private
 

@@ -1,0 +1,40 @@
+<script>
+  const addFullscreenButton = (map) => {
+    // https://github.com/brunob/leaflet.fullscreen
+    const fullscreen_btn = L.control.fullscreen({
+      position: 'topleft',
+      forceSeparateButton: true
+    })
+    fullscreen_btn.addTo(map);
+  };
+
+  const addAllLayers = (map) => {
+    const layer_osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors',
+      maxNativeZoom: 19,
+      maxZoom: 20
+    });
+
+    const layer_here = L.tileLayer('https://3.aerial.maps.ls.hereapi.com/maptile/2.1/maptile/newest/satellite.day/{z}/{x}/{y}/256/png?apiKey=<%= ENV.fetch('HERE_MAPS_API_KEY') %>', {
+      attribution: '&copy; <a href="https://developer.here.com/" target="_blank">HERE</a>',
+      maxNativeZoom: 19,
+      maxZoom: 20
+    });
+
+    const layer_google = L.tileLayer('https://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
+      attribution: '&copy; Google',
+      maxNativeZoom: 19,
+      maxZoom: 20
+    });
+
+    layer_google.addTo(map);
+
+    var baseMaps = {
+      'Google': layer_google,
+      'HERE Maps': layer_here,
+      'OpenStreetMap': layer_osm
+    };
+
+    L.control.layers(baseMaps, {}, { position: 'bottomleft' }).addTo(map);
+  }
+</script>

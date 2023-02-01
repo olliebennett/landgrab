@@ -18,7 +18,7 @@
              featured_description: featured_description %>
 <% end %>
 
-<% tiles = tiles.each { |b| b.map_popup = popup_tiles.include?(b) } %>
+<% tiles = tiles.each { |t| t.map_popup = popup_tiles.include?(t) } %>
 <script>
   function onEachFeature(feature, layer) {
     if (feature.properties && feature.properties.popupContent) {
@@ -59,7 +59,7 @@
     map.fitBounds(polygon.getBounds());
   <% else %>
     // Fit map to tile bounds
-    map.fitBounds(tiles.getBounds())
+    map.fitBounds(tiles.getBounds());
   <% end %>
 
   function drawGrid() {

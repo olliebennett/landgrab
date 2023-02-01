@@ -16,10 +16,27 @@
     Bulk associating to tiles in plot:
     <%= link_to @plot.title, admin_plot_path(@plot) %>
   </p>
-  <p>
-    Use the polygon icon on the map below to draw around a section of the plot
-    and we'll assign all contained tiles to the post.
-  </p>
+  <ul>
+    <!--
+    TODO:
+    <li>
+      Use the polygon icon on the map below to draw around a group of tiles,
+      then click "Assign" or "Unassign" to toggle all enclosed tiles accordingly.
+    </li>
+    -->
+    <li>
+      Click an individual tile to toggle it between associated and unassociated.
+    </li>
+    <li>
+      Click "Save Associations" to save changes.
+    </li>
+    <li>
+      Remember, if the post is also associated with the whole plot or project,
+      that will supercede individual tiles; subscribers of any tile in the plot or
+      project will be able to see this post regardless of whether their particular
+      tile is associated directly.
+    </li>
+  </ul>
 
-  <%= render 'static_pages/w3w_map', tiles: @plot.tiles %>
+  <%= render 'associated_tiles_map', tiles: @plot.tiles, associated_tiles: Tile.joins(:posts).where(posts: { id: @post.id }) %>
 <% end %>

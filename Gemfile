@@ -24,6 +24,9 @@ gem 'bootstrap5-kaminari-views'
 # Security audit checks (eg. SQL injection)
 gem 'brakeman', require: false, group: %i[development test]
 
+# Track down N+1 queries and unused eager loading
+gem 'bullet', group: %i[development test]
+
 # Call 'byebug' anywhere in the code to stop execution and get a debugger console
 gem 'byebug', groups: %i[development test]
 

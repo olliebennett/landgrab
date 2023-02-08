@@ -73,5 +73,13 @@ Rails.application.configure do
   config.after_initialize do
     # Ensure availability of xyz_url helpers in background jobs
     Rails.application.routes.default_url_options = config.action_mailer.default_url_options
+
+    # Enable Bullet (to track N+1s)
+    Bullet.enable        = true
+    Bullet.alert         = true
+    Bullet.bullet_logger = true
+    Bullet.console       = true
+    Bullet.rails_logger  = true
+    Bullet.add_footer    = true
   end
 end

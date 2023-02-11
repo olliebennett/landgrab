@@ -23,22 +23,18 @@ module Admin
       @post = Post.new(post_params)
       @post.author = current_user
 
-      respond_to do |format|
-        if @post.save
-          format.html { redirect_to admin_post_path(@post), notice: 'Post was successfully created.' }
-        else
-          format.html { render :new }
-        end
+      if @post.save
+        redirect_to admin_post_path(@post), notice: 'Post was successfully created.'
+      else
+        render :new
       end
     end
 
     def update
-      respond_to do |format|
-        if @post.update(post_params)
-          format.html { redirect_to admin_post_path(@post), notice: 'Post was successfully updated.' }
-        else
-          format.html { render :edit }
-        end
+      if @post.update(post_params)
+        redirect_to admin_post_path(@post), notice: 'Post was successfully updated.'
+      else
+        render :edit
       end
     end
 

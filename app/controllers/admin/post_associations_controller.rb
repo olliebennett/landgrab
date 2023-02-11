@@ -8,12 +8,10 @@ module Admin
       @post_association = PostAssociation.new(post_association_params)
       @post = @post_association.post
 
-      respond_to do |format|
-        if @post_association.save
-          format.html { redirect_to admin_post_path(@post), notice: 'Post association was successfully created.' }
-        else
-          format.html { render :new }
-        end
+      if @post_association.save
+        redirect_to admin_post_path(@post), notice: 'Post association was successfully created.'
+      else
+        render :new
       end
     end
 

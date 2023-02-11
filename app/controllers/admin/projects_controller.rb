@@ -20,22 +20,18 @@ module Admin
     def create
       @project = Project.new(project_params)
 
-      respond_to do |format|
-        if @project.save
-          format.html { redirect_to admin_project_path(@project), notice: 'Project was successfully created.' }
-        else
-          format.html { render :new }
-        end
+      if @project.save
+        redirect_to admin_project_path(@project), notice: 'Project was successfully created.'
+      else
+        render :new
       end
     end
 
     def update
-      respond_to do |format|
-        if @project.update(project_params)
-          format.html { redirect_to admin_project_path(@project), notice: 'Project was successfully updated.' }
-        else
-          format.html { render :edit }
-        end
+      if @project.update(project_params)
+        redirect_to admin_project_path(@project), notice: 'Project was successfully updated.'
+      else
+        render :edit
       end
     end
 

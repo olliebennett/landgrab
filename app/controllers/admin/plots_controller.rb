@@ -22,31 +22,22 @@ module Admin
 
     def create
       @plot = Plot.new(plot_params)
+      if @plot.save
+        PlotTilesPopulateJob.perform_later(@plot.id)
 
-      respond_to do |format|
-        if @plot.save
-          PlotTilesPopulateJob.perform_later(@plot.id)
-
-          format.html { redirect_to admin_plot_path(@plot), notice: 'Plot was successfully created.' }
-          format.json { render :show, status: :created, location: @plot }
-        else
-          format.html { render :new }
-          format.json { render json: @plot.errors, status: :unprocessable_entity }
-        end
+        redirect_to admin_plot_path(@plot), notice: 'Plot was successfully created.'
+      else
+        render :new
       end
     end
 
     def update
-      respond_to do |format|
-        if @plot.update(plot_params)
-          PlotTilesPopulateJob.perform_later(@plot.id) if @plot.changes.key?('polygon')
+      if @plot.update(plot_params)
+        PlotTilesPopulateJob.perform_later(@plot.id) if @plot.changes.key?('polygon')
 
-          format.html { redirect_to admin_plot_path(@plot), notice: 'Plot was successfully updated.' }
-          format.json { render :show, status: :ok, location: @plot }
-        else
-          format.html { render :edit }
-          format.json { render json: @plot.errors, status: :unprocessable_entity }
-        end
+        redirect_to admin_plot_path(@plot), notice: 'Plot was successfully updated.'
+      else
+        render :edit
       end
     end
 

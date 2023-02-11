@@ -3,7 +3,7 @@
 <% else %>
   <p>The post is linked to the following records:</p>
   <ul>
-    <% post.post_associations.select(&:persisted?).each do |pa| %>
+    <% post.post_associations.includes(:postable).select(&:persisted?).each do |pa| %>
       <li>
         <% case pa.postable_type %>
         <% when 'Project' %>

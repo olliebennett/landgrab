@@ -142,6 +142,9 @@ Layout/TrailingWhitespace:
 Lint/Void:
   Enabled: false
 
+Lint/EmptyBlock:
+  Enabled: false
+
 Lint/EmptyWhen:
   Enabled: false
 

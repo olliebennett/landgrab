@@ -1,0 +1,90 @@
+<% tiles ||= [] %>
+<% associated_tiles ||= [] %>
+
+<%= render 'layouts/leaflet_imports' %>
+
+<%= render 'layouts/leaflet_helpers' %>
+
+<div class="row">
+  <div class="col-xs-12 col-lg-10 mb-3">
+    <div id="map" style="width: 100%; height: 500px" class="mb-3"></div>
+  </div>
+  <div class="col-xs-12 col-lg-2">
+    <%= form_with url: bulk_association_update_admin_post_path do |form| %>
+      <%= form.submit 'Save Associations', class: 'btn btn-primary' %>
+      <%= form.label :w3w_list, class: 'form-label mt-3' do %>
+        Selected Tiles
+        (auto-updated when toggling on the map above)
+      <% end %>
+      <%= form.text_area 'w3w_list', class: 'form-control', rows: 15 %>
+    <% end %>
+  </div>
+</div>
+
+<% tiles = tiles.each { |t| t.map_popup = associated_tiles.include?(t) } %>
+<script>
+  const styleBase = { color: 'black', weight: 2 }
+  const styleAssociated = {...styleBase, ...{ opacity: 0.65, fill: true, fillOpacity: 0.5, fillColor: 'blue' }};
+  const styleUnassociated = {...styleBase, ...{ opacity: 1, fillOpacity: 0.3, fillColor: 'grey' }}
+
+  const w3wList = new Set();
+
+  const addW3W = (w3w) => {
+    w3wList.add(w3w);
+    updateW3WList();
+  };
+
+  const removeW3W = (w3w) => {
+    w3wList.delete(w3w)
+    updateW3WList();
+  };
+
+  const updateW3WList = () => {
+    const el = document.getElementById('w3w_list');
+    // Convert set to array to simplify printing
+    el.value = Array.from(w3wList).join(',\n');
+  };
+
+  // <% tiles.filter { |t| t.map_popup }.each do |tile| %>
+  w3wList.add('<%= tile.w3w %>');
+  // <% end %>
+  updateW3WList();
+
+  const onEachFeature = (feature, layer) => {
+    layer.on({
+      click: () => {
+        if (feature.properties.focussed) {
+          removeW3W(feature.properties.w3w);
+          layer.setStyle(styleUnassociated);
+        } else {
+          addW3W(feature.properties.w3w);
+          layer.setStyle(styleAssociated);
+        }
+        feature.properties.focussed = !feature.properties.focussed;
+      }
+    });
+  }
+
+  const tileStyle = (feature) => {
+    const base = { color: 'black', weight: 2 }
+    // Style docs: https://leafletjs.com/reference.html#path-option
+    if (feature.geometry.properties.focussed) {
+      return styleAssociated
+    } else {
+      return styleUnassociated;
+    }
+  };
+
+  var map = L.map('map');
+
+  addFullscreenButton(map);
+  addAllLayers(map);
+
+  var allTilesGeoJson;
+  // <%= "\n allTilesGeoJson = [" %><%= tiles.map(&:to_geojson).join(', ').html_safe %>];
+
+  var tiles = L.geoJSON(allTilesGeoJson, { onEachFeature: onEachFeature, style: tileStyle }).addTo(map);
+
+  // Fit map to tile bounds
+  map.fitBounds(tiles.getBounds());
+</script>

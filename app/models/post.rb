@@ -10,6 +10,10 @@ class Post < ApplicationRecord
 
   W3W_REGEX = %r{/{3}([a-z]+\.[a-z]+\.[a-z]+)}
 
+  def associated_tiles
+    post_associations.where(postable_type: 'Tile').includes(:postable).map(&:postable)
+  end
+
   def mentioned_w3w
     body.scan(W3W_REGEX).uniq.map(&:first)
   end

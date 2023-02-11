@@ -1,4 +1,3 @@
-
 <%= form_with(model: [:admin, post_association]) do |form| %>
   <%= render 'layouts/form_errors', errors: post_association.errors %>
 
@@ -32,4 +31,8 @@
   </div>
 
   <%= form.submit class: 'btn btn-primary' %>
+  ... or
+  <%= link_to 'associate tiles in bulk',
+              bulk_association_edit_admin_post_path(@post),
+              class: 'btn btn-secondary' %>
 <% end %>

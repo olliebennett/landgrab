@@ -15,7 +15,7 @@ module Admin
       when 'false'
         @tiles = @tiles.where.missing(:subscription)
       end
-      @tiles = @tiles.order(id: :desc).includes(:plot, :subscription).page(params[:page])
+      @tiles = @tiles.order(id: :desc).includes(:plot, subscription: :user).page(params[:page])
     end
 
     def show; end

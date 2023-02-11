@@ -3,7 +3,7 @@
 
   <div class="col-sm-4">
     <%= label_tag :plot, 'Plot', class: 'visually-hidden' %>
-    <%= select_tag :plot, option_groups_from_collection_for_select(Project.order(:title), :plots, :title, :hashid, :title, params[:plot]),
+    <%= select_tag :plot, option_groups_from_collection_for_select(Project.includes(:plots).order(:title), :plots, :title, :hashid, :title, params[:plot]),
                           { include_blank: '[ All Plots ]', class: 'form-select' } %>
   </div>
 

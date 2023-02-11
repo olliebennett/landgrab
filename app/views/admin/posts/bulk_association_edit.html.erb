@@ -5,7 +5,7 @@
   <%= form_with(url: bulk_association_edit_admin_post_path(@post), method: :get) do |form| %>
     <div class="col-sm-4 mb-3">
       <%= label_tag :plot, 'Plot', class: 'visually-hidden' %>
-      <%= select_tag :plot, option_groups_from_collection_for_select(Project.order(:title), :plots, :title, :hashid, :title, params[:plot]),
+      <%= select_tag :plot, option_groups_from_collection_for_select(Project.order(:title).includes(:plots), :plots, :title, :hashid, :title, params[:plot]),
                             { include_blank: '[ Select Plot ]', class: 'form-select' } %>
     </div>
 
@@ -16,6 +16,8 @@
     Bulk associating to tiles in plot:
     <%= link_to @plot.title, admin_plot_path(@plot) %>
   </p>
+  <%= render 'associated_tiles_map', tiles: @plot.tiles.includes(:subscription), associated_tiles: Tile.joins(:posts).where(posts: { id: @post.id }) %>
+  <h3>How to use this page</h3>
   <ul>
     <!--
     TODO:
@@ -37,6 +39,4 @@
       tile is associated directly.
     </li>
   </ul>
-
-  <%= render 'associated_tiles_map', tiles: @plot.tiles, associated_tiles: Tile.joins(:posts).where(posts: { id: @post.id }) %>
 <% end %>

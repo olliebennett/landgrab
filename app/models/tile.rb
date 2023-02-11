@@ -26,6 +26,7 @@ class Tile < ApplicationRecord
 
     geojson['properties'] ||= {}
     geojson['properties']['available'] = available?
+    geojson['properties']['w3w'] = w3w
     geojson['properties']['popupContent'] = popup_content
     geojson['properties']['focussed'] = map_popup
     geojson['properties']['link'] = Rails.application.routes.url_helpers.tile_path(self)

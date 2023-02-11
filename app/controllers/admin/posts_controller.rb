@@ -42,7 +42,23 @@ module Admin
       @plot = Plot.find_by_hashid!(params[:plot]) if params[:plot].present?
     end
 
-    def bulk_association_update; end
+    def bulk_association_update
+      w3w_list = params[:w3w_list].split(',').map(&:squish)
+      # TODO: Is there a Rails way to update (add/remove) these in a neater/performant way?
+      required_tiles = Tile.where(w3w: w3w_list)
+      existing_tiles = @post.associated_tiles
+
+      tiles_to_remove = existing_tiles - required_tiles
+      @post.post_associations.where(postable_type: 'Tile', postable_id: tiles_to_remove.map(&:id)).destroy_all
+
+      tiles_to_add = required_tiles - existing_tiles
+      tiles_to_add.each do |tile|
+        @post.post_associations.create(postable: tile)
+      end
+
+      redirect_to admin_post_path(@post),
+                  flash: { success: "Associations updated! Tiles added: #{tiles_to_add.size}, Tiles removed #{tiles_to_remove.size}" }
+    end
 
     private
 

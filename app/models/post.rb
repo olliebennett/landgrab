@@ -24,7 +24,7 @@ class Post < ApplicationRecord
 
   # Viewable if user has subscribed to any associated tile
   def viewable_by?(user)
-    post_associations.any? do |pa|
+    post_associations.includes(:postable).any? do |pa|
       pa.postable.viewable_by?(user)
     end
   end

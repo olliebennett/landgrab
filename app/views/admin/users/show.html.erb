@@ -36,6 +36,13 @@
 </p>
 
 <p>
+  <strong>Subscriptions:</strong>
+  <%= @user.subscriptions.size %>
+  -
+  <%= link_to 'view', admin_subscriptions_path(user_id: @user.hashid) %>
+</p>
+
+<p>
   <strong>Posts Authored:</strong>
   <%= @user.posts_authored.size %>
   -

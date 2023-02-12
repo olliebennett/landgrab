@@ -38,9 +38,6 @@
 <p>
   <strong>Posts Authored:</strong>
   <%= @user.posts_authored.size %>
+  -
+  <%= link_to 'view', admin_posts_path(author: @user.hashid) %>
 </p>
-
-<% if @user.posts_authored.size.positive? %>
-  <h3>Posts Authored</h3>
-  <%= render 'admin/posts/table', posts: @user.posts_authored %>
-<% end %>

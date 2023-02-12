@@ -6,7 +6,9 @@ module Admin
     before_action :set_post, only: %i[show edit update bulk_association_edit bulk_association_update]
 
     def index
-      @posts = Post.order(id: :desc).page(params[:page])
+      @posts = Post.all
+      @posts = @posts.where(author_id: User.decode_id(params[:author])) if params[:author].present?
+      @posts = @posts.order(id: :desc).page(params[:page])
     end
 
     def show; end

@@ -4,8 +4,9 @@
   Posts provide updates or news about a specific project, plot or tile.
 </p>
 
-<%= link_to 'New Post', new_admin_post_path %>
+<%= render 'filters' %>
 
+<%= link_to 'New Post', new_admin_post_path %>
 <%= page_entries_info @posts %>
 
 <%= render 'table', posts: @posts %>

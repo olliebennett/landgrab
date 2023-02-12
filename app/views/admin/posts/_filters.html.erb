@@ -1,0 +1,10 @@
+<%= form_tag(admin_posts_path, method: :get, class: 'row g-3 mb-3') do %>
+  <div class="col-sm-2">
+    <%= label_tag :author, 'Subscribed to Plot', class: 'visually-hidden' %>
+    <% all_post_authors = User.joins(:posts_authored).distinct %>
+    <%= select_tag :author, options_from_collection_for_select(all_post_authors.order(:last_name, :first_name), :hashid, :full_name, params[:author]),
+                                         { include_blank: '[ Author ]', class: 'form-select' } %>
+  </div>
+
+  <%= render_filter_submit %>
+<% end %>

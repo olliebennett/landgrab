@@ -1,8 +1,14 @@
 <%= form_tag(admin_users_path, method: :get, class: 'row g-3 mb-3') do %>
   <%= render_filter_text(:first_name) %>
   <%= render_filter_text(:last_name) %>
-  <%= render_filter_text(:email, col: 3) %>
-  <%= render_filter_text(:stripe_customer_id, col: 3) %>
+  <%= render_filter_text(:email, col: 2) %>
+  <%= render_filter_text(:stripe_customer_id, 'Stripe Customer ID', col: 2) %>
+
+  <div class="col-sm-2">
+    <%= label_tag :subscribed_to_plot, 'Subscribed to Plot', class: 'visually-hidden' %>
+    <%= select_tag :subscribed_to_plot, option_groups_from_collection_for_select(Project.includes(:plots).order(:title), :plots, :title, :hashid, :title, params[:subscribed_to_plot]),
+                                         { include_blank: '[ Subscribed to Plot ]', class: 'form-select' } %>
+  </div>
 
   <%= render_filter_submit %>
 <% end %>

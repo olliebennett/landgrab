@@ -11,6 +11,12 @@ module Admin
       @users = @users.where('users.last_name LIKE ?', "%#{params[:last_name]}%") if params[:last_name].present?
       @users = @users.where('users.email LIKE ?', "%#{params[:email]}%") if params[:email].present?
       @users = @users.where(users: { stripe_customer_id: params[:stripe_customer_id] }) if params[:stripe_customer_id].present?
+      if params[:subscribed_to_plot].present?
+        @users = @users.joins(subscriptions: { tile: :plot })
+                       .where(subscriptions: { stripe_status: %i[active trialing] })
+                       .where(plots: { id: Plot.find_by_hashid!(params[:subscribed_to_plot]) })
+                       .distinct
+      end
       @users = @users.page(params[:page])
     end
 

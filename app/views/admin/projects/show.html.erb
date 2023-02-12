@@ -39,6 +39,15 @@
     </tr>
 
     <tr>
+      <th>Subscribed Users</th>
+      <td>
+        view a
+        <%= link_to 'list of users', admin_users_path(subscribed_to_plot: @project.plots.map(&:hashid).join(',')) %>
+        with an active subscription to any tile in any plot in this project.
+      </td>
+    </tr>
+
+    <tr>
       <th>Created</th>
       <td>
         <%= @project.created_at.strftime('%e %b %Y %H:%M:%S') %>

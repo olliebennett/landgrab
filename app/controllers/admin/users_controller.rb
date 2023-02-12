@@ -12,9 +12,10 @@ module Admin
       @users = @users.where('users.email LIKE ?', "%#{params[:email]}%") if params[:email].present?
       @users = @users.where(users: { stripe_customer_id: params[:stripe_customer_id] }) if params[:stripe_customer_id].present?
       if params[:subscribed_to_plot].present?
+        subscribed_to_plot_ids = params[:subscribed_to_plot].map { |x| Plot.decode_id(x) }
         @users = @users.joins(subscriptions: { tile: :plot })
                        .where(subscriptions: { stripe_status: %i[active trialing] })
-                       .where(plots: { id: Plot.find_by_hashid!(params[:subscribed_to_plot]) })
+                       .where(plots: { id: subscribed_to_plot_ids })
                        .distinct
       end
       @users = @users.page(params[:page])

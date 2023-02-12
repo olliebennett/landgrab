@@ -7,7 +7,7 @@
   <div class="col-sm-2">
     <%= label_tag :subscribed_to_plot, 'Subscribed to Plot', class: 'visually-hidden' %>
     <%= select_tag :subscribed_to_plot, option_groups_from_collection_for_select(Project.includes(:plots).order(:title), :plots, :title, :hashid, :title, params[:subscribed_to_plot]),
-                                         { include_blank: '[ Subscribed to Plot ]', class: 'form-select' } %>
+                                         { include_blank: '[ Subscribed to Plot ]', multiple: true, class: 'form-select' } %>
   </div>
 
   <%= render_filter_submit %>

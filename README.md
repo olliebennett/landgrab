@@ -1,46 +1,34 @@
 # LandGrab
 
-Source at [GitHub](https://github.com/olliebennett/landgrab)
-
 Demo running at [landgrabdemo.herokuapp.com](https://landgrabdemo.herokuapp.com/)
 
-## Setup
+LandGrab ([source on GitHub](https://github.com/olliebennett/landgrab)) is an application which supports tracking areas of land
+in small parcels just a few metres across.
 
-You'll need Rails and PostgreSQL set up.
+### Features
 
-Checkout this repo and navigate to the directory.
+- Set up one or more 'projects' for different interests or explorations.
+- Create 'plots' of land by defining an outline on a map.
+- Identify individual 3x3m square 'tiles' of land within the plot (using [What3Words](https://what3words.com/)).
+- Publish rich 'posts' with updates related to specific projects, plots or tiles.
+- Offer 'sponsorships' for tiles of the land (using [Stripe payments](https://stripe.com/)).
+- Card payments collected automatically into your account.
 
-Install the required PostGIS (spatial PostgreSQL extension);
+### Use Cases
 
-```
-brew install postgis
-```
+The potential uses for this tool could be;
 
-Create the required databases and load schema;
+- Sponsoring/buying areas of land through crowdfunding.
+- Visualising information about a plot of land.
+- Tracking the status of vegetation, infrastructure or land use on a plot.
 
-```
-bin/rails db:setup
-```
+### Contributing
 
-Create an `.env` file to hold required environment variables.
+- Any feedback or questions? Please [get in touch with Ollie](https://www.olliebennett.co.uk/contact).
 
-```
-touch .env
-```
+## Development & Setup
 
-Run the server...
+If you're a developer looking to set this up for yourself,
+please say Hi! I'd love to hear what you're working on.
 
-```
-bin/rails s
-```
-
-Open the site at [localhost:3000](http://localhost:3000)!
-
-## Troubleshooting
-
-Database filling up (> 8,000 rows with no records);
-
-```sh
-heroku pg:psql
-DELETE FROM spatial_ref_sys WHERE srid <> 4326;
-```
+Setup instructions for the application are in [docs/SETUP.md](docs/SETUP.md).

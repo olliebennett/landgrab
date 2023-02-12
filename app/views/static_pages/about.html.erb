@@ -1,41 +1,8 @@
 <h1><%= title 'About' %></h1>
 
 <p>
-  This site is powered by LandGrab - an application which supports tracking areas of land
-  in small parcels just a few metres across.
-</p>
-
-<h3>Features</h3>
-<p>
-  <ul>
-    <li>Set up one or more 'projects' for different interests or explorations.</li>
-    <li>Create 'plots' of land by defining an outline on a map.</li>
-    <li>Identify individual 3x3m square 'tiles' of land within the plot.</li>
-    <li>Publish rich 'posts' with updates related to specific projects, plots or tiles.</li>
-    <li>Offer 'sponsorships' for tiles of the land.</li>
-    <li>Card payments collected automatically into your account.</li>
-  </ul>
-</p>
-
-<h3>Use Cases</h3>
-<p>
-  The potential uses for this tool could be;
-  <ul>
-    <li>Sponsoring/buying areas of land through crowdfunding.</li>
-    <li>Visualising information about a plot of land.</li>
-    <li>Tracking the status of vegetation, infrastructure or land use on a plot.</li>
-  </ul>
-</p>
-
-<h3>Contributing</h3>
-
-<p>
-  LandGrab is open source software, built and maintained by
-  <%= link_to 'Ollie Bennett', 'https://www.olliebennett.co.uk/' %>.
-</p>
-
-<p>
-  The code is available on
-  <%= link_to('GitHub', 'https://github.com/olliebennett/landgrab/') %>
-  where contributions or feedback are welcome!
+  <%= ENV.fetch('SITE_TITLE', 'This site') %>
+  is powered by
+  <%= link_to('LandGrab', 'https://github.com/olliebennett/landgrab/') %>
+  - open source software where contributions or questions are welcome!
 </p>

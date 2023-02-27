@@ -81,7 +81,7 @@ GEM
     bootstrap5-kaminari-views (0.0.1)
       kaminari (>= 0.13)
       rails (>= 3.1)
-    brakeman (5.4.0)
+    brakeman (5.4.1)
     builder (3.2.4)
     bullet (7.0.7)
       activesupport (>= 3.0.0)

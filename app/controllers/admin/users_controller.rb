@@ -19,6 +19,14 @@ module Admin
                        .distinct
       end
       @users = @users.page(params[:page])
+
+      respond_to do |format|
+        format.html { render :index }
+        format.csv do
+          response.headers['Content-Type'] = 'text/csv'
+          response.headers['Content-Disposition'] = 'attachment; filename=users.csv'
+        end
+      end
     end
 
     def show; end

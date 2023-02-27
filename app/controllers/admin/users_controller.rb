@@ -6,11 +6,7 @@ module Admin
     before_action :set_user, only: %i[show]
 
     def index
-      @users = User.all
-      @users = @users.where('users.first_name LIKE ?', "%#{params[:first_name]}%") if params[:first_name].present?
-      @users = @users.where('users.last_name LIKE ?', "%#{params[:last_name]}%") if params[:last_name].present?
-      @users = @users.where('users.email LIKE ?', "%#{params[:email]}%") if params[:email].present?
-      @users = @users.where(users: { stripe_customer_id: params[:stripe_customer_id] }) if params[:stripe_customer_id].present?
+      @users = filtered_users
       if params[:subscribed_to_plot].present?
         subscribed_to_plot_ids = params[:subscribed_to_plot].map { |x| Plot.decode_id(x) }
         @users = @users.joins(subscriptions: { tile: :plot })
@@ -35,6 +31,16 @@ module Admin
 
     def set_user
       @user = User.find_by_hashid!(params[:id])
+    end
+
+    def filtered_users
+      users = User.all
+      users = users.where('users.first_name LIKE ?', "%#{params[:first_name]}%") if params[:first_name].present?
+      users = users.where('users.last_name LIKE ?', "%#{params[:last_name]}%") if params[:last_name].present?
+      users = users.where('users.email LIKE ?', "%#{params[:email]}%") if params[:email].present?
+      users = users.where(users: { stripe_customer_id: params[:stripe_customer_id] }) if params[:stripe_customer_id].present?
+
+      users
     end
   end
 end

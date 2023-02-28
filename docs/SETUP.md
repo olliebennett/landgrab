@@ -24,6 +24,12 @@ docker-compose up
 
 Open the site at [localhost:3000](http://localhost:3000)!
 
+Access the Rails console;
+
+```sh
+docker-compose exec app bin/rails c
+```
+
 ## Troubleshooting
 
 Database filling up (> 8,000 rows with no records);

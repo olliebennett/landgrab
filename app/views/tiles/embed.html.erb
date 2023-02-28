@@ -1,0 +1,7 @@
+<html>
+<%= render 'static_pages/w3w_map',
+    tiles: @tile.plot&.tiles_for_map(include_tile: @tile) || [@tile],
+    plot: @tile.plot,
+    popup_tiles: [@tile],
+    hide_legend: true %>
+</html>

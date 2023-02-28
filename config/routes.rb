@@ -12,7 +12,10 @@ Rails.application.routes.draw do
 
   root to: 'static_pages#homepage'
 
-  resources :tiles, only: %i[index show]
+  resources :tiles, only: %i[index show] do
+    get :embed, on: :member
+  end
+
   resources :plots, only: %i[index show]
   resources :posts, only: %i[show]
   resources :projects, only: %i[index show] do

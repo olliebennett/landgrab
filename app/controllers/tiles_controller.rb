@@ -1,9 +1,17 @@
 # frozen_string_literal: true
 
 class TilesController < ApplicationController
-  before_action :set_tile, only: %i[show]
+  before_action :set_tile, only: %i[show embed]
   before_action :ensure_stripe_enrollment, only: %i[show]
-  skip_before_action :authenticate_user!, only: %i[index show]
+  skip_before_action :authenticate_user!, only: %i[index embed show]
+
+  def embed
+    # Set CSP policy header to allow embedding this in specified external domains
+    # https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/frame-ancestors
+    response.headers['Content-Security-Policy'] = "frame-ancestors #{ENV.fetch('EMBED_CSP_DOMAINS', 'http://example.com')}"
+
+    render layout: false
+  end
 
   def index
     log_event_mixpanel('Tiles: Index', { authed: user_signed_in? })

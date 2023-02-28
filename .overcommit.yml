@@ -19,8 +19,9 @@ verify_signatures: false
 PreCommit:
   RuboCop:
     enabled: true
-    command: ['bundle', 'exec', 'rubocop'] # Invoke within Bundler context
+    command: ['docker-compose', 'exec', 'app', 'bin/rubocop']
 
 PrePush:
   RSpec:
     enabled: true
+    command: ['docker-compose', 'exec', 'app', 'bin/rspec']

@@ -7,7 +7,7 @@ Checkout this repo and navigate to the directory.
 Create an `.env` file to hold required environment variables.
 
 ```sh
-cp .env.sample.txt .env
+cp .env.sample .env
 ```
 
 Build the services via docker;

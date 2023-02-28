@@ -2,6 +2,10 @@
 
 source 'https://rubygems.org'
 
+# IMPORTANT: If changing, also update;
+# - .ruby-version file (`rbenv local X.Y.Z`)
+# - RuboCop's TargetRubyVersion
+# - Dockerfile FROM image definition
 ruby '3.1.3'
 
 # IMPORTANT: When upgrading Rails, follow all instructions!

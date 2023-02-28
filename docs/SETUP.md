@@ -1,31 +1,25 @@
 # SETUP
 
-You'll need Rails and PostgreSQL set up.
+You'll need [Docker](https://www.docker.com/) installed.
 
 Checkout this repo and navigate to the directory.
 
-Install the required PostGIS (spatial PostgreSQL extension);
-
-```
-brew install postgis
-```
-
-Create the required databases and load schema;
-
-```
-bin/rails db:setup
-```
-
 Create an `.env` file to hold required environment variables.
 
+```sh
+cp .env.sample.txt .env
 ```
-touch .env
+
+Build the services via docker;
+
+```sh
+docker-compose build
 ```
 
 Run the server...
 
-```
-bin/rails s
+```sh
+docker-compose up
 ```
 
 Open the site at [localhost:3000](http://localhost:3000)!

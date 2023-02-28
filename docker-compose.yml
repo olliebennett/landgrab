@@ -1,0 +1,23 @@
+version: '2'
+services:
+  db:
+    image: mdillon/postgis:latest
+    ports:
+      - 5432:5432
+    env_file:
+      - .env
+  app:
+    tty: true
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    command: ./wait-for-it.sh db:5432 -- ./entrypoint
+    depends_on:
+      - db
+    volumes:
+      - .:/usr/app/${APP_NAME}
+    ports:
+      - 3000:3000

@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+
+echo "Waiting for database before starting rails..."
+./wait-for-it.sh db:5432
+
+RAILS_ENV=development bin/rails db:create
+RAILS_ENV=development bin/rails db:migrate
+# bundle exec puma -C config/puma.rbexec "$@"
+RAILS_ENV=development bin/rails s -b 0.0.0.0
+

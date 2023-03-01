@@ -2,6 +2,7 @@
 <% tiles ||= [] %>
 <% plot ||= nil %>
 <% hide_legend ||= false %>
+<% map_height ||= '500px' %>
 <% featured_description ||= 'Current Tile' %>
 
 <script src="https://assets.what3words.com/sdk/v3/what3words.js?key=<%= ENV.fetch('WHAT3WORDS_API_KEY') %>"></script>
@@ -10,7 +11,7 @@
 
 <%= render 'layouts/leaflet_helpers' %>
 
-<div id="map" style="width: 100%; height: 500px" class="mb-3"></div>
+<div id="map" style="width: 100%; height: <%= map_height %>" class="mb-3"></div>
 
 <% unless hide_legend %>
   <%= render 'static_pages/map_legend',

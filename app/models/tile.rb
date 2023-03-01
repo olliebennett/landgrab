@@ -28,7 +28,7 @@ class Tile < ApplicationRecord
     geojson['properties']['available'] = available?
     geojson['properties']['w3w'] = w3w
     geojson['properties']['popupContent'] = popup_content
-    geojson['properties']['focussed'] = map_popup
+    geojson['properties']['focussed'] = (map_popup == :w3w)
     geojson['properties']['link'] = Rails.application.routes.url_helpers.tile_path(self)
 
     geojson.to_json
@@ -43,9 +43,27 @@ class Tile < ApplicationRecord
   end
 
   def popup_content
-    return unless map_popup
+    return if map_popup.blank?
 
-    "///#{w3w}"
+    return "///#{w3w}" if map_popup == :w3w
+
+    return popup_content_details if map_popup == :view_details_or_unavailable
+
+    raise "Unexpected map_popup type: '#{map_popup}'"
+  end
+
+  def popup_content_details
+    lines = ["///#{w3w}"]
+    lines << if available?
+               # NOTE: target="_top" forces ejection from iFrame
+               "<a href=\"#{Rails.application.routes.url_helpers.tile_path(self)}\"
+                   target=\"_top\"
+                   class=\"btn btn-default\">View & Subscribe</a>"
+             else
+               'Already taken, sorry!'
+             end
+
+    lines.join('<br>')
   end
 
   def w3w_url

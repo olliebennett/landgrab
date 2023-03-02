@@ -1,10 +1,11 @@
 <h1><%= title 'Payment cancelled!' %></h1>
 
 <%= bootstrap_alert safe_join([
-  'Changed your mind? The payment is cancelled.',
-  'You can'
+  'The payment is cancelled.',
+  'Changed your mind?',
+  'You can',
   link_to('explore other tiles', explore_path, class: 'alert-link'),
-  'to start again or drop us an email at'
-  link_to(ENV.fetch('EMAIL_FROM_ADDRESS'), "mailto:#{ENV.fetch('EMAIL_FROM_ADDRESS')}")
+  'to start again or drop us an email at',
+  link_to(ENV.fetch('EMAIL_FROM_ADDRESS'), "mailto:#{ENV.fetch('EMAIL_FROM_ADDRESS')}"),
   'with any questions.'
 ], ' '), :danger %>

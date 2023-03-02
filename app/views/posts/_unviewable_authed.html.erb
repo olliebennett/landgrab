@@ -1,0 +1,11 @@
+
+<% tiles = post.associated_tiles.select { |t| t.available? } %>
+<% tiles = post.associated_plots.includes(:tiles).map(&:tiles).flatten.select { |t| t.available? } if tiles.empty? %>
+<% tiles = post.associated_projects.includes(plots: :tiles).map(&:plots).flatten.map(&:tiles).flatten.select { |t| t.available? } if tiles.empty? %>
+
+<% if tiles.any? %>
+  <%= bootstrap_alert 'You need to be subscribed to an associated tile before you can view this post!' %>
+  <%= render 'tiles/subscription_info', tile: tiles.sample %>
+<% else %>
+  <%= bootstrap_alert 'There are no available tiles associated with this post so you can\'t subscribe right now!' %>
+<% end %>

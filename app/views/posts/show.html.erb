@@ -8,16 +8,10 @@
       <% if @viewable %>
         <%= markdown(linkify_tiles(@post.body)) %>
       <% else %>
-        <%= bootstrap_alert 'You need to be subscribed to a related tile before you can view this post!' %>
+        <%= render 'unviewable_authed', post: @post %>
       <% end %>
     <% else %>
-      <%= bootstrap_alert safe_join([
-        'Please',
-        link_to('log in', new_user_session_path, class: 'alert-link'),
-        'or',
-        link_to('register', new_user_registration_path, class: 'alert-link'),
-        'before trying to view this post'
-      ], ' ') %>
+      <%= render 'unviewable_unauthed' %>
     <% end %>
   </div>
   <div class="col-md-4">

@@ -14,6 +14,14 @@ class Post < ApplicationRecord
     post_associations.where(postable_type: 'Tile').includes(:postable).map(&:postable)
   end
 
+  def associated_plots
+    post_associations.where(postable_type: 'Plot').includes(:postable).map(&:postable)
+  end
+
+  def associated_projects
+    post_associations.where(postable_type: 'Project').includes(:postable).map(&:postable)
+  end
+
   def mentioned_w3w
     body.scan(W3W_REGEX).uniq.map(&:first)
   end

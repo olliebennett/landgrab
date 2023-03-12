@@ -93,6 +93,9 @@ gem 'ruumba'
 gem 'sentry-rails'
 gem 'sentry-ruby'
 
+# Language Server for IDE enhancement / 'Intellisense'
+gem 'solargraph', group: :development
+
 # Payments
 gem 'stripe'
 

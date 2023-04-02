@@ -14,7 +14,7 @@ services:
       dockerfile: Dockerfile
     env_file:
       - .env
-    command: wait-for-it.sh db:5432 -- entrypoint
+    command: ./entrypoint
     depends_on:
       - db
     volumes:

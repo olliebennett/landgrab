@@ -14,6 +14,9 @@ jobs:
 
     env:
       RAILS_ENV: test
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432
+      DEVISE_SECRET_KEY: devise-ci-secret-key
+      STRIPE_SECRET_KEY: sk_test_abc123
 
     services:
       postgres:
@@ -43,14 +46,8 @@ jobs:
 
     - name: Create database
       # Environment variable used to create a new PostgreSQL client.
-      env:
-        DATABASE_URL: postgres://postgres:postgres@localhost:5432
       run: |
         bundler exec rails db:setup
 
     - name: Run Rspec
-      env:
-        DATABASE_URL: postgres://postgres:postgres@localhost:5432
-        DEVISE_SECRET_KEY: devise-ci-secret-key
-        STRIPE_SECRET_KEY: sk_test_abc123
       run: bin/rspec

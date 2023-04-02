@@ -12,6 +12,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      DEVISE_SECRET_KEY: devise-ci-secret-key
+
     steps:
     - uses: actions/checkout@v2
 

@@ -96,6 +96,6 @@ class CheckoutController < ApplicationController
   end
 
   def set_tile
-    @tile = Tile.find_by_hashid!(params[:tile])
+    @tile = Tile.find_by_hashid!(params[:tile]&.upcase)
   end
 end

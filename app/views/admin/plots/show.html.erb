@@ -59,7 +59,7 @@
         available out of
         <%= @plot.tiles.size %>
         <% if @plot.tiles.size.positive? %>
-          - <%= link_to 'view on map', tiles_path(plot: @plot) %>
+          - <%= link_to 'view on map', admin_tiles_path(plot: @plot) %>
         <% end %>
       </td>
     </tr>

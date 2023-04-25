@@ -6,4 +6,6 @@ Posts about this Tile
 <% end %>
 </h2>
 
-<%= render 'admin/posts/table', posts: [@tile, @tile.plot, @tile.plot&.project].compact.map(&:posts).flatten %>
+<%= render 'admin/posts/table',
+           cols: %w[title, author],
+           posts: [@tile, @tile.plot, @tile.plot&.project].compact.map(&:posts).flatten %>

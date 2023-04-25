@@ -1,25 +1,47 @@
+<% cols ||= %w[title preview body author created] %>
+
 <% if posts.none? %>
   <p>No posts found</p>
 <% else %>
   <table class="table">
     <thead>
       <tr>
-        <th>Title</th>
-        <th>Preview</th>
-        <th>Body</th>
-        <th>Author</th>
-        <th>Created</th>
+        <% if cols.include?('title') %>
+          <th>Title</th>
+        <% end %>
+        <% if cols.include?('preview') %>
+          <th>Preview</th>
+        <% end %>
+        <% if cols.include?('body') %>
+          <th>Body</th>
+        <% end %>
+        <% if cols.include?('author') %>
+          <th>Author</th>
+        <% end %>
+        <% if cols.include?('created') %>
+          <th>Created</th>
+        <% end %>
       </tr>
     </thead>
 
     <tbody style="font-variant-numeric: tabular-nums;">
       <% posts.each do |post| %>
         <tr>
-          <td><%= link_to post.title, admin_post_path(post) %></td>
-          <td><%= truncate(post.preview || '-', length: 75) %></td>
-          <td><%= truncate(post.body, length: 75) %></td>
-          <td><%= post.author.display_name %></td>
-          <td><%= post.created_at.to_formatted_s(:short) %></td>
+          <% if cols.include?('title') %>
+            <td><%= link_to post.title, admin_post_path(post) %></td>
+          <% end %>
+          <% if cols.include?('preview') %>
+            <td><%= truncate(post.preview || '-', length: 75) %></td>
+          <% end %>
+          <% if cols.include?('body') %>
+            <td><%= truncate(post.body, length: 75) %></td>
+          <% end %>
+          <% if cols.include?('author') %>
+            <td><%= post.author.display_name %></td>
+          <% end %>
+          <% if cols.include?('created') %>
+            <td><%= post.created_at.to_formatted_s(:short) %></td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>

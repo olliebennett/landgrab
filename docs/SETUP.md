@@ -32,9 +32,15 @@ docker-compose exec app bin/rails c
 
 ## Troubleshooting
 
-Database filling up (> 8,000 rows with no records);
+### Database filling up (> 8,000 rows with no records);
 
 ```sh
 heroku pg:psql
 DELETE FROM spatial_ref_sys WHERE srid <> 4326;
+```
+
+### Error when starting the container: "A server is already running."
+
+```sh
+docker compose run app rm /usr/app/landgrab/tmp/pids/server.pid
 ```

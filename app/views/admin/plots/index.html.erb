@@ -12,9 +12,16 @@
   <%= link_to 'What3Words', 'https://what3words.com/' %>.
 </p>
 
-<%= link_to 'New Plot', new_admin_plot_path %>
-
-<%= page_entries_info @plots %>
+<p>
+  <%= link_to 'New Plot', new_admin_plot_path %>
+  <%= page_entries_info @plots %>
+  <% if @project.present? %>
+    from the <%= link_to @project.title, admin_project_path(@project) %> project
+  <% end %>
+  <% if filtered?(:project) %>
+    matching selected filters.
+  <% end %>
+</p>
 
 <%= render 'table', plots: @plots %>
 

@@ -6,8 +6,13 @@
 
 <%= render 'filters' %>
 
-<%= link_to 'New Post', new_admin_post_path %>
-<%= page_entries_info @posts %>
+<p>
+  <%= link_to 'New Post', new_admin_post_path %>
+  <%= page_entries_info @posts %>
+  <% if filtered? %>
+    matching selected filters.
+  <% end %>
+</p>
 
 <%= render 'table', posts: @posts %>
 

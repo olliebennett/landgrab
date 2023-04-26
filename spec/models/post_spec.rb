@@ -16,7 +16,7 @@ RSpec.describe Post do
     before { post.body = body }
 
     it 'extracts tiles from w3w strings in body' do
-      expect(post.mentioned_tiles.map(&:id)).to match_array [tile1.id]
+      expect(post.mentioned_tiles.map(&:id)).to contain_exactly(tile1.id)
     end
   end
 end

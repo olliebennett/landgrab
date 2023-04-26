@@ -15,4 +15,11 @@
   <% else %>
     This tile is not currently subscribed.
   <% end %>
+  <% @tile.previous_subscriptions.each do |previous_sub| %>
+    <p>
+      Previous subscription:
+      <%= link_to previous_sub.hashid, admin_subscription_path(previous_sub) %>
+      (since <%= previous_sub.created_at.strftime('%e %b %Y %H:%M:%S') %>)
+    </p>
+  <% end %>
 </p>

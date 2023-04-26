@@ -24,7 +24,7 @@ RSpec.describe Plot do
     before { subscription }
 
     it 'returns subscribed tile' do
-      expect(tiles_subscribed.ids).to match_array [tile.id]
+      expect(tiles_subscribed.ids).to contain_exactly(tile.id)
     end
 
     it 'excludes unsubscribed tiles' do

@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :subscription do
-    tile
-    user
+    tile { nil }
+    user { nil }
 
     sequence(:stripe_id) { |n| "sub_#{n}" }
   end

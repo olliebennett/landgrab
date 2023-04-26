@@ -39,3 +39,5 @@ en:
       post_association:
         postable: 'Record'
         postable_id: 'Record'
+      subscription:
+        stripe: 'Stripe ID'

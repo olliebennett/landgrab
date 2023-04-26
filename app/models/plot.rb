@@ -16,7 +16,7 @@ class Plot < ApplicationRecord
 
   auto_strip_attributes :title, squish: true
 
-  scope :with_available_tiles, -> { left_joins(tiles: :subscription).where(subscription: { id: nil }) }
+  scope :with_available_tiles, -> { left_joins(tiles: :latest_subscription).where(latest_subscription: { id: nil }) }
 
   MAX_BOUNDING_BOX_DIMENSION = 0.005
   DEFAULT_COORDS = [51.4778, -0.0014].freeze # Greenwich Observatory
@@ -74,7 +74,7 @@ class Plot < ApplicationRecord
   end
 
   def non_subscribed_tiles
-    tiles.where.missing(:subscription)
+    tiles.where.missing(:latest_subscription)
   end
 
   def validate_bounding_box_dimensions
@@ -107,13 +107,13 @@ class Plot < ApplicationRecord
   end
 
   def tiles_subscribed_by(user)
-    tiles.joins(subscription: :user).where(users: { id: user.id })
+    tiles.joins(latest_subscription: :user).where(users: { id: user.id })
   end
 
   def tiles_for_map(include_tile: nil)
     # returns 250 (or 251) tiles, sampling a balance of subscribed vs avaliable tiles
-    subscribed = tiles.includes(:subscription).unavailable.sample(100)
-    available = tiles.includes(:subscription).where.not(id: subscribed.map(&:id)).sample(150)
+    subscribed = tiles.includes(:latest_subscription).unavailable.sample(100)
+    available = tiles.includes(:latest_subscription).where.not(id: subscribed.map(&:id)).sample(150)
     ([include_tile] + subscribed + available).compact.uniq
   end
 end

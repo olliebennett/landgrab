@@ -7,15 +7,15 @@ module Admin
 
     def index
       @plot = Plot.find_by_hashid!(params[:plot]) if params[:plot].present?
-      @tiles = @plot.present? ? @plot.tiles : Tile.all
+      @tiles = @plot.present? ? @plot.tiles : Tile.all.includes(:plot)
       @tiles = @tiles.where('tiles.w3w LIKE ?', "%#{params[:w3w]}%") if params[:w3w]
       case params[:subscribed]
       when 'true'
-        @tiles = @tiles.joins(:subscription)
+        @tiles = @tiles.joins(:latest_subscription)
       when 'false'
-        @tiles = @tiles.where.missing(:subscription)
+        @tiles = @tiles.where.missing(:latest_subscription)
       end
-      @tiles = @tiles.order(id: :desc).includes(:plot, subscription: :user).page(params[:page])
+      @tiles = @tiles.order(id: :desc).includes(latest_subscription: :user).page(params[:page])
     end
 
     def show; end

@@ -38,6 +38,7 @@ RSpec.describe Project do
     end
 
     it 'returns false if tile assigned to different plot' do
+      tile.plot.destroy # avoid new plot conflicting with old plot's polygon
       tile.update!(plot: create(:plot))
       tile.reload
 

@@ -23,7 +23,7 @@
             <% end %>
           </td>
         <% end %>
-        <td><%= tile.subscription.nil? ? 'Available' : 'Unavailable' %></td>
+        <td><%= tile.available? ? 'Available' : 'Unavailable' %></td>
         <td><%= link_to 'W3W', tile.w3w_url %></td>
         <td><%= link_to 'Details', tile %></td>
       </tr>

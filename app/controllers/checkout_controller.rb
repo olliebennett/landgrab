@@ -34,9 +34,9 @@ class CheckoutController < ApplicationController
 
   def success
     log_event_mixpanel('Checkout: Success', { authed: user_signed_in? })
-    return if @tile.subscription.nil?
+    return if @tile.latest_subscription.nil?
 
-    StripeSubscriptionRefreshJob.perform_later(@tile.subscription)
+    StripeSubscriptionRefreshJob.perform_later(@tile.latest_subscription)
 
     redirect_to tile_path(@tile),
                 flash: { success: 'Purchase successful!' }

@@ -18,10 +18,10 @@ class TilesController < ApplicationController
     log_event_mixpanel('Tiles: Index', { authed: user_signed_in? })
     @plot = Plot.find_by_hashid!(params[:plot]) if params[:plot].present?
     if @plot.present?
-      @tiles = @plot.tiles.order(id: :desc).includes(:subscription).page(params[:page])
+      @tiles = @plot.tiles.order(id: :desc).includes(:latest_subscription).page(params[:page])
       @center = [@plot.centroid_coords.y, @plot.centroid_coords.x]
     else
-      @tiles = Tile.order(id: :desc).includes(:plot, :subscription).page(params[:page])
+      @tiles = Tile.order(id: :desc).includes(:plot, :latest_subscription).page(params[:page])
       if @tiles.none?
         @center = Plot::DEFAULT_COORDS
       else

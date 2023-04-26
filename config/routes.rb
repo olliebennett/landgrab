@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   as :user do
     get '/settings/profile' => 'registrations#edit', as: 'edit_profile'
     get '/settings/password' => 'registrations#edit_password', as: 'edit_password'
+    get '/settings/notifications' => 'registrations#edit_notifications', as: 'edit_notifications'
   end
 
   root to: 'static_pages#homepage'

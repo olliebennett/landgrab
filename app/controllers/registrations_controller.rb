@@ -8,6 +8,8 @@ class RegistrationsController < Devise::RegistrationsController
     set_minimum_password_length
   end
 
+  def edit_notifications; end
+
   private
 
   # Allow updating other attributes if replacement password is not provided

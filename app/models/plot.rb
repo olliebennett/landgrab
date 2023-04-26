@@ -94,7 +94,7 @@ class Plot < ApplicationRecord
   def overlapping_polygons
     return nil if polygon.nil?
 
-    Plot \
+    Plot
       .select('plots.id, plots.title, plots.polygon')
       .joins('INNER JOIN plots p2 ON plots.id != p2.id')
       .where('ST_Intersects(plots.polygon, ST_GeomFromText(?, 0))', polygon.as_json)

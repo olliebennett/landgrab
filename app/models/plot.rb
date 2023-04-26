@@ -107,7 +107,7 @@ class Plot < ApplicationRecord
   end
 
   def tiles_subscribed_by(user)
-    tiles.joins(latest_subscription: :user).where(users: { id: user.id })
+    tiles.joins(latest_subscription: :user).where(users: { id: user.id }).includes(:latest_subscription)
   end
 
   def tiles_for_map(include_tile: nil)

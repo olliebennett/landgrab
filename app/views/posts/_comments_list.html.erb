@@ -1,0 +1,11 @@
+<% visible_comments = post.comments.where(public: true).or(post.comments.where(author: current_user)) %>
+<% visible_comments.each do |comment| %>
+  <p>
+    <%= comment.author == current_user ? 'You' : comment.author.first_name %>
+    <%= comment.public? ? '(publically)' : '(privately)' %>
+    on
+    <%= comment.created_at.strftime('%d %b %Y') %>:
+    <br>
+    <%= comment.text %>
+  </p>
+<% end %>

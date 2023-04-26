@@ -1,0 +1,18 @@
+<%= form_with(model: [comment], local: true) do |form| %>
+  <%= render 'layouts/form_errors', errors: comment.errors %>
+
+  <div class="row mb-3 g-3 align-items-center">
+    <div class="col-xs-12">
+      <%= form.text_area :text, required: true, class: 'form-control', rows: 2 %>
+    </div>
+  </div>
+
+  <div class="mb-3 form-check">
+    <%= form.check_box :public, class: 'form-check-input' %>
+    <%= form.label :public, 'Comment publically (showing my first name)', class: 'form-check-label' %>
+  </div>
+
+  <%= form.hidden_field :post_id, { value: form.object.post.hashid } %>
+
+  <%= form.submit 'Add Comment', class: 'btn btn-primary' %>
+<% end %>

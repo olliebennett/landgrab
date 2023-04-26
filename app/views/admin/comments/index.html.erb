@@ -1,0 +1,21 @@
+<h1><%= admin_title Comment %></h1>
+
+<p>
+  Comments can be added by subscribed users on any post (either publically or privately).
+</p>
+
+<%= render 'filters' %>
+
+<p>
+  <%= page_entries_info @comments %>
+  <% if @post.present? %>
+    from the <%= link_to @post.title, admin_post_path(@post) %> post
+  <% end %>
+  <% if filtered?(:post) %>
+    matching selected filters.
+  <% end %>
+</p>
+
+<%= render 'table' %>
+
+<%= paginate @comments, theme: 'bootstrap-5' %>

@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   root to: 'static_pages#homepage'
 
+  resources :comments, only: %i[create update destroy]
+
   resources :tiles, only: %i[index show] do
     get :embed, on: :member
   end
@@ -39,6 +41,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'dashboard#dashboard', as: :dashboard
 
+    resources :comments, only: %i[index show]
     resources :tiles, only: %i[create index show new]
     resources :plots, only: %i[create index show new edit update]
     resources :posts, only: %i[create index show new edit update] do

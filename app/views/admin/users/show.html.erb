@@ -48,3 +48,10 @@
   -
   <%= link_to 'view', admin_posts_path(author: @user.hashid) %>
 </p>
+
+<p>
+  <strong>Comments Authored:</strong>
+  <%= @user.comments_authored.size %>
+  -
+  <%= link_to 'view', admin_comments_path(author: @user.hashid) %>
+</p>

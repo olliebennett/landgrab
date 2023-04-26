@@ -1,0 +1,25 @@
+<table class="table">
+  <tbody>
+    <tr>
+      <th>Text</th>
+      <td><%= comment.text %></td>
+    </tr>
+
+    <tr>
+      <th>Post</th>
+      <td><%= link_to comment.post.title, admin_post_path(comment.post) %></td>
+    </tr>
+
+    <tr>
+      <th>Author</th>
+      <td><%= link_to comment.author.display_name, admin_user_path(comment.author) %></td>
+    </tr>
+
+    <tr>
+      <th>Created</th>
+      <td>
+        <%= comment.created_at.strftime('%e %b %Y %H:%M:%S') %>
+      </td>
+    </tr>
+  </tbody>
+</table>

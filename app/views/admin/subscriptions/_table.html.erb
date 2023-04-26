@@ -8,6 +8,7 @@
       <th>Price</th>
       <th>Stripe<br>Status</th>
       <th>Created</th>
+      <th>Updated</th>
     </tr>
   </thead>
 
@@ -38,6 +39,7 @@
         <td><%= render_subscription_price(subscription) || 'Not set' %></td>
         <td><%= render_subscription_status(subscription) || 'NOT SET' %></td>
         <td><%= subscription.created_at.strftime('%e %b %Y %H:%M:%S') %></td>
+        <td><%= subscription.updated.strftime('%e %b %Y %H:%M:%S') %></td>
       </tr>
     <% end %>
   </tbody>

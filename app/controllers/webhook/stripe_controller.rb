@@ -8,9 +8,26 @@ module Webhook
     def webhook
       @event = parse_event
 
+      # See https://stripe.com/docs/api/events/types
       case @event.type
       when 'checkout.session.completed'
         checkout_session_completed
+      when 'customer.subscription.created'
+        # ignore; rely upon checkout.session.completed instead
+      when 'customer.subscription.deleted'
+        refresh_subscription
+      when 'customer.subscription.paused'
+        refresh_subscription
+      when 'customer.subscription.pending_update_applied'
+        refresh_subscription
+      when 'customer.subscription.pending_update_expired'
+        refresh_subscription
+      when 'customer.subscription.resumed'
+        refresh_subscription
+      when 'customer.subscription.trial_will_end'
+        refresh_subscription
+      when 'customer.subscription.updated'
+        refresh_subscription
       when 'invoice.paid'
         # TODO: invoice_paid
       when 'invoice.payment_failed'
@@ -37,6 +54,14 @@ module Webhook
       subscr = Subscription.create!(user:, tile:, stripe_id: sub_id)
 
       handle_external_checkout(subscr) if user.nil?
+
+      StripeSubscriptionRefreshJob.perform_later(subscr)
+    end
+
+    def refresh_subscription
+      sub_id = @event.data.object.id
+
+      subscr = Subscription.find_by!(stripe_id: sub_id)
 
       StripeSubscriptionRefreshJob.perform_later(subscr)
     end

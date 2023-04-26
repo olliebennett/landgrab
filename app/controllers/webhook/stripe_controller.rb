@@ -12,21 +12,7 @@ module Webhook
       case @event.type
       when 'checkout.session.completed'
         checkout_session_completed
-      when 'customer.subscription.created'
-        # ignore; rely upon checkout.session.completed instead
-      when 'customer.subscription.deleted'
-        refresh_subscription
-      when 'customer.subscription.paused'
-        refresh_subscription
-      when 'customer.subscription.pending_update_applied'
-        refresh_subscription
-      when 'customer.subscription.pending_update_expired'
-        refresh_subscription
-      when 'customer.subscription.resumed'
-        refresh_subscription
-      when 'customer.subscription.trial_will_end'
-        refresh_subscription
-      when 'customer.subscription.updated'
+      when start_with?('customer.subscription.')
         refresh_subscription
       when 'invoice.paid'
         # TODO: invoice_paid

@@ -1,26 +1,29 @@
 <% cols ||= %w[title preview body author created] %>
 
+<% cols_remaining = cols.dup %>
+
 <% if posts.none? %>
   <p>No posts found</p>
 <% else %>
   <table class="table">
     <thead>
       <tr>
-        <% if cols.include?('title') %>
+        <% if cols_remaining.delete('title') %>
           <th>Title</th>
         <% end %>
-        <% if cols.include?('preview') %>
+        <% if cols_remaining.delete('preview') %>
           <th>Preview</th>
         <% end %>
-        <% if cols.include?('body') %>
+        <% if cols_remaining.delete('body') %>
           <th>Body</th>
         <% end %>
-        <% if cols.include?('author') %>
+        <% if cols_remaining.delete('author') %>
           <th>Author</th>
         <% end %>
-        <% if cols.include?('created') %>
+        <% if cols_remaining.delete('created') %>
           <th>Created</th>
         <% end %>
+        <% raise "Unhandled table col(s): #{cols_remaining.join(' and ')}" if cols_remaining.any? %>
       </tr>
     </thead>
 

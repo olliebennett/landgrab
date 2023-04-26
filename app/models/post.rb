@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   belongs_to :author, class_name: 'User', inverse_of: :posts_authored
 
   has_many :post_associations, dependent: :destroy
+  has_many :comments, dependent: :restrict_with_exception
 
   validates :title, presence: true
   validates :body, presence: true

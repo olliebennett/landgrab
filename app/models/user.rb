@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   has_many :subscriptions, dependent: :restrict_with_exception
   has_many :posts_authored, class_name: 'Post', foreign_key: 'author_id', inverse_of: :author, dependent: :restrict_with_exception
+  has_many :comments_authored, class_name: 'Comment', inverse_of: :author, dependent: :restrict_with_exception
 
   validates :first_name, :last_name, length: { maximum: 255 }
   validates :stripe_customer_id, allow_blank: true,

@@ -1,0 +1,23 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Author</th>
+      <th>Post</th>
+      <th>Created</th>
+      <th>Text</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comments.each do |comment| %>
+      <tr>
+        <td><%= link_to comment.hashid, admin_comment_path(comment) %></td>
+        <td><%= link_to comment.author.full_name, admin_user_path(comment.author) %></td>
+        <td><%= link_to comment.post.title, admin_post_path(comment.post) %></td>
+        <td><%= comment.created_at.strftime('%e %b %Y %H:%M:%S') %></td>
+        <td><%= comment.text %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

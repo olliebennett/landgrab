@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_20_231250) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_25_211642) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -90,6 +90,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_20_231250) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "plot_id"
+    t.bigint "latest_subscription_id"
+    t.index ["latest_subscription_id"], name: "index_tiles_on_latest_subscription_id"
     t.index ["plot_id"], name: "index_tiles_on_plot_id"
   end
 
@@ -116,4 +118,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_20_231250) do
   add_foreign_key "subscriptions", "tiles"
   add_foreign_key "subscriptions", "users"
   add_foreign_key "tiles", "plots"
+  add_foreign_key "tiles", "subscriptions", column: "latest_subscription_id"
 end

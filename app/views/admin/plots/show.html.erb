@@ -55,7 +55,7 @@
     <tr>
       <th>Tiles</th>
       <td>
-        <%= @plot.tiles.left_outer_joins(:subscription).where(subscriptions: { id: nil }).size %>
+        <%= @plot.tiles.available.size %>
         available out of
         <%= @plot.tiles.size %>
         <% if @plot.tiles.size.positive? %>

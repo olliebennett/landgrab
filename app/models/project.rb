@@ -13,7 +13,7 @@ class Project < ApplicationRecord
   end
 
   def tiles_subscribed_by(user)
-    Tile.joins(subscription: :user, plot: :project)
+    Tile.joins(latest_subscription: :user, plot: :project)
         .where(projects: { id: })
         .where(users: { id: user.id })
   end

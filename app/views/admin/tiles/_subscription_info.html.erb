@@ -1,18 +1,18 @@
 <p>
-  <% if @tile.subscription.present? %>
+  <% if @tile.latest_subscription.present? %>
     This tile is already
     <%= link_to 'subscribed',
-                admin_subscription_path(@tile.subscription) %>
+                admin_subscription_path(@tile.latest_subscription) %>
 
-    <% if @tile.subscription.user.present? %>
+    <% if @tile.latest_subscription.user.present? %>
       by
-      <%= link_to @tile.subscription.user.display_name,
-                  admin_user_path(@tile.subscription.user) %>
+      <%= link_to @tile.latest_subscription.user.display_name,
+                  admin_user_path(@tile.latest_subscription.user) %>
     <% else %>
       (but not claimed yet)
     <% end %>
-    (since <%= @tile.subscription.created_at.strftime('%e %b %Y %H:%M:%S') %>).
+    (since <%= @tile.latest_subscription.created_at.strftime('%e %b %Y %H:%M:%S') %>).
   <% else %>
-    This tile is not yet subscribed.
+    This tile is not currently subscribed.
   <% end %>
 </p>

@@ -6,14 +6,16 @@ class Tile < ApplicationRecord
   attr_accessor :map_popup
 
   belongs_to :plot, optional: true
-  has_one :subscription, dependent: :restrict_with_exception
+  has_many :subscriptions, dependent: :restrict_with_exception
+
+  belongs_to :latest_subscription, class_name: 'Subscription', optional: true
   has_many :post_associations, as: :postable, inverse_of: :postable, dependent: :restrict_with_exception
   has_many :posts, through: :post_associations
 
   default_scope { order(:id) }
 
-  scope :available, -> { where.missing(:subscription) }
-  scope :unavailable, -> { joins(:subscription).distinct }
+  scope :available, -> { where.missing(:latest_subscription) }
+  scope :unavailable, -> { joins(:latest_subscription).distinct } # TODO: where latest_subscription is active?
 
   validates :southwest, :northeast, presence: true
 
@@ -35,7 +37,7 @@ class Tile < ApplicationRecord
   end
 
   def available?
-    subscription.nil? || subscription.new_record? # handle display on 'new' screen
+    latest_subscription.nil? || latest_subscription.new_record? # handle display on 'new' screen
   end
 
   def unavailable?
@@ -115,6 +117,6 @@ class Tile < ApplicationRecord
   end
 
   def viewable_by?(user)
-    subscription&.user == user
+    latest_subscription&.user == user
   end
 end

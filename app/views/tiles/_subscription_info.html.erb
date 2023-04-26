@@ -1,14 +1,14 @@
 <p>
-  <% if tile.subscription.present? %>
+  <% if tile.latest_subscription.present? %>
     <p>
-      <% if tile.subscription.user == current_user %>
+      <% if tile.latest_subscription.user == current_user %>
         Your subscription to this tile began on
-        <%= tile.subscription.created_at.strftime('%e %b %Y') %>
+        <%= tile.latest_subscription.created_at.strftime('%e %b %Y') %>
       <% else %>
         This tile is already subscribed by someone else!
       <% end %>
     </p>
-    <% if tile.subscription.user == current_user %>
+    <% if tile.latest_subscription.user == current_user %>
       <%= link_to 'Cancel Subscription',
                   "javascript:alert('Please contact us if you need to cancel your subscription')",
                   class: 'btn btn-outline-danger' %>

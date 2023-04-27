@@ -23,10 +23,9 @@ class User < ApplicationRecord
     first_name || email.split('@').first
   end
 
-  def active_subscription_for_plot(plot)
+  def subscription_for_plot(plot)
     subscriptions.joins(:tile)
                  .where(tiles: { plot_id: plot.id })
-                 .where(stripe_status: :active)
                  .first
   end
 end

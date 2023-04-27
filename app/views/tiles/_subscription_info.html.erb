@@ -4,6 +4,8 @@
       <% if tile.latest_subscription.user == current_user %>
         Your subscription to this tile began on
         <%= tile.latest_subscription.created_at.strftime('%e %b %Y') %>
+        and is currently
+        <%= render_subscription_status(tile.latest_subscription) %>
       <% else %>
         This tile is already subscribed by someone else!
       <% end %>

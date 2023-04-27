@@ -7,15 +7,12 @@
   <%= tile.midpoint_rounded.join(', ') %>
 </p>
 
-<p>
-  <strong>Plot:</strong>
-  <% if tile.plot.present? %>
+<% if tile.plot.present? %>
+  <p>
+    This tile is part of
     <%= link_to tile.plot.title, plot_path(tile.plot) %>
     <% if tile.plot.project.present? %>
-      (part of the <%= link_to tile.plot.project.title, project_path(tile.plot.project) %> project)
+      in the <%= link_to tile.plot.project.title, project_path(tile.plot.project) %> project.
     <% end %>
-    </tr>
-  <% else %>
-    -
-  <% end %>
-</p>
+  </p>
+<% end %>

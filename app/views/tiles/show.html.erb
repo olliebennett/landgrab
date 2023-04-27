@@ -1,4 +1,5 @@
 <% ready_to_claim = user_signed_in? && current_user.subscriptions.where.missing(:tile).any? %>
+<% active_sub = user_signed_in? && @tile.plot.present? && current_user.subscription_for_plot(@tile.plot) %>
 
 <h1><%= title @tile.w3w %></h1>
 
@@ -8,7 +9,21 @@
       <%= bootstrap_alert "Last step! Use the 'claim this tile' button below.", :info %>
     <% end %>
     <%= render 'details', tile: @tile %>
-    <%= render 'subscription_info', tile: @tile %>
+
+    <% if active_sub.present? && active_sub.tile != @tile %>
+      <%= bootstrap_alert safe_join([
+        "You can view this tile already, as you're subscribed to ",
+        link_to(active_sub.tile.w3w, tile_path(active_sub.tile), class: 'alert-link'),
+        '.'
+      ], ''), :info %>
+    <% else %>
+      <%= render 'subscription_info', tile: @tile %>
+    <% end %>
+
+    <% if !user_signed_in? %>
+      <%= markdown(@tile&.plot&.project&.subscriber_benefits) %>
+    <% end %>
+
     <%= render 'posts', tile: @tile %>
   </div>
   <div class="col-md-6">

@@ -1,5 +1,5 @@
 <% ready_to_claim = user_signed_in? && current_user.subscriptions.where.missing(:tile).any? %>
-<% active_sub = user_signed_in? && current_user.active_subscription_for_plot(@plot) %>
+<% active_sub = user_signed_in? && current_user.subscription_for_plot(@plot) %>
 <% random_tile = @plot.tiles.available.sample %>
 
 <h1>
@@ -15,17 +15,16 @@
         '.'
       ], ''), :info %>
     <% end %>
+
+    <%= render 'details', plot: @plot %>
+
     <% if active_sub.present? %>
       <%= bootstrap_alert safe_join([
         "You're already subscribed to a tile in this plot - ",
         link_to(active_sub.tile.w3w, tile_path(active_sub.tile), class: 'alert-link'),
         '.'
       ], ''), :info %>
-    <% end %>
-
-    <%= render 'details', plot: @plot %>
-
-    <% if ready_to_claim %>
+    <% elsif user_signed_in? %>
       <p>
         Click an available tile (small blue square) on the map to subscribe or view details.
       </p>
@@ -35,6 +34,20 @@
           <%= link_to 'Pick a random tile for me', tile_path(random_tile), class: 'btn btn-primary' %>
         </p>
       <% end %>
+    <% end %>
+
+    <% if !user_signed_in? %>
+      <p>
+        You need to
+        <%= link_to 'log in', new_user_session_path, class: 'btn btn-primary' %>
+        or
+        <%= link_to 'register', new_user_registration_path, class: 'btn btn-primary' %>
+        to subscribe to a tile in this plot.
+      </p>
+    <% end %>
+
+    <% if !user_signed_in? %>
+      <%= markdown(@plot.project&.subscriber_benefits) %>
     <% end %>
 
     <%= render 'posts', plot: @plot %>

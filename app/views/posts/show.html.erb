@@ -15,6 +15,9 @@
     <% end %>
   </div>
   <div class="col-md-4">
+    <h2 class="mt-3">
+      Comments
+    </h2>
     <%= render 'comments_list', post: @post %>
     <%= render 'comment_form', comment: @post.comments.new %>
     <%= render 'associations', post: @post %>

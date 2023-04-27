@@ -1,11 +1,15 @@
 <% visible_comments = post.comments.where(public: true).or(post.comments.where(author: current_user)) %>
-<% visible_comments.each do |comment| %>
+<% if visible_comments.each do |comment| %>
   <p>
-    <%= comment.author == current_user ? 'You' : comment.author.first_name %>
-    <%= comment.public? ? '(publically)' : '(privately)' %>
-    on
-    <%= comment.created_at.strftime('%d %b %Y') %>:
+    <b>
+      <%= comment.author == current_user ? 'You' : comment.author.first_name %>
+      <%= comment.public? ? '(publically)' : '(privately)' %>
+      on
+      <%= comment.created_at.strftime('%d %b %Y') %>:
+    </b>
     <br>
     <%= comment.text %>
   </p>
+<% end.empty? %>
+  <p>None yet; be the first to leave a comment!</p>
 <% end %>

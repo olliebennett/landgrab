@@ -6,11 +6,15 @@
       <%= form.label :title, class: 'col-form-label' %>
     </div>
     <div class="col-sm-5">
-      <%= form.text_field :title, required: true, class: 'form-control', aria: { describedby: 'titleHelp' } %>
+      <%= form.text_field :title,
+                          required: true,
+                          placeholder: 'My First Project',
+                          class: 'form-control',
+                          aria: { describedby: 'titleHelp' } %>
     </div>
     <div class="col-sm-5">
       <span id="titleHelp" class="form-text">
-        Provide a name for this project
+        Name for this project
       </span>
     </div>
   </div>
@@ -22,31 +26,14 @@
     <div class="col-sm-5">
       <%= form.text_area :description,
                          required: true,
+                         placeholder: 'We are working to rewild ...',
                          class: 'form-control',
                          rows: 6,
                          aria: { describedby: 'descriptionHelp' } %>
     </div>
     <div class="col-sm-5">
       <span id="descriptionHelp" class="form-text">
-        Provide some detail about the project
-      </span>
-    </div>
-  </div>
-
-  <div class="row mb-3 g-3 align-items-center">
-    <div class="col-sm-2">
-      <%= form.label :welcome_text, class: 'col-form-label' %>
-    </div>
-    <div class="col-sm-5">
-      <%= form.text_area :welcome_text,
-                        required: true,
-                        class: 'form-control',
-                        rows: 6,
-                        aria: { describedby: 'welcomeTextHelp' } %>
-    </div>
-    <div class="col-sm-5">
-      <span id="welcomeTextHelp" class="form-text">
-        Provide a message to be displayed after a user subscribes.
+        Detail about the project, shown on project page
       </span>
     </div>
   </div>
@@ -56,11 +43,14 @@
       <%= form.label :website, 'Website URL', class: 'col-form-label' %>
     </div>
     <div class="col-sm-5">
-      <%= form.text_field :website, class: 'form-control', aria: { describedby: 'websiteHelp' } %>
+      <%= form.text_field :website,
+                          class: 'form-control',
+                          placeholder: 'https://www.example.com',
+                          aria: { describedby: 'websiteHelp' } %>
     </div>
     <div class="col-sm-5">
       <span id="websiteHelp" class="form-text">
-        URL of the project website (the project logo will link here)
+        URL of the project website which the project logo will link to
       </span>
     </div>
   </div>
@@ -70,7 +60,10 @@
       <%= form.label :hero_image_url, 'Hero Image URL', class: 'col-form-label' %>
     </div>
     <div class="col-sm-5">
-      <%= form.text_field :hero_image_url, class: 'form-control', aria: { describedby: 'heroImageHelp' } %>
+      <%= form.text_field :hero_image_url,
+                          class: 'form-control',
+                          placeholder: 'https://www.example.com/wide-image.jpg',
+                          aria: { describedby: 'heroImageHelp' } %>
     </div>
     <div class="col-sm-5">
       <span id="heroImageHelp" class="form-text">
@@ -84,11 +77,33 @@
       <%= form.label :logo_url, 'Logo URL', class: 'col-form-label' %>
     </div>
     <div class="col-sm-5">
-      <%= form.text_field :logo_url, class: 'form-control', aria: { describedby: 'logoImageHelp' } %>
+      <%= form.text_field :logo_url,
+                          class: 'form-control',
+                          placeholder: 'https://www.example.com/logo.png',
+                          aria: { describedby: 'logoImageHelp' } %>
     </div>
     <div class="col-sm-5">
       <span id="logoImageHelp" class="form-text">
         URL of a smaller image / icon for the project
+      </span>
+    </div>
+  </div>
+
+  <div class="row mb-3 g-3 align-items-center">
+    <div class="col-sm-2">
+      <%= form.label :welcome_text, class: 'col-form-label' %>
+    </div>
+    <div class="col-sm-5">
+      <%= form.text_area :welcome_text,
+                        required: true,
+                        class: 'form-control',
+                        placeholder: "Welcome to the members area for the project! Now you've subscribed, you can ...",
+                        rows: 6,
+                        aria: { describedby: 'welcomeTextHelp' } %>
+    </div>
+    <div class="col-sm-5">
+      <span id="welcomeTextHelp" class="form-text">
+        Message shown after a user subscribes
       </span>
     </div>
   </div>

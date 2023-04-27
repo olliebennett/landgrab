@@ -6,5 +6,12 @@
                                          { include_blank: '[ Author ]', class: 'form-select' } %>
   </div>
 
+  <div class="col-sm-3">
+    <%= label_tag :published, 'Published?', class: 'visually-hidden' %>
+    <%= select_tag :published,
+                   options_for_select({ 'Already Published' => 'true', 'Not Published' => 'false' }, params[:published]),
+                   { include_blank: '[ Published? ]', class: 'form-select' } %>
+  </div>
+
   <%= render_filter_submit %>
 <% end %>

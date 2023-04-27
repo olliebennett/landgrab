@@ -1,4 +1,4 @@
-<% cols ||= %w[title preview body author created] %>
+<% cols ||= %w[title preview body author created published] %>
 
 <% cols_remaining = cols.dup %>
 
@@ -23,6 +23,9 @@
         <% if cols_remaining.delete('created') %>
           <th>Created</th>
         <% end %>
+        <% if cols_remaining.delete('published') %>
+          <th>Publish State</th>
+        <% end %>
         <% raise "Unhandled table col(s): #{cols_remaining.join(' and ')}" if cols_remaining.any? %>
       </tr>
     </thead>
@@ -44,6 +47,11 @@
           <% end %>
           <% if cols.include?('created') %>
             <td><%= post.created_at.to_formatted_s(:short) %></td>
+          <% end %>
+          <% if cols.include?('published') %>
+            <td>
+              <%= render_post_published_state(post) %>
+            </td>
           <% end %>
         </tr>
       <% end %>

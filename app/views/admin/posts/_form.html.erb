@@ -43,5 +43,38 @@
     </div>
   </div>
 
+  <% if post.new_record? %>
+    <div class="row mb-3 g-3 align-items-center">
+      <div class="col-sm-2">
+        <%= form.label :publish_immediately, class: 'col-form-label' %>
+      </div>
+      <div class="col-sm-5">
+        <%= form.select :publish_immediately,
+                        options_for_select({ 'Yes (publish now)' => 'true', 'No (leave as draft)' => 'false' }, 'true'),
+                        {},
+                        { class: 'form-select', aria: { describedby: 'publishedImmediatelyHelp' } } %>
+      </div>
+      <div class="col-sm-5">
+        <span id="publishedImmediatelyHelp" class="form-text">
+          Choose 'No' to leave as draft and publish manually later
+        </span>
+      </div>
+    </div>
+  <% else %>
+    <div class="row mb-3 g-3 align-items-center">
+      <div class="col-sm-2">
+        <%= form.label :published_at, class: 'col-form-label' %>
+      </div>
+      <div class="col-sm-5">
+        <%= form.datetime_field :published_at, class: 'form-control', aria: { describedby: 'publishedAtHelp' } %>
+      </div>
+      <div class="col-sm-5">
+        <span id="publishedAtHelp" class="form-text">
+          Post is viewable only after this date
+          (or never visible if left blank)
+        </span>
+      </div>
+    </div>
+  <% end %>
   <%= form.submit class: 'btn btn-primary' %>
 <% end %>

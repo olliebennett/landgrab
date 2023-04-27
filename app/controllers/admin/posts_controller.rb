@@ -8,6 +8,7 @@ module Admin
     def index
       @posts = Post.all
       @posts = @posts.where(author_id: User.decode_id(params[:author])) if params[:author].present?
+      @posts = params[:published] == 'true' ? @posts.published : @posts.unpublished if params[:published].present?
       @posts = @posts.order(id: :desc).page(params[:page])
     end
 
@@ -22,10 +23,11 @@ module Admin
     end
 
     def create
-      @post = Post.new(post_params)
+      @post = Post.new(post_params_for_create)
       @post.author = current_user
 
       if @post.save
+        @post.update!(published_at: @post.created_at) if @post.publish_immediately == 'true'
         redirect_to admin_post_path(@post), notice: 'Post was successfully created.'
       else
         render :new
@@ -33,7 +35,7 @@ module Admin
     end
 
     def update
-      if @post.update(post_params)
+      if @post.update(post_params_for_update)
         redirect_to admin_post_path(@post), notice: 'Post was successfully updated.'
       else
         render :edit
@@ -68,8 +70,12 @@ module Admin
       @post = Post.find_by_hashid!(params[:id])
     end
 
-    def post_params
-      params.require(:post).permit(:title, :preview, :body)
+    def post_params_for_create
+      params.require(:post).permit(:title, :preview, :body, :publish_immediately)
+    end
+
+    def post_params_for_update
+      params.require(:post).permit(:title, :preview, :body, :published_at)
     end
   end
 end

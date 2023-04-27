@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Post < ApplicationRecord
+  attr_accessor :publish_immediately
+
   belongs_to :author, class_name: 'User', inverse_of: :posts_authored
 
   has_many :post_associations, dependent: :destroy
@@ -8,6 +10,9 @@ class Post < ApplicationRecord
 
   validates :title, presence: true
   validates :body, presence: true
+
+  scope :published, -> { where('published_at IS NOT NULL AND published_at <= ?', Time.zone.now) }
+  scope :unpublished, -> { where('published_at IS NULL OR published_at > ?', Time.zone.now) }
 
   W3W_REGEX = %r{/{3}([a-z]+\.[a-z]+\.[a-z]+)}
 

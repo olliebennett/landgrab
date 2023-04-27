@@ -18,11 +18,22 @@
     <% end %>
   </div>
   <div class="col-md-4">
-    <h2 class="mt-3">
-      Comments
-    </h2>
-    <%= render 'comments_list', post: @post %>
-    <%= render 'comment_form', comment: @post.comments.new %>
+    <% if @viewable %>
+      <h2 class="mt-3">
+        Comments
+      </h2>
+      <%= render 'comments_list', post: @post %>
+      <%= render 'comment_form', comment: @post.comments.new %>
+    <% else %>
+      <p>
+        <% if user_signed_in? %>
+          Once you subscribe
+        <% else %>
+          Once you register and subscribe
+        <% end %>
+        to a related tile, you'll be able to read and engage with this post here.
+      </p>
+    <% end %>
     <%= render 'associations', post: @post %>
   </div>
 </div>

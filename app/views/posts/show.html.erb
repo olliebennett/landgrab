@@ -12,6 +12,9 @@
       <% end %>
     <% else %>
       <%= render 'unviewable_unauthed' %>
+      <% if @post.associated_projects.size == 1 %>
+        <%= markdown(@post.associated_projects.first.subscriber_benefits) %>
+      <% end %>
     <% end %>
   </div>
   <div class="col-md-4">

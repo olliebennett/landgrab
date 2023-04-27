@@ -49,7 +49,8 @@ module Admin
               :website,
               :hero_image_url,
               :logo_url,
-              :welcome_text
+              :welcome_text,
+              :subscriber_benefits
             )
     end
   end

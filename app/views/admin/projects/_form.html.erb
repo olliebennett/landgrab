@@ -108,5 +108,23 @@
     </div>
   </div>
 
+  <div class="row mb-3 g-3 align-items-center">
+    <div class="col-sm-2">
+      <%= form.label :subscriber_benefits, class: 'col-form-label' %>
+    </div>
+    <div class="col-sm-5">
+      <%= form.text_area :subscriber_benefits,
+                        class: 'form-control',
+                        placeholder: "You should really sponsor a tile here because:\n- Reason 1\n- Reason 2\n- Reason 3",
+                        rows: 6,
+                        aria: { describedby: 'subscriberBenefitsHelp' } %>
+    </div>
+    <div class="col-sm-5">
+      <span id="subscriberBenefitsHelp" class="form-text">
+        Shown to non-sponsoring (or unregistered) users to encourage subscribing
+      </span>
+    </div>
+  </div>
+
   <%= form.submit class: 'btn btn-primary' %>
 <% end %>

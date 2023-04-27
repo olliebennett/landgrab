@@ -12,7 +12,7 @@ class Project < ApplicationRecord
   validates :website, url: true, allow_blank: true
 
   auto_strip_attributes :title, squish: true
-  auto_strip_attributes :description, :welcome_text
+  auto_strip_attributes :description, :welcome_text, :subscriber_benefits
 
   def viewable_by?(user)
     tiles_subscribed_by(user).any?

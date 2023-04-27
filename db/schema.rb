@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_26_233317) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_27_195142) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -68,6 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_26_233317) do
     t.datetime "updated_at", null: false
     t.string "website"
     t.text "welcome_text"
+    t.text "subscriber_benefits"
   end
 
   create_table "promo_codes", force: :cascade do |t|

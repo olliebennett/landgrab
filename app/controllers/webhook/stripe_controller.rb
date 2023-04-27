@@ -12,7 +12,7 @@ module Webhook
       case @event.type
       when 'checkout.session.completed'
         checkout_session_completed
-      when start_with?('customer.subscription.')
+      when /customer\.subscription\.*/
         refresh_subscription
       when 'invoice.paid'
         # TODO: invoice_paid

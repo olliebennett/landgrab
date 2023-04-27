@@ -7,6 +7,7 @@ class Subscription < ApplicationRecord
   validates :stripe_id,
             format: { with: /\Asub_[0-9a-zA-Z]+\z/ },
             uniqueness: true
+  validates :stripe_status, presence: true
 
   # https://stripe.com/docs/api/subscriptions/object#subscription_object-status
   enum :stripe_status,

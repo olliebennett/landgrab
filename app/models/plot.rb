@@ -10,6 +10,7 @@ class Plot < ApplicationRecord
 
   validates :title, presence: true
   validates :polygon, presence: true
+  validates :hero_image_url, url: true, allow_blank: true
 
   validate :validate_bounding_box_dimensions
   validate :validate_overlapping_polygons

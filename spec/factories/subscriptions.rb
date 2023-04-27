@@ -6,5 +6,6 @@ FactoryBot.define do
     user { nil }
 
     sequence(:stripe_id) { |n| "sub_#{n}" }
+    stripe_status { 'active' }
   end
 end

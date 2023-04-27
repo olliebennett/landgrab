@@ -6,8 +6,7 @@
       <th>User</th>
       <td>
         <% if @subscription.user.present? %>
-          <%= link_to @subscription.user.hashid, admin_user_path(@subscription.user) %>
-          - <%= @subscription.user.display_name %>
+          <%= link_to @subscription.user.full_name, admin_user_path(@subscription.user) %>
           <%= " (that's you!)" if @subscription.user == current_user %>
         <% else %>
           No user; purchase not yet claimed. User must visit this link:

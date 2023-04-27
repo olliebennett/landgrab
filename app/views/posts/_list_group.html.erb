@@ -6,14 +6,15 @@
   </p>
 <% else %>
   <div class="list-group">
-    <% posts.sort_by(&:created_at).reverse_each do |post| %>
+    <%# https://stackoverflow.com/a/35539062/1323144 %>
+    <% posts.sort_by { |x| [x.published_at.nil? ? 0 : 1, x.published_at] }.reverse_each do |post| %>
       <a href="<%= post_path(post) %>" class="list-group-item list-group-item-action">
         <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-0">
             <%= post.title %>
           </h5>
           <small class="text-muted">
-            <%= distance_of_time_in_words(post.created_at, Time.current) %> ago
+            <%= distance_of_time_in_words(post.published_at || post.created_at, Time.current) %> ago
           </small>
         </div>
         <% if show_preview && post.preview.present? %>

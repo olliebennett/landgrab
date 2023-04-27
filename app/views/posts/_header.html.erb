@@ -1,6 +1,10 @@
 <p>
-  Posted
-  <%= post.created_at.strftime('%e %b %Y') %>
+  <% if post.published_at.present? %>
+    Posted
+    <%= post.published_at.strftime('%e %b %Y') %>
+  <% else %>
+    Drafted
+  <% end %>
   by
   <%= post.author.display_name %>
   <% if current_user&.admin? %>

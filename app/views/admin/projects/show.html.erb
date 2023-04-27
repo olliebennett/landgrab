@@ -64,4 +64,4 @@
 <%= render 'admin/plots/table', project: @project, plots: @project.plots %>
 
 <h2>Posts about this Project</h2>
-<%= render 'admin/posts/table', posts: @project.posts %>
+<%= render 'admin/posts/table', posts: @project.posts, cols: %w[title preview author published] %>

@@ -35,5 +35,12 @@
         <%= post.created_at.strftime('%e %b %Y %H:%M:%S') %>
       </td>
     </tr>
+
+    <tr>
+      <th>Publish State</th>
+      <td>
+        <%= render_post_published_state(post) %>
+      </td>
+    </tr>
   </tbody>
 </table>

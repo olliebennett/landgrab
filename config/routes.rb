@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
   get '/about', to: 'static_pages#about'
   get '/explore', to: 'static_pages#explore'
+  get '/my_tile', to: 'static_pages#my_tile'
   get '/support', to: 'static_pages#support'
 
   namespace :admin do

@@ -21,6 +21,24 @@ class StaticPagesController < ApplicationController
     end
   end
 
+  def my_tile
+    log_event_mixpanel('My Tile Shortcut', { authed: true })
+
+    if current_user.subscriptions.none?
+      redirect_to root_path,
+                  alert: "You don't have a subscription yet"
+    elsif current_user.subscriptions.stripe_status_active.none?
+      redirect_to subscriptions_path,
+                  alert: 'Your subscription is not active'
+    elsif current_user.subscriptions.stripe_status_active.joins(:tile).none?
+      redirect_to subscriptions_path,
+                  alert: "You're subscribed, but haven't claimed a tile yet!"
+    else
+      tile = current_user.subscriptions.stripe_status_active.joins(:tile).first.tile
+      redirect_to tile_path(tile)
+    end
+  end
+
   def explore
     log_event_mixpanel('Explore Page', { authed: user_signed_in? })
     @plot = Plot.select('plots.id, plots.title, COUNT(tiles)')

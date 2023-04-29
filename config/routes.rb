@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     get :embed, on: :member
   end
 
-  resources :plots, only: %i[index show]
+  resources :plots, only: %i[show]
   resources :posts, only: %i[show]
   resources :projects, only: %i[index show] do
     get :welcome, on: :member

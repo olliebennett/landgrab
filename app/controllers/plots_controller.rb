@@ -2,12 +2,7 @@
 
 class PlotsController < ApplicationController
   before_action :set_plot, only: %i[show]
-  skip_before_action :authenticate_user!, only: %i[index show]
-
-  def index
-    @plots = Plot.order(id: :desc).page(params[:page])
-    log_event_mixpanel('Plots: Index', { authed: user_signed_in? })
-  end
+  skip_before_action :authenticate_user!, only: %i[show]
 
   def show
     log_event_mixpanel('Plots: Show', { authed: user_signed_in?, plot: @plot.hashid, project: @plot.project&.hashid })

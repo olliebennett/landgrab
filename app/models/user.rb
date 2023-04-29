@@ -26,6 +26,6 @@ class User < ApplicationRecord
   def subscription_for_plot(plot)
     subscriptions.joins(:tile)
                  .where(tiles: { plot_id: plot.id })
-                 .first
+                 .order(id: :desc).first # assume last = most likely to be active
   end
 end

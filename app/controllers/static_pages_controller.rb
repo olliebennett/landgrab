@@ -34,8 +34,13 @@ class StaticPagesController < ApplicationController
       redirect_to subscriptions_path,
                   alert: "You're subscribed, but haven't claimed a tile yet!"
     else
-      tile = current_user.subscriptions.stripe_status_active.joins(:tile).first.tile
-      redirect_to tile_path(tile)
+      claimed_subs = current_user.subscriptions.stripe_status_active.joins(:tile)
+      if claimed_subs.size > 1
+        redirect_to subscriptions_path,
+                    notice: "You've got multiple active tile subscriptions; choose one to view below."
+      else
+        redirect_to tile_path(claimed_subs.first.tile)
+      end
     end
   end
 

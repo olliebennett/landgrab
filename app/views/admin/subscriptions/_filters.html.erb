@@ -3,7 +3,7 @@
 
   <%= render_filter_text(:stripe_id, 'Stripe ID', col: 2) %>
 
-  <%= render_filter_enum(Subscription.stripe_statuses, :stripe_status, size: 1) %>
+  <%= render_filter_enum(Subscription.stripe_statuses, :stripe_status, size: 2) %>
 
   <%= render_filter_submit %>
 <% end %>

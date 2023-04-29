@@ -18,8 +18,9 @@
         <td><%= link_to subscription.hashid, admin_subscription_path(subscription) %></td>
         <td>
           <% if subscription.user.present? %>
-            <%= link_to subscription.user.hashid, admin_user_path(subscription.user) %>
-            (<%= subscription.user.email %>)
+            <%= link_to subscription.user.full_name, admin_user_path(subscription.user) %>
+            <br>
+            <%= subscription.user.email %>
           <% else %>
             Unregistered; email from stripe is
             <%= content_tag(:code, subscription.claim_email || 'NOT SET') %>

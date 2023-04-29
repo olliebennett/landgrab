@@ -85,5 +85,11 @@
     </div>
   </div>
 
+  <% if plot.new_record? %>
+    <p>
+      Once created, the underlying 3x3m 'tiles' will be created automatically.
+    </p>
+  <% end %>
+
   <%= form.submit class: 'btn btn-primary' %>
 <% end %>

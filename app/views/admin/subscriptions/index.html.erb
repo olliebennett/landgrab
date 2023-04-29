@@ -1,8 +1,15 @@
 <h1><%= admin_title Subscription %></h1>
 
-<%= page_entries_info @subscriptions %>
+<p>
+  Subscriptions grant users access to the corresponding tile (once claimed).
+</p>
 
 <%= render 'filters' %>
+
+<%= page_entries_info @subscriptions %>
+<% if filtered? %>
+  matching selected filters.
+<% end %>
 
 <%= render 'table', subscriptions: @subscriptions %>
 

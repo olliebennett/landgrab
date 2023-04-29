@@ -11,9 +11,14 @@
       <% end %>
     </p>
     <% if tile.latest_subscription.user == current_user %>
-      <%= link_to 'Cancel Subscription',
-                  "javascript:alert('Please contact us if you need to cancel your subscription')",
-                  class: 'btn btn-outline-danger' %>
+      <% if tile.latest_subscription.stripe_status_canceled? %>
+        <%= bootstrap_alert 'Your subscription is inactive. To resolve this, please re-subscribe below' %>
+        <%= render 'tiles/subscription_checkout', tile: tile %>
+      <% else %>
+        <%= link_to 'Cancel Subscription',
+                    "javascript:alert('Please contact us if you need to cancel your subscription')",
+                    class: 'btn btn-outline-danger' %>
+      <% end %>
     <% end %>
   <% elsif user_signed_in? %>
     <% redeemable_subscription = current_user.subscriptions.where.missing(:tile).first %>

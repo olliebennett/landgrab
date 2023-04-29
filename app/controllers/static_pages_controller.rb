@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class StaticPagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[about homepage explore]
+  skip_before_action :authenticate_user!, only: %i[about support homepage explore]
 
   def about
     log_event_mixpanel('About Page', { authed: user_signed_in? })

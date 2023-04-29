@@ -9,4 +9,17 @@ namespace :subscription do
       StripeSubscriptionRefreshJob.perform_later(s)
     end
   end
+
+  desc 'Create fake subscription for testing'
+  task fake_subscription: :environment do
+    n = ENV.fetch('COUNT', '3').to_i
+    Tile.available.sample(n).each do |tile|
+      fake_id = Array.new(8) { rand(0..9) }.join
+      Subscription.create!(
+        stripe_id: "sub_fake#{fake_id}",
+        stripe_status: :trialing,
+        tile:
+      )
+    end
+  end
 end

@@ -15,12 +15,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <% [
-          ['Explore', explore_path],
-          ['Projects', projects_path],
-          ['Subscriptions', subscriptions_path],
-          ['About', about_path]
-        ].each do |text, href| %>
+        <% links = [] %>
+        <% links << ['Explore', explore_path] %>
+        <% links << ['Projects', projects_path] %>
+        <% links << ['My Tile', my_tile_path] %>
+        <% links << ['Subscriptions', subscriptions_path] if user_signed_in? %>
+        <% links << ['About', about_path] %>
+        <% links.each do |text, href| %>
           <li class="nav-item">
             <%= active_navlink text, href %>
           </li>

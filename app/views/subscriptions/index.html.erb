@@ -1,12 +1,22 @@
 <h1><%= title 'Subscriptions' %></h1>
 
-<p>
-  You currently have
-  <%= pluralize(@subscriptions.size, 'subscription') %>
-</p>
+<% if @subscriptions.size.zero? %>
+  <p>
+    You haven't subscribed to any tiles yet.
+    Take a look through the different plots to find
+    a tile that you'd like to subscribe to!
+  </p>
+  <%= link_to 'Start exploring!', explore_path %>
+<% else %>
+  <p>
+    You have
+    <%= pluralize(@subscriptions.size, 'subscription') %>
+  </p>
 
-<%= render 'table', subscriptions: @subscriptions %>
+  <%= render 'table', subscriptions: @subscriptions %>
 
-<p>
-  You can subscribe to a new (unclaimed) tile from any project, plot or tile's details page.
-</p>
+  <p>
+    You can always subscribe to a new (unclaimed) tile from any
+    project, plot or tile's details page.
+  </p>
+<% end %>

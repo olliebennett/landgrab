@@ -5,6 +5,7 @@
 
 <% if available_tiles.any? %>
   <%= bootstrap_alert 'You need to be subscribed to an associated tile before you can view this post!' %>
+  <%= markdown available_tiles.first&.plot&.project&.subscriber_benefits %>
   <%= render 'tiles/subscription_info', tile: available_tiles.sample %>
 <% else %>
   <%= bootstrap_alert "There are no available tiles associated with this post so you can't subscribe right now!" %>

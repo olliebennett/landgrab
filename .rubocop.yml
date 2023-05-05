@@ -41,6 +41,9 @@ RSpec/DescribeClass:
     - spec/requests/**/*
     - spec/features/**/*
 
+RSpec/MultipleExpectations:
+  Enabled: false
+
 RSpec/NamedSubject:
   Enabled: false
 

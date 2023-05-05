@@ -38,8 +38,13 @@ class Post < ApplicationRecord
 
   # Viewable if user has subscribed to any associated tile
   def viewable_by?(user)
-    post_associations.includes(:postable).any? do |pa|
-      pa.postable.viewable_by?(user)
+    # Handle association types separately to optimise N+1 queries
+    [
+      post_associations.where(postable_type: 'Tile').includes(postable: :latest_subscription),
+      post_associations.where(postable_type: 'Plot').includes(postable: { tiles: :latest_subscription }),
+      post_associations.where(postable_type: 'Project')
+    ].any? do |associations|
+      associations.any? { |a| a.postable.viewable_by?(user) }
     end
   end
 end

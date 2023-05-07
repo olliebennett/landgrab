@@ -12,6 +12,11 @@ module Admin
       @posts = @posts.where('posts.title ILIKE ?', "%#{params[:title]}%") if params[:title].present?
       @posts = @posts.where('posts.body ILIKE ?', "%#{params[:body]}%") if params[:body].present?
       @posts = @posts.order(id: :desc).page(params[:page])
+
+      respond_to do |format|
+        format.html { render :index }
+        format.csv { render_csv('posts') }
+      end
     end
 
     def show; end

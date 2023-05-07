@@ -10,8 +10,10 @@
   <%= link_to 'New Post', new_admin_post_path %>
   <%= page_entries_info @posts %>
   <% if filtered? %>
-    matching selected filters.
+    matching selected filters
   <% end %>
+  -
+  <%= link_to 'download csv', admin_posts_path(format: :csv, params: request.query_parameters) %>
 </p>
 
 <%= render 'table', posts: @posts %>

@@ -58,4 +58,10 @@ class ApplicationController < ActionController::Base
 
     current_user.reload
   end
+
+  def render_csv(filename_prefix)
+    filename = "#{filename_prefix}-#{Time.zone.now.strftime('%Y-%m-%dT%H-%M-%S')}.csv"
+    response.headers['Content-Type'] = 'text/csv'
+    response.headers['Content-Disposition'] = "attachment; filename=#{filename}"
+  end
 end

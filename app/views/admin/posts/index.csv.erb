@@ -1,0 +1,13 @@
+<%- headers = ['Post ID', 'Created At', 'Title', 'Body', 'Preview', 'Author', 'Published At'] -%>
+<%= CSV.generate_line headers -%>
+<%- @posts.includes(:author).find_each do |post| -%>
+<%= CSV.generate_line([
+    post.hashid,
+    post.created_at,
+    post.title,
+    post.body,
+    post.preview,
+    post.author.full_name,
+    post.published_at
+  ]).html_safe -%>
+<%- end -%>

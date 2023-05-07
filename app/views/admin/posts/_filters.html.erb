@@ -6,7 +6,7 @@
                                          { include_blank: '[ Author ]', class: 'form-select' } %>
   </div>
 
-  <div class="col-sm-3">
+  <div class="col-sm-2">
     <%= label_tag :published, 'Published?', class: 'visually-hidden' %>
     <%= select_tag :published,
                    options_for_select({ 'Already Published' => 'true', 'Not Published' => 'false' }, params[:published]),
@@ -14,7 +14,8 @@
   </div>
 
   <%= render_filter_text(:title, 'Title', col: 2) %>
-  <%= render_filter_text(:body, 'Body', col: 3) %>
+  <%= render_filter_text(:body, 'Body', col: 2) %>
+  <%= render_filter_text(:body, 'Preview', col: 2) %>
 
   <%= render_filter_submit(col: 2) %>
 <% end %>

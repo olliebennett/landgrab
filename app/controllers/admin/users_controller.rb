@@ -18,10 +18,7 @@ module Admin
 
       respond_to do |format|
         format.html { render :index }
-        format.csv do
-          response.headers['Content-Type'] = 'text/csv'
-          response.headers['Content-Disposition'] = 'attachment; filename=users.csv'
-        end
+        format.csv { render_csv('users') }
       end
     end
 

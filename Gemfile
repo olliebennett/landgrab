@@ -46,6 +46,9 @@ gem 'factory_bot_rails', group: %i[development test]
 # Dependency of RGeo operation with 'geos' library
 gem 'ffi-geos', groups: %i[development test]
 
+# Apply scopes (filters) based on params
+gem 'has_scope'
+
 # Replace raw numeric IDs with short unique ids
 gem 'hashid-rails'
 

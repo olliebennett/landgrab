@@ -13,5 +13,8 @@
                    { include_blank: '[ Published? ]', class: 'form-select' } %>
   </div>
 
-  <%= render_filter_submit %>
+  <%= render_filter_text(:title, 'Title', col: 2) %>
+  <%= render_filter_text(:body, 'Body', col: 3) %>
+
+  <%= render_filter_submit(col: 2) %>
 <% end %>

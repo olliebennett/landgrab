@@ -9,6 +9,8 @@ module Admin
       @posts = Post.all
       @posts = @posts.where(author_id: User.decode_id(params[:author])) if params[:author].present?
       @posts = params[:published] == 'true' ? @posts.published : @posts.unpublished if params[:published].present?
+      @posts = @posts.where('posts.title ILIKE ?', "%#{params[:title]}%") if params[:title].present?
+      @posts = @posts.where('posts.body ILIKE ?', "%#{params[:body]}%") if params[:body].present?
       @posts = @posts.order(id: :desc).page(params[:page])
     end
 

@@ -11,8 +11,10 @@ class Post < ApplicationRecord
   validates :title, presence: true
   validates :body, presence: true
 
-  scope :published, -> { where('published_at IS NOT NULL AND published_at <= ?', Time.zone.now) }
-  scope :unpublished, -> { where('published_at IS NULL OR published_at > ?', Time.zone.now) }
+  scope :published, ->(value = true) { value ? where('published_at IS NOT NULL AND published_at <= ?', Time.zone.now) : where('published_at IS NULL OR published_at > ?', Time.zone.now) }
+  scope :title, ->(value) { where('posts.title ILIKE ?', "%#{value}%") }
+  scope :body, ->(value) { where('posts.body ILIKE ?', "%#{value}%") }
+  scope :preview, ->(value) { where('posts.preview ILIKE ?', "%#{value}%") }
 
   W3W_REGEX = %r{/{3}([a-z]+\.[a-z]+\.[a-z]+)}
 

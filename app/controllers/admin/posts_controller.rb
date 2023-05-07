@@ -5,13 +5,14 @@ module Admin
     before_action :check_admin
     before_action :set_post, only: %i[show edit update bulk_association_edit bulk_association_update]
 
+    has_scope :title
+    has_scope :body
+    has_scope :preview
+
     def index
-      @posts = Post.all
+      @posts = apply_scopes(Post).all
       @posts = @posts.where(author_id: User.decode_id(params[:author])) if params[:author].present?
-      @posts = params[:published] == 'true' ? @posts.published : @posts.unpublished if params[:published].present?
-      @posts = @posts.where('posts.title ILIKE ?', "%#{params[:title]}%") if params[:title].present?
-      @posts = @posts.where('posts.body ILIKE ?', "%#{params[:body]}%") if params[:body].present?
-      @posts = @posts.where('posts.preview ILIKE ?', "%#{params[:preview]}%") if params[:preview].present?
+      @posts = @posts.published(%w[1 true].include?(params[:published])) if params[:published].present?
       @posts = @posts.order(id: :desc).page(params[:page])
 
       respond_to do |format|

@@ -24,7 +24,13 @@ docker-compose up
 
 Open the site at [localhost:3000](http://localhost:3000)!
 
-Access the Rails console;
+Register in the UI, then set yourself (the first user) as admin;
+
+```sh
+docker-compose exec app bin/rails runner 'User.first.update!(admin: true)'
+```
+
+Access the Rails console (for any other changes);
 
 ```sh
 docker-compose exec app bin/rails c

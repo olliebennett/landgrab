@@ -10,6 +10,10 @@ class RegistrationsController < Devise::RegistrationsController
 
   private
 
+  def after_update_path_for(_resource)
+    edit_profile_path
+  end
+
   # Allow updating other attributes if replacement password is not provided
   def update_resource(resource, params)
     if params[:password].blank?

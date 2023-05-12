@@ -3,11 +3,12 @@
 Rails.application.routes.draw do
   devise_for :users,
              controllers: {
-               registrations: 'registrations'
+               registrations: 'registrations',
+               passwords: 'passwords'
              }
   as :user do
     get '/settings/profile' => 'registrations#edit', as: 'edit_profile'
-    get '/settings/password' => 'registrations#edit_password', as: 'edit_password'
+    get '/settings/password' => 'registrations#edit_password', as: 'custom_edit_password'
   end
 
   root to: 'static_pages#homepage'

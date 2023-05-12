@@ -4,6 +4,10 @@ ignore_unreachable_actions:
 - devise/confirmations#show
 - devise/omniauth_callbacks#failure
 - devise/omniauth_callbacks#passthru
+- devise/passwords#new
+- devise/passwords#update
+- devise/passwords#create
+- devise/passwords#edit
 - devise/registrations#cancel
 - devise/registrations#create
 - devise/registrations#destroy

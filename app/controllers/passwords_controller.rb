@@ -2,6 +2,8 @@
 
 # Extends https://github.com/heartcombo/devise/blob/main/app/controllers/devise/passwords_controller.rb
 class PasswordsController < Devise::PasswordsController
+  private
+
   def after_resetting_password_path_for(_resource)
     edit_profile_path
   end

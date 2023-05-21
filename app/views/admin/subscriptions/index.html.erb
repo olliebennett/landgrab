@@ -6,10 +6,14 @@
 
 <%= render 'filters' %>
 
-<%= page_entries_info @subscriptions %>
-<% if filtered? %>
-  matching selected filters.
-<% end %>
+<p>
+  <%= page_entries_info @subscriptions %>
+  <% if filtered? %>
+    matching selected filters
+  <% end %>
+  -
+  <%= link_to 'download csv', admin_subscriptions_path(format: :csv, params: request.query_parameters) %>
+</p>
 
 <%= render 'table', subscriptions: @subscriptions %>
 

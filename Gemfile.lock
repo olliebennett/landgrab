@@ -376,6 +376,7 @@ DEPENDENCIES
   rgeo-geojson
   rspec-rails
   rubocop
+  rubocop-factory_bot
   rubocop-performance
   rubocop-rails
   rubocop-rspec

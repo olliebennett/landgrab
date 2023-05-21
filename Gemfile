@@ -84,6 +84,7 @@ gem 'rspec-rails', groups: %i[development test]
 
 # RuboCop code linting
 gem 'rubocop'
+gem 'rubocop-factory_bot'
 gem 'rubocop-performance'
 gem 'rubocop-rails'
 gem 'rubocop-rspec'

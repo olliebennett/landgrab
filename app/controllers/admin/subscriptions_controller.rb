@@ -11,6 +11,11 @@ module Admin
       @subscriptions = @subscriptions.where('stripe_id LIKE ?', "%#{params[:stripe_id]}%") if params[:stripe_id].present?
       @subscriptions = @subscriptions.joins(:user).where(users: { id: User.decode_id(params[:user_id]) }) if params[:user_id].present?
       @subscriptions = @subscriptions.includes(:user, :tile).order(id: :desc).page(params[:page])
+
+      respond_to do |format|
+        format.html { render :index }
+        format.csv { render_csv('subscriptions') }
+      end
     end
 
     def show; end

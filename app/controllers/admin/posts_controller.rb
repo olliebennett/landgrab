@@ -13,10 +13,12 @@ module Admin
       @posts = apply_scopes(Post).all
       @posts = @posts.where(author_id: User.decode_id(params[:author])) if params[:author].present?
       @posts = @posts.published(%w[1 true].include?(params[:published])) if params[:published].present?
-      @posts = @posts.order(id: :desc).page(params[:page])
 
       respond_to do |format|
-        format.html { render :index }
+        format.html do
+          @posts = @posts.order(id: :desc).page(params[:page])
+          render :index
+        end
         format.csv { render_csv('posts') }
       end
     end

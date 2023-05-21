@@ -14,10 +14,12 @@ module Admin
                        .where(plots: { id: subscribed_to_plot_ids })
                        .distinct
       end
-      @users = @users.order(id: :desc).page(params[:page])
 
       respond_to do |format|
-        format.html { render :index }
+        format.html do
+          @users = @users.order(id: :desc).page(params[:page])
+          render :index
+        end
         format.csv { render_csv('users') }
       end
     end

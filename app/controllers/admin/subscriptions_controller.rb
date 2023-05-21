@@ -10,10 +10,12 @@ module Admin
       @subscriptions = @subscriptions.where(stripe_status: params[:stripe_status].compact_blank.map { |x| x == 'BLANK' ? nil : Subscription.stripe_statuses.fetch(x) }) if params[:stripe_status]
       @subscriptions = @subscriptions.where('stripe_id LIKE ?', "%#{params[:stripe_id]}%") if params[:stripe_id].present?
       @subscriptions = @subscriptions.joins(:user).where(users: { id: User.decode_id(params[:user_id]) }) if params[:user_id].present?
-      @subscriptions = @subscriptions.includes(:user, :tile).order(id: :desc).page(params[:page])
 
       respond_to do |format|
-        format.html { render :index }
+        format.html do
+          @subscriptions = @subscriptions.includes(:user, :tile).order(id: :desc).page(params[:page])
+          render :index
+        end
         format.csv { render_csv('subscriptions') }
       end
     end

@@ -1,0 +1,35 @@
+<%# Note: Requires 'copytext' variable. 'copyid' is optional %>
+<% copyid ||= SecureRandom.hex %>
+<% copycta ||= 'Copy' %>
+
+<div class="input-group mb-3">
+  <input id="input_copy_<%= copyid %>"
+         type="text"
+         value="<%= copytext %>"
+         readonly="readonly"
+         class="form-control"
+         aria-label="Copy to clipboard"
+         aria-describedby="btn_copy_<%= copyid %>">
+  <button class="btn btn-outline-primary"
+          type="button"
+          style="width: 150px;"
+          id="btn_copy_<%= copyid %>">
+    <%= copycta %>
+  </button>
+</div>
+
+<script>
+  let copyBtn<%= copyid %> = document.getElementById("btn_copy_<%= copyid %>");
+  copyBtn<%= copyid %>.addEventListener('click', event => {
+    let clipText = document.getElementById("input_copy_<%= copyid %>").value;
+    navigator.clipboard.writeText(clipText).then(function() {
+      copyBtn<%= copyid %>.textContent = "Copied!";
+      window.setTimeout(function() {
+        copyBtn<%= copyid %>.textContent = "<%= copycta %>";
+      }, 1250);
+    }, function() {
+      copyBtn<%= copyid %>.textContent = "Copy FAILED!";
+    });
+  });
+</script>
+

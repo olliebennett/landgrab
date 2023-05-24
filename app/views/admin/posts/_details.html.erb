@@ -1,6 +1,12 @@
 <table class="table">
   <tbody>
     <tr>
+      <th>Share Link</th>
+      <td>
+        <%= render 'layouts/copy_to_clipboard', copytext: post_url(@post), copycta: 'Copy Post URL' %>
+      </td>
+    </tr>
+    <tr>
       <th>Title</th>
       <td><%= post.title %></td>
     </tr>

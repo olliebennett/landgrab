@@ -5,6 +5,6 @@ FactoryBot.define do
     title { 'My Post Title' }
     body { 'My Post Body' }
 
-    association :author, factory: :user
+    author factory: %i[user]
   end
 end

@@ -9,17 +9,36 @@
         <% [
           ['Projects', admin_projects_path],
           ['Plots', admin_plots_path],
-          ['Posts', admin_posts_path],
-          ['Post Views', admin_post_views_path],
+          ['Posts',
+            [
+              ['All Posts', admin_posts_path],
+              ['Post Views', admin_post_views_path],
+              ['Comments', admin_comments_path]
+            ]
+          ],
           ['Promo Codes', admin_promo_codes_path],
           ['Tiles', admin_tiles_path],
           ['Subscriptions', admin_subscriptions_path],
-          ['Users', admin_users_path],
-          ['Comments', admin_comments_path]
-        ].each do |text, href| %>
-          <li class="nav-item">
-            <%= active_navlink text, href %>
-          </li>
+          ['Users', admin_users_path]
+        ].each do |text, config| %>
+          <% if config.instance_of?(Array) %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <%= text %>
+              </a>
+              <ul class="dropdown-menu">
+                <% config.each do |linktext, url| %>
+                  <li>
+                    <%= active_navlink linktext, url, 'dropdown-item' %>
+                  </li>
+                <% end %>
+              </ul>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= active_navlink text, config %>
+            </li>
+          <% end %>
         <% end %>
       </ul>
     </div>

@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 module BootstrapHelper
-  def active_navlink(title, href)
+  def active_navlink(title, href, klass = 'nav-link')
     if current_page?(href)
-      link_to title, href, class: 'nav-link active', aria: { current: 'page' }
+      link_to title, href, class: "#{klass} active", aria: { current: 'page' }
     else
-      link_to title, href, class: 'nav-link'
+      link_to title, href, class: klass
     end
   end
 

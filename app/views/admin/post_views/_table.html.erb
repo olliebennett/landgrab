@@ -1,0 +1,38 @@
+<% cols ||= %w[post user created] %>
+
+<% cols_remaining = cols.dup %>
+
+<% if post_views.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <% if cols_remaining.delete('post') %>
+          <th>Post</th>
+        <% end %>
+        <% if cols_remaining.delete('user') %>
+          <th>User</th>
+        <% end %>
+        <% if cols_remaining.delete('created') %>
+          <th>Viewed</th>
+        <% end %>
+        <% raise "Unhandled table col(s): #{cols_remaining.join(' and ')}" if cols_remaining.any? %>
+      </tr>
+    </thead>
+
+    <tbody style="font-variant-numeric: tabular-nums;">
+      <% post_views.each do |post_view| %>
+        <tr>
+          <% if cols.include?('post') %>
+            <td><%= link_to post_view.post.title, admin_post_path(post_view.post) %></td>
+          <% end %>
+          <% if cols.include?('user') %>
+            <td><%= link_to post_view.user.display_name, admin_user_path(post_view.user) %></td>
+          <% end %>
+          <% if cols.include?('created') %>
+            <td><%= post_view.created_at.to_formatted_s(:short) %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

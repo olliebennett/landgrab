@@ -1,0 +1,20 @@
+<h1><%= admin_title(PostView) %></h1>
+
+<p>
+  Post views track which users have viewed which posts.
+</p>
+
+<%= render 'filters' %>
+
+<p>
+  <%= page_entries_info @post_views %>
+  <% if filtered? %>
+    matching selected filters
+  <% end %>
+  -
+  <%= link_to 'download csv', admin_post_views_path(format: :csv, params: request.query_parameters) %>
+</p>
+
+<%= render 'table', post_views: @post_views %>
+
+<%= paginate @post_views, theme: 'bootstrap-5' %>

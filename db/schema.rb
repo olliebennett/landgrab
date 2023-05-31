@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_27_195142) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_31_210713) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -46,6 +46,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_27_195142) do
     t.index ["post_id", "postable_type", "postable_id"], name: "index_post_associations_on_post_and_postable", unique: true
     t.index ["post_id"], name: "index_post_associations_on_post_id"
     t.index ["postable_type", "postable_id"], name: "index_post_associations_on_postable"
+  end
+
+  create_table "post_views", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "post_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_post_views_on_post_id"
+    t.index ["user_id"], name: "index_post_views_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -129,6 +138,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_27_195142) do
   add_foreign_key "comments", "users"
   add_foreign_key "plots", "projects"
   add_foreign_key "post_associations", "posts"
+  add_foreign_key "post_views", "posts"
+  add_foreign_key "post_views", "users"
   add_foreign_key "posts", "users", column: "author_id"
   add_foreign_key "subscriptions", "tiles"
   add_foreign_key "subscriptions", "users"

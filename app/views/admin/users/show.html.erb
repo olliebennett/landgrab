@@ -43,6 +43,13 @@
 </p>
 
 <p>
+  <strong>Posts Viewed:</strong>
+  <%= @user.post_views.size %>
+  -
+  <%= link_to 'view', admin_post_views_path(user: @user.hashid) %>
+</p>
+
+<p>
   <strong>Posts Authored:</strong>
   <%= @user.posts_authored.size %>
   -

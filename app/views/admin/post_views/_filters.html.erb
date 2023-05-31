@@ -1,0 +1,16 @@
+<%= form_tag(admin_post_views_path, method: :get, class: 'row g-3 mb-3') do %>
+  <div class="col-sm-5">
+    <%= label_tag :user, 'User', class: 'visually-hidden' %>
+    <% all_post_users = User.joins(:post_views).distinct %>
+    <%= select_tag :user, options_from_collection_for_select(all_post_users.order(:last_name, :first_name), :hashid, :full_name, params[:user]),
+                                         { include_blank: '[ User ]', class: 'form-select' } %>
+  </div>
+
+  <div class="col-sm-5">
+    <%= label_tag :post, 'Post', class: 'visually-hidden' %>
+    <%= select_tag :post, options_from_collection_for_select(Post.all.order(title: :asc), :hashid, :title, params[:post]),
+                          { include_blank: '[ All Posts ]', class: 'form-select' } %>
+  </div>
+
+  <%= render_filter_submit(col: 2) %>
+<% end %>

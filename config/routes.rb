@@ -50,8 +50,8 @@ Rails.application.routes.draw do
       get :bulk_association_edit, on: :member
       post :bulk_association_update, on: :member
     end
-
     resources :post_associations, only: %i[create]
+    resources :post_views, only: %i[index]
     resources :projects, only: %i[create index show new edit update]
     resources :promo_codes, only: %i[index]
     resources :subscriptions, only: %i[create index show edit update] do

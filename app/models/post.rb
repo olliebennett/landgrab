@@ -6,6 +6,7 @@ class Post < ApplicationRecord
   belongs_to :author, class_name: 'User', inverse_of: :posts_authored
 
   has_many :post_associations, dependent: :destroy
+  has_many :post_views, dependent: :destroy
   has_many :comments, dependent: :restrict_with_exception
 
   validates :title, presence: true
@@ -36,6 +37,10 @@ class Post < ApplicationRecord
 
   def mentioned_tiles
     Tile.where(w3w: mentioned_w3w)
+  end
+
+  def viewed_by_users
+    User.joins(:post_views).where(post_views: { post_id: id }).distinct
   end
 
   # Viewable if user has subscribed to any associated tile

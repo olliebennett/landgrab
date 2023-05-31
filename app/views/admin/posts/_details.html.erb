@@ -27,15 +27,6 @@
     </tr>
 
     <tr>
-      <th>Comments</th>
-      <td>
-        <%= post.comments.size %>
-        -
-        <%= link_to 'view', admin_comments_path(post: post.hashid) %>
-      </td>
-    </tr>
-
-    <tr>
       <th>Created</th>
       <td>
         <%= post.created_at.strftime('%e %b %Y %H:%M:%S') %>
@@ -46,6 +37,24 @@
       <th>Publish State</th>
       <td>
         <%= render_post_published_state(post) %>
+      </td>
+    </tr>
+
+    <tr>
+      <th>Comments</th>
+      <td>
+        <%= post.comments.size %>
+        -
+        <%= link_to 'see all comments', admin_comments_path(post: post.hashid) %>
+      </td>
+    </tr>
+
+    <tr>
+      <th>Views</th>
+      <td>
+        <%= post.viewed_by_users.size %>
+        -
+        <%= link_to 'see all users who viewed', admin_post_views_path(post: post.hashid) %>
       </td>
     </tr>
   </tbody>

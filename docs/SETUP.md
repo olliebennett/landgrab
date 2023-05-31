@@ -50,3 +50,9 @@ DELETE FROM spatial_ref_sys WHERE srid <> 4326;
 ```sh
 docker compose run app rm /usr/app/landgrab/tmp/pids/server.pid
 ```
+
+### Could not find xxx in locally installed gems
+
+```sh
+docker-compose exec app bin/bundle install
+```

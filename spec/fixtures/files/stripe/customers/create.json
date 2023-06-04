@@ -1,0 +1,29 @@
+{
+  "id": "cus_aoeuidhtns",
+  "object": "customer",
+  "address": null,
+  "balance": 0,
+  "created": 1483000000,
+  "currency": null,
+  "default_source": "card_yyyyffffgggghhhhggggeeeejjjjoooo",
+  "delinquent": false,
+  "description": "Test Customer",
+  "discount": null,
+  "email": "stripe-test-123@example.com",
+  "invoice_prefix": "XYZ123",
+  "invoice_settings": {
+    "custom_fields": null,
+    "default_payment_method": null,
+    "footer": null,
+    "rendering_options": null
+  },
+  "livemode": false,
+  "metadata": {},
+  "name": null,
+  "next_invoice_sequence": 1,
+  "phone": null,
+  "preferred_locales": [],
+  "shipping": null,
+  "tax_exempt": "none",
+  "test_clock": null
+}

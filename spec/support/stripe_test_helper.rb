@@ -22,10 +22,11 @@ module StripeTestHelper
   # status => response code (200 or 4XX) - see https://stripe.com/docs/api/errors
   # path => Stripe API path AND local fixtures directory (eg. 'payment_intents')
   # filename => JSON fixture (relative to 'path' folder)
-  def stub_stripe_api(method, status, path, filename)
+  def stub_stripe_api(method, status, path, filename, query_params = nil)
     resp = stripe_fixture("#{path}/#{filename}")
 
-    stub_request(method, stripe_api_url(path))
+    urlpath = query_params.nil? ? path : "#{path}?#{query_params}"
+    stub_request(method, stripe_api_url(urlpath))
       .to_return(status:, body: resp.to_json)
   end
 

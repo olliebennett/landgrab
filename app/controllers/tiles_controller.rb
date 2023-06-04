@@ -2,7 +2,6 @@
 
 class TilesController < ApplicationController
   before_action :set_tile, only: %i[show embed]
-  before_action :ensure_stripe_enrollment, only: %i[show]
   skip_before_action :authenticate_user!, only: %i[index embed show]
   skip_before_action :store_location, only: %i[embed]
 

@@ -3,6 +3,8 @@
 class CheckoutController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[generate claim]
 
+  before_action :ensure_stripe_enrollment, only: %i[checkout]
+
   before_action :set_tile, only: %i[checkout success]
 
   # See docs/CHECKOUT.md

@@ -5,7 +5,6 @@
       <th>Full Name</th>
       <th>Email</th>
       <th>Stripe Customer ID</th>
-      <th>Admin?</th>
       <th>Created</th>
     </tr>
   </thead>
@@ -24,7 +23,6 @@
             -
           <% end %>
         </td>
-        <td><%= user.admin? %></td>
         <td><%= user.created_at.strftime('%e %b %Y %H:%M:%S') %></td>
       </tr>
     <% end %>

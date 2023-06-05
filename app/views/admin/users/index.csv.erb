@@ -4,7 +4,8 @@
   'Email',
   'First Name',
   'Last Name',
-  'Stripe Customer ID'
+  'Stripe Customer ID',
+  'Admin'
 ] -%>
 <%= CSV.generate_line headers -%>
 <%- @users.each do |user| -%>
@@ -15,5 +16,6 @@
     user.first_name,
     user.last_name,
     user.stripe_customer_id
+    user.admin?
   ]) -%>
 <%- end -%>

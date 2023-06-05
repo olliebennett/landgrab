@@ -42,6 +42,7 @@ docker-compose exec app bin/rails c
 
 ```sh
 heroku pg:psql
+SELECT COUNT(srid) FROM spatial_ref_sys WHERE srid <> 4326;
 DELETE FROM spatial_ref_sys WHERE srid <> 4326;
 ```
 

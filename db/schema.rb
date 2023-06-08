@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_31_210713) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_08_205234) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -103,6 +103,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_31_210713) do
     t.index ["stripe_id"], name: "index_subscriptions_on_stripe_id", unique: true
     t.index ["tile_id"], name: "index_subscriptions_on_tile_id"
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "title"
+    t.string "slug"
+    t.string "logo_url"
+    t.string "website"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_teams_on_slug", unique: true
   end
 
   create_table "tiles", force: :cascade do |t|

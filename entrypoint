@@ -9,6 +9,8 @@ RAILS_ENV=development bin/rails db:migrate
 
 RAILS_ENV=development bin/bundle install
 
+rm -f /usr/app/landgrab/tmp/pids/server.pid
+
 # bundle exec puma -C config/puma.rbexec "$@"
 RAILS_ENV=development bin/rails s -b 0.0.0.0
 

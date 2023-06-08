@@ -4,10 +4,10 @@ set -e
 echo "Waiting for database before starting rails..."
 ./wait-for-it.sh db:5432
 
+bin/bundle install
+
 RAILS_ENV=development bin/rails db:create
 RAILS_ENV=development bin/rails db:migrate
-
-RAILS_ENV=development bin/bundle install
 
 rm -f /usr/app/landgrab/tmp/pids/server.pid
 

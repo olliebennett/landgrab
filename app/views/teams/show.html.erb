@@ -1,0 +1,22 @@
+<h1><%= title "#{@team.title} on #{ENV.fetch('SITE_TITLE', 'LandGrab')}" %></h1>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="row">
+      <div class="col-xs-12 col-sm-4">
+        <% if @team.website %>
+          <%= link_to @team.website do %>
+            <%= image_tag @team.logo_url, class: 'img-fluid' %>
+          <% end %>
+        <% else %>
+          <%= image_tag @team.logo_url, class: 'img-fluid' %>
+        <% end %>
+      </div>
+      <div class="col-xs-12 col-sm-8">
+        <p>
+          <%= markdown(@team.description) %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

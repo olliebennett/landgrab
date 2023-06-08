@@ -1,0 +1,14 @@
+<h1><%= admin_title(Team) %></h1>
+
+<p>
+  Teams are groups of users (such as colleagues in a company) who can view each other activity.
+</p>
+
+<p>
+  <%= link_to 'New Team', new_admin_team_path %>
+  <%= page_entries_info @teams %>
+</p>
+
+<%= render 'table', teams: @teams %>
+
+<%= paginate @teams, theme: 'bootstrap-5' %>

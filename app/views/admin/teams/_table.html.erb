@@ -1,0 +1,29 @@
+<% project ||= nil %>
+
+<% if teams.none? %>
+  <p>
+    No teams found
+  </p>
+<% else %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Slug</th>
+        <th>Website</th>
+        <th>Created</th>
+      </tr>
+    </thead>
+
+    <tbody style="font-variant-numeric: tabular-nums;">
+      <% teams.each do |team| %>
+        <tr>
+          <td><%= link_to team.title, admin_team_path(team) %></td>
+          <td><%= team.slug %></td>
+          <td><%= team.website %></td>
+          <td><%= team.created_at.to_formatted_s(:short) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

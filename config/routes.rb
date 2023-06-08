@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   resources :comments, only: %i[create update destroy]
 
+  resources :teams, only: %i[show]
+
   resources :tiles, only: %i[index show] do
     get :embed, on: :member
   end
@@ -44,6 +46,7 @@ Rails.application.routes.draw do
     root to: 'dashboard#dashboard', as: :dashboard
 
     resources :comments, only: %i[index show]
+    resources :teams, only: %i[create index show new edit update]
     resources :tiles, only: %i[create index show new]
     resources :plots, only: %i[create index show new edit update]
     resources :posts, only: %i[create index show new edit update] do

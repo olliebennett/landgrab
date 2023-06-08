@@ -1,0 +1,11 @@
+<h1><%= title @team.title %></h1>
+
+<p>slug: <%= @team.slug %></p>
+
+<%= render 'layouts/copy_to_clipboard', copytext: team_url(@team.slug), copycta: 'Copy Team URL' %>
+
+<p>website: <%= @team.website %></p>
+
+<p>description: <%= @team.description %></p>
+
+<p>logo: <%= image_tag @team.logo_url %></p>

@@ -1,0 +1,32 @@
+<table class="table">
+  <tbody>
+    <tr>
+      <th>Share Link</th>
+      <td>
+      <%= render 'layouts/copy_to_clipboard', copytext: team_url(@team.slug), copycta: 'Copy Team URL' %>
+      </td>
+    </tr>
+
+    <tr>
+      <th>Title</th>
+      <td><%= team.title %></td>
+    </tr>
+
+    <tr>
+      <th>Description</th>
+      <td><%= markdown(team.description) %></td>
+    </tr>
+
+    <tr>
+      <th>Website</th>
+      <td><%= team.website %></td>
+    </tr>
+
+    <tr>
+      <th>Created</th>
+      <td>
+        <%= team.created_at.strftime('%e %b %Y %H:%M:%S') %>
+      </td>
+    </tr>
+  </tbody>
+</table>

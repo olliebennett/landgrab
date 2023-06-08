@@ -1,65 +1,6 @@
 <h1><%= admin_title @project %></h1>
 
-<table class="table">
-  <tbody>
-    <tr>
-      <th>Title</th>
-      <td><%= @project.title %></td>
-    </tr>
-
-    <tr>
-      <th>Description</th>
-      <td><%= markdown(@project.description) %></td>
-    </tr>
-
-    <tr>
-      <th>Welcome Text<br>(shown after subscribing)</th>
-      <td><%= markdown(@project.welcome_text) %></td>
-    </tr>
-
-    <tr>
-      <th>Subscriber Benefits<br>(shown before subscribing)</th>
-      <td><%= markdown(@project.subscriber_benefits) %></td>
-    </tr>
-
-    <tr>
-      <th>Website</th>
-      <td>
-        <% if @project.website.present? %>
-          <%= link_to @project.website, @project.website %>
-        <% else %>
-          -
-        <% end %>
-      </td>
-    </tr>
-
-    <tr>
-      <th>Hero Image</th>
-      <td><%= image_tag @project.hero_image_url, height: '150px' %></td>
-    </tr>
-
-    <tr>
-      <th>Logo</th>
-      <td><%= image_tag @project.logo_url, height: '100px' %></td>
-    </tr>
-
-    <tr>
-      <th>Subscribed Users</th>
-      <td>
-        view a
-        <%= link_to 'list of users', admin_users_path(subscribed_to_plot: @project.plots.map(&:hashid)) %>
-        with an active subscription to any tile in any plot in this project.
-      </td>
-    </tr>
-
-    <tr>
-      <th>Created</th>
-      <td>
-        <%= @project.created_at.strftime('%e %b %Y %H:%M:%S') %>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<%= render 'details', project: @project %>
 
 <p>
   <%= link_to 'Edit project', edit_admin_project_path(@project) %>

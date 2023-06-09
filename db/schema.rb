@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_08_205234) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_09_053352) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -140,9 +140,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_205234) do
     t.string "first_name", limit: 255
     t.string "last_name", limit: 255
     t.string "stripe_customer_id"
+    t.bigint "team_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["stripe_customer_id"], name: "index_users_on_stripe_customer_id", unique: true
+    t.index ["team_id"], name: "index_users_on_team_id"
   end
 
   add_foreign_key "comments", "posts"
@@ -156,4 +158,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_205234) do
   add_foreign_key "subscriptions", "users"
   add_foreign_key "tiles", "plots"
   add_foreign_key "tiles", "subscriptions", column: "latest_subscription_id"
+  add_foreign_key "users", "teams"
 end

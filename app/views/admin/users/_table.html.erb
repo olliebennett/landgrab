@@ -5,6 +5,7 @@
       <th>Full Name</th>
       <th>Email</th>
       <th>Stripe Customer ID</th>
+      <th>Team</th>
       <th>Created</th>
     </tr>
   </thead>
@@ -19,6 +20,13 @@
           <% if user.stripe_customer_id.present? %>
             <%= link_to user.stripe_customer_id,
                         "#{ENV.fetch('STRIPE_DASHBOARD_URL')}/customers/#{user.stripe_customer_id}" %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+        <td>
+          <% if user.team_id.present? %>
+            <%= link_to user.team.title, admin_team_path(user.team) %>
           <% else %>
             -
           <% end %>

@@ -60,7 +60,7 @@ Rails.application.routes.draw do
     resources :subscriptions, only: %i[create index show edit update] do
       get :refresh, on: :member
     end
-    resources :users, only: %i[index show]
+    resources :users, only: %i[index show edit update]
   end
 
   namespace :webhook do

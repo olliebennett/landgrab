@@ -1,0 +1,47 @@
+<%= form_with(model: [:admin, user], local: true) do |form| %>
+  <%= render 'layouts/form_errors', errors: user.errors %>
+
+  <div class="row mb-3 g-3 align-items-center">
+    <div class="col-sm-2">
+      <%= form.label :first_name, class: 'col-form-label' %>
+    </div>
+    <div class="col-sm-3">
+      <%= form.text_field :first_name, required: true, class: 'form-control', aria: { describedby: 'firstNameHelp' } %>
+    </div>
+    <div class="col-sm-7">
+      <span id="firstNameHelp" class="form-text">
+        Enter the forename of the user.
+      </span>
+    </div>
+  </div>
+
+  <div class="row mb-3 g-3 align-items-center">
+    <div class="col-sm-2">
+      <%= form.label :last_name, class: 'col-form-label' %>
+    </div>
+    <div class="col-sm-3">
+      <%= form.text_field :last_name, required: true, class: 'form-control', aria: { describedby: 'lastNameHelp' } %>
+    </div>
+    <div class="col-sm-7">
+      <span id="lastNameHelp" class="form-text">
+        Enter the surname of the user.
+      </span>
+    </div>
+  </div>
+
+  <div class="row mb-3 g-3 align-items-center">
+    <div class="col-sm-2">
+      <%= form.label :team_id, class: 'col-form-label' %>
+    </div>
+    <div class="col-sm-3">
+      <%= form.collection_select :team_id, Team.order(:title), :id, :title, { include_blank: '[ No team ]' }, { class: 'form-control', aria: { describedby: 'teamHelp' } } %>
+    </div>
+    <div class="col-sm-7">
+      <span id="teamHelp" class="form-text">
+        Associate the user with a team.
+      </span>
+    </div>
+  </div>
+
+  <%= form.submit class: 'btn btn-primary' %>
+<% end %>

@@ -5,6 +5,7 @@
   'First Name',
   'Last Name',
   'Stripe Customer ID',
+  'Team',
   'Admin'
 ] -%>
 <%= CSV.generate_line headers -%>
@@ -15,7 +16,8 @@
     user.email,
     user.first_name,
     user.last_name,
-    user.stripe_customer_id
+    user.stripe_customer_id,
+    user.team&.slug,
     user.admin?
   ]) -%>
 <%- end -%>

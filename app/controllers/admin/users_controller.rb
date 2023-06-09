@@ -3,10 +3,10 @@
 module Admin
   class UsersController < ApplicationController
     before_action :check_admin
-    before_action :set_user, only: %i[show]
+    before_action :set_user, only: %i[show edit update]
 
     def index
-      @users = filtered_users
+      @users = filtered_users.includes(:team)
       if params[:subscribed_to_plot].present?
         subscribed_to_plot_ids = params[:subscribed_to_plot].map { |x| Plot.decode_id(x) }
         @users = @users.joins(subscriptions: { tile: :plot })
@@ -14,6 +14,7 @@ module Admin
                        .where(plots: { id: subscribed_to_plot_ids })
                        .distinct
       end
+      @users = @users.where(team_id: Team.find_by_hashid!(params[:team]).id) if params[:team].present?
 
       respond_to do |format|
         format.html do
@@ -26,10 +27,24 @@ module Admin
 
     def show; end
 
+    def edit; end
+
+    def update
+      if @user.update(user_params_for_update)
+        redirect_to admin_user_path(@user), notice: 'User was successfully updated.'
+      else
+        render :edit
+      end
+    end
+
     private
 
     def set_user
       @user = User.find_by_hashid!(params[:id])
+    end
+
+    def user_params_for_update
+      params.require(:user).permit(:first_name, :last_name, :team_id)
     end
 
     def filtered_users

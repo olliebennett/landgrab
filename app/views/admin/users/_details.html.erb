@@ -1,0 +1,71 @@
+<p>
+  <strong>First Name:</strong>
+  <%= user.first_name %>
+</p>
+
+<p>
+  <strong>Last Name:</strong>
+  <%= user.last_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= user.email %>
+</p>
+
+<p>
+  <strong>Stripe Customer ID:</strong>
+  <% if user.stripe_customer_id.present? %>
+    <%= link_to user.stripe_customer_id,
+                "#{ENV.fetch('STRIPE_DASHBOARD_URL')}/customers/#{user.stripe_customer_id}" %>
+  <% else %>
+    -
+  <% end %>
+</p>
+
+<p>
+  <strong>Registered:</strong>
+  <%= user.created_at.strftime('%e %b %Y %H:%M:%S') %>
+</p>
+
+<p>
+  <strong>Admin:</strong>
+  <%= user.admin? ? 'YES' : 'NO' %>
+</p>
+
+<p>
+  <strong>Team:</strong>
+  <% if user.team.present? %>
+    <%= link_to user.team.title, admin_team_path(user.team) %>
+  <% else %>
+    -
+  <% end %>
+</p>
+
+<p>
+  <strong>Subscriptions:</strong>
+  <%= user.subscriptions.size %>
+  -
+  <%= link_to 'view', admin_subscriptions_path(user_id: user.hashid) %>
+</p>
+
+<p>
+  <strong>Posts Viewed:</strong>
+  <%= user.post_views.size %>
+  -
+  <%= link_to 'view', admin_post_views_path(user: user.hashid) %>
+</p>
+
+<p>
+  <strong>Posts Authored:</strong>
+  <%= user.posts_authored.size %>
+  -
+  <%= link_to 'view', admin_posts_path(author: user.hashid) %>
+</p>
+
+<p>
+  <strong>Comments Authored:</strong>
+  <%= user.comments_authored.size %>
+  -
+  <%= link_to 'view', admin_comments_path(author: user.hashid) %>
+</p>

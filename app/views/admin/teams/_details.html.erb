@@ -28,5 +28,14 @@
         <%= team.created_at.strftime('%e %b %Y %H:%M:%S') %>
       </td>
     </tr>
+
+    <tr>
+      <th>Users</th>
+      <td>
+        <%= team.users.size %>
+        -
+        <%= link_to 'view users in the team', admin_users_path(team: team.hashid) %>
+      </td>
+    </tr>
   </tbody>
 </table>

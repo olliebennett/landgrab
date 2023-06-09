@@ -3,7 +3,7 @@
   <div class="card-body">
     <h5 class="card-title"><%= project.title %></h5>
     <p class="card-text">
-      <%= markdown(truncate(project.description, length: 400)) %>
+      <%= markdown(truncate(project.description, length: 1000)) %>
     </p>
     <%= link_to 'View Project', project_path(project), class: 'btn btn-primary stretched-link' %>
   </div>

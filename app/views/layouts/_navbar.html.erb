@@ -8,6 +8,12 @@
                       height: 24,
                       class: 'd-inline-block align-text-top' %>
       <% end %>
+      <% if current_user&.team.present? && current_user.team.logo_url.present? %>
+        <%= image_tag current_user.team.logo_url,
+          alt: "#{current_user.team.title} logo",
+          height: 24,
+          class: 'd-inline-block align-text-top' %>
+      <% end %>
       <%= ENV.fetch('SITE_TITLE', 'LandGrab') %>
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

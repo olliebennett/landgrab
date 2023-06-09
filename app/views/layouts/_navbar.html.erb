@@ -1,19 +1,23 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">
-      <% if ENV.fetch('SITE_LOGO_URL', false) %>
+    <% if ENV.fetch('SITE_LOGO_URL', false) %>
+      <a class="navbar-brand" href="/">
         <%= image_tag ENV.fetch('SITE_LOGO_URL'),
                       alt: "#{ENV.fetch('SITE_TITLE', 'LandGrab')} logo",
                       width: 24,
                       height: 24,
                       class: 'd-inline-block align-text-top rounded' %>
-      <% end %>
-      <% if current_user&.team.present? && current_user.team.logo_url.present? %>
+      </a>
+    <% end %>
+    <% if current_user&.team.present? && current_user.team.logo_url.present? %>
+      <a class="navbar-brand" href="<%= team_path(current_user.team.slug) %>">
         <%= image_tag current_user.team.logo_url,
-          alt: "#{current_user.team.title} logo",
-          height: 24,
-          class: 'd-inline-block align-text-top rounded' %>
-      <% end %>
+                      alt: "#{current_user.team.title} logo",
+                      height: 24,
+                      class: 'd-inline-block align-text-top rounded' %>
+      </a>
+    <% end %>
+    <a class="navbar-brand" href="/">
       <%= ENV.fetch('SITE_TITLE', 'LandGrab') %>
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

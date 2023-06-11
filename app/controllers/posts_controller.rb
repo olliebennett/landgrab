@@ -7,8 +7,10 @@ class PostsController < ApplicationController
   def show
     @viewable = user_signed_in? && @post.viewable_by?(current_user)
 
-    recent_post_view = @post.post_views.where(user: current_user).where('created_at > ?', 1.hour.ago).first
-    @post.post_views.create!(user: current_user) if recent_post_view.nil?
+    if user_signed_in?
+      recent_post_view = @post.post_views.where(user: current_user).where('created_at > ?', 1.hour.ago).first
+      @post.post_views.create!(user: current_user) if recent_post_view.nil?
+    end
 
     log_event_mixpanel('Posts: Show', { authed: user_signed_in?, viewable: @viewable })
   end

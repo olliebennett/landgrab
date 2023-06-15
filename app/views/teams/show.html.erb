@@ -13,6 +13,17 @@
         <% end %>
       </div>
       <div class="col-xs-12 col-sm-8">
+        <% if user_signed_in? %>
+          <%= if current_user.team == @team %>
+            <%= bootstrap_alert('You are a member of this team.', 'success') %>
+          <% else %>
+            <%= bootstrap_alert('You are not a member of this team.', 'warning') %>
+          <% end %>
+        <% else %>
+          <%= bootstrap_alert('Login or register to join this team!', 'warning') %>
+        <% end %>
+      </div>
+      <div class="col-xs-12 col-sm-8">
         <p>
           <%= markdown(@team.description) %>
         </p>

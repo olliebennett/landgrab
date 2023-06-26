@@ -157,6 +157,9 @@ Style/EmptyElse:
 Style/ExplicitBlockArgument:
   Enabled: false
 
+Style/HashSyntax:
+  Enabled: false
+
 Style/IdenticalConditionalBranches:
   Enabled: false
 

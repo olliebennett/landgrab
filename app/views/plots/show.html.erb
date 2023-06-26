@@ -36,7 +36,7 @@
       <% end %>
     <% end %>
 
-    <% if !user_signed_in? %>
+    <% unless user_signed_in? %>
       <p>
         You need to
         <%= link_to 'log in', new_user_session_path, class: 'btn btn-primary' %>
@@ -46,7 +46,7 @@
       </p>
     <% end %>
 
-    <% if !user_signed_in? %>
+    <% unless user_signed_in? %>
       <%= markdown(@plot.project&.subscriber_benefits) %>
     <% end %>
 

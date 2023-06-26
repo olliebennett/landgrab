@@ -20,7 +20,7 @@
       <%= render 'subscription_info', tile: @tile %>
     <% end %>
 
-    <% if !user_signed_in? %>
+    <% unless user_signed_in? %>
       <%= markdown(@tile&.plot&.project&.subscriber_benefits) %>
     <% end %>
 

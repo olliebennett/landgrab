@@ -21,6 +21,8 @@ class Subscription < ApplicationRecord
   before_destroy :wipe_latest_subscription
   after_save :assign_latest_subscription
 
+  EXTERNALLY_PAID_PREFIX = 'sub_externallypaid'
+
   def project_fallback
     Project.first
   end

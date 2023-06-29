@@ -26,7 +26,7 @@ namespace :subscription do
   desc 'Create externally paid subscriptions'
   task create_external: :environment do
     n = ENV.fetch('COUNT', '3').to_i
-    n.times do |i|
+    n.times do
       fake_id = Array.new(8) { rand(0..9) }.join
       Subscription.create!(
         stripe_id: "#{Subscription::EXTERNALLY_PAID_PREFIX}#{fake_id}",

@@ -7,9 +7,7 @@ class Project < ApplicationRecord
   has_many :posts, through: :post_associations
 
   validates :title, presence: true
-  validates :hero_image_url, url: true, allow_blank: true
-  validates :logo_url, url: true, allow_blank: true
-  validates :website, url: true, allow_blank: true
+  validates :hero_image_url, :logo_url, :website, url: true, allow_blank: true
 
   auto_strip_attributes :title, squish: true
   auto_strip_attributes :description, :welcome_text, :subscriber_benefits

@@ -1,21 +1,21 @@
-<% project_pas = post.post_associations.where(postable_type: 'Project') %>
-<% plot_pas = post.post_associations.where(postable_type: 'Plot') %>
-<% tile_pas = post.post_associations.where(postable_type: 'Tile') %>
-<% linked_tiles = tile_pas.map(&:postable) %>
+<% project_assocs = post.post_associations.where(postable_type: 'Project') %>
+<% plot_assocs = post.post_associations.where(postable_type: 'Plot') %>
+<% tile_assocs = post.post_associations.where(postable_type: 'Tile') %>
+
 <h2 class="mt-3">
   Associated Places
 </h2>
-<% if [project_pas, plot_pas, tile_pas].all?(&:empty?) %>
+<% if [project_assocs, plot_assocs, tile_assocs].all?(&:empty?) %>
   <p>This post isn't linked to any places yet.</p>
 <% end %>
-<% if project_pas.any? %>
-  <% project_pas.each do |pa| %>
+<% if project_assocs.any? %>
+  <% project_assocs.each do |pa| %>
     <%= render 'projects/card', project: pa.postable %>
   <% end %>
 <% end %>
 
-<% if plot_pas.any? %>
-  <% plot_pas.each do |pa| %>
+<% if plot_assocs.any? %>
+  <% plot_assocs.each do |pa| %>
     <%= render 'plots/card', plot: pa.postable %>
   <% end %>
 <% end %>

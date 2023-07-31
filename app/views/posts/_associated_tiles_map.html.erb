@@ -1,0 +1,25 @@
+<% mentioned_tiles = post.mentioned_tiles %>
+<% if mentioned_tiles.any? || linked_tiles.any? %>
+  <p>
+    <% if mentioned_tiles.any? && (linked_tiles - mentioned_tiles).any? %>
+      This post mentions
+      <%= pluralize(mentioned_tiles.size, 'tile') %>
+      and is associated with
+      <%= pluralize((linked_tiles - mentioned_tiles).size, 'additional tile') %>,
+      shown on the map below.
+    <% elsif mentioned_tiles.any? %>
+      This post mentions
+      <%= pluralize(mentioned_tiles.size, 'tile') %>,
+      shown on the map below.
+    <% elsif linked_tiles.any? %>
+      This post is associated with
+      <%= pluralize(linked_tiles.size, 'tile') %>,
+      shown on the map below.
+    <% end %>
+  </p>
+  <%= render 'static_pages/w3w_map',
+    tiles: tile_pas.map(&:postable) + mentioned_tiles,
+    plot: post.post_associations.where(postable_type: 'Plot').first&.postable,
+    popup_tiles: mentioned_tiles,
+    featured_description: 'Mentioned' %>
+<% end %>

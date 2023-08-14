@@ -11,6 +11,7 @@
         <%= render 'unviewable_authed', post: @post %>
       <% end %>
     <% else %>
+      <%= markdown(@post.preview) %>
       <%= render 'unviewable_unauthed' %>
       <% if @post.associated_projects.size == 1 %>
         <%= markdown(@post.associated_projects.first.subscriber_benefits) %>
@@ -32,7 +33,7 @@
         <% else %>
           Once you register and subscribe
         <% end %>
-        to a related tile, you'll be able to read and engage with this post here.
+        to a related tile, you'll be able to read and engage with the full post here.
       </p>
     <% end %>
     <%= render 'associations', post: @post %>

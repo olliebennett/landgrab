@@ -1,10 +1,9 @@
-
 <% available_tiles = Tile.where(id: post.associated_tiles.map(&:id)).includes(:latest_subscription, :plot).select(&:available?) %>
 <% available_tiles = Tile.joins(:plot).where(plot: post.associated_plots).includes(:latest_subscription, :plot).select(&:available?) if available_tiles.empty? %>
 <% available_tiles = Tile.joins(plot: :project).where(plot: { project: post.associated_projects }).includes(:latest_subscription, :plot).select(&:available?) if available_tiles.empty? %>
 
 <% if available_tiles.any? %>
-  <%= bootstrap_alert 'You need to be subscribed to an associated tile before you can view this post!' %>
+  <%= bootstrap_alert 'You need to be subscribed to an associated tile before you can view and interact with the full post.' %>
   <%= markdown available_tiles.first&.plot&.project&.subscriber_benefits %>
   <%= render 'tiles/subscription_info', tile: available_tiles.sample %>
 <% else %>

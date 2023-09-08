@@ -1,5 +1,5 @@
 <% ready_to_claim = user_signed_in? && current_user.subscriptions.where.missing(:tile).any? %>
-<% random_plot = @project.plots.with_available_tiles.sample %>
+<% random_tile = @project.plots.with_available_tiles.sample.tiles.available.sample %>
 
 <h1><%= title "Welcome to #{@project.title}" %></h1>
 
@@ -8,11 +8,11 @@
     <%= image_tag @project.hero_image_url, height: '250px', width: '100%', class: 'mb-2 rounded' %>
   </div>
   <div class="col-xs-12">
-    <% if random_plot.present? && ready_to_claim %>
+    <% if random_tile.present? && ready_to_claim %>
       <%= bootstrap_alert safe_join([
         "Great! You've subscribed but need to choose a tile. First, pick a plot from below or ",
-        link_to('pick a random plot', plot_path(random_plot), class: 'alert-link'),
-        '.'
+        link_to('pick a random tile', tile_path(random_tile), class: 'alert-link'),
+        'directly.'
       ], ''), :info %>
     <% end %>
     <div class="row">
@@ -29,9 +29,9 @@
         <p>
           <%= markdown(@project.welcome_text) %>
         </p>
-        <% if random_plot.present? %>
+        <% if random_tile.present? %>
           <p>
-            <%= link_to 'Pick a random plot for me', plot_path(random_plot), class: 'btn btn-primary' %>
+            <%= link_to 'Pick a random tile for me', tile_path(random_tile), class: 'btn btn-primary' %>
           </p>
         <% end %>
       </div>

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Tile < ApplicationRecord
+  W3W_REGEX = /\A[a-z]+\.[a-z]+\.[a-z]+\z/
+
   after_initialize :sanitize_w3w
 
   attr_accessor :map_popup
@@ -20,7 +22,7 @@ class Tile < ApplicationRecord
 
   validates :southwest, :northeast, presence: true
 
-  validates :w3w, presence: true, format: { with: /\A[a-z]+\.[a-z]+\.[a-z]+\z/, message: 'format should be a.b.c' }
+  validates :w3w, presence: true, format: { with: W3W_REGEX, message: 'format should be a.b.c' }
 
   auto_strip_attributes :w3w, squish: true
 

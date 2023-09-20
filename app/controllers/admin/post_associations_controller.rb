@@ -4,18 +4,33 @@ module Admin
   class PostAssociationsController < ApplicationController
     before_action :check_admin
 
+    before_action :set_post_association, only: %i[destroy]
+
     def create
       @post_association = PostAssociation.new(post_association_params)
       @post = @post_association.post
 
       if @post_association.save
-        redirect_to admin_post_path(@post), notice: 'Post association was successfully created.'
+        redirect_back fallback_location: admin_post_path(@post),
+                      notice: 'Post association was successfully created.'
       else
-        render :new
+        redirect_back fallback_location: @post.present? ? admin_post_path(@post) : admin_posts_path,
+                      alert: "Failed to associate: #{@post_association.errors.full_messages.to_sentence}"
       end
     end
 
+    def destroy
+      @post_association.destroy
+
+      redirect_back fallback_location: admin_post_path(@post_association.post),
+                    notice: 'Association was deleted.'
+    end
+
     private
+
+    def set_post_association
+      @post_association = PostAssociation.find_by_hashid!(params[:id])
+    end
 
     def post_association_params
       params.require(:post_association).permit(:postable_type, :postable_id, :post_id).tap do |tmp|
@@ -27,7 +42,11 @@ module Admin
           when 'Plot'
             Plot.decode_id(tmp[:postable_id])
           when 'Tile'
-            Tile.decode_id(tmp[:postable_id])
+            if tmp[:postable_id].match?(Tile::W3W_REGEX)
+              Tile.find_by!(w3w: tmp[:postable_id]).id
+            else
+              Tile.decode_id(tmp[:postable_id])
+            end
           else
             raise "Unexpected postable_type: #{tmp[:postable_type]}"
           end

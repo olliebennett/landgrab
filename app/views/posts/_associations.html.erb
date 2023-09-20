@@ -6,7 +6,7 @@
   Associated Places
 </h2>
 <% if [project_assocs, plot_assocs, tile_assocs].all?(&:empty?) %>
-  <p>This post isn't linked to any places yet.</p>
+  <p>This post isn't associated with any places yet.</p>
 <% end %>
 <% if project_assocs.any? %>
   <% project_assocs.each do |pa| %>

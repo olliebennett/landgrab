@@ -3,27 +3,12 @@
 <%= render 'form', post: @post %>
 
 <h3>Associations</h3>
-<% if @post.post_associations.none? %>
-  <p>This post isn't linked to any records yet.</p>
-<% else %>
-  <p>The post is linked to the following records:</p>
-  <ul>
-    <% @post.post_associations.includes(:postable).select(&:persisted?).each do |pa| %>
-      <li>
-        <% case pa.postable_type %>
-        <% when 'Project' %>
-          <%= link_to "Project: #{pa.postable.title}", admin_project_path(pa.postable) %>
-        <% when 'Plot' %>
-          <%= link_to "Plot: #{pa.postable.title}", admin_plot_path(pa.postable) %>
-        <% when 'Tile' %>
-          <%= link_to "Tile: #{pa.postable.w3w}", admin_tile_path(pa.postable) %>
-        <% else %>
-          <% raise "Unhandled post association type: #{pa.postable_type}" %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
 
-<h3>Add a new association</h3>
-<%= render 'admin/post_associations/form', post_association: @post_association %>
+<%= render 'admin/posts/associations',
+           post_associations: @post.post_associations,
+           show_unassociate: true %>
+
+<%= render 'layouts/form_errors', errors: @post_association.errors %>
+<%= render 'admin/post_associations/project_association_form', post_association: @post_association %>
+<%= render 'admin/post_associations/plot_association_form', post_association: @post_association %>
+<%= render 'admin/post_associations/tile_association_form', post_association: @post_association %>

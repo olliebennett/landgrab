@@ -3,8 +3,12 @@
 # Preview all emails at http://localhost:3000/rails/mailers/subscription
 class SubscriptionPreview < ActionMailer::Preview
   def claim
-    subscr = Subscription.where.not(claim_hash: nil).where.not(claim_email: nil).first
+    subscr = Subscription.new(
+      id: 999_999_999,
+      claim_hash: SecureRandom.base36,
+      claim_email: 'subscriber@example.com'
+    )
 
-    SubscriptionMailer.claim(subscr.id)
+    SubscriptionMailer.claim(subscr)
   end
 end

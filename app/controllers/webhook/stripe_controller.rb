@@ -58,7 +58,7 @@ module Webhook
       raise 'Missing customer/claim email from Stripe checkout session' if claim_email.nil?
 
       subscr.update!(claim_email:, claim_hash: SecureRandom.base36)
-      SubscriptionMailer.claim(subscr.id).deliver_later
+      SubscriptionMailer.claim(subscr).deliver_later
     end
 
     def extract_user

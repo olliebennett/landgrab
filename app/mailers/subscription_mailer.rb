@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class SubscriptionMailer < ApplicationMailer
-  def claim(subscription_id)
-    @subscription = Subscription.find(subscription_id)
+  def claim(subscription)
+    @subscription = subscription
 
     raise 'Missing claim email from subscription!' if @subscription.claim_email.nil?
 
@@ -10,7 +10,7 @@ class SubscriptionMailer < ApplicationMailer
 
     mail(
       to: @subscription.claim_email,
-      subject: "Claim your #{ENV.fetch('SITE_TITLE', 'LandGrab')} subscription"
+      subject: "Connect to your #{ENV.fetch('SITE_TITLE', 'LandGrab')} tile"
     )
   end
 end

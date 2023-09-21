@@ -1,0 +1,31 @@
+<%= form_for resource,
+             as: resource_name,
+             url: registration_path(resource_name),
+             html: { class: 'mb-3' } do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <%= render 'users/form_names', form: f %>
+
+  <%= render 'users/form_email', form: f %>
+
+  <div class="row">
+    <div class="col mb-3">
+      <%= f.label :password, class: 'form-label' %>
+      <%= f.password_field :password, autocomplete: 'new-password', required: true, class: 'form-control', aria: { describedby: 'passwordHelp' } %>
+      <div id="passwordHelp" class="form-text">
+        (<%= @minimum_password_length %> characters minimum)
+      </div>
+    </div>
+
+    <div class="col mb-3">
+      <%= f.label :password_confirmation, 'Confirm password', class: 'form-label' %>
+      <%= f.password_field :password_confirmation, autocomplete: 'new-password', required: true, class: 'form-control' %>
+    </div>
+  </div>
+
+  <%= f.submit 'Register', class: 'btn btn-primary' %>
+  or
+  <%= link_to 'Log in',
+              new_session_path(resource_name),
+              class: 'btn btn-secondary' %>
+<% end %>

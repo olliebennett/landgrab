@@ -1,6 +1,9 @@
 <h1><%= title "Register for #{ENV.fetch('SITE_TITLE', 'LandGrab')}" %></h1>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= form_for resource,
+             as: resource_name,
+             url: registration_path(resource_name),
+             html: { class: 'mb-3' } do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <%= render 'users/form_names', form: f %>
@@ -21,6 +24,16 @@
   </div>
 
   <%= f.submit 'Register', class: 'btn btn-primary' %>
+  or
+  <%= link_to 'Log in',
+              new_session_path(resource_name),
+              class: 'btn btn-secondary' %>
 <% end %>
 
-<%= render "devise/shared/links" %>
+
+<% project = Project.all.sample %>
+<% if project %>
+  <%= image_tag project.hero_image_url,
+                class: 'img-fluid rounded',
+                alt: project.title %>
+<% end %>

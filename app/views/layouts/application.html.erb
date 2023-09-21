@@ -18,8 +18,6 @@
             integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
             crossorigin="anonymous"></script>
 
-    <%#= stylesheet_link_tag 'application', media: 'all' %>
-
     <% if ENV.key?('CSS_THEME_URL') %>
       <%= stylesheet_link_tag ENV.fetch('CSS_THEME_URL') %>
     <% end %>

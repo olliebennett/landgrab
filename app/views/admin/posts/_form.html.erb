@@ -83,6 +83,8 @@
   <% end %>
 
   <%= form.submit 'Update Post', class: 'btn btn-primary' %>
-  or
-  <%= link_to 'return to post details', admin_post_path(post), class: 'btn btn-secondary' %>
+  <% if post.persisted? %>
+    or
+    <%= link_to 'return to post details', admin_post_path(post), class: 'btn btn-secondary' %>
+  <% end %>
 <% end %>

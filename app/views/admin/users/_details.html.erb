@@ -50,8 +50,10 @@
 </p>
 
 <p>
-  <strong>Posts Viewed:</strong>
-  <%= user.post_views.size %>
+  <strong>Post Views:</strong>
+  <%= pluralize user.post_views.size, 'view' %>
+  of
+  <%= pluralize user.post_views.count('DISTINCT post_id'), 'unique post' %>
   -
   <%= link_to 'view', admin_post_views_path(user: user.hashid) %>
 </p>

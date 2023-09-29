@@ -72,7 +72,7 @@ module Admin
       end
 
       redirect_to admin_post_path(@post),
-                  flash: { success: "Associations updated! Tiles added: #{tiles_to_add.size}, Tiles removed #{tiles_to_remove.size}" }
+                  flash: { success: "Associations updated; added #{view_context.pluralize(tiles_to_add.size, 'tile')}, removed #{tiles_to_remove.size}." }
     end
 
     private

@@ -11,7 +11,7 @@ module Admin
 
       respond_to do |format|
         format.html do
-          @post_views = @post_views.order(id: :desc).page(params[:page])
+          @post_views = @post_views.includes(:post, :user).order(id: :desc).page(params[:page])
           render :index
         end
         format.csv { render_csv('post_views') }

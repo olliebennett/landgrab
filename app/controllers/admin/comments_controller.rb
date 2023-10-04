@@ -7,7 +7,7 @@ module Admin
 
     def index
       @post = Post.find_by_hashid!(params[:post]) if params[:post].present?
-      @comments = @post.present? ? @post.comments : Comment.all.includes(:post)
+      @comments = @post.present? ? @post.comments : Comment.includes(:post)
       @user = User.find_by_hashid!(params[:author]) if params[:author].present?
       @comments = @user.present? ? @comments.where(author: @user) : @comments.includes(:author)
       @comments = @comments.order(id: :desc).page(params[:page])

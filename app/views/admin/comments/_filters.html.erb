@@ -1,7 +1,7 @@
 <%= form_tag(admin_comments_path, method: :get, class: 'row g-3 mb-3') do %>
   <div class="col-sm-4">
     <%= label_tag :post, 'Post', class: 'visually-hidden' %>
-    <%= select_tag :post, options_from_collection_for_select(Post.all.order(title: :asc), :hashid, :title, params[:post]),
+    <%= select_tag :post, options_from_collection_for_select(Post.order(title: :asc), :hashid, :title, params[:post]),
                           { include_blank: '[ All Posts ]', class: 'form-select' } %>
   </div>
 

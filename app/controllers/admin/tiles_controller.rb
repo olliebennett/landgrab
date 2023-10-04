@@ -7,7 +7,7 @@ module Admin
 
     def index
       @plot = Plot.find_by_hashid!(params[:plot]) if params[:plot].present?
-      @tiles = @plot.present? ? @plot.tiles : Tile.all.includes(:plot)
+      @tiles = @plot.present? ? @plot.tiles : Tile.includes(:plot)
       @tiles = @tiles.where('tiles.w3w LIKE ?', "%#{params[:w3w]}%") if params[:w3w]
       case params[:subscribed]
       when 'true'

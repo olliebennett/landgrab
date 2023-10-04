@@ -7,7 +7,7 @@ module Admin
 
     def index
       @project = Project.find_by_hashid!(params[:project]) if params[:project].present?
-      @plots = @project.present? ? @project.plots : Plot.all.includes(:project)
+      @plots = @project.present? ? @project.plots : Plot.includes(:project)
       @plots = @plots.order(id: :desc).page(params[:page])
     end
 

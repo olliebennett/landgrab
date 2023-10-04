@@ -8,7 +8,7 @@
 
   <div class="col-sm-5">
     <%= label_tag :post, 'Post', class: 'visually-hidden' %>
-    <%= select_tag :post, options_from_collection_for_select(Post.all.order(title: :asc), :hashid, :title, params[:post]),
+    <%= select_tag :post, options_from_collection_for_select(Post.order(title: :asc), :hashid, :title, params[:post]),
                           { include_blank: '[ All Posts ]', class: 'form-select' } %>
   </div>
 

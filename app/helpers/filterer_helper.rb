@@ -2,15 +2,15 @@
 
 module FiltererHelper
   # Identify whether current page has custom filter(s) applied.
-  def filtered?(*also_ignore)
-    filtered_params(*also_ignore)
+  def filtered?(*)
+    filtered_params(*)
       .present?
   end
 
-  def filtered_params(*also_ignore)
+  def filtered_params(*)
     params
       .except(:action, :controller, :sort, :direction, :page, :utf8, :commit, :problem_id, :cols)
-      .except(*also_ignore)
+      .except(*)
       .compact_blank
   end
 

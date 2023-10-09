@@ -2,4 +2,4 @@
 
 <%= render 'posts/list_group',
            posts: [tile, tile.plot, tile.plot&.project].compact.map { |x| x.posts.published }.flatten.uniq,
-           show_preview: true %>
+           show_preview: false %>

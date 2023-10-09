@@ -45,7 +45,9 @@
     }
   };
 
-  var map = L.map('map');
+  var map = L.map('map', { scrollWheelZoom: false });
+
+  disableScrollWheelZoomUnlessFocussed(map);
 
   addFullscreenButton(map);
   addAllLayers(map);

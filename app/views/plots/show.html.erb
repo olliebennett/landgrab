@@ -13,7 +13,7 @@
         "Next, you need to choose a tile! Click a blue square on the map or ",
         link_to('pick a random tile', tile_path(random_tile), class: 'alert-link'),
         '.'
-      ], ''), :info %>
+      ], ''), :success %>
     <% end %>
 
     <%= render 'details', plot: @plot %>
@@ -23,7 +23,7 @@
         "You're already subscribed to a tile in this plot - ",
         link_to(active_sub.tile.w3w, tile_path(active_sub.tile), class: 'alert-link'),
         '.'
-      ], ''), :info %>
+      ], ''), :success %>
     <% elsif user_signed_in? %>
       <p>
         Click an available tile (small blue square) on the map to subscribe or view details.

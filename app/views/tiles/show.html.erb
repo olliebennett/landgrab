@@ -6,7 +6,7 @@
 <div class="row">
   <div class="col-md-6">
     <% if @tile.available? && ready_to_claim %>
-      <%= bootstrap_alert "Last step! Use the 'claim this tile' button below.", :info %>
+      <%= bootstrap_alert "Last step! Use the 'claim this tile' button below.", :success %>
     <% end %>
     <%= render 'details', tile: @tile %>
 
@@ -15,7 +15,7 @@
         "You can view this tile already, as you're subscribed to ",
         link_to(active_sub.tile.w3w, tile_path(active_sub.tile), class: 'alert-link'),
         '.'
-      ], ''), :info %>
+      ], ''), :success %>
     <% else %>
       <%= render 'subscription_info', tile: @tile %>
     <% end %>

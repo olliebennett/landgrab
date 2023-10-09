@@ -7,7 +7,7 @@
     <%= image_tag @project.hero_image_url, height: '250px', width: '100%', class: 'mb-2 rounded' %>
 
     <% if ready_to_claim %>
-      <%= bootstrap_alert "You've subscribed but need to choose a tile! First, pick a plot from below...", :info %>
+      <%= bootstrap_alert "You've subscribed but need to choose a tile! First, pick a plot from below...", :success %>
     <% end %>
 
     <div class="row">

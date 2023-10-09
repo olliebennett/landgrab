@@ -19,8 +19,14 @@
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"></script>
 
-    <% if ENV.key?('CSS_THEME_URL') %>
-      <%= stylesheet_link_tag ENV.fetch('CSS_THEME_URL') %>
+    <% if ENV.key?('THEME_GOOGLE_FONT_NAME') %>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=<%= ENV.fetch('THEME_GOOGLE_FONT_NAME') %>&display=swap" rel="stylesheet">
+    <% end %>
+
+    <% if ENV.key?('THEME_CSS_URL') %>
+      <%= stylesheet_link_tag ENV.fetch('THEME_CSS_URL') %>
     <% end %>
 
     <title><%= if content_for?(:title) then yield(:title) + ' | ' end %><%= ENV.fetch('SITE_TITLE', 'LandGrab') %></title>

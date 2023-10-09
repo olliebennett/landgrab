@@ -37,11 +37,11 @@
     const base = { color: 'black', weight: 2 }
     // Style docs: https://leafletjs.com/reference.html#path-option
     if (feature.geometry.properties && feature.geometry.properties.focussed) {
-      return {...base, ...{ opacity: 0.65, fill: true, fillOpacity: 0.5, fillColor: 'limegreen' }};
+      return {...base, ...{ opacity: 0.65, fill: true, fillOpacity: 0.5, fillColor: 'var(--landgrab-color-green-light, limegreen)' }};
     } else if (feature.geometry.properties && feature.geometry.properties.available) {
-      return {...base, ...{ fillColor: "#3388ff", fillOpacity: 0.3 }};
+      return {...base, ...{ fillColor: 'var(--landgrab-color-blue, blue)', fillOpacity: 0.3 }};
     } else {
-      return {...base, ...{ fillColor: "darkred", fillOpacity: 0.3 }};
+      return {...base, ...{ fillColor: 'var(--landgrab-color-red-dark, darkred)', fillOpacity: 0.3 }};
     }
   };
 

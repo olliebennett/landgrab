@@ -54,7 +54,7 @@ class StaticPagesController < ApplicationController
     return redirect_to root_url, flash: { danger: 'No plots exist yet so nothing to explore!' } if @plot.nil?
 
     @available_limit = 200
-    @available_tiles = @plot.tiles.includes(:latest_subscription).sample(@available_limit)
+    @available_tiles = @plot.tiles.available.includes(:latest_subscription).sample(@available_limit)
     @unavailable_tiles = @plot.tiles.unavailable.distinct.sample(250 - @available_tiles.size)
   end
 

@@ -42,6 +42,8 @@ Rails.application.routes.draw do
   get '/my_tile', to: 'static_pages#my_tile'
   get '/support', to: 'static_pages#support'
 
+  get '/debug', to: 'static_pages#debug'
+
   namespace :admin do
     root to: 'dashboard#dashboard', as: :dashboard
 

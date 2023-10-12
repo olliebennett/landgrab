@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class StaticPagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[about support homepage explore]
+  skip_before_action :authenticate_user!, only: %i[about debug support homepage explore]
 
   def about
     log_event_mixpanel('About Page', { authed: user_signed_in? })
@@ -57,4 +57,6 @@ class StaticPagesController < ApplicationController
     @available_tiles = @plot.tiles.includes(:latest_subscription).sample(@available_limit)
     @unavailable_tiles = @plot.tiles.unavailable.distinct.sample(250 - @available_tiles.size)
   end
+
+  def debug; end
 end

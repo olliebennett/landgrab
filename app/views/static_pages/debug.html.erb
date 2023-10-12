@@ -1,0 +1,6 @@
+<h1><%= title 'Debug' %></h1>
+
+<h2>Progress bar</h2>
+<% 1.upto(5) do |step| %>
+  <%= render 'layouts/progress_bar', step: step %>
+<% end %>

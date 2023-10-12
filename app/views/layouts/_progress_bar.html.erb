@@ -1,0 +1,99 @@
+<% step ||= 1 %>
+
+<% steps = [
+  { id: 1, text: 'Choose<br>Subscription', done: true },
+  { id: 2, text: 'Pay', done: step > 1 },
+  { id: 3, text: 'Create<br>Profile', done: step > 2 },
+  { id: 4, text: 'Choose<br>Tile', done: step > 3 },
+  { id: 5, text: 'Start<br>Rewilding!', done: step > 4 },
+] %>
+<div class="stepper-wrapper">
+  <% steps.each do |step| %>
+    <% klass = 'completed' if step.fetch(:done) %>
+    <% klass ||= 'active' if step.fetch(:id) == step %>
+    <div class="stepper-item <%= klass %>">
+      <div class="step-blob"></div>
+      <div class="step-text"><%= step.fetch(:text).html_safe %></div>
+    </div>
+  <% end %>
+</div>
+
+<style>
+
+.stepper-wrapper {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.stepper-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.stepper-item::after {
+  position: absolute;
+  content: "";
+  border-bottom: 2px solid #ccc;
+  width: 100%;
+  top: 20px;
+  left: 50%;
+  z-index: 2;
+}
+
+.stepper-item .step-blob {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ccc;
+  margin-bottom: 6px;
+}
+
+.stepper-item .step-text {
+  text-align: center;
+
+  @media (max-width: 512px) {
+    display: none;
+  }
+}
+
+.stepper-item.active {
+  font-weight: bold;
+}
+
+.stepper-item .step-blob {
+  background-color: var(--landgrab-color-white, white);
+  border: 1px solid var(--landgrab-color-grey, grey);
+}
+
+.stepper-item.completed .step-blob {
+  background-color: var(--landgrab-color-green-lighter, limegreen);
+  border: 3px solid var(--landgrab-color-green, green);
+}
+
+.stepper-item.completed::after {
+  position: absolute;
+  content: "";
+  border-bottom: 2px solid #4bb543;
+  width: 100%;
+  top: 20px;
+  left: 50%;
+  z-index: 3;
+}
+
+.stepper-item:first-child::before {
+  content: none;
+}
+.stepper-item:last-child::after {
+  content: none;
+}
+
+</style>

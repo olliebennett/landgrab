@@ -1,12 +1,28 @@
-<% step ||= 1 %>
+<%
+journey ||= :pay_first
 
-<% steps = [
-  { id: 1, text: 'Choose<br>Subscription', done: true },
-  { id: 2, text: 'Pay', done: step > 1 },
-  { id: 3, text: 'Create<br>Profile', done: step > 2 },
-  { id: 4, text: 'Choose<br>Tile', done: step > 3 },
-  { id: 5, text: 'Start<br>Rewilding!', done: step > 4 },
-] %>
+steps = case journey
+        when :pay_first
+          [
+            { id: 1, text: 'Choose<br>Subscription', done: step >= 1 },
+            { id: 2, text: 'Pay', done: step >= 2 },
+            { id: 3, text: 'Create<br>Profile', done: step >= 3 },
+            { id: 4, text: 'Choose<br>Tile', done: step >= 4 },
+            { id: 5, text: 'Start<br>Rewilding!', done: step >= 5 },
+          ]
+        when :register_first
+          [
+            { id: 1, text: 'Choose<br>Tile', done: step >= 1 },
+            { id: 2, text: 'Create<br>Profile', done: step >= 2 },
+            { id: 3, text: 'Choose<br>Subscription', done: step >= 3 },
+            { id: 4, text: 'Pay', done: step >= 4 },
+            { id: 5, text: 'Start<br>Rewilding!', done: step >= 5 },
+          ]
+        else
+          raise "Unexpected journey: #{journey}"
+        end
+%>
+
 <div class="stepper-wrapper">
   <% steps.each do |step| %>
     <% klass = 'completed' if step.fetch(:done) %>

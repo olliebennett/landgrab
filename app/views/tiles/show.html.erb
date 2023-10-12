@@ -1,6 +1,16 @@
 <% ready_to_claim = user_signed_in? && current_user.subscriptions.where.missing(:tile).any? %>
 <% active_sub = user_signed_in? && @tile.plot.present? && current_user.subscription_for_plot(@tile.plot) %>
 
+<% if !user_signed_in? %>
+  <%= render 'layouts/progress_bar', step: 2, journey: :register_first %>
+<% elsif ready_to_claim && !active_sub %>
+  <% if @step.available? %>
+    <%= render 'layouts/progress_bar', step: 4 %>
+  <% else %>
+    <%= render 'layouts/progress_bar', step: 3 %>
+  <% end %>
+<% end %>
+
 <h1><%= title @tile.w3w %></h1>
 
 <div class="row">

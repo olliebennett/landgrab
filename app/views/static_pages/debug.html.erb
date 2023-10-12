@@ -1,6 +1,8 @@
 <h1><%= title 'Debug' %></h1>
 
-<h2>Progress bar</h2>
-<% 1.upto(5) do |step| %>
-  <%= render 'layouts/progress_bar', step: step %>
+<% %i[register_first pay_first].each do |journey| %>
+  <h2>Progress Bar (journey = <%= journey.to_s %>)</h2>
+  <% 1.upto(5) do |step| %>
+    <%= render 'layouts/progress_bar', step: step, journey: journey %>
+  <% end %>
 <% end %>

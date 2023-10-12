@@ -2,6 +2,12 @@
 <% active_sub = user_signed_in? && current_user.subscription_for_plot(@plot) %>
 <% random_tile = @plot.tiles.available.sample %>
 
+<% if !user_signed_in? %>
+  <%= render 'layouts/progress_bar', step: 1, journey: :register_first %>
+<% elsif ready_to_claim && !active_sub %>
+  <%= render 'layouts/progress_bar', step: 3, journey: :pay_first %>
+<% end %>
+
 <h1>
   Plot: <%= title @plot.title %>
 </h1>
@@ -44,9 +50,7 @@
         <%= link_to 'register', new_user_registration_path, class: 'btn btn-primary' %>
         to subscribe to a tile in this plot.
       </p>
-    <% end %>
 
-    <% unless user_signed_in? %>
       <%= markdown(@plot.project&.subscriber_benefits) %>
     <% end %>
 

@@ -51,9 +51,19 @@
     </tr>
 
     <tr>
+      <th>Public?</th>
+      <td>
+        <%= project.public? ? 'Yes - visible on explore page and projects list' : 'No - not visible on explore or projects list' %>
+      </td>
+    </tr>
+
+    <tr>
       <th>Created</th>
       <td>
         <%= project.created_at.strftime('%e %b %Y %H:%M:%S') %>
+        <% if project.created_at != project.updated_at %>
+          (updated <%= project.updated_at.strftime('%e %b %Y %H:%M:%S') %>)
+        <% end %>
       </td>
     </tr>
   </tbody>

@@ -50,7 +50,8 @@ module Admin
               :hero_image_url,
               :logo_url,
               :welcome_text,
-              :subscriber_benefits
+              :subscriber_benefits,
+              :public
             )
     end
   end

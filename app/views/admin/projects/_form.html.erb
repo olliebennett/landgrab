@@ -126,5 +126,21 @@
     </div>
   </div>
 
+  <div class="row mb-3 g-3 align-items-center">
+    <div class="col-sm-2">
+      <%= form.label :public, class: 'col-form-label' %>
+    </div>
+    <div class="col-sm-5">
+      <%= form.check_box :public,
+                         class: 'form-check-input',
+                         aria: { describedby: 'publicHelp' } %>
+    </div>
+    <div class="col-sm-5">
+      <span id="publicHelp" class="form-text">
+        Tick to show this project on the explore page and public projects list
+      </span>
+    </div>
+  </div>
+
   <%= form.submit class: 'btn btn-primary' %>
 <% end %>

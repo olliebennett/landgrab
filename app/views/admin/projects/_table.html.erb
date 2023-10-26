@@ -3,6 +3,7 @@
     <tr>
       <th>Title</th>
       <th>Description</th>
+      <th>Public?</th>
       <th>Logo</th>
       <th>Created</th>
       <th>Plots</th>
@@ -14,6 +15,7 @@
       <tr>
         <td><%= link_to project.title, admin_project_path(project) %></td>
         <td><%= project.description&.first(80) %>...</td>
+        <td><%= project.public? ? 'PUBLIC' : 'PRIVATE' %></td>
         <td><%= image_tag project.logo_url, height: '50' %></td>
         <td><%= project.created_at.to_formatted_s(:short) %></td>
         <td><%= project.plots.size %></td>

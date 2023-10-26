@@ -47,6 +47,8 @@ class StaticPagesController < ApplicationController
   def explore
     log_event_mixpanel('Explore Page', { authed: user_signed_in? })
     @plot = Plot.select('plots.id, plots.title, COUNT(tiles)')
+                .joins(:projects)
+                .where(projects: { public: true })
                 .with_available_tiles
                 .group('plots.id')
                 .sample

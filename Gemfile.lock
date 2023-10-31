@@ -79,7 +79,7 @@ GEM
     bcrypt (3.1.19)
     benchmark (0.2.1)
     bindex (0.8.1)
-    bootsnap (1.16.0)
+    bootsnap (1.17.0)
       msgpack (~> 1.2)
     bootstrap5-kaminari-views (0.0.1)
       kaminari (>= 0.13)
@@ -175,7 +175,7 @@ GEM
       monetize (~> 1.9)
       money (~> 6.13)
       railties (>= 3.0)
-    msgpack (1.7.0)
+    msgpack (1.7.2)
     net-imap (0.3.7)
       date
       net-protocol

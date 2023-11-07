@@ -1,6 +1,7 @@
 <%# NOTE: Requires 'copytext' variable. 'copyid' is optional %>
 <% copyid ||= SecureRandom.hex %>
 <% copycta ||= 'Copy' %>
+<% cta_width ||= '150px' %>
 
 <div class="input-group mb-3">
   <input id="input_copy_<%= copyid %>"
@@ -12,7 +13,7 @@
          aria-describedby="btn_copy_<%= copyid %>">
   <button class="btn btn-outline-primary"
           type="button"
-          style="width: 150px;"
+          style="width: <%= cta_width %>;"
           id="btn_copy_<%= copyid %>">
     <%= copycta %>
   </button>

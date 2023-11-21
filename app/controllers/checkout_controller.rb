@@ -56,6 +56,8 @@ class CheckoutController < ApplicationController
       ENV.fetch('STRIPE_PRICE_ID_BLOCK_MONTHLY')
     when :yearly
       ENV.fetch('STRIPE_PRICE_ID_BLOCK_YEARLY')
+    when :fixed
+      ENV.fetch('STRIPE_PRICE_ID_BLOCK_FIXED')
     else
       raise "Unhandled price frequency: #{freq}"
     end

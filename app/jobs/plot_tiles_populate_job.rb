@@ -53,9 +53,15 @@ class PlotTilesPopulateJob < ApplicationJob
     RGeo::Cartesian::PointImpl.new(RGeo::Cartesian::Factory.new, lat, lng)
   end
 
+  def tiles_to_check
+    # We include 'orphaned' (plot=nil) tiles here in case we
+    # recently cleared them while editing this (or a nearby) plot.
+    @tiles_to_check ||= Tile.where(plot_id: [nil, @plot.id]).to_a
+  end
+
   def existing_tile(lat, lng)
     point = build_point(lat, lng)
-    @plot.tiles.detect do |tile|
+    tiles_to_check.detect do |tile|
       tile.bounding_box.contains?(point)
     end
   end

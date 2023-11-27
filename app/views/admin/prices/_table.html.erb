@@ -1,0 +1,39 @@
+<% project ||= nil %>
+
+<% if prices.none? %>
+  <p>
+   No prices found
+  </p>
+<% else %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Project</th>
+        <th>Amount</th>
+        <th>Stripe ID</th>
+        <th>Created</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% prices.each do |price| %>
+        <tr>
+          <td><%= link_to price.title, admin_price_path(price) %></td>
+          <td>
+            <%= link_to price.project.title, admin_project_path(price.project) %>
+          </td>
+          <td><%= price.amount_display %></td>
+          <td><%= price.stripe_id %></td>
+          <td><%= price.created_at.to_formatted_s(:short) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<% if project.present? %>
+<p>
+  <%= link_to 'Create New Price for the Project', new_admin_price_path(project_id: project.hashid) %>
+</p>
+<% end %>

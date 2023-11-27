@@ -60,6 +60,7 @@ Rails.application.routes.draw do
     end
     resources :post_associations, only: %i[create destroy]
     resources :post_views, only: %i[index]
+    resources :prices, only: %i[create index show new edit update]
     resources :projects, only: %i[create index show new edit update]
     resources :promo_codes, only: %i[index]
     resources :subscriptions, only: %i[create index show edit update] do

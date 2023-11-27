@@ -39,5 +39,7 @@ en:
       post_association:
         postable: 'Record'
         postable_id: 'Record'
+      price:
+        stripe_id: 'Stripe ID'
       subscription:
-        stripe: 'Stripe ID'
+        stripe_id: 'Stripe ID'

@@ -1,0 +1,73 @@
+<%= form_with(model: [:admin, price], local: true) do |form| %>
+  <%= render 'layouts/form_errors', errors: price.errors %>
+
+  <div class="row mb-3 g-3 align-items-center">
+    <div class="col-sm-2">
+      <%= form.label :title, class: 'col-form-label' %>
+    </div>
+    <div class="col-sm-5">
+      <%= form.text_field :title,
+                          required: true,
+                          placeholder: 'Super Price',
+                          class: 'form-control',
+                          aria: { describedby: 'titleHelp' } %>
+    </div>
+    <div class="col-sm-5">
+      <span id="titleHelp" class="form-text">
+        Name for this price.
+      </span>
+    </div>
+  </div>
+
+  <div class="row mb-3 g-3 align-items-center">
+    <div class="col-sm-2">
+      <%= form.label :project_id, class: 'col-form-label' %>
+    </div>
+    <div class="col-sm-5">
+      <%= form.collection_select :project_id, Project.order(:title), :id, :title, { include_blank: '[ No Project ]' }, { class: 'form-control', aria: { describedby: 'projectIdHelp' } } %>
+    </div>
+    <div class="col-sm-5">
+      <span id="projectIdHelp" class="form-text">
+        Associate the price to a project.
+      </span>
+    </div>
+  </div>
+
+  <div class="row mb-3 g-3 align-items-center">
+    <div class="col-sm-2">
+      <%= form.label :stripe_id, 'Stripe ID', class: 'col-form-label' %>
+    </div>
+    <div class="col-sm-5">
+      <%= form.text_field :stripe_id,
+                          required: true,
+                          placeholder: 'price_abc123',
+                          class: 'form-control',
+                          aria: { describedby: 'stripeIdHelp' } %>
+    </div>
+    <div class="col-sm-5">
+      <span id="stripeIdHelp" class="form-text">
+        The Stripe ID for the price. Starting with 'price_'.
+      </span>
+    </div>
+  </div>
+
+  <div class="row mb-3 g-3 align-items-center">
+    <div class="col-sm-2">
+      <%= form.label :amount_display, class: 'col-form-label' %>
+    </div>
+    <div class="col-sm-5">
+      <%= form.text_field :amount_display,
+                          required: true,
+                          class: 'form-control',
+                          placeholder: '$50',
+                          aria: { describedby: 'amountDisplayHelp' } %>
+    </div>
+    <div class="col-sm-5">
+      <span id="amountDisplayHelp" class="form-text">
+        The text to display as the amount (incl. currency symbol).
+      </span>
+    </div>
+  </div>
+
+  <%= form.submit class: 'btn btn-primary' %>
+<% end %>

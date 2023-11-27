@@ -17,10 +17,16 @@
               ['Comments', admin_comments_path]
             ]
           ],
-          ['Promo Codes', admin_promo_codes_path],
+          [
+            'Prices & Payments',
+            [
+              ['Prices', admin_prices_path],
+              ['Promo Codes', admin_promo_codes_path],
+              ['Subscriptions', admin_subscriptions_path]
+            ]
+          ],
           ['Tiles', admin_tiles_path],
           ['Teams', admin_teams_path],
-          ['Subscriptions', admin_subscriptions_path],
           ['Users', admin_users_path]
         ].each do |text, config| %>
           <% if config.instance_of?(Array) %>

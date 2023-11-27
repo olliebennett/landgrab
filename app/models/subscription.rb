@@ -16,6 +16,7 @@ class Subscription < ApplicationRecord
 
   enum :recurring_interval, %i[month year], prefix: :recurring_interval
 
+  # TODO: Migrate to prices table (subscription.price.amount_display)
   monetize :price_pence, as: :price, numericality: { greater_than: 0 }, allow_nil: true
 
   before_destroy :wipe_latest_subscription

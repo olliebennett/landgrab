@@ -9,7 +9,7 @@ class CheckoutController < ApplicationController
 
   # See docs/CHECKOUT.md
   def checkout
-    create_stripe_checkout(params[:freq].to_sym, nil, @tile)
+    create_stripe_checkout(params[:freq].to_s, nil, @tile)
 
     log_event_mixpanel('Checkout: Checkout', { authed: user_signed_in? })
     redirect_to @stripe_checkout.url,
@@ -20,7 +20,7 @@ class CheckoutController < ApplicationController
   # See docs/CHECKOUT.md
   def generate
     promo_code = PromoCode.find_by!(code: params[:code]) if params[:code].present?
-    err = create_stripe_checkout(params[:freq].to_sym, promo_code, nil)
+    err = create_stripe_checkout(params[:freq].to_s, promo_code, nil)
 
     return redirect_to support_path, flash: { danger: err } if err.present?
 
@@ -50,17 +50,18 @@ class CheckoutController < ApplicationController
 
   private
 
-  def extract_stripe_price_id(freq)
-    case freq
-    when :monthly
-      ENV.fetch('STRIPE_PRICE_ID_BLOCK_MONTHLY')
-    when :yearly
-      ENV.fetch('STRIPE_PRICE_ID_BLOCK_YEARLY')
-    when :fixed
-      ENV.fetch('STRIPE_PRICE_ID_BLOCK_FIXED')
-    else
-      raise "Unhandled price frequency: #{freq}"
-    end
+  def extract_stripe_price_id(freq_or_hashid)
+    # DEPRECATED ENV-based price IDs
+    # TODO: Remove these once we've migrated to prices from database
+    return ENV.fetch('STRIPE_PRICE_ID_BLOCK_MONTHLY') if freq_or_hashid == 'monthly'
+    return ENV.fetch('STRIPE_PRICE_ID_BLOCK_YEARLY') if freq_or_hashid == 'yearly'
+    return ENV.fetch('STRIPE_PRICE_ID_BLOCK_FIXED') if freq_or_hashid == 'fixed'
+
+    price = Price.find_by_hashid(freq_or_hashid)
+
+    raise "Unhandled price lookup: #{freq_or_hashid}" if price.nil?
+
+    price.stripe_id
   end
 
   def derive_success_url(tile)

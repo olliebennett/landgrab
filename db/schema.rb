@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_26_060536) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_27_223431) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -66,6 +66,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_26_060536) do
     t.text "preview"
     t.datetime "published_at", precision: nil
     t.index ["author_id"], name: "index_posts_on_author_id"
+  end
+
+  create_table "prices", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.string "amount_display"
+    t.string "title"
+    t.string "stripe_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_prices_on_project_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -155,6 +165,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_26_060536) do
   add_foreign_key "post_views", "posts"
   add_foreign_key "post_views", "users"
   add_foreign_key "posts", "users", column: "author_id"
+  add_foreign_key "prices", "projects"
   add_foreign_key "subscriptions", "tiles"
   add_foreign_key "subscriptions", "users"
   add_foreign_key "tiles", "plots"

@@ -1,0 +1,12 @@
+# frozen_string_literal: true
+
+class Price < ApplicationRecord
+  belongs_to :project
+
+  validates :title, presence: true
+  validates :amount_display, presence: true
+  validates :stripe_id, format: { with: /\Aprice_[0-9a-zA-Z]+\z/ }
+
+  auto_strip_attributes :title, squish: true
+  auto_strip_attributes :amount_display, squish: true
+end

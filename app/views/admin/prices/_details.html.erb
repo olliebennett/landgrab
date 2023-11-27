@@ -1,0 +1,31 @@
+<table class="table">
+  <tbody>
+    <tr>
+      <th>Title</th>
+      <td><%= price.title %></td>
+    </tr>
+
+    <tr>
+      <th>Amount</th>
+      <td><%= price.amount_display %></td>
+    </tr>
+
+    <tr>
+      <th>Stripe ID</th>
+      <td>
+        <%= link_to price.stripe_id,
+                    "#{ENV.fetch('STRIPE_DASHBOARD_URL')}/prices/#{price.stripe_id}" %>
+      </td>
+    </tr>
+
+    <tr>
+      <th>Created</th>
+      <td>
+        <%= price.created_at.strftime('%e %b %Y %H:%M:%S') %>
+        <% if price.created_at != price.updated_at %>
+          (updated <%= price.updated_at.strftime('%e %b %Y %H:%M:%S') %>)
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,7 @@
+<h1><%= admin_title @price %></h1>
+
+<%= render 'details', price: @price %>
+
+<p>
+  <%= link_to 'Edit price', edit_admin_price_path(@price) %>
+</p>

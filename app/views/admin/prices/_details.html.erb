@@ -6,7 +6,7 @@
     </tr>
 
     <tr>
-      <th>Amount</th>
+      <th>Amount & Frequency Display</th>
       <td><%= price.amount_display %></td>
     </tr>
 
@@ -29,3 +29,10 @@
     </tr>
   </tbody>
 </table>
+
+<p>
+  Use the link below to send customers directly to the checkout page for this price:
+</p>
+<p>
+  <%= render 'layouts/copy_to_clipboard', copytext: checkout_generate_url(price: price.hashid), copycta: 'Copy Link', cta_width: '200px' %>
+</p>

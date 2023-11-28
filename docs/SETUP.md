@@ -38,6 +38,16 @@ docker-compose exec app bin/rails c
 
 ## Troubleshooting
 
+### Crash when trying to view plots
+
+Check that Rgeo is configured with Geos;
+
+```sh
+RGeo::Geos.supported?
+```
+
+and if not, see [these instructions](https://github.com/rgeo/rgeo/blob/main/doc/Enable-GEOS-and-Proj4-on-Heroku.md).
+
 ### Database filling up (> 8,000 rows with no records);
 
 ```sh

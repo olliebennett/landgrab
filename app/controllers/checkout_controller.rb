@@ -9,7 +9,7 @@ class CheckoutController < ApplicationController
 
   # See docs/CHECKOUT.md
   def checkout
-    create_stripe_checkout(params[:freq].to_s, nil, @tile)
+    create_stripe_checkout(price_param, nil, @tile)
 
     log_event_mixpanel('Checkout: Checkout', { authed: user_signed_in? })
     redirect_to @stripe_checkout.url,
@@ -20,7 +20,7 @@ class CheckoutController < ApplicationController
   # See docs/CHECKOUT.md
   def generate
     promo_code = PromoCode.find_by!(code: params[:code]) if params[:code].present?
-    err = create_stripe_checkout(params[:freq].to_s, promo_code, nil)
+    err = create_stripe_checkout(price_param, promo_code, nil)
 
     return redirect_to support_path, flash: { danger: err } if err.present?
 
@@ -105,5 +105,9 @@ class CheckoutController < ApplicationController
 
   def set_tile
     @tile = Tile.find_by_hashid!(params[:tile]&.upcase)
+  end
+
+  def price_param
+    (params[:price] || params[:freq]).to_s
   end
 end

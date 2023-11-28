@@ -6,9 +6,16 @@ class PlotTilesPopulateJob < ApplicationJob
   def perform(plot_id)
     @plot = Plot.find(plot_id)
 
+    @plot.update!(tile_population_status: :in_progress)
+
     clear_outlier_tiles
 
     populate_internal_tiles
+
+    @plot.update!(tile_population_status: :succeeded)
+  rescue StandardError => e
+    @plot.update!(tile_population_status: :errored)
+    raise e
   end
 
   private

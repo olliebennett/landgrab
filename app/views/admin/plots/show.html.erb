@@ -61,6 +61,24 @@
         <% if @plot.tiles.size.positive? %>
           - <%= link_to 'view on map', admin_tiles_path(plot: @plot) %>
         <% end %>
+        <% case @plot.tile_population_status %>
+        <% when 'pending' %>
+          <br>
+          <br>
+          <%= bootstrap_alert 'Tile population is pending and should begin soon. Please wait a few minutes and refresh the page.' %>
+        <% when 'in_progress' %>
+          <br>
+          <br>
+          <%= bootstrap_alert 'Tile population is in progress. Please wait a few minutes and refresh the page.' %>
+        <% when 'succeeded' %>
+          <!-- tile population succeeded -->
+        <% when 'errored' %>
+          <br>
+          <br>
+          <%= bootstrap_alert 'Tile population has failed; it is likely at least some tiles are missing from the plot.' %>
+        <% else %>
+          <% raise "Unexpected tile_population_status: #{@plot.tile_population_status}" %>
+        <% end %>
       </td>
     </tr>
     <tr>

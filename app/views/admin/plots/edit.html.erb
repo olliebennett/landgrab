@@ -1,5 +1,20 @@
 <h1><%= admin_title 'Editing Plot' %></h1>
 
+<% case @plot.tile_population_status %>
+<% when 'pending' %>
+  <br>
+  <%= bootstrap_alert 'Tile population is pending and should begin soon. Please do not edit the plot; wait a few minutes and refresh the page.' %>
+<% when 'in_progress' %>
+  <br>
+  <%= bootstrap_alert 'Tile population is in progress. Please do not edit the plot; wait a few minutes and refresh the page.' %>
+<% when 'succeeded' %>
+  <!-- tile population succeeded -->
+<% when 'errored' %>
+  <!-- tile population errored -->
+<% else %>
+  <% raise "Unexpected tile_population_status: #{@plot.tile_population_status}" %>
+<% end %>
+
 <%= render 'form', plot: @plot %>
 
 <%= render 'map', plot: @plot, edit_mode: true %>

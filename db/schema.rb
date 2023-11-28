@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_27_223431) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_28_214756) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -34,6 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_27_223431) do
     t.bigint "project_id"
     t.text "description"
     t.string "hero_image_url"
+    t.integer "tile_population_status", default: 0
     t.index ["project_id"], name: "index_plots_on_project_id"
   end
 

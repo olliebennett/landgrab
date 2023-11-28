@@ -17,6 +17,13 @@ class Plot < ApplicationRecord
 
   auto_strip_attributes :title, squish: true
 
+  enum tile_population_status: {
+    pending: 0,
+    in_progress: 1,
+    succeeded: 2,
+    errored: 3
+  }, _prefix: true
+
   scope :with_available_tiles, -> { left_joins(tiles: :latest_subscription).where(latest_subscription: { id: nil }) }
 
   MAX_BOUNDING_BOX_DIMENSION = 0.005

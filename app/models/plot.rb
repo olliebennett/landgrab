@@ -76,9 +76,7 @@ class Plot < ApplicationRecord
   end
 
   def coordinates_display
-    polygon.coordinates[0].map do |coord|
-      coord.map { |x| format('%.6f', x) }
-    end.to_s.delete('"')
+    "POLYGON ((#{polygon.coordinates[0].map { |coord| coord.map { |x| format('%.6f', x) }.join(' ') }.join(', ')}))"
   end
 
   def non_subscribed_tiles

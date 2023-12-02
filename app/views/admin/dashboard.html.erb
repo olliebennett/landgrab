@@ -7,3 +7,14 @@
   <li><%= link_to user.full_name, admin_user_path(user) %> - <%= user.email %></li>
 <% end %>
 </ul>
+
+<% if ENV.fetch('HEROKU_SLUG_COMMIT', nil).present? %>
+<p>
+  Current landgrab version:
+  <%= link_to ENV.fetch('HEROKU_SLUG_COMMIT').first(10),
+              "#{LandgrabService::SOURCE_CODE_REPO_URL}/commit/#{ENV.fetch('HEROKU_SLUG_COMMIT')}" %>
+  <% if ENV.fetch('HEROKU_RELEASE_CREATED_AT', nil).present? %>
+    (deployed <%= timeago_tag(DateTime.strptime(ENV.fetch('HEROKU_RELEASE_CREATED_AT'))) %>)
+  <% end %>
+</p>
+<% end %>

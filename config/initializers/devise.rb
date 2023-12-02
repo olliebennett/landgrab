@@ -24,7 +24,8 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = ApplicationMailer::FROM_EMAIL_WITH_NAME
+  # NOTE: If changing this, also update `default from` in `app/mailers/application_mailer.rb`
+  config.mailer_sender = "\"#{ENV.fetch('SITE_TITLE', 'Landgrab')} Support\" <#{ENV.fetch('EMAIL_FROM_ADDRESS', 'landgrab@example.com')}>".freeze
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'

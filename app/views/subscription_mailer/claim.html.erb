@@ -9,7 +9,7 @@
       Click here to set up your account and choose a tile:
     </p>
     <p>
-      <%= link_to 'claim my tile', claim_subscription_url(@subscription, hash: @subscription.claim_hash) %>
+      <%= link_to 'claim my tile', claim_subscription_url(@subscription, hash: @subscription.claim_hash, email: @subscription.claim_email) %>
     </p>
     <p>
       For reference, you can always log into the site here:

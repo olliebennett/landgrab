@@ -2,6 +2,7 @@
              as: resource_name,
              url: registration_path(resource_name),
              html: { class: 'mb-3' } do |f| %>
+  <% resource.email = params[:email] if resource.email.blank? && params[:email].present? %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <%= render 'users/form_names', form: f %>

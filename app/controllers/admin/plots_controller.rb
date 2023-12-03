@@ -33,7 +33,7 @@ module Admin
 
     def update
       if @plot.update(plot_params)
-        if @plot.changes.key?('polygon')
+        if @plot.previous_changes.key?('polygon')
           @plot.update!(tile_population_status: :pending)
           PlotTilesPopulateJob.perform_later(@plot.id)
         end

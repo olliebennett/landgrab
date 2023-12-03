@@ -38,6 +38,9 @@ RSpec.configure do |config|
 
   config.include FactoryBot::Syntax::Methods
 
+  # Allow 'sign_in' helper for authenticated controller specs
+  config.include Devise::Test::ControllerHelpers, type: :controller
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = Rails.root.join('spec/fixtures')
 

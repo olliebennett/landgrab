@@ -6,10 +6,11 @@ class CheckoutController < ApplicationController
   before_action :ensure_stripe_enrollment, only: %i[checkout generate]
 
   before_action :set_tile, only: %i[checkout success]
+  before_action :set_price, only: %i[checkout generate]
 
   # See docs/CHECKOUT.md
   def checkout
-    create_stripe_checkout(price_param, nil, @tile)
+    create_stripe_checkout(tile: @tile)
 
     log_event_mixpanel('Checkout: Checkout', { authed: user_signed_in? })
     redirect_to @stripe_checkout.url,
@@ -20,7 +21,7 @@ class CheckoutController < ApplicationController
   # See docs/CHECKOUT.md
   def generate
     promo_code = PromoCode.find_by!(code: params[:code]) if params[:code].present?
-    err = create_stripe_checkout(price_param, promo_code, nil)
+    err = create_stripe_checkout(promo_code:)
 
     return redirect_to support_path, flash: { danger: err } if err.present?
 
@@ -50,20 +51,6 @@ class CheckoutController < ApplicationController
 
   private
 
-  def extract_stripe_price_id(freq_or_hashid)
-    # DEPRECATED ENV-based price IDs
-    # TODO: Remove these once we've migrated to prices from database
-    return ENV.fetch('STRIPE_PRICE_ID_BLOCK_MONTHLY') if freq_or_hashid == 'monthly'
-    return ENV.fetch('STRIPE_PRICE_ID_BLOCK_YEARLY') if freq_or_hashid == 'yearly'
-    return ENV.fetch('STRIPE_PRICE_ID_BLOCK_FIXED') if freq_or_hashid == 'fixed'
-
-    price = Price.find_by_hashid(freq_or_hashid)
-
-    raise "Unhandled price lookup: #{freq_or_hashid}" if price.nil?
-
-    price.stripe_id
-  end
-
   def derive_success_url(tile)
     project = tile&.plot&.project || Project.first
 
@@ -74,12 +61,12 @@ class CheckoutController < ApplicationController
     end
   end
 
-  def stripe_checkout_payload(freq, promo_stripe_id, tile)
+  def stripe_checkout_payload(promo_code, tile)
     x = {
       # Stripe will create new customer if not supplied
       customer: current_user&.stripe_customer_id,
       line_items: [{
-        price: extract_stripe_price_id(freq),
+        price: @price.stripe_id,
         quantity: 1
       }],
       metadata: {
@@ -89,12 +76,12 @@ class CheckoutController < ApplicationController
       success_url: derive_success_url(tile),
       cancel_url: checkout_cancel_url
     }
-    x[:discounts] = [{ promotion_code: promo_stripe_id }] if promo_stripe_id.present?
+    x[:discounts] = [{ promotion_code: promo_code.stripe_id }] unless promo_code&.nil?
     x
   end
 
-  def create_stripe_checkout(freq, promo_code, tile)
-    @stripe_checkout = Stripe::Checkout::Session.create(stripe_checkout_payload(freq, promo_code&.stripe_id, tile))
+  def create_stripe_checkout(promo_code: nil, tile: nil)
+    @stripe_checkout = Stripe::Checkout::Session.create(stripe_checkout_payload(promo_code, tile))
     nil # return no error
   rescue Stripe::InvalidRequestError => e
     raise e unless e.message == 'This promotion code cannot be redeemed because the associated customer has prior transactions.'
@@ -103,11 +90,11 @@ class CheckoutController < ApplicationController
     "You've already used this promo code so can't subscribe with this again"
   end
 
-  def set_tile
-    @tile = Tile.find_by_hashid!(params[:tile]&.upcase)
+  def set_price
+    @price = Price.find_by_hashid!(params[:price])
   end
 
-  def price_param
-    (params[:price] || params[:freq]).to_s
+  def set_tile
+    @tile = Tile.find_by_hashid!(params[:tile]&.upcase)
   end
 end

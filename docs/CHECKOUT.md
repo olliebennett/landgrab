@@ -19,23 +19,22 @@ and associated to the user and corresponding tile.
 
 ## External Checkout
 
-This works by sending a (likely unauthenticated) user to one of
-the following (`checkout_generate_path`) endpoints;
+This works by sending a (optionally authenticated) visitor to
+the following (`checkout_generate_path`) path;
 
 ```
-/checkout/generate?freq=monthly
-/checkout/generate?freq=yearly
+/checkout/generate?price=<price_hashid>
 ```
 
-This endpoint will generate a Stripe checkout, associating it to the
-user if they are logged in, and redirect the customer to complete
+This endpoint will generate a Stripe checkout (associating it to the
+user if they are logged in) and redirect the customer to complete
 payment through Stripe.
 
 The endpoint accepts parameters;
 
-- `freq` for the period of the subscription.
-- `code` of a promo code corresponding to a Stripe 'promotion code'.
-- `project` id to restrict the subscription to a specific project.
+- `price` (required) - a hashid of an existing 'price' for the subscription.
+- `code` (optional) - a 'code' of an existing promo code.
+- `project` (optional) - a hashid to restrict the subscription to a specific project.
 
 After completing the payment, the user will reach a 'claim' page
 (`checkout_claim_path`) which is a dead end. We'll separately receive

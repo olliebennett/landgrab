@@ -35,7 +35,7 @@ module Admin
     def post_association_params
       params.require(:post_association).permit(:postable_type, :postable_id, :post_id).tap do |tmp|
         tmp[:post_id] = Post.decode_id(tmp[:post_id])
-        tmp[:postable_id] = \
+        tmp[:postable_id] =
           case tmp[:postable_type]
           when 'Project'
             Project.decode_id(tmp[:postable_id])

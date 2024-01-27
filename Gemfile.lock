@@ -78,7 +78,7 @@ GEM
     bcrypt (3.1.19)
     benchmark (0.3.0)
     bindex (0.8.1)
-    bootsnap (1.17.0)
+    bootsnap (1.17.1)
       msgpack (~> 1.2)
     bootstrap5-kaminari-views (0.0.1)
       kaminari (>= 0.13)

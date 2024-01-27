@@ -45,9 +45,7 @@
     }
   };
 
-  var map = L.map('map', { scrollWheelZoom: false });
-
-  disableScrollWheelZoomUnlessFocussed(map);
+  var map = L.map('map', { gestureHandling: true });
 
   addFullscreenButton(map);
   addAllLayers(map);

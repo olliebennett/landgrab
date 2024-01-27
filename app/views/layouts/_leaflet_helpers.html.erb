@@ -48,9 +48,4 @@
     bounds._southWest.lng -= LNG_BUFFER;
     map.fitBounds(bounds);
   };
-
-  const disableScrollWheelZoomUnlessFocussed = (map) => {
-    map.on('focus', () => { map.scrollWheelZoom.enable(); });
-    map.on('blur', () => { map.scrollWheelZoom.disable(); });
-  };
 </script>

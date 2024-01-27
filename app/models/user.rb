@@ -18,6 +18,8 @@ class User < ApplicationRecord
                                  format: { with: /\Acus_[0-9a-zA-Z]+\z/ },
                                  uniqueness: true
 
+  before_create :titleize_lowercased_names
+
   def full_name
     [first_name, last_name].join(' ')
   end
@@ -30,5 +32,13 @@ class User < ApplicationRecord
     subscriptions.joins(:tile)
                  .where(tiles: { plot_id: plot.id })
                  .order(id: :desc).first # assume last = most likely to be active
+  end
+
+  private
+
+  def titleize_lowercased_names
+    # Replace each name's first letter (unless it already has a capital, as in 'de Santos')
+    self.first_name = first_name.sub(/\S/) { |s| s.mb_chars.upcase.to_s } if first_name == first_name.downcase
+    self.last_name = last_name.sub(/\S/) { |s| s.mb_chars.upcase.to_s } if last_name == last_name.downcase
   end
 end

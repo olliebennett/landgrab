@@ -6,8 +6,16 @@ module Admin
     before_action :set_tile, only: %i[show]
 
     def index
-      @plot = Plot.find_by_hashid!(params[:plot]) if params[:plot].present?
-      @tiles = @plot.present? ? @plot.tiles : Tile.includes(:plot)
+      if params[:plot].present?
+        if params[:plot] == 'BLANK'
+          @tiles = Tile.where(plot: nil)
+        else
+          @plot = Plot.find_by_hashid!(params[:plot])
+          @tiles = @plot.tiles
+        end
+      else
+        @tiles = Tile.includes(:plot)
+      end
       @tiles = @tiles.where('tiles.w3w LIKE ?', "%#{params[:w3w]}%") if params[:w3w]
       case params[:subscribed]
       when 'true'

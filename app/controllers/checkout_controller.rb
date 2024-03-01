@@ -77,9 +77,9 @@ class CheckoutController < ApplicationController
       cancel_url: checkout_cancel_url
     }
     if promo_code&.nil?
-      x[:discounts] = [{ promotion_code: promo_code&.stripe_id }]
-    else
       x[:allow_promotion_codes] = true
+    else
+      x[:discounts] = [{ promotion_code: promo_code&.stripe_id }]
     end
     x
   end

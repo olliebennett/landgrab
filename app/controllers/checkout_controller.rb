@@ -76,7 +76,11 @@ class CheckoutController < ApplicationController
       success_url: derive_success_url(tile),
       cancel_url: checkout_cancel_url
     }
-    x[:discounts] = [{ promotion_code: promo_code&.stripe_id }] unless promo_code&.nil?
+    if promo_code&.nil?
+      x[:discounts] = [{ promotion_code: promo_code&.stripe_id }]
+    else
+      x[:allow_promotion_codes] = true
+    end
     x
   end
 

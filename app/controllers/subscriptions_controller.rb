@@ -27,7 +27,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def claim
-    log_event_mixpanel('Subscriptions: Claim', { authd: user_signed_in? })
+    log_event_mixpanel('Subscriptions: Claim', { authed: user_signed_in? })
     if user_signed_in?
       @subscription = Subscription.find_by_hashid(params[:id])
       # TODO: Set 'project' on a subscription and redirect to that!

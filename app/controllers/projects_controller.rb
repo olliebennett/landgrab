@@ -19,6 +19,7 @@ class ProjectsController < ApplicationController
 
   def find_tile
     @tiles = Tile.where(plot: @project.plots).includes(:latest_subscription)
+    log_event_mixpanel('Projects: Find Tile', { authed: user_signed_in?, project: @project.hashid })
   end
 
   private

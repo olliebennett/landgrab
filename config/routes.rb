@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
   resources :posts, only: %i[show]
   resources :projects, only: %i[index show] do
+    get :find_tile, on: :member
     get :welcome, on: :member
   end
   resources :subscriptions, only: %i[create index show] do

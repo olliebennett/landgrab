@@ -1,0 +1,9 @@
+<% ready_to_claim = user_signed_in? && current_user.subscriptions.where.missing(:tile).any? %>
+
+<h1><%= title "Search for a tile in #{@project.title}" %></h1>
+
+<% if @tiles.empty? %>
+  <p>There aren't any tiles in <%= @project.title %></p>
+<% else %>
+  <%= render 'tiles/search', tiles: @tiles %>
+<% end %>

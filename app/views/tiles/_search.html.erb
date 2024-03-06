@@ -1,0 +1,54 @@
+<p>
+  Use the search box below to find tiles by their what3words address.
+</p>
+
+<% search_result_classes = %w[d-inline-flex mb-3 mx-1 px-2 py-1 border rounded-2] %>
+<% search_result_avail_classes = search_result_classes + %w[text-success-emphasis bg-success-subtle border-success-subtle] %>
+<% search_result_unavail_classes = search_result_classes + %w[text-danger-emphasis bg-danger-subtle border-danger-subtle] %>
+
+<p>
+  The results show both
+  <%= content_tag(:span, 'available', class: search_result_avail_classes) %>
+  and
+  <%= content_tag(:span, 'unavailable', class: search_result_unavail_classes) %>
+  tiles.
+</p>
+
+<%= label_tag :filterInput, 'Search', class: 'visually-hidden' %>
+<%= text_field_tag :filterInput, nil, class: 'form-control', placeholder: 'search term' %>
+
+<div id="search_results_container" class="mt-3">
+<% tiles.each do |tile| %>
+  <span class="search_result">
+    <%= link_to tile.w3w, tile_path(tile), class: tile.available? ? search_result_avail_classes : search_result_unavail_classes %>
+  </span>
+<% end %>
+
+<script>
+  document.getElementById('filterInput').addEventListener('input', function() {
+      // Get input value
+      var filter = this.value.toLowerCase();
+
+      // Get the list and list items
+      var list = document.getElementById('search_results_container');
+      var items = list.getElementsByClassName('search_result');
+
+      // Loop through all list items, hide those that don't match the filter
+      for (var i = 0; i < items.length; i++) {
+          var text = items[i].textContent.toLowerCase();
+          var words = text.split('.');
+
+          var match = filter.split(' ').every(function(searchWord) {
+              return words.some(function(word) {
+                  return word.includes(searchWord);
+              });
+          });
+
+          if (match) {
+              items[i].style.display = 'inline-flex';
+          } else {
+              items[i].style.display = 'none';
+          }
+      }
+  });
+</script>

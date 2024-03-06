@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[show welcome]
+  before_action :set_project, only: %i[show welcome find_tile]
   skip_before_action :authenticate_user!, only: %i[index show]
 
   def index
@@ -15,6 +15,10 @@ class ProjectsController < ApplicationController
 
   def welcome
     log_event_mixpanel('Projects: Welcome', { authed: user_signed_in?, project: @project.hashid })
+  end
+
+  def find_tile
+    @tiles = Tile.where(plot: @project.plots).includes(:latest_subscription)
   end
 
   private

@@ -27,7 +27,7 @@
 <script>
   document.getElementById('filterInput').addEventListener('input', function() {
       // Get input value
-      var filter = this.value.toLowerCase();
+      var searchWords = this.value.toLowerCase().split(' ');
 
       // Get the list and list items
       var list = document.getElementById('search_results_container');
@@ -38,7 +38,7 @@
           var text = items[i].textContent.toLowerCase();
           var words = text.split('.');
 
-          var match = filter.split(' ').every(function(searchWord) {
+          var match = searchWords.every(function(searchWord) {
               return words.some(function(word) {
                   return word.includes(searchWord);
               });

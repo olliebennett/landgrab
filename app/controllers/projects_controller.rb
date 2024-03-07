@@ -2,7 +2,7 @@
 
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show welcome find_tile]
-  skip_before_action :authenticate_user!, only: %i[index show]
+  skip_before_action :authenticate_user!, only: %i[index show find_tile]
 
   def index
     log_event_mixpanel('Projects: Index', { authed: user_signed_in? })

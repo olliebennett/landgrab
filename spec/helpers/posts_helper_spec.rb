@@ -13,6 +13,8 @@ RSpec.describe PostsHelper do
 
     %w[
       https://www.youtube.com/watch?v=abc-123
+      https://youtube.com/shorts/abc-123
+      https://youtu.be/abc-123
     ].each do |yt_link|
       it "renders iframe for YouTube URL #{yt_link}" do
         html = helper.markdown(yt_link)

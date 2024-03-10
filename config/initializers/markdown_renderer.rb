@@ -2,7 +2,7 @@
 
 # https://stackoverflow.com/a/68098687/1323144
 module MarkdownRenderer
-  YOUTUBE_REGEX = %r{^(?:https?:)?(?://)?(?:youtu\.be/|(?:www\.|m\.)?youtube\.com/(?:watch|v|embed)(?:\.php)?(?:\?.*v=|/))([a-zA-Z0-9_-]{7,15})(?:[?&][a-zA-Z0-9_-]+=[a-zA-Z0-9_-]+)*$}
+  YOUTUBE_REGEX = %r{^(?:https?:)?(?://)?(?:youtu\.be/|(?:www\.|m\.)?youtube\.com/(?:watch|v|embed|shorts)(?:\.php)?(?:\?.*v=|/))([a-zA-Z0-9_-]{7,15})(?:[?&][a-zA-Z0-9_-]+=[a-zA-Z0-9_-]+)*$}
 
   class CustomRenderer < Redcarpet::Render::HTML
     def block_quote(quote)

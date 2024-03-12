@@ -5,14 +5,14 @@
     <div class="col-sm-2">
       <%= form.label :title, class: 'col-form-label' %>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-5">
       <%= form.text_field :title,
                           required: true,
                           placeholder: 'My Team',
                           class: 'form-control',
                           aria: { describedby: 'titleHelp' } %>
     </div>
-    <div class="col-sm-7">
+    <div class="col-sm-5">
       <span id="titleHelp" class="form-text">
         Provide a meaningful name for the team.
       </span>
@@ -23,36 +23,42 @@
     <div class="col-sm-2">
       <%= form.label :description, class: 'col-form-label' %>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-5">
       <%= form.text_area :description,
                          placeholder: 'A team for my example company.',
                          class: 'form-control',
                          aria: { describedby: 'descriptionHelp' } %>
     </div>
-    <div class="col-sm-7">
+    <div class="col-sm-5">
       <span id="descriptionHelp" class="form-text">
         Provide a longer description for the team.
       </span>
     </div>
   </div>
 
-  <div class="row mb-3 g-3 align-items-center">
-    <div class="col-sm-2">
-      <%= form.label :slug, class: 'col-form-label' %>
+  <% if form.object.persisted? || form.object.errors.key?(:slug) %>
+    <div class="row mb-3 g-3 align-items-center">
+      <div class="col-sm-2">
+        <%= form.label :slug, 'Link Slug', class: 'col-form-label' %>
+      </div>
+      <div class="col-sm-5">
+        <div class="input-group">
+          <span class="input-group-text" id="slugPrefix">
+            <%= root_url %>teams/
+          </span>
+          <%= form.text_field :slug,
+                              placeholder: 'my-company-team',
+                              class: 'form-control',
+                              aria: { describedby: 'slugHelp slugPrefix' } %>
+        </div>
+      </div>
+      <div class="col-sm-5">
+        <span id="slugHelp" class="form-text">
+          Set the team's page (lowercase, without spaces or special chars).
+        </span>
+      </div>
     </div>
-    <div class="col-sm-3">
-      <%= form.text_field :slug,
-                          required: true,
-                          placeholder: 'my-company-team',
-                          class: 'form-control',
-                          aria: { describedby: 'slugHelp' } %>
-    </div>
-    <div class="col-sm-7">
-      <span id="slugHelp" class="form-text">
-        Set the team's URL.
-      </span>
-    </div>
-  </div>
+  <% end %>
 
   <div class="row mb-3 g-3 align-items-center">
     <div class="col-sm-2">
@@ -66,7 +72,7 @@
     </div>
     <div class="col-sm-5">
       <span id="websiteHelp" class="form-text">
-        URL of the team's website
+        URL of the team's external website (optional).
       </span>
     </div>
   </div>
@@ -83,7 +89,7 @@
     </div>
     <div class="col-sm-5">
       <span id="logoImageHelp" class="form-text">
-        URL of a small image / icon for the team
+        URL of a small image / icon for the team (optional).
       </span>
     </div>
   </div>

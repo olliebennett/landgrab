@@ -9,6 +9,7 @@
            show_unassociate: true %>
 
 <%= render 'layouts/form_errors', errors: @post_association.errors %>
+<%= render 'admin/post_associations/team_association_form', post_association: @post_association %>
 <%= render 'admin/post_associations/project_association_form', post_association: @post_association %>
 <%= render 'admin/post_associations/plot_association_form', post_association: @post_association %>
 <%= render 'admin/post_associations/tile_association_form', post_association: @post_association %>

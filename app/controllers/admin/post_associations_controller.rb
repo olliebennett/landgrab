@@ -41,6 +41,8 @@ module Admin
             Project.decode_id(tmp[:postable_id])
           when 'Plot'
             Plot.decode_id(tmp[:postable_id])
+          when 'Team'
+            Team.decode_id(tmp[:postable_id])
           when 'Tile'
             if tmp[:postable_id].match?(Tile::W3W_REGEX)
               Tile.find_by!(w3w: tmp[:postable_id]).id

@@ -1,0 +1,10 @@
+<% published_posts = team.posts.published %>
+<% if published_posts.any? %>
+  <p>
+    Your team has
+    <%= pluralize(published_posts.size, 'related update') %>.
+  </p>
+  <%= render 'posts/list_group', posts: published_posts, show_preview: true %>
+<% else %>
+  <p>There aren't any posts associated with your team yet.
+<% end %>

@@ -17,7 +17,7 @@
       </div>
       <div class="col-xs-12 col-sm-8">
         <% if user_signed_in? %>
-          <% if current_user.team == @team %>
+          <% if current_user&.team == @team %>
             <%= bootstrap_alert('You are a member of this team.', 'success') %>
           <% else %>
             <%= bootstrap_alert('You are not a member of this team.', 'warning') %>
@@ -32,7 +32,7 @@
         </p>
       </div>
 
-      <% if current_user.team == @team %>
+      <% if current_user&.team == @team %>
         <h2>Team Updates</h2>
         <%= render 'posts', team: @team %>
       <% end %>

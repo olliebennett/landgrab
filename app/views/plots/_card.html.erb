@@ -1,9 +1,7 @@
 <% featured ||= false %>
 
 <div class="card mb-3">
-  <% if plot.hero_image_url.present? %>
-    <%= image_tag plot.hero_image_url, height: '150', class: 'card-img-top', alt: "Hero image for #{plot.title} plot" %>
-  <% end %>
+  <%= image_tag plot.hero_image_url_fallback, class: 'card-img-top img-fluid', alt: "Hero image for #{plot.title} plot" %>
   <% if featured %>
     <div class="card-header">
       <span class="badge text-bg-warning">Featured Plot</span>

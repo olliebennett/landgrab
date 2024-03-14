@@ -14,13 +14,9 @@ covers <%= @plot.area_formatted_acres %>
 (~ <%= @plot.area_formatted_unsquared %><sup>2</sup>).
 </p>
 
-<% if @plot.hero_image_url.present? %>
-  <%= image_tag @plot.hero_image_url,
-                height: '150',
-                width: '100%',
-                class: 'rounded mb-3',
-                alt: "Hero image for #{@plot.title} plot" %>
-<% end %>
+<%= image_tag @plot.hero_image_url_fallback,
+              class: 'rounded mb-3 img-fluid',
+              alt: "Hero image for #{@plot.title} plot" %>
 
 <p>
 There are

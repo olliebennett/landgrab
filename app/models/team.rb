@@ -13,4 +13,8 @@ class Team < ApplicationRecord
   def normalize_slug
     self.slug = slug.present? ? slug&.parameterize : title&.parameterize
   end
+
+  def logo_url_fallback
+    logo_url.presence || "https://placehold.co/800x400?text=#{title}"
+  end
 end

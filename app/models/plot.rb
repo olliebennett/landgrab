@@ -122,4 +122,8 @@ class Plot < ApplicationRecord
     available = tiles.includes(:latest_subscription).where.not(id: subscribed.map(&:id)).sample(150)
     ([include_tile] + subscribed + available).compact.uniq
   end
+
+  def hero_image_url_fallback
+    hero_image_url.presence || "https://placehold.co/800x400?text=#{title}"
+  end
 end

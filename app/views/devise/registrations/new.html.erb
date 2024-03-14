@@ -20,7 +20,7 @@
 </div>
 
 <% if project %>
-  <%= image_tag project.hero_image_url,
+  <%= image_tag project.hero_image_url_fallback,
                 class: 'img-fluid rounded',
                 alt: project.title %>
 <% end %>

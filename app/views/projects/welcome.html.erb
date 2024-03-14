@@ -5,7 +5,7 @@
 
 <div class="row">
   <div class="col-xs-12">
-    <%= image_tag @project.hero_image_url, height: '250px', width: '100%', class: 'mb-2 rounded' %>
+    <%= image_tag @project.hero_image_url_fallback, class: 'mb-2 rounded img-fluid' %>
   </div>
   <div class="col-xs-12">
     <% if random_tile.present? && ready_to_claim %>

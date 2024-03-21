@@ -9,9 +9,14 @@
           <%= link_to @subscription.user.full_name, admin_user_path(@subscription.user) %>
           <%= " (that's you!)" if @subscription.user == current_user %>
         <% else %>
-          No user; purchase not yet claimed. User must visit this link:
-          <br>
-          <%= content_tag(:code, claim_subscription_url(@subscription, hash: @subscription.claim_hash)) %>
+          No user; purchase not yet claimed.
+          <% if @subscription.claim_hash.nil? %>
+            There is no claim hash for this subscription so it can't be claimed directly.
+          <% else %>
+            User must visit this link:
+            <br>
+            <%= content_tag(:code, claim_subscription_url(@subscription, hash: @subscription.claim_hash)) %>
+          <% end %>
         <% end %>
       </td>
     </tr>

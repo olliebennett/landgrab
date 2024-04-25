@@ -2,7 +2,7 @@
 
 Demo running at [landgrabdemo.herokuapp.com](https://landgrabdemo.herokuapp.com/)
 
-LandGrab ([source on GitHub](https://github.com/olliebennett/landgrab)) is an application which supports tracking areas of land
+LandGrab ([source on GitHub](https://github.com/landgrab/landgrab)) is an application which supports tracking areas of land
 in small parcels just a few metres across.
 
 ### Features

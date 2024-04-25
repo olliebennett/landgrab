@@ -10,7 +10,7 @@ RSpec.describe Plot do
   end
 
   it 'handles polygon centroid' do
-    # See https://github.com/olliebennett/landgrab/issues/1
+    # See https://github.com/landgrab/landgrab/issues/1
     expect(plot.polygon.methods).to include :centroid
   end
 

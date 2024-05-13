@@ -1,4 +1,4 @@
-<% prices = tile.plot&.project&.prices&.to_a || [] %>
+<% prices = tile.plot&.project&.prices.to_a || [] %>
 <% if prices.any? %>
   <%= form_with url: checkout_checkout_path do |form| %>
     <%= form.hidden_field :tile, value: tile.hashid %>

@@ -1,4 +1,5 @@
 <% show_preview ||= false %>
+<% viewed_post_ids = current_user&.post_views&.distinct(:post_id)&.pluck(:post_id) || [] %>
 
 <% if posts.none? %>
   <p>
@@ -11,6 +12,9 @@
       <a href="<%= post_path(post) %>" class="list-group-item list-group-item-action">
         <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-0">
+            <% if user_signed_in? && viewed_post_ids.exclude?(post.id) %>
+              <%= content_tag(:span, 'UNREAD', class: 'badge bg-info') %>
+            <% end %>
             <%= post.title %>
           </h5>
           <small class="text-muted">

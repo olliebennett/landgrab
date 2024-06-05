@@ -1,7 +1,7 @@
 {
   "buildpacks": [
     {
-      "url": "heroku/heroku-geo-buildpack"
+      "url": "https://github.com/heroku/heroku-geo-buildpack"
     },
     {
       "url": "heroku/ruby"

@@ -34,6 +34,9 @@ gem 'bullet', group: %i[development test]
 # Call 'byebug' anywhere in the code to stop execution and get a debugger console
 gem 'byebug', groups: %i[development test]
 
+# CSV building (for data export)
+gem 'csv'
+
 # User authentication
 gem 'devise'
 

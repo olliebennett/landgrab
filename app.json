@@ -6,5 +6,27 @@
     {
       "url": "heroku/ruby"
     }
-  ]
+  ],
+  "env": {
+    "DEVISE_SECRET_KEY": "devise-secret-key",
+    "HASHIDS_SALT": "some-hashids-salt",
+    "RAILS_ENV": "test"
+  },
+  "environments": {
+    "test": {
+      "addons": [
+        "heroku-postgresql:in-dyno"
+      ],
+      "formation": {
+        "test": {
+          "quantity": 1,
+          "size": "performance-m"
+        }
+      },
+      "scripts": {
+        "test-setup": "gem install rspec",
+        "test": "bundle exec rspec"
+      }
+    }
+  }
 }

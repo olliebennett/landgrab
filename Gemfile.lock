@@ -96,6 +96,7 @@ GEM
       bigdecimal
       rexml
     crass (1.0.6)
+    csv (3.3.0)
     date (3.3.4)
     devise (4.9.4)
       bcrypt (~> 3.0)
@@ -371,6 +372,7 @@ DEPENDENCIES
   brakeman
   bullet
   byebug
+  csv
   devise
   dotenv-rails
   factory_bot_rails

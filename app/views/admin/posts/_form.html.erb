@@ -84,9 +84,11 @@
     </div>
   <% end %>
 
-  <%= form.submit 'Update Post', class: 'btn btn-primary' %>
   <% if post.persisted? %>
+    <%= form.submit 'Update Post', class: 'btn btn-primary' %>
     or
     <%= link_to 'return to post details', admin_post_path(post), class: 'btn btn-secondary' %>
+  <% else %>
+    <%= form.submit 'Create Post', class: 'btn btn-primary' %>
   <% end %>
 <% end %>

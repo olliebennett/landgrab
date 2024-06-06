@@ -14,15 +14,15 @@
 <%= link_to "https://www.linkedin.com/shareArticle?mini=true&url=#{share_url}", target: '_blank', rel: 'noopener',
   style: 'text-decoration: none;' do %>
   <%= image_tag 'https://res.cloudinary.com/swra/image/upload/v1717706111/linkedin_ez8atd.png',
-  alt: 'Share via LinkedIn',
-  title: 'Share via LinkedIn',
+  alt: 'Post on LinkedIn',
+  title: 'Post on LinkedIn',
   size: image_size %>
 <% end %>
 <%= link_to "https://twitter.com/intent/tweet?url=#{share_url}", target: '_blank', rel: 'noopener',
   style: 'text-decoration: none;' do %>
   <%= image_tag 'https://res.cloudinary.com/swra/image/upload/v1717706111/twitter_qkdr3g.png',
-  alt: 'Share via Twitter / X',
-  title: 'Share via Twitter / X',
+  alt: 'Post to Twitter / X',
+  title: 'Post to Twitter / X',
   size: image_size %>
 <% end %>
 <%= link_to "https://api.whatsapp.com/send?text=#{share_body}", target: '_blank', rel: 'noopener',

@@ -2,7 +2,7 @@
 
 module PostsHelper
   def markdown(text)
-    return '-' if text.blank?
+    return nil if text.blank?
 
     # rubocop:disable Rails/OutputSafety
     MarkdownRenderer.render(text).html_safe

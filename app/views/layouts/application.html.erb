@@ -6,6 +6,17 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <meta property='og:title' content='<%= if content_for?(:title) then yield(:title) + ' | ' end %><%= ENV.fetch('SITE_TITLE', 'LandGrab') %>'/>
+    <% if content_for?(:og_description) %>
+      <meta property='og:description' content='<%= yield(:og_description) %>'/>
+    <% end %>
+    <% if content_for?(:og_image) %>
+      <meta property='og:image' content='<%= yield(:og_image) %>'/>
+    <% end %>
+    <% if content_for?(:og_url) %>
+      <meta property='og:url' content='<%= yield(:og_url) %>'/>
+    <% end %>
+
     <% if ENV.fetch('SITE_FAVICON_URL', false) %>
       <%= favicon_link_tag ENV.fetch('SITE_FAVICON_URL') %>
     <% end %>

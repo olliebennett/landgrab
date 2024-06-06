@@ -1,15 +1,21 @@
 <% project ||= nil %>
+<% prices ||= project.prices %>
 
 <% if prices.none? %>
   <p>
-   No prices found
+    No prices found
+    <% if project.present? %>
+      in this project.
+    <% end %>
   </p>
 <% else %>
   <table class="table">
     <thead>
       <tr>
         <th>Title</th>
-        <th>Project</th>
+        <% if project.nil? %>
+          <th>Project</th>
+        <% end %>
         <th>Amount</th>
         <th>Stripe ID</th>
         <th>Created</th>
@@ -20,11 +26,16 @@
       <% prices.each do |price| %>
         <tr>
           <td><%= link_to price.title, admin_price_path(price) %></td>
-          <td>
-            <%= link_to price.project.title, admin_project_path(price.project) %>
-          </td>
+          <% if project.nil? %>
+            <td>
+              <%= link_to price.project.title, admin_project_path(price.project) %>
+            </td>
+          <% end %>
           <td><%= price.amount_display %></td>
-          <td><%= price.stripe_id %></td>
+          <td>
+            <%= link_to price.stripe_id,
+                        "#{ENV.fetch('STRIPE_DASHBOARD_URL')}/prices/#{price.stripe_id}" %>
+          </td>
           <td><%= price.created_at.to_formatted_s(:short) %></td>
         </tr>
       <% end %>

@@ -12,7 +12,8 @@ module Admin
     def show; end
 
     def new
-      @price = Price.new
+      project = Project.find_by_hashid!(params[:project_id]) if params[:project_id].present?
+      @price = Price.new(project:)
     end
 
     def edit; end

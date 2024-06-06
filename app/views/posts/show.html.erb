@@ -9,6 +9,7 @@
         <%= markdown(linkify_tiles(@post.body)) %>
       <% else %>
         <%= render 'unviewable_authed', post: @post %>
+        <%= markdown(@post.preview) %>
       <% end %>
     <% else %>
       <%= markdown(@post.preview) %>

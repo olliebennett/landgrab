@@ -7,5 +7,5 @@
   <%= markdown available_tiles.first&.plot&.project&.subscriber_benefits %>
   <%= render 'tiles/subscription_info', tile: available_tiles.sample %>
 <% else %>
-  <%= bootstrap_alert "There are no available tiles associated with this post so you can't subscribe right now!" %>
+  <%= bootstrap_alert "There are no available tiles associated with this post so you can't subscribe right now! Preview the post below." %>
 <% end %>

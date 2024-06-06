@@ -1,0 +1,72 @@
+<% share_title = CGI.escape(@post.title) %>
+<% share_body_raw = @post.preview || @post.title %>
+<% share_url = post_url(@post) %>
+<% share_body = "#{CGI.escape(share_body_raw)}%20-%20#{share_url}" %>
+<% image_size = 50 %>
+
+<%= link_to "https://www.facebook.com/sharer/sharer.php?u=#{share_url}", target: '_blank', rel: 'noopener',
+  style: 'text-decoration: none;' do %>
+  <%= image_tag 'https://res.cloudinary.com/swra/image/upload/v1717706111/facebook_pf5u5k.png',
+  alt: 'Share via Facebook',
+  title: 'Share via Facebook',
+  size: image_size %>
+<% end %>
+<%= link_to "https://www.linkedin.com/shareArticle?mini=true&url=#{share_url}", target: '_blank', rel: 'noopener',
+  style: 'text-decoration: none;' do %>
+  <%= image_tag 'https://res.cloudinary.com/swra/image/upload/v1717706111/linkedin_ez8atd.png',
+  alt: 'Share via LinkedIn',
+  title: 'Share via LinkedIn',
+  size: image_size %>
+<% end %>
+<%= link_to "https://twitter.com/intent/tweet?url=#{share_url}", target: '_blank', rel: 'noopener',
+  style: 'text-decoration: none;' do %>
+  <%= image_tag 'https://res.cloudinary.com/swra/image/upload/v1717706111/twitter_qkdr3g.png',
+  alt: 'Share via Twitter / X',
+  title: 'Share via Twitter / X',
+  size: image_size %>
+<% end %>
+<%= link_to "https://api.whatsapp.com/send?text=#{share_body}", target: '_blank', rel: 'noopener',
+  style: 'text-decoration: none;' do %>
+  <%= image_tag 'https://res.cloudinary.com/swra/image/upload/v1717706111/whatsapp_lasgbq.png',
+  alt: 'Share via WhatsApp',
+  title: 'Share via WhatsApp',
+  size: image_size %>
+<% end %>
+<%= link_to "mailto:?subject=#{share_title}&body=#{share_body}",
+  style: 'text-decoration: none;' do %>
+  <%= image_tag 'https://res.cloudinary.com/swra/image/upload/v1717706111/email_has7lf.png',
+  alt: 'Share via Email',
+  title: 'Share via Email',
+  size: image_size %>
+<% end %>
+
+<% copyid = SecureRandom.hex %>
+
+<%= link_to 'javascript:void();',
+  style: 'text-decoration: none;',
+  id: "copy_link_#{copyid}" do %>
+  <%= image_tag 'https://res.cloudinary.com/swra/image/upload/v1717706111/link_prnvpr.png',
+    alt: 'Copy Link',
+    title: 'Copy Link',
+    size: image_size,
+    id: "copy_img_#{copyid}" %>
+<% end %>
+
+<script>
+  let copyLink = document.getElementById("copy_link_<%= copyid %>");
+  let copyImage = document.getElementById("copy_img_<%= copyid %>");
+  let copyIcon = copyImage.src;
+  let copyIconTick = 'https://res.cloudinary.com/swra/image/upload/v1717708092/checked_llhcs6.png';
+  new Image().src = copyIconTick; // pre-cache
+  copyLink.addEventListener('click', event => {
+    let clipText = '<%= share_url %>';
+    navigator.clipboard.writeText(clipText).then(function() {
+      copyImage.src = copyIconTick;
+      window.setTimeout(function() {
+        copyImage.src = copyIcon;
+      }, 1250);
+    }, function() {
+      alert('Could not copy to clipboard.');
+    });
+  });
+</script>

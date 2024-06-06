@@ -28,6 +28,11 @@
     <%= render 'associated_tiles_map', post: @post %>
     <% if @viewable %>
       <h2 class="mt-3">
+        Share This
+      </h2>
+      <p>Share this post with your network</p>
+      <%= render 'share_links', post: @post %>
+      <h2 class="mt-3">
         Comments
       </h2>
       <%= render 'comments_list', post: @post %>

@@ -52,6 +52,7 @@ Rails.application.routes.draw do
     root to: 'dashboard#dashboard', as: :dashboard
 
     resources :comments, only: %i[index show]
+    resources :tags, only: %i[create index]
     resources :teams, only: %i[create index show new edit update]
     resources :tiles, only: %i[create index show new]
     resources :plots, only: %i[create index show new edit update]

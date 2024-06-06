@@ -8,6 +8,7 @@ class Post < ApplicationRecord
   has_many :post_associations, dependent: :destroy
   has_many :post_views, dependent: :destroy
   has_many :comments, dependent: :restrict_with_exception
+  has_many :tags, dependent: :nullify
 
   validates :title, presence: true
   validates :body, presence: true

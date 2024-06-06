@@ -1,0 +1,7 @@
+<div class="row">
+  <% tags.each do |tag| %>
+    <div class="col-xs-12 col-lg-6 mb-4">
+      <%= content_tag :span, tag.title, class: 'badge bg-primary' %>
+    </div>
+  <% end %>
+</div>

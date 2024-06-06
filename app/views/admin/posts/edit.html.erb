@@ -2,6 +2,15 @@
 
 <%= render 'form', post: @post %>
 
+<h3>Tags</h3>
+
+<p>
+  <% @post.tags.each do |tag| %>
+    <%= content_tag :span, tag.title, class: 'badge bg-primary' %>
+  <% end %>
+</p>
+<%= render 'admin/tags/form', tag: @post.tags.new %>
+
 <h3>Associations</h3>
 
 <%= render 'admin/posts/associations',

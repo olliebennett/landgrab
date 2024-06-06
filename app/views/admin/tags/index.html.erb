@@ -1,0 +1,9 @@
+<h1><%= title 'Tags' %></h1>
+
+<% if @tags.empty? %>
+  <p>
+    No posts have been assigned a tag yet.
+  </p>
+<% end %>
+
+<%= render 'table', tags: @tags %>

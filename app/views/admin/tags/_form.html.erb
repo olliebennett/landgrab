@@ -1,0 +1,12 @@
+<%= form_with(model: [:admin, tag], class: 'row row-cols-lg-auto mb-3 g-3 align-items-center') do |form| %>
+  <%= form.hidden_field :post_id, { value: form.object.post.hashid } %>
+
+  <div class="col-12 g-3 align-items-center">
+    <%= label_tag :tag, 'Tag', class: 'visually-hidden' %>
+    <%= form.text_field :title, { class: 'form-control', required: true } %>
+  </div>
+
+  <div class="col-12">
+    <%= form.submit 'Apply Tag', class: 'btn btn-primary' %>
+  </div>
+<% end %>

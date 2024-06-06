@@ -59,5 +59,14 @@
         <%= link_to 'see all post views', admin_post_views_path(post: post.hashid) %>
       </td>
     </tr>
+
+    <tr>
+      <th>Tags</th>
+      <td>
+        <% post.tags.each do |tag| %>
+          <%= content_tag(:span, tag.title.upcase, class: 'badge bg-primary') %>
+        <% end %>
+      </td>
+    </tr>
   </tbody>
 </table>

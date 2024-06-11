@@ -2,9 +2,9 @@
   <%= image_tag project.hero_image_url_fallback, class: 'card-img-top img-fluid', alt: "Hero image for #{project.title} project" %>
   <div class="card-body">
     <h5 class="card-title"><%= project.title %></h5>
-    <p class="card-text">
-      <%= markdown(truncate(project.description.html_safe, length: 1000)) %>
-    </p>
+    <div class="card-text">
+      <%= markdown(truncate(project.description&.html_safe, length: 1000)) %>
+    </div>
     <%= link_to 'View Project', project_path(project), class: 'btn btn-primary stretched-link' %>
   </div>
 </div>

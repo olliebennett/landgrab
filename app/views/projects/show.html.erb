@@ -20,10 +20,8 @@
           <%= image_tag @project.logo_url, class: 'img-fluid' %>
         <% end %>
       </div>
-      <div class="col-xs-12 col-sm-8">
-        <p>
-          <%= markdown(@project.description) %>
-        </p>
+      <div class="col-xs-12">
+        <%= markdown(@project.description) %>
       </div>
     </div>
     <h2>Support the project</h2>
@@ -32,9 +30,8 @@
         <%= @project.title %> consists of
         <%= pluralize(@project.plots.size, 'plot') %>
         broken into 3x3m squares ("tiles") of land.
-        In order to support the restoration of the land,
-        each tile is individually available to sponsor for a small fee.
       </p>
+      <%= markdown(@project.subscriber_benefits) %>
     <% end %>
     <%= render 'plots', project: @project %>
   </div>

@@ -11,5 +11,17 @@
     <%= comment.text %>
   </p>
 <% end.empty? %>
-  <p>None yet; be the first to leave a comment!</p>
+  <% if user_signed_in? %>
+    <p>
+      None yet; be the first to leave a comment!
+    </p>
+  <% else %>
+    <p>
+      None yet;
+      <%= link_to 'log in', new_user_session_path %>
+      or
+      <%= link_to 'sign up', new_user_registration_path %>
+      to leave a comment.
+    </p>
+  <% end %>
 <% end %>

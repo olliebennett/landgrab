@@ -1,6 +1,6 @@
-<% share_title = CGI.escape(@post.title) %>
-<% share_body_raw = @post.preview || @post.title %>
-<% share_url = post_url(@post) %>
+<% share_title = CGI.escape(post.title) %>
+<% share_body_raw = post.preview || post.title %>
+<% share_url = post_url(post, access_key: shared_access_key) %>
 <% share_body = "#{CGI.escape(share_body_raw)}%20-%20#{share_url}" %>
 <% image_size = 50 %>
 

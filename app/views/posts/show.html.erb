@@ -9,34 +9,64 @@
 
 <div class="row">
   <div class="col-md-8">
-    <% if user_signed_in? %>
-      <% if @viewable %>
-        <%= markdown(linkify_tiles(@post.body)) %>
-      <% else %>
-        <%= render 'unviewable_authed', post: @post %>
-        <%= markdown(@post.preview) %>
-      <% end %>
+    <% if @viewable %>
+      <%= markdown(linkify_tiles(@post.body)) %>
     <% else %>
-      <%= markdown(@post.preview) %>
-      <%= render 'unviewable_unauthed' %>
+      <% if user_signed_in? %>
+        <%= render 'unviewable_authed', post: @post %>
+      <% else %>
+        <%= render 'unviewable_unauthed' %>
+      <% end %>
       <% if @post.associated_projects.size == 1 %>
         <%= markdown(@post.associated_projects.first.subscriber_benefits) %>
       <% end %>
+      <%= markdown(@post.preview) %>
     <% end %>
   </div>
   <div class="col-md-4">
     <%= render 'associated_tiles_map', post: @post %>
     <% if @viewable %>
-      <h2 class="mt-3">
-        Share This
-      </h2>
-      <p>Share this post with your network</p>
-      <%= render 'share_links', post: @post %>
+      <% if @sharer.present? %>
+        <div class="alert alert-info">
+          A subscriber - <%= @sharer.first_name %> - granted you access
+          to this post via a special link.
+        </div>
+      <% elsif @latest_post_view&.shared_access_key.present? %>
+        <h2 class="mt-3">
+          Share This
+        </h2>
+        <script>
+          function showSharedAccessLinkDetails() {
+            var short = document.getElementById('shared-access-link-short');
+            var long = document.getElementById('shared-access-link-long');
+            short.style.display = "none";
+            long.style.display = "inline";
+          }
+        </script>
+        <p>
+          Share a personal link to let anyone read this;
+          <span id="shared-access-link-short">
+            <%= link_to '?', "javascript:showSharedAccessLinkDetails();" %>
+          </span>
+        </p>
+        <p id="shared-access-link-long" style="display: none;">
+          Your link provides access to the post without
+          the visitor needing to login or subscribe.
+          We'll show them your first name when they read the post,
+          so they'll understand who provided them access.
+          Use the links below to share directly to socials, or to copy the link for sharing elsewhere.
+        </p>
+        <p class="mt-3">
+          <%= render 'share_links', post: @post, shared_access_key: @latest_post_view.shared_access_key %>
+        </p>
+      <% end %>
       <h2 class="mt-3">
         Comments
       </h2>
       <%= render 'comments_list', post: @post %>
-      <%= render 'comment_form', comment: @post.comments.new %>
+      <% if user_signed_in? %>
+        <%= render 'comment_form', comment: @post.comments.new %>
+      <% end %>
     <% else %>
       <p>
         <% if user_signed_in? %>

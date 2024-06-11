@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_28_214756) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_10_202839) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -54,6 +54,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_28_214756) do
     t.bigint "post_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "shared_access_key"
     t.index ["post_id"], name: "index_post_views_on_post_id"
     t.index ["user_id"], name: "index_post_views_on_user_id"
   end

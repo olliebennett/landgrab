@@ -31,6 +31,12 @@
           A subscriber - <%= @sharer.first_name %> - granted you access
           to this post via a special link.
         </div>
+        <% if @sharer == current_user %>
+          <p>
+            This 👆 is exactly what visitors will see
+            when they access the post via your personal share link.
+          </p>
+        <% end %>
       <% elsif @latest_post_view&.shared_access_key.present? %>
         <h2 class="mt-3">
           Share This

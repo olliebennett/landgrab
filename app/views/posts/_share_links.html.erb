@@ -1,24 +1,24 @@
 <% share_title = CGI.escape(post.title) %>
-<% share_body_raw = post.preview || post.title %>
-<% share_url = post_url(post, access_key: shared_access_key) %>
-<% share_body = "#{CGI.escape(share_body_raw)}%20-%20#{share_url}" %>
+<% share_body_raw = post.preview.present? ? truncate(post.preview, length: 75) : post.title %>
+<% share_url = access_post_url(post, access_key: shared_access_key) %>
+<% share_body = "#{CGI.escape(share_body_raw)}%20-%20#{CGI.escape(share_url)}" %>
 <% image_size = 50 %>
 
-<%= link_to "https://www.facebook.com/sharer/sharer.php?u=#{share_url}", target: '_blank', rel: 'noopener',
+<%= link_to "https://www.facebook.com/sharer/sharer.php?u=#{CGI.escape(share_url)}", target: '_blank', rel: 'noopener',
   style: 'text-decoration: none;' do %>
   <%= image_tag 'https://res.cloudinary.com/swra/image/upload/v1717706111/facebook_pf5u5k.png',
   alt: 'Share via Facebook',
   title: 'Share via Facebook',
   size: image_size %>
 <% end %>
-<%= link_to "https://www.linkedin.com/shareArticle?mini=true&url=#{share_url}", target: '_blank', rel: 'noopener',
+<%= link_to "https://www.linkedin.com/shareArticle?mini=true&url=#{CGI.escape(share_url)}", target: '_blank', rel: 'noopener',
   style: 'text-decoration: none;' do %>
   <%= image_tag 'https://res.cloudinary.com/swra/image/upload/v1717706111/linkedin_ez8atd.png',
   alt: 'Post on LinkedIn',
   title: 'Post on LinkedIn',
   size: image_size %>
 <% end %>
-<%= link_to "https://twitter.com/intent/tweet?url=#{share_url}", target: '_blank', rel: 'noopener',
+<%= link_to "https://twitter.com/intent/tweet?url=#{CGI.escape(share_url)}", target: '_blank', rel: 'noopener',
   style: 'text-decoration: none;' do %>
   <%= image_tag 'https://res.cloudinary.com/swra/image/upload/v1717706111/twitter_qkdr3g.png',
   alt: 'Post to Twitter / X',

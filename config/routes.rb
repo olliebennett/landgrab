@@ -25,7 +25,10 @@ Rails.application.routes.draw do
     get :embed, on: :member
   end
 
-  resources :posts, only: %i[show]
+  resources :posts, only: %i[show] do
+    get 'access/:access_key', action: :access, on: :member, as: :access
+  end
+
   resources :projects, only: %i[index show] do
     get :find_tile, on: :member
     get :welcome, on: :member

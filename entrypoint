@@ -6,9 +6,8 @@ echo "Waiting for database before starting rails..."
 
 bin/bundle install
 
-RAILS_ENV=development bin/rails db:create
-# RAILS_ENV=development bin/rails db:schema:load
-RAILS_ENV=development bin/rails db:migrate
+# Create or migrate the database
+RAILS_ENV=development bin/rails db:prepare
 
 rm -f /usr/app/landgrab/tmp/pids/server.pid
 

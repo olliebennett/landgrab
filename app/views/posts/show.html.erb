@@ -1,7 +1,7 @@
 <% content_for(:og_description, truncate(@post.preview, length: 75)) if @post.preview.present? %>
 <% # TODO: Get first image from post? Or project's hero_image? %>
 <% content_for(:og_image, ENV.fetch('SITE_HERO_IMAGE_URL', nil)) %>
-<% content_for(:og_url, post_url(@post)) %>
+<% content_for(:og_url, request.original_url) %>
 
 <h1><%= title @post.title %></h1>
 

@@ -204,9 +204,7 @@ GEM
     net-smtp (0.4.0.1)
       net-protocol
     nio4r (2.7.0)
-    nokogiri (1.16.5-aarch64-linux)
-      racc (~> 1.4)
-    nokogiri (1.16.5-arm64-darwin)
+    nokogiri (1.16.6-arm64-darwin)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     parallel (1.25.1)
@@ -390,7 +388,7 @@ GEM
     zeitwerk (2.6.13)
 
 PLATFORMS
-  ruby
+  arm64-darwin-23
 
 DEPENDENCIES
   activerecord-postgis-adapter

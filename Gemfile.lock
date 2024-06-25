@@ -182,7 +182,6 @@ GEM
       net-smtp
     marcel (1.0.3)
     mini_mime (1.1.5)
-    mini_portile2 (2.8.6)
     minitest (5.23.1)
     monetize (1.12.0)
       money (~> 6.12)
@@ -205,8 +204,9 @@ GEM
     net-smtp (0.4.0.1)
       net-protocol
     nio4r (2.7.0)
-    nokogiri (1.16.5)
-      mini_portile2 (~> 2.8.2)
+    nokogiri (1.16.5-aarch64-linux)
+      racc (~> 1.4)
+    nokogiri (1.16.5-arm64-darwin)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     parallel (1.25.1)
@@ -329,6 +329,9 @@ GEM
       rubocop-ast (>= 1.31.1, < 2.0)
     rubocop-rspec (3.0.1)
       rubocop (~> 1.61)
+    rubocop-rspec_rails (2.30.0)
+      rubocop (~> 1.61)
+      rubocop-rspec (~> 3, >= 3.0.1)
     rubocop-thread_safety (0.5.1)
       rubocop (>= 0.90.0)
     ruby-progressbar (1.13.0)
@@ -420,6 +423,7 @@ DEPENDENCIES
   rubocop-performance
   rubocop-rails
   rubocop-rspec
+  rubocop-rspec_rails
   rubocop-thread_safety
   ruumba
   sentry-rails

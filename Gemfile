@@ -86,15 +86,16 @@ gem 'rgeo-geojson'
 gem 'rspec-rails', groups: %i[development test]
 
 # RuboCop code linting
-gem 'rubocop'
-gem 'rubocop-factory_bot'
-gem 'rubocop-performance'
-gem 'rubocop-rails'
-gem 'rubocop-rspec'
-gem 'rubocop-thread_safety'
+gem 'rubocop', groups: %i[development test]
+gem 'rubocop-factory_bot', groups: %i[development test]
+gem 'rubocop-performance', groups: %i[development test]
+gem 'rubocop-rails', groups: %i[development test]
+gem 'rubocop-rspec', groups: %i[development test]
+gem 'rubocop-rspec_rails', groups: %i[development test]
+gem 'rubocop-thread_safety', groups: %i[development test]
 
 # RuboCop for view files
-gem 'ruumba'
+gem 'ruumba', groups: %i[development test]
 
 # Sentry.io Error Reporting
 gem 'sentry-rails'
@@ -107,10 +108,10 @@ gem 'solargraph', group: :development
 gem 'stripe'
 
 # Detect misconfigured routes
-gem 'traceroute', group: %i[development test]
+gem 'traceroute', groups: %i[development test]
 
 # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-gem 'web-console', groups: :development
+gem 'web-console', group: :development
 
 # Mock web requests during tests
 gem 'webmock', group: :test
